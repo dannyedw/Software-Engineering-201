@@ -1,0 +1,49 @@
+extends layout
+
+block content
+  nav
+    ul
+      li
+        a(href='/') Click here to get to index 
+      li
+        a(href='/login') Click here to get to login 
+      li
+        a(href='/signUp' style={color: 'red'}) Click here to get to sign up 
+      li
+        a(href='/userDashboard') Click here to get to User dashboard 
+      li  
+        a(href='/groupDashboard') Click here to get to group dashboard
+  
+  h3 Sign Up 
+  form(action='#' method='post')
+    label(for='firstName')
+    input#fisrtname(type='text' name='firstName' placeholder='FirstName' required='')
+    br
+    label(for='lastName')
+    input#fisrtname(type='text' name='lastName' placeholder='LastName' required='')
+    br
+    label(for='username')
+    input#username(type='text' name='username' placeholder='Username' required='')
+    br
+    label(for='password')
+    input#password(type='password' name='password' placeholder='Password' required='')
+    br
+    label(for='passwordConfirm')
+    input#password(type='passwordConfirm' name='passwordConfirm' placeholder='Password Confirm' required='')
+    br
+
+    p Other details (Optional)
+        
+    label(for='height')
+    input#password(type='height' name='height' placeholder='Height(cm)')
+    br
+    label(for='weight')
+    input#password(type='weight' name='weight' placeholder='Weight(kg)')
+    br
+    label(for='age')
+    input#password(type='age' name='age' placeholder='Age(Years)')
+    br
+    label(for='bmi')
+    input#password(type='bmi' name='bmi' placeholder='BMI')
+    br
+    input(type='submit' value='Login')
