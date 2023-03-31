@@ -1,10 +1,13 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  div
-    a(href='/') Click here to get to index 
-    a(href='/login') Click here to get to login 
-    a(href='/userDashboard') Click here to get to User dashboard 
-    a(href='/groupDashboard') Click here to get to group dashboard
+  nav
+    ul
+      li
+        a(href='/' style={color: 'red'}) Click here to get to index 
+      li
+        a(href='/login') Click here to get to login 
+      li
+        a(href='/userDashboard') Click here to get to User dashboard 
+      li  
+        a(href='/groupDashboard') Click here to get to group dashboard
