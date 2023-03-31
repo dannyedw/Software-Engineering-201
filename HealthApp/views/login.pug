@@ -11,3 +11,12 @@ block content
         a(href='/userDashboard') Click here to get to User dashboard 
       li  
         a(href='/groupDashboard') Click here to get to group dashboard
+  h3 Login 
+  form(action='#' method='post')
+    label(for='username')
+    input#username(type='text' name='username' placeholder='Username' required='')
+    br
+    label(for='password')
+    input#password(type='password' name='password' placeholder='Password' required='')
+    br
+    input(type='submit' value='Login')
