@@ -1,20 +1,37 @@
 extends layout
 
-block content
-  nav
+doctype html
+// saved from url=(0022)http://localhost:3000/
+head
+  meta(http-equiv='Content-Type' content='text/html; charset=UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(rel='stylesheet' href='./Home_files/index_style.css')
+  title Home
+nav
+  .menu-left
     ul
       li
-        a(href='/' style={color: 'red'}) Click here to get to index 
+        a(href='http://localhost:3000/' style='color:red;') Home 
       li
-        a(href='/login') Click here to get to login 
+        a(href='http://localhost:3000/userDashboard') My Dashboard 
       li
-        a(href='/signUp') Click here to get to sign up 
+        a(href='http://localhost:3000/groupDashboard') Group Dashboard
       li
-        a(href='/userDashboard') Click here to get to user dashboard 
-      li  
-        a(href='/groupDashboard') Click here to get to group dashboard
-      li  
-        a(href='/about') Click here to get to about page
-
-  h3 Home page jargon
-  p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus leo in enim vestibulum, ut imperdiet leo fermentum. Duis suscipit erat at eros placerat aliquam. Sed auctor commodo sem eget vehicula. Sed ultrices massa eu sapien pulvinar gravida. Maecenas vel turpis quam. Mauris mollis sapien lacus, vitae condimentum erat lacinia quis. Sed elementum lorem a commodo auctor. Nullam et interdum nunc. Nulla tempor magna et ipsum finibus volutpat. Aenean auctor urna eget ltricies ultricies. Aliquam sed velit eget dui dignissim faucibus. Vestibulum commodo commodo acus, at faucibus elit aliquet ac. Sed placerat id leo quis luctus. Fusce quis efficitur dolor.
+        a(href='http://localhost:3000/about') About
+  .menu-logo
+    img(src='./Home_files/company-logo.png' alt='Company logo' height='100px' width='100px')
+    // added random ai generated logo, can change if you want to
+  .menu-right
+    ul
+      li
+        a(href='http://localhost:3000/login') Login 
+      li
+        a(href='http://localhost:3000/signUp') Sign up 
+h3 Home page jargon
+p
+  | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus leo in enim vestibulum, ut imperdiet leo
+  | fermentum. Duis suscipit erat at eros placerat aliquam. Sed auctor commodo sem eget vehicula. Sed ultrices massa
+  | eu sapien pulvinar gravida. Maecenas vel turpis quam. Mauris mollis sapien lacus, vitae condimentum erat lacinia
+  | quis. Sed elementum lorem a commodo auctor. Nullam et interdum nunc. Nulla tempor magna et ipsum finibus
+  | volutpat. Aenean auctor urna eget ltricies ultricies. Aliquam sed velit eget dui dignissim faucibus. Vestibulum
+  | commodo commodo acus, at faucibus elit aliquet ac. Sed placerat id leo quis luctus. Fusce quis efficitur dolor.
