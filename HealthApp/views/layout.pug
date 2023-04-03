@@ -1,17 +1,16 @@
 doctype html
 html
   head
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/index_style.css')
     title= title
   body
-    h1 A.S.C.E.N.D Health
-    // add logo
     block content
-  footer 
-    div(class='footer')
+  footer
+    .footer
       // add logo
-      p © 2023 A.S.C.E.N.D Health
-      p Contact: 
-      img(src = "images/facebook-logo.png" alt = "Facebook logo" height="50px" width="50px")
-      img(src = "images/twitter-logo.png" alt = "Twitter logo" height="50px" width="50px")
-      img(src = "images/instagram-logo.png" alt = "Instagram logo" height="50px" width="50px")
+      p#phone-number Contact: +1 702-706-7568
+      .social-media
+        img(src='./Home_files/facebook-logo.png', alt='Facebook logo', height='50px', width='50px')
+        img(src='./Home_files/twitter-logo.png', alt='Twitter logo', height='50px', width='50px')
+        img(src='./Home_files/instagram-logo.png', alt='Instagram logo', height='50px', width='50px')
+      p#copyright &copy; 2023 A.S.C.E.N.D Health
