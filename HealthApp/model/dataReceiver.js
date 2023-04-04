@@ -6,7 +6,7 @@ export function process(data)
 {
     if (!data.type || !data.content)
     {
-        //error
+        return { status: 400, content: "Invalid data submission, missing type or content" };
     }
 
     switch (data.type)
