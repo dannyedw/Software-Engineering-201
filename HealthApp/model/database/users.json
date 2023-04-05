@@ -1,3 +1,20 @@
 {
-    
+    "c": {
+        "firstName": "a",
+        "lastName": "b",
+        "password": "d",
+        "height": "1",
+        "weight": "2",
+        "bmi": "4",
+        "age": "3"
+    },
+    "uname": {
+        "firstName": "fname",
+        "lastName": "lname",
+        "password": "aaaaa",
+        "height": "1",
+        "weight": "2",
+        "bmi": "4",
+        "age": "3"
+    }
 }

@@ -2,14 +2,15 @@ extends layout
 
 block header
   link(rel='stylesheet' href='stylesheets/signUp_style.css')
+  script(src='javascripts/signUp.js', defer)
   title Sign Up
 
 block content  
   h3 Sign Up 
-  form(action='http://localhost:3000/signUp#' method='post')
+  form(id='fSignUp' onsubmit='return false;')
     p First name
     label(for='firstName')
-    input#firstname(type='text' name='firstName' placeholder='First Name' required='')
+    input#firstName(type='text' name='firstName' placeholder='First Name' required='')
     br
     p Last name
     label(for='lastName')
@@ -25,7 +26,7 @@ block content
     br
     p Verify password
     label(for='passwordConfirm')
-    input#passwordConfirm(type='passwordConfirm' name='passwordConfirm' placeholder='Confirm Password' required='')
+    input#passwordConfirm(type='password' name='passwordConfirm' placeholder='Confirm Password' required='')
     br
     p Other details
     .other-details-container

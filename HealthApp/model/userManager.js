@@ -17,9 +17,11 @@ function login(content)
 
 function signup(content)
 {
+    console.log(content);
+
     let userInfo = {
-        firstname: "",
-        lastname: "",
+        firstName: "",
+        lastName: "",
         password: "",
         height: 0,
         weight: 0,
@@ -31,10 +33,10 @@ function signup(content)
     let username;
 
     //mandatory information for account to exist
-    if (content.firstname) userInfo.firstname = content.firstname;
+    if (content.firstName) userInfo.firstName = content.firstName;
     else return { status: 400, content: "Missing required data - firstname" };
 
-    if (content.lastname) userInfo.lastname = content.lastname;
+    if (content.lastName) userInfo.lastName = content.lastName;
     else return { status: 400, content: "Missing required data - lastname" };
 
     if (content.username) username = content.username;
