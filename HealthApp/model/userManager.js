@@ -1,7 +1,7 @@
 
 const fs = require("fs");
 
-export function login(content)
+function login(content)
 {
     if (!content.username) return { status: 400, content: "Missing required data - username" };
     if (!content.password) return { status: 400, content: "Missing required data - password" };
@@ -11,11 +11,11 @@ export function login(content)
     if (content.password === db[content.username].password)
     {
         //signed in, have some sort of verification token for accessing things that require being in an account
-        return { status: 200, content: db[content.username].supersecretverification };
+        return { status: 200, content: db[content.username].loginID };
     }
 }
 
-export function signup(content)
+function signup(content)
 {
     let userInfo = {
         firstname: "",
@@ -25,7 +25,7 @@ export function signup(content)
         weight: 0,
         bmi: 0,
         age: 0,
-        supersecretverification: 0
+        loginID: 0
     };
 
     let username;
@@ -53,14 +53,14 @@ export function signup(content)
     else return { status: 400, content: "Username already taken" };
 }
 
-export function update(content)
+function update(content)
 {
     if (!content.username) return { status: 400, content: "Missing required data - username" };
-    if (!content.supersecretverification) return { status: 400, content: "Missing required data - verification" };
+    if (!content.loginID) return { status: 400, content: "Missing required data - loginID" };
 
     const u = content.username;
     let db = getDB();
-    if (!checkVerification(u, content.supersecretverification)) return { status: 400, content: "Invalid verification" };
+    if (!checkLoginID(u, content.loginID)) return { status: 400, content: "Invalid loginID" };
 
     if (content.firstname) db[u].firstname = content.firstname;
     if (content.lastname) db[u].lastname = content.lastname;
@@ -75,10 +75,10 @@ export function update(content)
     return { status: 200, content: "Updated user info" };
 }
 
-export function dataRequest(content)
+function dataRequest(content)
 {
     if (!content.username) return { status: 400, content: "Missing required data - username" };
-    if (!content.supersecretverification) return { status: 400, content: "Missing required data - verification" };
+    if (!content.loginID) return { status: 400, content: "Missing required data - loginID" };
     if (!content.requestKeys) return { status: 400, content: "Missing required data - request keys" };
 
     let data = {};
@@ -93,7 +93,7 @@ export function dataRequest(content)
     ];
 
     const u = content.username;
-    if (!checkVerification(u, content.supersecretverification)) return { status: 400, content: "Invalid verification" };
+    if (!checkLoginID(u, content.loginID)) return { status: 400, content: "Invalid loginID" };
 
     for (let key of content.requestKeys)
     {
@@ -116,7 +116,7 @@ function addUser(username, userInfo)
     if (db[username]) return false; //username taken, must be unique
     else
     {
-        userInfo.supersecretverification = db.length;
+        userInfo.loginID = db.length;
         db[username] = userInfo;
     }
 
@@ -127,16 +127,21 @@ function addUser(username, userInfo)
 
 function getDB()
 {
-    return JSON.parse(fs.readFileSync("database/users.json").toString());
+    return JSON.parse(fs.readFileSync("model/database/users.json").toString());
 }
 
 function updateDB(newDB)
 {
-    fs.writeFileSync("database/users.json", JSON.stringify(newDB));
+    fs.writeFileSync("model/database/users.json", JSON.stringify(newDB, null, 4));
 }
 
-function checkVerification(username, verification)
+function checkLoginID(username, ID)
 {
     const db = getDB();
-    return verification === db[username].supersecretverification;
+    return ID === db[username].loginID;
 }
+
+exports.login = login;
+exports.signup = signup;
+exports.update = update;
+exports.dataRequest = dataRequest;

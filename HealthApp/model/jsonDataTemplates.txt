@@ -27,6 +27,7 @@ User update
 {
     type: "user-update",
     content: {
+        //must include login id received on sign in
         //may include any of the attributes stored about users
     }
 }
@@ -35,9 +36,9 @@ Group create
 {
     type: "group-create",
     content: {
-        owner: ...,
-        name: ...,
-
+        loginID: ...,
+        username: ...,  //username to set the owner of the group
+        groupname: ...,
     }
 }
 
@@ -45,8 +46,8 @@ Group delete
 {
     type: "group-delete",
     content: {
-        name: ...,
-        authorisation: ...  //have some method of checking the delete request is by the group owner
+        loginID: ...,
+        groupname: ...
     }
 }
 
@@ -55,11 +56,13 @@ Data requests
     type: "data-request-user",
     content: {
         //data to be requested about a user e.g. name, weight, height etc.
+        //requires login id
     }
 }
 {
     type: "data-request-group",
     content: {
         //data to be requested about a group, e.g. name, members, goals etc.
+        //requires login id
     }
 }
