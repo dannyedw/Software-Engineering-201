@@ -1,0 +1,22 @@
+h3
+{
+  text-align: center;
+  font-size: 4em;
+}
+
+form
+{
+  text-align: center;
+  font-size: 2em;
+}
+
+form input
+{
+  font-size: 2em;
+}
+
+#login-button
+{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
