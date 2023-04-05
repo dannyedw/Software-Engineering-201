@@ -64,8 +64,8 @@ function update(content)
     let db = getDB();
     if (!checkLoginID(u, content.loginID)) return { status: 400, content: "Invalid loginID" };
 
-    if (content.firstname) db[u].firstname = content.firstname;
-    if (content.lastname) db[u].lastname = content.lastname;
+    if (content.firstName) db[u].firstName = content.firstName;
+    if (content.lastName) db[u].lastName = content.lastName;
     if (content.password) db[u].password = content.password;
     if (content.height) db[u].height = content.height;
     if (content.weight) db[u].weight = content.weight;
@@ -86,8 +86,8 @@ function dataRequest(content)
     let data = {};
     let db = getDB();
     const acceptedKeys = [
-        "firstname",
-        "lastname",
+        "firstName",
+        "lastName",
         "height",
         "weight",
         "bmi",
