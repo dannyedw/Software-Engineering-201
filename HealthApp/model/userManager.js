@@ -1,7 +1,7 @@
 
 const fs = require("fs");
 
-export function login(content)
+function login(content)
 {
     if (!content.username) return { status: 400, content: "Missing required data - username" };
     if (!content.password) return { status: 400, content: "Missing required data - password" };
@@ -15,7 +15,7 @@ export function login(content)
     }
 }
 
-export function signup(content)
+function signup(content)
 {
     let userInfo = {
         firstname: "",
@@ -53,7 +53,7 @@ export function signup(content)
     else return { status: 400, content: "Username already taken" };
 }
 
-export function update(content)
+function update(content)
 {
     if (!content.username) return { status: 400, content: "Missing required data - username" };
     if (!content.supersecretverification) return { status: 400, content: "Missing required data - verification" };
@@ -75,7 +75,7 @@ export function update(content)
     return { status: 200, content: "Updated user info" };
 }
 
-export function dataRequest(content)
+function dataRequest(content)
 {
     if (!content.username) return { status: 400, content: "Missing required data - username" };
     if (!content.supersecretverification) return { status: 400, content: "Missing required data - verification" };
@@ -127,12 +127,12 @@ function addUser(username, userInfo)
 
 function getDB()
 {
-    return JSON.parse(fs.readFileSync("database/users.json").toString());
+    return JSON.parse(fs.readFileSync("model/database/users.json").toString());
 }
 
 function updateDB(newDB)
 {
-    fs.writeFileSync("database/users.json", JSON.stringify(newDB));
+    fs.writeFileSync("model/database/users.json", JSON.stringify(newDB, null, 4));
 }
 
 function checkVerification(username, verification)
@@ -140,3 +140,8 @@ function checkVerification(username, verification)
     const db = getDB();
     return verification === db[username].supersecretverification;
 }
+
+exports.login = login;
+exports.signup = signup;
+exports.update = update;
+exports.dataRequest = dataRequest;

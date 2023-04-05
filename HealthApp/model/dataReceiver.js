@@ -1,15 +1,18 @@
 
-const userManager = require("userManager");
-const groupManager = require("groupManager");
+const userManager = require("../model/userManager");
+const groupManager = require("../model/groupManager");
 
-export function process(data)
+function process(data)
 {
-    if (!data.type || !data.content)
+    const type = data.type;
+    const content = data.content;
+
+    if (!type || !content)
     {
         return { status: 400, content: "Invalid data submission, missing type or content" };
     }
 
-    switch (data.type)
+    switch (type)
     {
         case "user-login": return userManager.login(content);
         case "user-signup": return userManager.signup(content);
@@ -21,3 +24,5 @@ export function process(data)
         default: //return unknown request type
     }
 }
+
+exports.process = process;
