@@ -8,6 +8,8 @@ function login(content)
 
     let db = getDB();
     if (!db[content.username]) return { status: 400, content: "Invalid username" };
+    console.log(content.password);
+    console.log(db[content.username]);
     if (content.password === db[content.username].password)
     {
         //signed in, have some sort of verification token for accessing things that require being in an account
@@ -17,8 +19,6 @@ function login(content)
 
 function signup(content)
 {
-    console.log(content);
-
     let userInfo = {
         firstName: "",
         lastName: "",
@@ -118,7 +118,7 @@ function addUser(username, userInfo)
     if (db[username]) return false; //username taken, must be unique
     else
     {
-        userInfo.loginID = db.length;
+        userInfo.loginID = Object.keys(db).length;
         db[username] = userInfo;
     }
 

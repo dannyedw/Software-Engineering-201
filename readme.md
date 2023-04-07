@@ -1,64 +1,66 @@
 
 # Software Engineering 2.01 Health App
 ## Sever Interaction
-The server responds to GET and POST requests on relevant routes. This can easily be changed and updated, but here's how it currently works:
-Upon logging in, the server will send a "super secret" loginID number which is used when making requests to the server which require being logged in (anything to do with groups, editing user info etc.). The loginID should be stored so it can be accessed again later, the likely best place would be in session storage (https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage).
+The server responds to GET and POST requests sent to /data. I have created a somewhat friendly interface to make requests
+easier to deal with. It is in the file public/javascripts/dataInteraction.js which will need to be included in the pug
+on any page it is accessed, look at the signUp page for an example of how its used. This is the only page to currently
+interact with the server.
 
-Here is an example of asking the server for a user's details.
-First, we need to be logged in and have the loginID. Then we need to form a JSON object with the appropriate data (see further down for the names of all the user data fields):
+There are two functions, dataRequest and dataSubmit:
+* dataRequest is used when requesting data from the server, e.g. about a user or group.
+* dataSubmit is used when sending data to the server for processing, such as signup, login, group creation etc.
+
+Both functions have the same parameters, data and callback. data should be a JSON object containing a "type" and a "content".
+"type" is used by the server to figure out what to do with the values in "content". For example, here is the data for a
+signup request:
 ```
-const requestBody = {
-    loginID: loginID,   //required to verify the user's access to the data
-    username: alexf13,  //the user we want the data about
-    data: [             //the items of data we want about the user
-        "firstName",
-        "lastName",
-        "weight"
-    ]
-};
-
-const url = "/userDashboard/data";  //an example, will probably add a route for just getting data unrelated to any specific page
-const requestOptions = {
-    method: "POST",
-    headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify(requestBody)
-};
-
-fetch(url, requestOptions).then((response) => {
-    //handle response here, can also replace this anonymous function with a pointer to an existing one, the response parameter will need to be in that function
-    //as an example, just blast the response in the user's face
-    let responseData = response.json();
-    alert(responseData);
-    /*
-    response would look something like
-    {
-        "firstName": "Alex",
-        "lastName": "Faulkner",
-        "weight": "none of your business"
+let data = {
+    type: "user-signup",
+    content: {
+        firstName: firstName,
+        lastName: lastName,
+        username: username,
+        password: password
     }
-    */
-});
+};
 ```
-A few important things to note:
-* in the body of the requestOptions, we need to "stringify" the object containing the data we want to send
-* the response object is returned as an output stream, we need to convert it into a JSON object to be able to read from it
-* most of this can be abstracted away into a function for making a request to the server, with the type (GET or POST) and the data being specified as parameters
+callback is the function the result of the request is sent to. The result will contain a status number which can be used
+to identify if the request was a success, along with content which will be either a message with information about the
+success/failure of a request, or the data which was requested. This will be specific to the request type, for example user
+signup just sends back a message saying either the signup was successful, or a reason why it wasn't (e.g. username taken).
+user-data-request will return a JSON with fields corresponding to those requested, e.g. in the request data you have
+["firstName", "lastName"], the response content will look something like
+```
+{
+    "firstName": alex,
+    "lastName": faulkner
+}
+```
 
-I have set the server to provide hopefully useful response details, which will appear in the browser console (F12) automatically. You can expand the errors to view the message.
+### Valid dataRequest types
+* user
+* group (not yet implemented)
 
-### User data parameters, case sensitive:
-* loginID
-* username
+### Valid dataSubmit types
+* user-login
+* user-signup
+* user-update
+* group-create (not yet implemented)
+* group-delete (not yet implemented)
+
+### User data parameters:
+* loginID*
+* username*
 * firstName
 * lastName
-* password
+* password*
 * height
 * weight
 * bmi
 * age
 
+*these values cannot be requested with a data request (because we wouldn't want to compromise the security of our plaintext
+json database storing everything unencrypted now would we)
+
 ### Group data parameters:
-* to be implemented later
+* not yet implemented
