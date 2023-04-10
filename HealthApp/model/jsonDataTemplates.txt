@@ -1,0 +1,68 @@
+
+User login
+{
+    type: "user-login",
+    content: {
+        username: ...,
+        password: ...
+    }
+}
+
+User signup
+{
+    type: "user-signup",
+    content: {
+        firstname: ...,
+        lastname: ...,
+        username: ...,
+        password: ...
+        height: ...,    //height, weight, age and bmi are optional, ok for them to not be present
+        weight: ...,
+        age: ...,
+        bmi: ...
+    }
+}
+
+User update
+{
+    type: "user-update",
+    content: {
+        //must include login id received on sign in
+        //may include any of the attributes stored about users
+    }
+}
+
+Group create
+{
+    type: "group-create",
+    content: {
+        loginID: ...,
+        username: ...,  //username to set the owner of the group
+        groupname: ...,
+    }
+}
+
+Group delete
+{
+    type: "group-delete",
+    content: {
+        loginID: ...,
+        groupname: ...
+    }
+}
+
+Data requests
+{
+    type: "data-request-user",
+    content: {
+        //data to be requested about a user e.g. name, weight, height etc.
+        //requires login id
+    }
+}
+{
+    type: "data-request-group",
+    content: {
+        //data to be requested about a group, e.g. name, members, goals etc.
+        //requires login id
+    }
+}

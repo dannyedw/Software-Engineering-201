@@ -1,27 +1,18 @@
 extends layout
 
+block header
+  link(rel='stylesheet' href='stylesheets/login_style.css')
+  title Login
+
 block content
-  nav
-    ul
-      li
-        a(href='/') Click here to get to index 
-      li
-        a(href='/login' style={color: 'red'}) Click here to get to login 
-      li
-        a(href='/signUp') Click here to get to sign up 
-      li
-        a(href='/userDashboard') Click here to get to user dashboard 
-      li  
-        a(href='/groupDashboard') Click here to get to group dashboard
-      li  
-        a(href='/about') Click here to get to about page
-  
   h3 Login 
-  form(action='#' method='post')
-    label(for='username')
+  form(action='http://localhost:3000/login#' method='post')
+    p Username
     input#username(type='text' name='username' placeholder='Username' required='')
     br
-    label(for='password')
+    label(for='username')
+    p Password
     input#password(type='password' name='password' placeholder='Password' required='')
     br
-    input(type='submit' value='Login')
+    label(for='password')
+    input#login-button(type='submit' value='Login')

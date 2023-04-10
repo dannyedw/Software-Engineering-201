@@ -1,16 +1,38 @@
 doctype html
 html
   head
-    link(rel='stylesheet', href='/stylesheets/index_style.css')
+    link(rel='stylesheet', href='stylesheets/layout_style.css')
     title= title
+    block header
   body
+    nav
+      .menu-left
+        ul
+          li
+            a(href='/') Home 
+          li
+            a(href='/userDashboard') My Dashboard 
+          li
+            a(href='/groupDashboard') Group Dashboard
+          li
+            a(href='/about') About
+      .menu-logo
+        img(src='images/company-logo.png' alt='Company logo' height='150px' width='150px')
+        // added random ai generated logo, can change if you want to
+      .menu-right
+        ul
+          li
+            a(href='/login') Login 
+          li
+            a(href='/signUp') Sign up 
+
     block content
   footer
     .footer
       // add logo
       p#phone-number Contact: +1 702-706-7568
       .social-media
-        img(src='./Home_files/facebook-logo.png', alt='Facebook logo', height='50px', width='50px')
-        img(src='./Home_files/twitter-logo.png', alt='Twitter logo', height='50px', width='50px')
-        img(src='./Home_files/instagram-logo.png', alt='Instagram logo', height='50px', width='50px')
+        img(src='images/facebook-logo.png', alt='Facebook logo', height='50px', width='50px')
+        img(src='images/twitter-logo.png', alt='Twitter logo', height='50px', width='50px')
+        img(src='images/instagram-logo.png', alt='Instagram logo', height='50px', width='50px')
       p#copyright &copy; 2023 A.S.C.E.N.D Health

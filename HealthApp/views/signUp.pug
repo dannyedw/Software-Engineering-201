@@ -1,51 +1,45 @@
 extends layout
 
-block content
-  nav
-    ul
-      li
-        a(href='/') Click here to get to index 
-      li
-        a(href='/login') Click here to get to login 
-      li
-        a(href='/signUp' style={color: 'red'}) Click here to get to sign up 
-      li
-        a(href='/userDashboard') Click here to get to user dashboard 
-      li  
-        a(href='/groupDashboard') Click here to get to group dashboard
-      li  
-        a(href='/about') Click here to get to about page
-  
+block header
+  link(rel='stylesheet' href='stylesheets/signUp_style.css')
+  script(src='javascripts/signUp.js', defer)
+  title Sign Up
+
+block content  
   h3 Sign Up 
-  form(action='#' method='post')
+  form(id='fSignUp' onsubmit='return false;')
+    p First name
     label(for='firstName')
-    input#fisrtname(type='text' name='firstName' placeholder='FirstName' required='')
+    input#firstName(type='text' name='firstName' placeholder='First Name' required='')
     br
+    p Last name
     label(for='lastName')
-    input#lastName(type='text' name='lastName' placeholder='LastName' required='')
+    input#lastName(type='text' name='lastName' placeholder='Last Name' required='')
     br
+    p Username
     label(for='username')
     input#username(type='text' name='username' placeholder='Username' required='')
     br
+    p Password
     label(for='password')
     input#password(type='password' name='password' placeholder='Password' required='')
     br
+    p Verify password
     label(for='passwordConfirm')
-    input#passwordConfirm(type='passwordConfirm' name='passwordConfirm' placeholder='Confirm Password' required='')
+    input#passwordConfirm(type='password' name='passwordConfirm' placeholder='Confirm Password' required='')
     br
-
-    p Other details (Optional)
-        
-    label(for='height')
-    input#height(type='height' name='height' placeholder='Height(cm)')
-    br
-    label(for='weight')
-    input#weight(type='weight' name='weight' placeholder='Weight(kg)')
-    br
-    label(for='age')
-    input#age(type='age' name='age' placeholder='Age(Years)')
-    br
-    label(for='bmi')
-    input#bmi(type='bmi' name='bmi' placeholder='BMI')
-    br
-    input(type='submit' value='Sign Up')
+    p Other details
+    .other-details-container
+      input#height(type='height' name='height' placeholder='Height(cm)')
+      label(for='height')
+      br
+      input#weight(type='weight' name='weight' placeholder='Weight(kg)')
+      label(for='weight')
+      br
+      input#age(type='age' name='age' placeholder='Age(Years)')
+      label(for='age')
+      br
+      input#bmi(type='bmi' name='bmi' placeholder='BMI')
+      label(for='bmi')
+      br
+    input#sign-up-button(type='submit' value='Sign Up')

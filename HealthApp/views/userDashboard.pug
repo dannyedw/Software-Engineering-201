@@ -1,13 +1,17 @@
 extends layout
 
+block header
+  link(rel='stylesheet' href='stylesheets/userDashboard_style.css')
+  title My Dashboard
+
 block content
-  //overlay that dimms the screen
-  div(class="overlay", style={display:'none'})
-    //popup for add exercise
-    div(class="popup", id="addExerciseContainer", style={display:'none'})
-      button(type='button' id='exitButtonExercise') Close
+  // overlay that dimms the screen
+  .overlay(style='display:none;')
+    // popup for add exercise
+    #addExerciseContainer.popup(style='display:none;')
+      button#exitButtonExercise(type='button') Close
       h3 Add Exercise
-      form(action='#' method='post')
+      form(action='http://localhost:3000/userDashboard#' method='post')
         label(for='exercise')
         input#exercise(type='text' name='exercise' placeholder='Exercise' required='')
         br
@@ -18,12 +22,11 @@ block content
         input#distance(type='text' name='distance' placeholder='Distance')
         br
         input(type='submit' value='Add Exercise')
-    
-    //popup for add diet
-    div(class="popup", id="addDietContainer", style={display:'none'})
-      button(type='button' id='exitButtonDiet') Close
+    // popup for add diet
+    #addDietContainer.popup(style='display:none;')
+      button#exitButtonDiet(type='button') Close
       h3 Add Diet
-      form(action='#' method='post')
+      form(action='http://localhost:3000/userDashboard#' method='post')
         label(for='foodType')
         input#foodType(type='text' name='foodType' placeholder='Food Type' required='')
         br
@@ -34,12 +37,11 @@ block content
         input#mealType(type='text' name='mealType' placeholder='Meal Type' required='')
         br
         input(type='submit' value='Add Diet')
-        
-    //popup for add goal
-    div(class="popup", id="addGoalContainer", style={display:'none'})
-      button(type='button' id='exitButtonGoal') Close
+    // popup for add goal
+    #addGoalContainer.popup(style='display:none;')
+      button#exitButtonGoal(type='button') Close
       h3 Add Goal
-      form(action='#' method='post')
+      form(action='http://localhost:3000/userDashboard#' method='post')
         label(for='goal')
         input#goal(type='text' name='goal' placeholder='Goal' required='')
         br
@@ -47,77 +49,69 @@ block content
         input#deadline(type='date' name='deadline' placeholder='Deadline')
         br
         input(type='submit' value='Add Goal')
-  
-  nav
-    ul
-      li
-        a(href='/') Click here to get to index 
-      li
-        a(href='/login') Click here to get to login
-      li
-        a(href='/signUp') Click here to get to sign up  
-      li
-        a(href='/userDashboard' style={color: 'red'}) Click here to get to user dashboard 
-      li  
-        a(href='/groupDashboard') Click here to get to group dashboard
-      li  
-        a(href='/about') Click here to get to about page
-
-  div(class='exerciseDietContainer')
-    h2 Diet and Exercise
-    div(class='exercise')
+  // date header to be changed to be interactable and changeable
+  h2#date Wednesday 5th April
+  .exerciseDietContainer
+    .exercise
       h3 Exercise
-      p Exercise info here
-      button(type="button" id="addExerciseButton") Add Exercise
-    div(class='diet')
+      p Exercise - Distance/Time
+      p Exercise - Distance/Time
+      p Exercise - Distance/Time
+      button#addExerciseButton(type='button') +
+    // <div class="line"></div>
+    .diet
       h3 Diet
-      p Diet info here
-      button(type="button" id="addDietButton") Add Diet
-
-  div(class='goalContainer')
-    h2 Goals
-    div(class='personalGoals')
+      p Food - Calories - Meal Type
+      p Food - Calories - Meal Type
+      p Food - Calories - Meal Type
+      button#addDietButton(type='button') +
+  h2#goals Goals
+  .goalContainer
+    .personalGoals
       h3 Personal Goals
       p Personal goal info here
-      button(type="button" id="addGoalButton") Add Goal
-    div(class='groupGoals')
-      h3 Group Goals
-      p Group goal info here
-      //Add group goal in group page instead of in userDashboard?
-
+    //
+      <div class="groupGoals">
+      <h3>Group Goals</h3>
+      <p>Group goal info here</p>
+      Add group goal in group page instead of in userDashboard?
+      </div>
+    button#addGoalButton(type='button') +
   script.
-    function addExercise(){
-      overlay.style.display = "block";
-      addExerciseContainer.style.display = "block";
+    function addExercise() {
+    overlay.style.display = "block";
+    addExerciseContainer.style.display = "block";
     }
-
-    function addDiet(){
-      overlay.style.display = "block";
-      addDietContainer.style.display = "block";
+    function addDiet() {
+    overlay.style.display = "block";
+    addDietContainer.style.display = "block";
     }
-
-    function addGoal(){
-      overlay.style.display = "block";
-      addGoalContainer.style.display = "block";
+    function addGoal() {
+    overlay.style.display = "block";
+    addGoalContainer.style.display = "block";
     }
-
     //gets the div's so we can hide/unhide them
     const overlay = document.querySelector('.overlay');
     const addExerciseContainer = document.querySelector('#addExerciseContainer');
     const addDietContainer = document.querySelector('#addDietContainer');
     const addGoalContainer = document.querySelector('#addGoalContainer');
-
     //links the buttons to the functions
-    document.getElementById("addExerciseButton").addEventListener("click",addExercise)
-    document.getElementById("addDietButton").addEventListener("click",addDiet)
-    document.getElementById("addGoalButton").addEventListener("click",addGoal)
-
+    document.getElementById("addExerciseButton").addEventListener("click", addExercise)
+    document.getElementById("addDietButton").addEventListener("click", addDiet)
+    document.getElementById("addGoalButton").addEventListener("click", addGoal)
     //add a anonymas function to each exit button to hide the popup
-    document.getElementById("exitButtonExercise").addEventListener("click",function(){overlay.style.display = "none";
-      addExerciseContainer.style.display = "none";})
-    document.getElementById("exitButtonDiet").addEventListener("click",function(){overlay.style.display = "none";
-      addDietContainer.style.display = "none";})
-    document.getElementById("exitButtonGoal").addEventListener("click",function(){overlay.style.display = "none"; 
-      addGoalContainer.style.display = "none";})
+    document.getElementById("exitButtonExercise").addEventListener("click", function () {
+    overlay.style.display = "none";
+    addExerciseContainer.style.display = "none";
+    })
+    document.getElementById("exitButtonDiet").addEventListener("click", function () {
+    overlay.style.display = "none";
+    addDietContainer.style.display = "none";
+    })
+    document.getElementById("exitButtonGoal").addEventListener("click", function () {
+    overlay.style.display = "none";
+    addGoalContainer.style.display = "none";
+    })
+
     
 
