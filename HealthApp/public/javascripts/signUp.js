@@ -23,27 +23,24 @@ function signUp()
     }
 
     let data = {
-          firstName: firstName,
-          lastName: lastName,
-          username: username,
-          password: password,
+        type: "user-signup",
+        content: {
+            firstName: firstName,
+            lastName: lastName,
+            username: username,
+            password: password
+        }
     };
 
-    if (height != "") data.height = height;
-    if (weight != "") data.weight = weight;
-    if (age != "") data.age = age;
-    if (bmi != "") data.bmi = bmi;
+    if (height != "") data.content.height = height;
+    if (weight != "") data.content.weight = weight;
+    if (age != "") data.content.age = age;
+    if (bmi != "") data.content.bmi = bmi;
 
-    console.log(data);
+    dataSubmit(data, responseHandler);
+}
 
-    fetch("/signUp",
-    { method: 'POST', headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then((response) => {
-        console.log(response.json());
-    });
+function responseHandler(response)
+{
+    console.log(response);
 }
