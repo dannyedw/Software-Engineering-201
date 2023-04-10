@@ -46,11 +46,13 @@ block content
         input#goal(type='text' name='goal' placeholder='Goal' required='')
         br
         label(for='deadline')
-        input#deadline(type='date' name='deadline' placeholder='Deadline')
+        input#deadline(type='date' name='deadline' placeholder='Deadline' value ='' min='01-01-2023' max='31-12-2023')
         br
         input(type='submit' value='Add Goal')
   // date header to be changed to be interactable and changeable
-  h2#date Wednesday 5th April
+  h2 
+     input#deadline(type='date' name='deadline' placeholder='Deadline' value ='' min='01-01-2023' max='31-12-2023')
+        
   .exerciseDietContainer
     .exercise
       h3 Exercise
