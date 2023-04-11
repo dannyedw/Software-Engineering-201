@@ -8,7 +8,7 @@
     
     position: fixed;
     /* Reference for positioning: https://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/*/
-    top: 25.5%;
+    top: 29%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
