@@ -17,18 +17,19 @@ block content
 
         p Select type of exercise: 
           select(name="exercises" id="exercises")
-            option(value="Upper Body")
-            option(value="Lower Body")
-            option(value="Cardio")  
-          button#verifyExercise(type="submit") verify  
-      
-        label(for='time')
-        input#time(type='text' name='time' placeholder='Time')
-        br
-        label(for='distance')
-        input#distance(type='text' name='distance' placeholder='Distance')
-        br
+            option(value="Upper Body") Upper Body
+            option(value="Lower Body") Lower Body
+            option(value="Cardio") Cardio
+          button#verifyExercise(type="button") submit  
+          <div id="variations"></div>    
+        //- label(for='time')
+        //- input#time(type='text' name='time' placeholder='Time')
+        //- br
+        //- label(for='distance')
+        //- input#distance(type='text' name='distance' placeholder='Distance')
+        //- br
         input(type='submit' value='Add Exercise')
+
     // popup for add diet
     #addDietContainer.popup(style='display:none;')
       button#exitButtonDiet(type='button') Close
@@ -127,9 +128,19 @@ block content
     addGoalContainer.style.display = "none";
     })
 
-    document.getElementById("#verifyExercise").addEventListener("click", function () {
-    console.log("hi");
-    //exercise = document.getElementById("exercises");
-    //type = exercise.value;
-    //console.log("hi");
+
+    document.getElementById("verifyExercise").addEventListener("click", function () {
+    exercise = document.getElementById("exercises");
+    type = exercise.value;
+  
+    if(type == "Upper Body"){
+      var data = "<input type='text' id='time' name='time' placeholder='Time(Minutes)'></input><br><input type='text' id='distance' name='distance' placeholder='Reps'>"
+      document.getElementById("variations").innerHTML = data;
+    }else if(type == "Lower Body"){
+      var data = "<input type='text' id='time' name='time' placeholder='Time(Minutes)'></input><br><input type='text' id='distance' name='distance' placeholder='Reps'>"
+      document.getElementById("variations").innerHTML = data;
+    }else if(type == "Cardio"){
+      var data = "<input type='text' id='time' name='time' placeholder='Time(Minutes)'></input><br><input type='text' id='distance' name='distance' placeholder='Distance(Meters)'>"
+      document.getElementById("variations").innerHTML = data;
+    }
     })
