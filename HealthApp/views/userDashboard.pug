@@ -13,8 +13,15 @@ block content
       h3 Add Exercise
       form(action='http://localhost:3000/userDashboard#' method='post')
         label(for='exercise')
-        input#exercise(type='text' name='exercise' placeholder='Exercise' required='')
-        br
+        //input#exercise(type='text' name='exercise' placeholder='Exercise Type' required='')
+
+        p Select type of exercise: 
+          select(name="exercises" id="exercises")
+            option(value="Upper Body")
+            option(value="Lower Body")
+            option(value="Cardio")  
+          button#verifyExercise(type="submit") verify  
+      
         label(for='time')
         input#time(type='text' name='time' placeholder='Time')
         br
@@ -115,5 +122,14 @@ block content
     addGoalContainer.style.display = "none";
     })
 
-    
+    document.getElementById("exitButtonGoal").addEventListener("click", function () {
+    overlay.style.display = "none";
+    addGoalContainer.style.display = "none";
+    })
 
+    document.getElementById("#verifyExercise").addEventListener("click", function () {
+    console.log("hi");
+    //exercise = document.getElementById("exercises");
+    //type = exercise.value;
+    //console.log("hi");
+    })
