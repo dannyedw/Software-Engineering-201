@@ -15,7 +15,6 @@ block content
       form#dietForm(onsubmit="return false;")
         label(for='exercise')
         //input#exercise(type='text' name='exercise' placeholder='Exercise Type' required='')
-
         //Reference for change event: https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event
         p Select type of exercise: 
           select(name="exercises" id="exercises")
@@ -62,7 +61,8 @@ block content
         input(type='submit' value='Add Goal')
   // date header to be changed to be interactable and changeable
   h2 
-     input#date(type='date' name='deadline' placeholder='Deadline' value ='' min='01-01-2023' max='31-12-2023')
+  form#dataForm(onsubmit="return false;")
+     input#date(type='date' name='deadlines' placeholder='Deadlines' min='01-01-2023' max='31-12-2023')
         
   .exerciseDietContainer
     .exercise
@@ -149,10 +149,10 @@ block content
           data = "<input type='text' id='exerciseName' name='exercise-name' placeholder='Exercise Name'><br><input type='text' id='tim' name='time' placeholder='Time (Minutes)'><br><input type='text' id='rep' name='reps' placeholder='Reps'>";
           break;
         case "Lower Body":
-          data = "<input type='text' id='exercise-name' name='exercise-name' placeholder='Exercise Name'><br><input type='text' id='tim' name='time' placeholder='Time (Minutes)'><br><input type='text' id='rep' name='reps' placeholder='Reps'>";
+          data = "<input type='text' id='exerciseName' name='exercise-name' placeholder='Exercise Name'><br><input type='text' id='tim' name='time' placeholder='Time (Minutes)'><br><input type='text' id='rep' name='reps' placeholder='Reps'>";
           break;
         case "Cardio":
-          data = "<input type='text' id='exercise-name' name='exercise-name' placeholder='Exercise Name'><br><input type='text' id='tim' name='time' placeholder='Time (Minutes)'><br><input type='text' id='rep' name='distance' placeholder='Distance (Meters)'>";
+          data = "<input type='text' id='exerciseName' name='exercise-name' placeholder='Exercise Name'><br><input type='text' id='tim' name='time' placeholder='Time (Minutes)'><br><input type='text' id='rep' name='distance' placeholder='Distance (Meters)'>";
           break;
         default:
           // clear the variations div if no exercise is selected
@@ -175,15 +175,16 @@ block content
     var name  = document.getElementById("exerciseName").value;
     var time = document.getElementById("tim").value;
     var reps = document.getElementById("rep").value;
-    console.log(name);
-    console.log(time);
-    console.log(reps);
+   
     const extraDiv = document.getElementById("extra");
     extraDiv.innerHTML = extraDiv.innerHTML + "<br>" + " " + name + " - " + time + " - " + reps;
     })
     
-    
-   // })
+    const mainDate = document.getElementById("dataForm");
+    mainDate.addEventListener("change", (event) =>{
+      var s = document.getElementById("date").value;
+      console.log(s)
+     })
 
     //- document.getElementById("verifyExercise").addEventListener("click", function () {
     //- exercise = document.getElementById("exercises");
