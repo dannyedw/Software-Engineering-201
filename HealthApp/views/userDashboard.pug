@@ -11,7 +11,8 @@ block content
     #addExerciseContainer.popup(style='display:none;')
       button#exitButtonExercise(type='button') Close
       h3 Add Exercise
-      form(action='http://localhost:3000/userDashboard#' method='post')
+      //form(action='http://localhost:3000/userDashboard' method='post' id="dietForm")
+      form#dietForm(onsubmit="return false;")
         label(for='exercise')
         //input#exercise(type='text' name='exercise' placeholder='Exercise Type' required='')
 
@@ -24,13 +25,13 @@ block content
             option(value="Cardio") Cardio
           //- button#verifyExercise(type="button") submit  
           <div id="variations"></div>    
-        //- label(for='time')
-        //- input#time(type='text' name='time' placeholder='Time')
-        //- br
+        //label(for='time')
+        //input#time(type='text' id="ids" name='time' placeholder='Timee')
+        //br
         //- label(for='distance')
         //- input#distance(type='text' name='distance' placeholder='Distance')
         //- br
-        input(type='submit' value='Add Exercise')
+        input(type='submit' id ="adde" value='Add Exercise')
 
     // popup for add diet
     #addDietContainer.popup(style='display:none;')
@@ -66,11 +67,13 @@ block content
   .exerciseDietContainer
     .exercise
       h3 Exercise
-      p Exercise - Distance/Time
-      p Exercise - Distance/Time
-      p Exercise - Distance/Time
+      p Exercise - Distance/Time - Distance/Reps
+      <div class="line" id="extra"></div>
+      //- p Exercise - Distance/Time
+      //- p Exercise - Distance/Time
+      //- p Exercise - Distance/Time
       button#addExerciseButton(type='button') +
-    // <div class="line"></div>
+    
     .diet
       h3 Diet
       p Food - Calories - Meal Type
@@ -143,24 +146,44 @@ block content
       switch(selectedExercise)
       {
         case "Upper Body":
-          data = "<input type='text' id='exercise-name' name='exercise-name' placeholder='Exercise Name'><br><input type='text' id='time' name='time' placeholder='Time (Minutes)'><br><input type='text' id='reps' name='reps' placeholder='Reps'>";
+          data = "<input type='text' id='exerciseName' name='exercise-name' placeholder='Exercise Name'><br><input type='text' id='tim' name='time' placeholder='Time (Minutes)'><br><input type='text' id='rep' name='reps' placeholder='Reps'>";
           break;
         case "Lower Body":
-          data = "<input type='text' id='exercise-name' name='exercise-name' placeholder='Exercise Name'><br><input type='text' id='time' name='time' placeholder='Time (Minutes)'><br><input type='text' id='reps' name='reps' placeholder='Reps'>";
+          data = "<input type='text' id='exercise-name' name='exercise-name' placeholder='Exercise Name'><br><input type='text' id='tim' name='time' placeholder='Time (Minutes)'><br><input type='text' id='rep' name='reps' placeholder='Reps'>";
           break;
         case "Cardio":
-          data = "<input type='text' id='exercise-name' name='exercise-name' placeholder='Exercise Name'><br><input type='text' id='time' name='time' placeholder='Time (Minutes)'><br><input type='text' id='distance' name='distance' placeholder='Distance (Meters)'>";
+          data = "<input type='text' id='exercise-name' name='exercise-name' placeholder='Exercise Name'><br><input type='text' id='tim' name='time' placeholder='Time (Minutes)'><br><input type='text' id='rep' name='distance' placeholder='Distance (Meters)'>";
           break;
         default:
           // clear the variations div if no exercise is selected
           variationsDiv.innerHTML = "";
           return;
       }
-
       // update the variations div with the selected exercise's data
       variationsDiv.innerHTML = data;
       
     }); 
+    //document.getElementById("adde").addEventListener("submit", function(){
+    
+
+    var data = document.getElementById("dietForm")
+    data.addEventListener('submit',(e)=>{
+    e.preventDefault();
+
+    overlay.style.display = "none";
+    addExerciseContainer.style.display = "none";
+    var name  = document.getElementById("exerciseName").value;
+    var time = document.getElementById("tim").value;
+    var reps = document.getElementById("rep").value;
+    console.log(name);
+    console.log(time);
+    console.log(reps);
+    const extraDiv = document.getElementById("extra");
+    extraDiv.innerHTML = extraDiv.innerHTML + "<br>" + " " + name + " - " + time + " - " + reps;
+    })
+    
+    
+   // })
 
     //- document.getElementById("verifyExercise").addEventListener("click", function () {
     //- exercise = document.getElementById("exercises");
