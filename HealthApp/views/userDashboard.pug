@@ -15,12 +15,14 @@ block content
         label(for='exercise')
         //input#exercise(type='text' name='exercise' placeholder='Exercise Type' required='')
 
+        //Reference for change event: https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event
         p Select type of exercise: 
           select(name="exercises" id="exercises")
+            option(value="") Select One ...
             option(value="Upper Body") Upper Body
             option(value="Lower Body") Lower Body
             option(value="Cardio") Cardio
-          button#verifyExercise(type="button") submit  
+          //- button#verifyExercise(type="button") submit  
           <div id="variations"></div>    
         //- label(for='time')
         //- input#time(type='text' name='time' placeholder='Time')
@@ -130,18 +132,64 @@ block content
     })
 
 
-    document.getElementById("verifyExercise").addEventListener("click", function () {
-    exercise = document.getElementById("exercises");
-    type = exercise.value;
+    const exerciseSelect = document.getElementById("exercises");
+    const variationsDiv = document.getElementById("variations");
+
+    exerciseSelect.addEventListener("change", (event) =>
+    {
+      const selectedExercise = event.target.value;
+      let data = "";
+
+      switch(selectedExercise)
+      {
+        case "Upper Body":
+          data = "<input type='text' id='exercise-name' name='exercise-name' placeholder='Exercise Name'><br><input type='text' id='time' name='time' placeholder='Time (Minutes)'><br><input type='text' id='reps' name='reps' placeholder='Reps'>";
+          break;
+        case "Lower Body":
+          data = "<input type='text' id='exercise-name' name='exercise-name' placeholder='Exercise Name'><br><input type='text' id='time' name='time' placeholder='Time (Minutes)'><br><input type='text' id='reps' name='reps' placeholder='Reps'>";
+          break;
+        case "Cardio":
+          data = "<input type='text' id='exercise-name' name='exercise-name' placeholder='Exercise Name'><br><input type='text' id='time' name='time' placeholder='Time (Minutes)'><br><input type='text' id='distance' name='distance' placeholder='Distance (Meters)'>";
+          break;
+        default:
+          // clear the variations div if no exercise is selected
+          variationsDiv.innerHTML = "";
+          return;
+      }
+
+      // update the variations div with the selected exercise's data
+      variationsDiv.innerHTML = data;
+      
+    }); 
+
+    //- document.getElementById("verifyExercise").addEventListener("click", function () {
+    //- exercise = document.getElementById("exercises");
+    //- type = exercise.value;
   
-    if(type == "Upper Body"){
-      var data = "<input type='text' id='time' name='time' placeholder=Exercise Name'><br></input><input type='text' id='time' name='time' placeholder='Time(Minutes)'></input><br><input type='text' id='distance' name='distance' placeholder='Reps'>"
-      document.getElementById("variations").innerHTML = data;
-    }else if(type == "Lower Body"){
-      var data = "<input type='text' id='time' name='time' placeholder=Exercise Name'><br></input><input type='text' id='time' name='time' placeholder='Time(Minutes)'></input><br><input type='text' id='distance' name='distance' placeholder='Reps'>"
-      document.getElementById("variations").innerHTML = data;
-    }else if(type == "Cardio"){
-      var data = "<input type='text' id='time' name='time' placeholder=Exercise Name'><br></input><input type='text' id='time' name='time' placeholder='Time(Minutes)'></input><br><input type='text' id='distance' name='distance' placeholder='Distance(Meters)'>"
-      document.getElementById("variations").innerHTML = data;
-    }
-    })
+    //- switch(type)
+    //- {
+    //-   case "Upper Body":
+    //-     var data = "<input type='text' id='time' name='time' placeholder=Exercise Name'><br></input><input type='text' id='time' name='time' placeholder='Time(Minutes)'></input><br><input type='text' id='distance' name='distance' placeholder='Reps'>"
+    //-     document.getElementById("variations").innerHTML = data;
+    //-     break;
+    //-   case "Lower Body":
+    //-     var data = "<input type='text' id='time' name='time' placeholder=Exercise Name'><br></input><input type='text' id='time' name='time' placeholder='Time(Minutes)'></input><br><input type='text' id='distance' name='distance' placeholder='Reps'>"
+    //-     document.getElementById("variations").innerHTML = data;
+    //-     break;
+    //-   case "Cardio":
+    //-     var data = "<input type='text' id='time' name='time' placeholder=Exercise Name'><br></input><input type='text' id='time' name='time' placeholder='Time(Minutes)'></input><br><input type='text' id='distance' name='distance' placeholder='Distance(Meters)'>"
+    //-     document.getElementById("variations").innerHTML = data;
+    //-     break;
+    //- }
+    
+    //- if(type == "Upper Body"){
+    //-   var data = "<input type='text' id='time' name='time' placeholder=Exercise Name'><br></input><input type='text' id='time' name='time' placeholder='Time(Minutes)'></input><br><input type='text' id='distance' name='distance' placeholder='Reps'>"
+    //-   document.getElementById("variations").innerHTML = data;
+    //- }else if(type == "Lower Body"){
+    //-   var data = "<input type='text' id='time' name='time' placeholder=Exercise Name'><br></input><input type='text' id='time' name='time' placeholder='Time(Minutes)'></input><br><input type='text' id='distance' name='distance' placeholder='Reps'>"
+    //-   document.getElementById("variations").innerHTML = data;
+    //- }else if(type == "Cardio"){
+    //-   var data = "<input type='text' id='time' name='time' placeholder=Exercise Name'><br></input><input type='text' id='time' name='time' placeholder='Time(Minutes)'></input><br><input type='text' id='distance' name='distance' placeholder='Distance(Meters)'>"
+    //-   document.getElementById("variations").innerHTML = data;
+    //- }
+    //})

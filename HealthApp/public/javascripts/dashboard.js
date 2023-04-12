@@ -1,4 +1,4 @@
-function getExecrise(){
+function getExercise(){
     exercise = document.getElementById("exercises")
     type = exercise.value
     console.log(type)
