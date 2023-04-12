@@ -8,15 +8,17 @@ block header
 
 block content  
   h3 Sign Up 
-  form(id='fSignUp' onsubmit='return false;')
-    p First name
-    label(for='firstName')
-    input#firstName(type='text' name='firstName' placeholder='First Name' required='')
-    br
-    p Last name
-    label(for='lastName')
-    input#lastName(type='text' name='lastName' placeholder='Last Name' required='')
-    br
+  form#fSignUp(onsubmit='return false;')
+    .name-container
+      p First name
+      p Last name
+    .name-container
+      label(for='firstName')
+      input#firstName(type='text' name='firstName' placeholder='First Name' required='')
+      br
+      label(for='lastName')
+      input#lastName(type='text' name='lastName' placeholder='Last Name' required='')
+      br
     p Username
     label(for='username')
     input#username(type='text' name='username' placeholder='Username' required='')
@@ -44,3 +46,4 @@ block content
       label(for='bmi')
       br
     input#sign-up-button(type='submit' value='Sign Up')
+
