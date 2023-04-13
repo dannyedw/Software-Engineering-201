@@ -25,8 +25,6 @@ function submit(data)
 
     switch (data.type)
     {
-        case "user-login": return userManager.login(data.content);
-        case "user-signup": return userManager.signup(data.content);
         case "user-update": return userManager.update(data.content);
         case "group-create": return groupManager.create(data.content);
         case "group-delete": return groupManager.delete(data.content);

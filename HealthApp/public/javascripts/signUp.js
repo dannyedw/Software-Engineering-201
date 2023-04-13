@@ -37,10 +37,26 @@ function signUp()
     if (age != "") data.content.age = age;
     if (bmi != "") data.content.bmi = bmi;
 
-    dataSubmit(data, responseHandler);
+    const url = "/signUp";
+    const requestOptions = {
+        method: 'POST', headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    };
+
+    fetch(url, requestOptions).then(responseHandler);
 }
 
 function responseHandler(response)
 {
-    console.log(response);
+    if (response.status === 200)
+    {
+        window.location.href = response.url;
+    }
+    else
+    {
+        console.log(response.json());
+    }
 }

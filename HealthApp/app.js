@@ -3,9 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('express-session')
 
 const indexRouter = require('./routes/index');
 const loginRouter = require('./routes/login');
+const logoutRouter = require('./routes/logout');
 const signUpRouter = require('./routes/signUp');
 const userDashboardRouter = require('./routes/userDashboard');
 const groupDashboardRouter = require('./routes/groupDashboard');
@@ -23,9 +25,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({ //http://expressjs.com/en/resources/middleware/session.html
+  secret: 'notverysecurereplacethiswithenvironmentvariablelatermaybe',
+  resave: false,
+  saveUninitialized: true
+}));
 
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
+app.use('/logout', logoutRouter);
 app.use('/signUp', signUpRouter);
 app.use('/userDashboard', userDashboardRouter);
 app.use('/groupDashboard', groupDashboardRouter);

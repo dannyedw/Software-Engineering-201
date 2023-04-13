@@ -1,74 +1,4 @@
 {
-    "abcd1234": {
-        "firstName": "test",
-        "lastName": "t",
-        "password": "f",
-        "height": "3",
-        "weight": "2",
-        "bmi": "2",
-        "age": "1",
-        "loginID": 0
-    },
-    "abcd123": {
-        "firstName": "test",
-        "lastName": "t",
-        "password": "f",
-        "height": "3",
-        "weight": "2",
-        "bmi": "2",
-        "age": "1",
-        "loginID": 1
-    },
-    "f": {
-        "firstName": "a",
-        "lastName": "b",
-        "password": "d",
-        "height": 0,
-        "weight": 0,
-        "bmi": 0,
-        "age": 0,
-        "loginID": 2
-    },
-    "g": {
-        "firstName": "a",
-        "lastName": "b",
-        "password": "a",
-        "height": 0,
-        "weight": 0,
-        "bmi": 0,
-        "age": 0,
-        "loginID": 3
-    },
-    "h": {
-        "firstName": "a",
-        "lastName": "b",
-        "password": "f",
-        "height": 0,
-        "weight": 0,
-        "bmi": 0,
-        "age": 0,
-        "loginID": 4
-    },
-    "i": {
-        "firstName": "a",
-        "lastName": "b",
-        "password": "f",
-        "height": 0,
-        "weight": 0,
-        "bmi": 0,
-        "age": 0,
-        "loginID": 5
-    },
-    "j": {
-        "firstName": "a",
-        "lastName": "b",
-        "password": "f",
-        "height": 0,
-        "weight": 0,
-        "bmi": 0,
-        "age": 0,
-        "loginID": 6
-    },
     "c": {
         "firstName": "a",
         "lastName": "b",
@@ -77,6 +7,6 @@
         "weight": 0,
         "bmi": 0,
         "age": 0,
-        "loginID": 7
+        "loginID": 0
     }
 }

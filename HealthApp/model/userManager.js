@@ -8,12 +8,10 @@ function login(content)
 
     let db = getDB();
     if (!db[content.username]) return { status: 400, content: "Invalid username" };
-    console.log(content.password);
-    console.log(db[content.username]);
+
     if (content.password === db[content.username].password)
     {
-        //signed in, have some sort of verification token for accessing things that require being in an account
-        return { status: 200, content: db[content.username].loginID };
+        return { status: 200, content: "Successfully logged in" };
     }
 }
 
@@ -26,8 +24,7 @@ function signup(content)
         height: 0,
         weight: 0,
         bmi: 0,
-        age: 0,
-        loginID: 0
+        age: 0
     };
 
     let username;
@@ -62,7 +59,6 @@ function update(content)
 
     const u = content.username;
     let db = getDB();
-    if (!checkLoginID(u, content.loginID)) return { status: 400, content: "Invalid loginID" };
 
     if (content.firstName) db[u].firstName = content.firstName;
     if (content.lastName) db[u].lastName = content.lastName;
@@ -94,14 +90,11 @@ function dataRequest(content)
         "age"
     ];
 
-    const u = content.username;
-    if (!checkLoginID(u, content.loginID)) return { status: 400, content: "Invalid loginID" };
-
     for (let key of content.requestKeys)
     {
         if (!acceptedKeys.includes(key)) continue;
 
-        if (db[u][key])
+        if (db[content.username][key])
         {
             data[key] = db[u][key];
         }
@@ -116,11 +109,7 @@ function addUser(username, userInfo)
     let db = getDB();
 
     if (db[username]) return false; //username taken, must be unique
-    else
-    {
-        userInfo.loginID = Object.keys(db).length;
-        db[username] = userInfo;
-    }
+    else db[username] = userInfo;
 
     updateDB(db);
 
@@ -135,12 +124,6 @@ function getDB()
 function updateDB(newDB)
 {
     fs.writeFileSync("model/database/users.json", JSON.stringify(newDB, null, 4));
-}
-
-function checkLoginID(username, ID)
-{
-    const db = getDB();
-    return ID === db[username].loginID;
 }
 
 exports.login = login;

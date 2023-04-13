@@ -2,11 +2,12 @@ extends layout
 
 block header
   link(rel='stylesheet' href='stylesheets/login_style.css')
+  script(src='javascripts/login.js', defer)
   title Login
 
 block content
   h3 Login 
-  form(action='http://localhost:3000/login#' method='post')
+  form(id='fLogin' onsubmit='return false;')
     p Username
     input#username(type='text' name='username' placeholder='Username' required='')
     br

@@ -10,13 +10,17 @@ router.get('/', (req, res, next) => {
     }
     else
     {
-        let result = dataManager.request(req.body);
+        let result;
+        if (!req.session.user) result = { status: 401, content: "User not logged in" };
+        else result = dataManager.request(req.body);
         res.status(result.status).json(result);
     }
 });
 
 router.post('/', (req, res) => {
-    let result = dataManager.submit(req.body);
+    let result;
+    if (!req.session.user) result = { status: 401, content: "User not logged in" };
+    else result = dataManager.submit(req.body);
     res.status(result.status).json(result);
 });
 
