@@ -10,15 +10,28 @@ function addExercise() {
   overlay.style.display = "block";
   addGoalContainer.style.display = "block";
   }
+  
   //gets the div's so we can hide/unhide them
   const overlay = document.querySelector('.overlay');
   const addExerciseContainer = document.querySelector('#addExerciseContainer');
   const addDietContainer = document.querySelector('#addDietContainer');
   const addGoalContainer = document.querySelector('#addGoalContainer');
+  const addDiets = document.querySelector('#addCustomDietsContainer')
+  
+
   //links the buttons to the functions
   document.getElementById("addExerciseButton").addEventListener("click", addExercise)
   document.getElementById("addDietButton").addEventListener("click", addDiet)
   document.getElementById("addGoalButton").addEventListener("click", addGoal)
+  
+  
+
+  document.getElementById("addCustomDiet").addEventListener("click", function(){
+  overlay.style.display = "block";
+  addCustomDietsContainer.style.display = "block";
+  })
+
+
   //add a anonymas function to each exit button to hide the popup
   document.getElementById("exitButtonExercise").addEventListener("click", function () {
   overlay.style.display = "none";
@@ -38,6 +51,12 @@ function addExercise() {
   overlay.style.display = "none";
   addGoalContainer.style.display = "none";
   })
+  
+  document.getElementById("exitCustomDiets").addEventListener("click", function(){
+    overlay.style.display = "none";
+    addCustomDietsContainer.style.display = "none";
+    })
+  
 
 
 
@@ -74,7 +93,7 @@ exerciseSelect.addEventListener("change", (event) =>
 //document.getElementById("adde").addEventListener("submit", function(){
 
 
-var data = document.getElementById("dietForm")
+var data = document.getElementById("exerciseForm")
 data.addEventListener('submit',(e)=>{
 e.preventDefault();
 
@@ -111,9 +130,32 @@ var calories = "120";
 
 divs.innerHTML = divs.innerHTML + `<tr onclick="submitDiet()"> <td>mealType</td> <td>name</td> <td>calories</td>`
 
+const dietDiv = document.getElementById("diets");
 function submitDiet(){
-  const dietDiv = document.getElementById("diets");
   dietDiv.innerHTML = dietDiv.innerHTML + "<br>" + mealType + " - " + nam + " - " + calories; 
   overlay.style.display = "none";
   addDietContainer.style.display = "none";
 }
+
+var data = document.getElementById("dietsForm")
+data.addEventListener('submit',(e)=>{
+e.preventDefault();
+addDietContainer.style.display = "none";
+//dietDiv.innerHTML = dietDiv.innerHTML + "<br>" + mealType + " - " + nam + " - " + calories;
+})
+
+var data = document.getElementById("CustomDietsForm")
+data.addEventListener('submit',(e)=>{
+e.preventDefault();
+
+overlay.style.display = "none";
+addExerciseContainer.style.display = "none";
+addCustomDietsContainer.style.display = "none";
+var mealType = "Brekfast";
+var nam     = "Cereal";
+var calories = "120";
+
+const extraDiv = document.getElementById("extra");
+divs.innerHTML = divs.innerHTML + `<tr onclick="submitDiet()"> <td>mealType</td> <td>name</td> <td>calories</td>`
+dietDiv.innerHTML = dietDiv.innerHTML + "<br>" + " " + mealType + " - " + nam + " - " + calories; 
+})
