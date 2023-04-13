@@ -7,7 +7,7 @@ on any page it is accessed.
 
 There are two functions, dataRequest and dataSubmit:
 * dataRequest is used when requesting data from the server, e.g. about a user or group.
-* dataSubmit is used when sending data to the server for processing, such as signup, login, group creation etc.
+* dataSubmit is used when sending data to the server for processing, such as updating user info, group creation/deletion etc.
 
 Both functions have the same parameters, data and callback.
 * data should be a JSON object containing a "type" and a "content"
