@@ -224,3 +224,6 @@
   padding: 10px;
 }
 
+tr:hover {
+    background-color: lightblue;
+  }

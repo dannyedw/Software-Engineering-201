@@ -40,9 +40,9 @@ function addExercise() {
   })
 
 
-  
 
 
+// this is the exercise section of code //
 const exerciseSelect = document.getElementById("exercises");
 const variationsDiv = document.getElementById("variations");
 
@@ -94,3 +94,26 @@ const mainDate = document.getElementById("dataForm");
     //dataSubmit(data, responseHandler);
     console.log(s)
   })
+
+
+// this is the diet section of code
+var divs = document.getElementById("dietTable");
+divs.innerHTML = 
+"<tr>"+
+  "<th>food type</th>" +
+  "<th>meal name</th>" +
+  "<th>calories</th>" +
+"</tr>";
+
+var mealType = "Brekfast";
+var nam     = "Cereal";
+var calories = "120";
+
+divs.innerHTML = divs.innerHTML + `<tr onclick="submitDiet()"> <td>mealType</td> <td>name</td> <td>calories</td>`
+
+function submitDiet(){
+  const dietDiv = document.getElementById("diets");
+  dietDiv.innerHTML = dietDiv.innerHTML + "<br>" + mealType + " - " + nam + " - " + calories; 
+  overlay.style.display = "none";
+  addDietContainer.style.display = "none";
+}

@@ -38,12 +38,9 @@ block content
       button#exitButtonDiet(type='button') Close
       h3 Add Diet
       form(action='http://localhost:3000/userDashboard#' method='post')
-        table(style='width:100%', border='1')
-          tr 
-            th food type
-            th meal name 
-            th calories
-          <div id="dietTable"></div>
+        table#dietTable(style='width:100%', border='1')
+         
+          
 
 
         //- label(for='foodType')
@@ -85,9 +82,10 @@ block content
     
     .diet
       h3 Diet
-      p Food - Calories - Meal Type
-      p Food - Calories - Meal Type
-      p Food - Calories - Meal Type
+      <div class="line" id="diets"></div>
+      //- p Food - Calories - Meal Type
+      //- p Food - Calories - Meal Type
+      //- p Food - Calories - Meal Type
       button#addDietButton(type='button') +
   h2#goals Goals
   .goalContainer
