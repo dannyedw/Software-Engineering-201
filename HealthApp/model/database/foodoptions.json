@@ -1,0 +1,22 @@
+{
+    "1": {
+        "Meal Type":"Lunch",
+        "Name":"CheeseBurger",
+        "Calories": 450
+    },
+    "2": {
+        "Meal Type":"Dinner",
+        "Name":"Pizza",
+        "Calories": 700
+    },
+    "3": {
+        "Meal Type":"Breakfast",
+        "Name":"Cereal",
+        "Calories": 125
+    },
+    "4": {
+        "Meal Type":"Dinner",
+        "Name":"Pasta",
+        "Calories": 220
+    }
+}

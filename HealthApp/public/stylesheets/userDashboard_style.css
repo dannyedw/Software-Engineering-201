@@ -3,12 +3,13 @@
     text-align: center;
     border: 5px black solid;
     
+    height: 30px;
     width: 150px;
     box-sizing: border-box;
     
     position: fixed;
     /* Reference for positioning: https://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/*/
-    top: 25.5%;
+    top: 29%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -201,6 +202,7 @@
   right: 0;
   bottom: 0;
   background-color: rgba(0,0,0,0.5);
+  z-index: 1;
 }
 
 .overlayHidden {
@@ -220,5 +222,4 @@
   background-color: white;    
   text-align: center;
   padding: 10px;
-
 }

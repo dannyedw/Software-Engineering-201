@@ -2,6 +2,7 @@ extends layout
 
 block header
   link(rel='stylesheet' href='stylesheets/userDashboard_style.css')
+  script(src='javascripts/dashboard.js', defer)
   title My Dashboard
 
 block content
@@ -11,30 +12,40 @@ block content
     #addExerciseContainer.popup(style='display:none;')
       button#exitButtonExercise(type='button') Close
       h3 Add Exercise
-      form(action='http://localhost:3000/userDashboard#' method='post')
+      //form(action='http://localhost:3000/userDashboard' method='post' id="dietForm")
+      form#dietForm(onsubmit="return false;")
         label(for='exercise')
-        input#exercise(type='text' name='exercise' placeholder='Exercise' required='')
-        br
-        label(for='time')
-        input#time(type='text' name='time' placeholder='Time')
-        br
-        label(for='distance')
-        input#distance(type='text' name='distance' placeholder='Distance')
-        br
-        input(type='submit' value='Add Exercise')
+        //input#exercise(type='text' name='exercise' placeholder='Exercise Type' required='')
+        //Reference for change event: https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event
+        p Select type of exercise: 
+          select(name="exercises" id="exercises")
+            option(value="") Select One ...
+            option(value="Upper Body") Upper Body
+            option(value="Lower Body") Lower Body
+            option(value="Cardio") Cardio
+          //- button#verifyExercise(type="button") submit  
+          <div id="variations"></div>    
+        //label(for='time')
+        //input#time(type='text' id="ids" name='time' placeholder='Timee')
+        //br
+        //- label(for='distance')
+        //- input#distance(type='text' name='distance' placeholder='Distance')
+        //- br
+        input(type='submit' id ="adde" value='Add Exercise')
+
     // popup for add diet
     #addDietContainer.popup(style='display:none;')
       button#exitButtonDiet(type='button') Close
       h3 Add Diet
       form(action='http://localhost:3000/userDashboard#' method='post')
-        label(for='foodType')
-        input#foodType(type='text' name='foodType' placeholder='Food Type' required='')
-        br
-        label(for='calories')
-        input#calories(type='text' name='calories' placeholder='Calories' required='')
-        br
-        label(for='mealType')
-        input#mealType(type='text' name='mealType' placeholder='Meal Type' required='')
+        //- label(for='foodType')
+        //- input#foodType(type='text' name='foodType' placeholder='Food Type' required='')
+        //- br
+        //- label(for='calories')
+        //- input#calories(type='text' name='calories' placeholder='Calories' required='')
+        //- br
+        //- label(for='mealType')
+        //- input#mealType(type='text' name='mealType' placeholder='Meal Type' required='')
         br
         input(type='submit' value='Add Diet')
     // popup for add goal
@@ -46,19 +57,24 @@ block content
         input#goal(type='text' name='goal' placeholder='Goal' required='')
         br
         label(for='deadline')
-        input#deadline(type='date' name='deadline' placeholder='Deadline')
+        input#deadline(type='date' name='deadline' placeholder='Deadline' value ='' min='01-01-2023' max='31-12-2023')
         br
         input(type='submit' value='Add Goal')
   // date header to be changed to be interactable and changeable
-  h2#date Wednesday 5th April
+  h2 
+  form#dataForm(onsubmit="return false;")
+     input#date(type='date' name='deadlines' placeholder='Deadlines' min='01-01-2023' max='31-12-2023')
+        
   .exerciseDietContainer
     .exercise
       h3 Exercise
-      p Exercise - Distance/Time
-      p Exercise - Distance/Time
-      p Exercise - Distance/Time
+      p Exercise - Distance/Time - Distance/Reps
+      <div class="line" id="extra"></div>
+      //- p Exercise - Distance/Time
+      //- p Exercise - Distance/Time
+      //- p Exercise - Distance/Time
       button#addExerciseButton(type='button') +
-    // <div class="line"></div>
+    
     .diet
       h3 Diet
       p Food - Calories - Meal Type
@@ -103,6 +119,7 @@ block content
     document.getElementById("exitButtonExercise").addEventListener("click", function () {
     overlay.style.display = "none";
     addExerciseContainer.style.display = "none";
+    document.getElementById("variations").innerHTML = "";
     })
     document.getElementById("exitButtonDiet").addEventListener("click", function () {
     overlay.style.display = "none";
@@ -113,5 +130,8 @@ block content
     addGoalContainer.style.display = "none";
     })
 
-    
-
+    document.getElementById("exitButtonGoal").addEventListener("click", function () {
+    overlay.style.display = "none";
+    addGoalContainer.style.display = "none";
+    })
+  
