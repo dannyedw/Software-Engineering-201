@@ -10,9 +10,16 @@ form
   font-size: 2em;
 }
 
+label
+{
+  font-size: 1.5em;
+}
+
 form input
 {
   font-size: 2em;
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
 
 #login-button
