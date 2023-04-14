@@ -13,6 +13,15 @@ form
 form input
 {
   font-size: 2em;
+  margin-bottom: 20px;
+}
+
+label
+{
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5em;
+  margin-bottom: 10px;
 }
 
 #login-button

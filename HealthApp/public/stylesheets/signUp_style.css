@@ -19,13 +19,22 @@ form > p
   font-size: 2em;
 }
 
+label
+{
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-size: 2em;
+}
+
 .name-container
 {
   display: flex;
   justify-content: center;
 }
 
-.name-container > p
+.name-container > label
 {
   
   margin-left: 145px;

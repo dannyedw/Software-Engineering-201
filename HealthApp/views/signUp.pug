@@ -9,25 +9,23 @@ block content
   h3 Sign Up 
   form#fSignUp(onsubmit='return false;')
     .name-container
-      p First name
-      p Last name
+      label(for='firstName') First name
+      label(for='lastName') Last name
     .name-container
-      label(for='firstName')
       input#firstName(type='text' name='firstName' placeholder='First Name' required='')
       br
-      label(for='lastName')
       input#lastName(type='text' name='lastName' placeholder='Last Name' required='')
       br
-    p Username
-    label(for='username')
+    label(for='username') Username
     input#username(type='text' name='username' placeholder='Username' required='')
     br
-    p Password
-    label(for='password')
+    label(for='email') Email Address 
+    input#email(type='email' name='email' placeholder='Email Address' required='')
+    br
+    label(for='password') Password
     input#password(type='password' name='password' placeholder='Password' required='')
     br
-    p Verify password
-    label(for='passwordConfirm')
+    label(for='passwordConfirm') Confirm password
     input#passwordConfirm(type='password' name='passwordConfirm' placeholder='Confirm Password' required='')
     br
     p Other details

@@ -63,7 +63,11 @@ function addExercise() {
 
 // this is the exercise section of code //
 const exerciseSelect = document.getElementById("exercises");
+const exerciseDietContainer = document.querySelector(".exerciseDietContainer");
+const exerciseContainer = document.querySelector(".exercise");
+const dietContainer = document.querySelector(".diet");
 const variationsDiv = document.getElementById("variations");
+const date = document.getElementById("date");
 
 exerciseSelect.addEventListener("change", (event) =>
 {
@@ -73,13 +77,16 @@ exerciseSelect.addEventListener("change", (event) =>
   switch(selectedExercise)
   {
     case "Upper Body":
-      data = "<input type='text' id='exerciseName' name='exercise-name' placeholder='Exercise Name'><br><input type='text' id='tim' name='time' placeholder='Time (Minutes)'><br><input type='text' id='rep' name='reps' placeholder='Reps'>";
+      data = "<input type='text' id='exerciseName' name='exercise-name' placeholder='Exercise Name'><br><input type='text' id='time' name='time' placeholder='Time (Minutes)'><br><input type='text' id='rep' name='reps' placeholder='Reps'><br>";
+      data += "<input type='submit' id ='add' value='Add Exercise'>";
       break;
     case "Lower Body":
-      data = "<input type='text' id='exerciseName' name='exercise-name' placeholder='Exercise Name'><br><input type='text' id='tim' name='time' placeholder='Time (Minutes)'><br><input type='text' id='rep' name='reps' placeholder='Reps'>";
+      data = "<input type='text' id='exerciseName' name='exercise-name' placeholder='Exercise Name'><br><input type='text' id='time' name='time' placeholder='Time (Minutes)'><br><input type='text' id='rep' name='reps' placeholder='Reps'><br>";
+      data += "<input type='submit' id ='add' value='Add Exercise'>";
       break;
     case "Cardio":
-      data = "<input type='text' id='exerciseName' name='exercise-name' placeholder='Exercise Name'><br><input type='text' id='tim' name='time' placeholder='Time (Minutes)'><br><input type='text' id='rep' name='distance' placeholder='Distance (Meters)'>";
+      data = "<input type='text' id='exerciseName' name='exercise-name' placeholder='Exercise Name'><br><input type='text' id='time' name='time' placeholder='Time (Minutes)'><br><input type='text' id='rep' name='distance' placeholder='Distance (Meters)'><br>";
+      data += "<input type='submit' id ='add' value='Add Exercise'>";
       break;
     default:
       // clear the variations div if no exercise is selected
@@ -93,18 +100,32 @@ exerciseSelect.addEventListener("change", (event) =>
 //document.getElementById("adde").addEventListener("submit", function(){
 
 
-var data = document.getElementById("exerciseForm")
+// var heightInc = 20;
+// var percentageInc = 1.5;
+// exerciseDietContainer.style.height = "280px";
+// exerciseDietContainer.style.top = "45%";
+// exerciseContainer.style.height = "250px";
+// date.style.top = "29%";
+// function adjustExerciseBorder(){
+//   exerciseDietContainer.style.height = parseInt(exerciseDietContainer.style.height) + heightInc + "px";
+//   exerciseDietContainer.style.top = parseInt(exerciseDietContainer.style.top) + percentageInc + "%";
+//   exerciseContainer.style.height = parseInt(exerciseContainer.style.height) + heightInc + "px";
+//   //date.style.top = parseInt(date.style.top) + percentageInc + "%";
+// }
+
+var data = document.getElementById("dietForm")
 data.addEventListener('submit',(e)=>{
 e.preventDefault();
 
 overlay.style.display = "none";
 addExerciseContainer.style.display = "none";
 var name  = document.getElementById("exerciseName").value;
-var time = document.getElementById("tim").value;
+var time = document.getElementById("time").value;
 var reps = document.getElementById("rep").value;
 
 const extraDiv = document.getElementById("extra");
 extraDiv.innerHTML = extraDiv.innerHTML + "<br>" + " " + name + " - " + time + " - " + reps;
+adjustExerciseBorder();
 })
 
 const mainDate = document.getElementById("dataForm");
