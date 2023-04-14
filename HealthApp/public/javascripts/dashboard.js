@@ -66,6 +66,7 @@ function addExercise() {
 var exerciseTable = document.getElementById("exerciseTable");
 exerciseTable.innerHTML = 
 "<tr>"+
+  "<th>Exercise Set</th>" +
   "<th>Exercise Name</th>" +
   "<th>Time</th>" +
   "<th>Distance/Reps</th>" +
@@ -111,9 +112,11 @@ addExerciseContainer.style.display = "none";
 var name  = document.getElementById("exerciseName").value;
 var time = document.getElementById("tim").value;
 var reps = document.getElementById("rep").value;
+const selectedExercise = document.getElementById("exercises").value;
+
 
 const extraDiv = document.getElementById("extra");
-exerciseTable.innerHTML = exerciseTable.innerHTML + "<td>"+name+"</td> <td>"+time+"</td> <td>"+reps+"</td>";
+exerciseTable.innerHTML = exerciseTable.innerHTML +"<td>"+selectedExercise+"</td> <td>"+name+"</td> <td>"+time+"</td> <td>"+reps+"</td>";
 })
 
 const mainDate = document.getElementById("dataForm");
@@ -177,5 +180,5 @@ var mealName = document.getElementById("mealType").value
 
 const extraDiv = document.getElementById("extra");
 divs.innerHTML = divs.innerHTML + `<tr onclick="submitDiet()">` + "<td>"+mealType+"</td> <td>"+mealName+"</td> <td>"+calories+"</td>";
-foodTab.innerHTML = foodTab.innerHTML + "<td>"+mealType+"</td> <td>"+nam+"</td> <td>"+calories+"</td>"; 
+foodTab.innerHTML = foodTab.innerHTML + "<td>"+mealType+"</td> <td>"+mealName+"</td> <td>"+calories+"</td>"; 
 })
