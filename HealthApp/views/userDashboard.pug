@@ -45,15 +45,20 @@ block content
     #addCustomDietsContainer.popup(style='display:none;')    
       button#exitCustomDiets(type='button') Close
       form#CustomDietsForm(onsubmit="return false;")
+        label(for='mealType')
+        select(name="Meal Type" id="mealType")
+            option(value="") Select One ...
+            option(value="BreakFast") Breakfast
+            option(value="Lunch") Lunch
+            option(value="Dinner") Dinner
+        br
         label(for='foodType')
-        input#foodType(type='text' name='foodType' placeholder='Food Type' required='')
+        input#foodTypes(type='text' name='foods' placeholder='Food Type' required='')
         br
         label(for='calories')
         input#calories(type='text' name='calories' placeholder='Calories' required='')
         br
-        label(for='mealType')
-        input#mealType(type='text' name='mealType' placeholder='Meal Type' required='')
-        br
+      
         input(type='submit' id="addDiet" value='Add Diet')
 
     // popup for add goal

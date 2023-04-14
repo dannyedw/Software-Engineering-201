@@ -16,7 +16,7 @@ function addExercise() {
   const addExerciseContainer = document.querySelector('#addExerciseContainer');
   const addDietContainer = document.querySelector('#addDietContainer');
   const addGoalContainer = document.querySelector('#addGoalContainer');
-  const addDiets = document.querySelector('#addCustomDietsContainer')
+  const addCustomDietsContainer = document.querySelector('#addCustomDietsContainer')
   
 
   //links the buttons to the functions
@@ -128,7 +128,7 @@ var mealType = "Brekfast";
 var nam     = "Cereal";
 var calories = "120";
 
-divs.innerHTML = divs.innerHTML + `<tr onclick="submitDiet()"> <td>mealType</td> <td>name</td> <td>calories</td>`
+divs.innerHTML = divs.innerHTML + `<tr onclick="submitDiet()">` + "<td>"+mealType+"</td> <td>"+nam+"</td> <td>"+calories+"</td>";
 
 const dietDiv = document.getElementById("diets");
 function submitDiet(){
@@ -144,18 +144,20 @@ addDietContainer.style.display = "none";
 //dietDiv.innerHTML = dietDiv.innerHTML + "<br>" + mealType + " - " + nam + " - " + calories;
 })
 
-var data = document.getElementById("CustomDietsForm")
-data.addEventListener('submit',(e)=>{
+var dataForms = document.getElementById("CustomDietsForm")
+dataForms.addEventListener('submit',(e)=>{
 e.preventDefault();
-
+console.log("hello")
 overlay.style.display = "none";
 addExerciseContainer.style.display = "none";
 addCustomDietsContainer.style.display = "none";
-var mealType = "Brekfast";
-var nam     = "Cereal";
-var calories = "120";
+
+var mealType = document.getElementById("foodTypes").value
+var calories = document.getElementById("calories").value
+var mealName = document.getElementById("mealType").value
+
 
 const extraDiv = document.getElementById("extra");
-divs.innerHTML = divs.innerHTML + `<tr onclick="submitDiet()"> <td>mealType</td> <td>name</td> <td>calories</td>`
-dietDiv.innerHTML = dietDiv.innerHTML + "<br>" + " " + mealType + " - " + nam + " - " + calories; 
+divs.innerHTML = divs.innerHTML + `<tr onclick="submitDiet()">` + "<td>"+mealType+"</td> <td>"+mealName+"</td> <td>"+calories+"</td>";
+dietDiv.innerHTML = dietDiv.innerHTML + "<br>" + " " + mealType + " - " + mealName + " - " + calories; 
 })
