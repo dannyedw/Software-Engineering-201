@@ -62,6 +62,15 @@ function addExercise() {
 
 
 // this is the exercise section of code //
+
+var exerciseTable = document.getElementById("exerciseTable");
+exerciseTable.innerHTML = 
+"<tr>"+
+  "<th>Exercise Name</th>" +
+  "<th>Time</th>" +
+  "<th>Distance/Reps</th>" +
+"</tr>";
+
 const exerciseSelect = document.getElementById("exercises");
 const variationsDiv = document.getElementById("variations");
 
@@ -104,7 +113,7 @@ var time = document.getElementById("tim").value;
 var reps = document.getElementById("rep").value;
 
 const extraDiv = document.getElementById("extra");
-extraDiv.innerHTML = extraDiv.innerHTML + "<br>" + " " + name + " - " + time + " - " + reps;
+exerciseTable.innerHTML = exerciseTable.innerHTML + "<td>"+name+"</td> <td>"+time+"</td> <td>"+reps+"</td>";
 })
 
 const mainDate = document.getElementById("dataForm");
@@ -114,8 +123,17 @@ const mainDate = document.getElementById("dataForm");
     console.log(s)
   })
 
+// this is the diet section of code //
 
-// this is the diet section of code
+var foodTab = document.getElementById("foodTable");
+foodTab.innerHTML = 
+"<tr>"+
+  "<th>Meal type</th>" +
+  "<th>Meal name</th>" +
+  "<th>Calories</th>" +
+"</tr>";
+
+
 var divs = document.getElementById("dietTable");
 divs.innerHTML = 
 "<tr>"+
@@ -132,7 +150,7 @@ divs.innerHTML = divs.innerHTML + `<tr onclick="submitDiet()">` + "<td>"+mealTyp
 
 const dietDiv = document.getElementById("diets");
 function submitDiet(){
-  dietDiv.innerHTML = dietDiv.innerHTML + "<br>" + mealType + " - " + nam + " - " + calories; 
+  foodTab.innerHTML = foodTab.innerHTML + "<td>"+mealType+"</td> <td>"+nam+"</td> <td>"+calories+"</td>"; 
   overlay.style.display = "none";
   addDietContainer.style.display = "none";
 }
@@ -159,5 +177,5 @@ var mealName = document.getElementById("mealType").value
 
 const extraDiv = document.getElementById("extra");
 divs.innerHTML = divs.innerHTML + `<tr onclick="submitDiet()">` + "<td>"+mealType+"</td> <td>"+mealName+"</td> <td>"+calories+"</td>";
-dietDiv.innerHTML = dietDiv.innerHTML + "<br>" + " " + mealType + " - " + mealName + " - " + calories; 
+foodTab.innerHTML = foodTab.innerHTML + "<td>"+mealType+"</td> <td>"+nam+"</td> <td>"+calories+"</td>"; 
 })

@@ -38,8 +38,12 @@ block content
       h3 Add Diet
       button#exitButtonDiet(type='button') Close
       table#dietTable(style='width:100%', border='1')
+        tr
+          th food type 
+          th meal name
+          th Calories
+        tr
       form#dietsForm(action='http://localhost:3000/userDashboard#' method='post')
-        
         input(type='submit' id="addCustomDiet" value='Add Custom Diet')
 
     #addCustomDietsContainer.popup(style='display:none;')    
@@ -81,8 +85,8 @@ block content
   .exerciseDietContainer
     .exercise
       h3 Exercise
-      p Exercise - Distance/Time - Distance/Reps
       <div class="line" id="extra"></div>
+      table#exerciseTable(style='width:100%', border='1')
       //- p Exercise - Distance/Time
       //- p Exercise - Distance/Time
       //- p Exercise - Distance/Time
@@ -90,8 +94,8 @@ block content
     
     .diet
       h3 Diet
-      p Food - Calories - Meal Type
       <div class="line" id="diets"></div>
+      table#foodTable(style='width:100%', border='1')
       //- p Food - Calories - Meal Type
       //- p Food - Calories - Meal Type
       button#addDietButton(type='button') +
