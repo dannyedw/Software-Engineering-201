@@ -187,9 +187,9 @@ addExerciseContainer.style.display = "none";
 addCustomDietsContainer.style.display = "none";
 
 //variables for three input options in custom diet panel
-var mealType = document.getElementById("foodTypes").value
+var mealName = document.getElementById("foodTypes").value
 var calories = document.getElementById("calories").value
-var mealName = document.getElementById("mealType").value
+var mealType = document.getElementById("mealType").value
 
 //adds calorie count of custom to total
 totalCalories += Number(calories);
