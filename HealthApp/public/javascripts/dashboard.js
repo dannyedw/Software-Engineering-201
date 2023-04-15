@@ -63,6 +63,7 @@ function addExercise() {
 
 // this is the exercise section of code //
 
+// retrieves the exercise table and makes the Header
 var exerciseTable = document.getElementById("exerciseTable");
 exerciseTable.innerHTML = 
 "<tr>"+
@@ -72,9 +73,11 @@ exerciseTable.innerHTML =
   "<th>Distance/Reps</th>" +
 "</tr>";
 
+// Gets both of the divs in the exercise panel
 const exerciseSelect = document.getElementById("exercises");
 const variationsDiv = document.getElementById("variations");
 
+// if upper body,lower body or cardio is selected then a different set of inputs is available for each
 exerciseSelect.addEventListener("change", (event) =>
 {
   const selectedExercise = event.target.value;
@@ -100,9 +103,8 @@ exerciseSelect.addEventListener("change", (event) =>
   variationsDiv.innerHTML = data;
   
 }); 
-//document.getElementById("adde").addEventListener("submit", function(){
 
-
+// If exercise set is added to your main panel then they are inserted into the table
 var data = document.getElementById("exerciseForm")
 data.addEventListener('submit',(e)=>{
 e.preventDefault();
@@ -114,11 +116,12 @@ var time = document.getElementById("tim").value;
 var reps = document.getElementById("rep").value;
 const selectedExercise = document.getElementById("exercises").value;
 
-
+//gets the div from the panel to add the inputted requirements into table
 const extraDiv = document.getElementById("extra");
 exerciseTable.innerHTML = exerciseTable.innerHTML +"<td>"+selectedExercise+"</td> <td>"+name+"</td> <td>"+time+"</td> <td>"+reps+"</td>";
 })
 
+//retrives the date selected
 const mainDate = document.getElementById("dataForm");
     mainDate.addEventListener("change", (event) =>{
     var s = document.getElementById("date").value;
@@ -127,8 +130,11 @@ const mainDate = document.getElementById("dataForm");
   })
 
 // this is the diet section of code //
+//total calories and the div section for total calorie display area
 var totalCalories = 0;
+var totalCalorieDiv = document.getElementById("calorieTotal");
 
+// food table of outputted results in the dashboard panel with headers for table
 var foodTab = document.getElementById("foodTable");
 foodTab.innerHTML = 
 "<tr>"+
@@ -137,39 +143,41 @@ foodTab.innerHTML =
   "<th>Calories</th>" +
 "</tr>";
 
-
+//This is the table and headers for the selection of food the user can choose from
 var divs = document.getElementById("dietTable");
 divs.innerHTML = 
 "<tr>"+
-  "<th>food type</th>" +
-  "<th>meal name</th>" +
-  "<th>calories</th>" +
+  "<th>Meal Type</th>" +
+  "<th>Meal Name</th>" +
+  "<th>Calories</th>" +
 "</tr>";
 
+//HardCoded for example
 var mealType = "Breakfast";
 var nam     = "Cereal";
 var calories = 120;
 
-totalCalories += calories;
-
+//creates row to the selection of food
 divs.innerHTML = divs.innerHTML + '<tr onclick="submitDiet(\''+mealType+'\',\''+nam+'\',\''+calories+'\');"> <td>'+mealType+'</td> <td>'+nam+'</td> <td>'+calories+'</td> </tr>';
 
+//This adds the calorie count to the total and adds the selected food item to the dashboard panel
 const dietDiv = document.getElementById("diets");
 function submitDiet(type,name,calories){
   foodTab.innerHTML = foodTab.innerHTML + "<td>"+type+"</td> <td>"+name+"</td> <td>"+calories+"</td>"; 
   overlay.style.display = "none";
   addDietContainer.style.display = "none";
   totalCalories += Number(calories);
+  totalCalorieDiv.innerHTML = "Total Calorie Count " + totalCalories;
   console.log(totalCalories)
 }
 
+//removes the diet container when meal is selected
 var data = document.getElementById("dietsForm")
 data.addEventListener('submit',(e)=>{
 e.preventDefault();
 addDietContainer.style.display = "none";
-//dietDiv.innerHTML = dietDiv.innerHTML + "<br>" + mealType + " - " + nam + " - " + calories;
 })
-
+//this removes the custom diet tab when meal is created and submitted
 var dataForms = document.getElementById("CustomDietsForm")
 dataForms.addEventListener('submit',(e)=>{
 e.preventDefault();
@@ -178,16 +186,17 @@ overlay.style.display = "none";
 addExerciseContainer.style.display = "none";
 addCustomDietsContainer.style.display = "none";
 
+//variables for three input options in custom diet panel
 var mealType = document.getElementById("foodTypes").value
 var calories = document.getElementById("calories").value
 var mealName = document.getElementById("mealType").value
 
+//adds calorie count of custom to total
 totalCalories += Number(calories);
+totalCalorieDiv.innerHTML = "Total Calorie Count " + totalCalories;
 
+//submits custom diet to main dashboard panel of Meals Eaten for the day
 const extraDiv = document.getElementById("extra");
 divs.innerHTML = divs.innerHTML + '<tr onclick="submitDiet(\''+mealType+'\',\''+mealName+'\',\''+calories+'\');"> <td>'+mealType+'</td> <td>'+mealName+'</td> <td>'+calories+'</td> </tr>';
 foodTab.innerHTML = foodTab.innerHTML + "<td>"+mealType+"</td> <td>"+mealName+"</td> <td>"+calories+"</td>"; 
-console.log(totalCalories)
 })
-
-console.log(totalCalories)
