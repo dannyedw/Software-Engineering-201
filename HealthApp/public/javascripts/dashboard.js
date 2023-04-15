@@ -127,6 +127,7 @@ const mainDate = document.getElementById("dataForm");
   })
 
 // this is the diet section of code //
+var totalCalories = 0;
 
 var foodTab = document.getElementById("foodTable");
 foodTab.innerHTML = 
@@ -145,17 +146,21 @@ divs.innerHTML =
   "<th>calories</th>" +
 "</tr>";
 
-var mealType = "Brekfast";
+var mealType = "Breakfast";
 var nam     = "Cereal";
-var calories = "120";
+var calories = 120;
 
-divs.innerHTML = divs.innerHTML + `<tr onclick="submitDiet()">` + "<td>"+mealType+"</td> <td>"+nam+"</td> <td>"+calories+"</td>";
+totalCalories += calories;
+
+divs.innerHTML = divs.innerHTML + '<tr onclick="submitDiet(\''+mealType+'\',\''+nam+'\',\''+calories+'\');"> <td>'+mealType+'</td> <td>'+nam+'</td> <td>'+calories+'</td> </tr>';
 
 const dietDiv = document.getElementById("diets");
-function submitDiet(){
-  foodTab.innerHTML = foodTab.innerHTML + "<td>"+mealType+"</td> <td>"+nam+"</td> <td>"+calories+"</td>"; 
+function submitDiet(type,name,calories){
+  foodTab.innerHTML = foodTab.innerHTML + "<td>"+type+"</td> <td>"+name+"</td> <td>"+calories+"</td>"; 
   overlay.style.display = "none";
   addDietContainer.style.display = "none";
+  totalCalories += Number(calories);
+  console.log(totalCalories)
 }
 
 var data = document.getElementById("dietsForm")
@@ -177,8 +182,12 @@ var mealType = document.getElementById("foodTypes").value
 var calories = document.getElementById("calories").value
 var mealName = document.getElementById("mealType").value
 
+totalCalories += Number(calories);
 
 const extraDiv = document.getElementById("extra");
-divs.innerHTML = divs.innerHTML + `<tr onclick="submitDiet()">` + "<td>"+mealType+"</td> <td>"+mealName+"</td> <td>"+calories+"</td>";
+divs.innerHTML = divs.innerHTML + '<tr onclick="submitDiet(\''+mealType+'\',\''+mealName+'\',\''+calories+'\');"> <td>'+mealType+'</td> <td>'+mealName+'</td> <td>'+calories+'</td> </tr>';
 foodTab.innerHTML = foodTab.innerHTML + "<td>"+mealType+"</td> <td>"+mealName+"</td> <td>"+calories+"</td>"; 
+console.log(totalCalories)
 })
+
+console.log(totalCalories)
