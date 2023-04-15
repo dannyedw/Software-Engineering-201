@@ -196,6 +196,7 @@ totalCalories += Number(calories);
 totalCalorieDiv.innerHTML = "Total Calorie Count " + totalCalories;
 
 //submits custom diet to main dashboard panel of Meals Eaten for the day
+//https://itecnote.com/tecnote/javascript-passing-dynamic-parameter-to-a-javascript-function-using-innerhtml/ reference for how to add mutiple parameters in inner html
 const extraDiv = document.getElementById("extra");
 divs.innerHTML = divs.innerHTML + '<tr onclick="submitDiet(\''+mealType+'\',\''+mealName+'\',\''+calories+'\');"> <td>'+mealType+'</td> <td>'+mealName+'</td> <td>'+calories+'</td> </tr>';
 foodTab.innerHTML = foodTab.innerHTML + "<td>"+mealType+"</td> <td>"+mealName+"</td> <td>"+calories+"</td>"; 
