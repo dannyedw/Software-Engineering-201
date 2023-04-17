@@ -1,5 +1,15 @@
 extends layout
 
+//-this variables block needs to be included on every page which will use a variable (cannot be put in the layout
+//-as variables are loaded with the specific page)
+block variables
+  //-username comes from res.render() on the server, USERNAME is the name of the variable in the pug, USERNAME is also
+  //-defined in a script so it can be used in the js files
+  - const USERNAME = username
+  script.
+    //https://pugjs.org/language/interpolation.html
+    const USERNAME = "#{USERNAME}";
+
 block content
   h3 About page jargon
   p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus leo in enim vestibulum, ut imperdiet leo fermentum. Duis suscipit erat at eros placerat aliquam. Sed auctor commodo sem eget vehicula. Sed ultrices massa eu sapien pulvinar gravida. Maecenas vel turpis quam. Mauris mollis sapien lacus, vitae condimentum erat lacinia quis. Sed elementum lorem a commodo auctor. Nullam et interdum nunc. Nulla tempor magna et ipsum finibus volutpat. Aenean auctor urna eget ltricies ultricies. Aliquam sed velit eget dui dignissim faucibus. Vestibulum commodo commodo acus, at faucibus elit aliquet ac. Sed placerat id leo quis luctus. Fusce quis efficitur dolor.

@@ -1,5 +1,15 @@
 extends layout
 
+//-this variables block needs to be included on every page which will use a variable (cannot be put in the layout
+//-as variables are loaded with the specific page)
+block variables
+  //-username comes from res.render() on the server, USERNAME is the name of the variable in the pug, USERNAME is also
+  //-defined in a script so it can be used in the js files
+  - const USERNAME = username
+  script.
+    //https://pugjs.org/language/interpolation.html
+    const USERNAME = "#{USERNAME}";
+
 block header
   link(rel='stylesheet' href='stylesheets/userDashboard_style.css')
   script(src='javascripts/dashboard.js', defer)
