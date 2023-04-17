@@ -1,21 +1,12 @@
 {
-    "1": {
-        "firstName": "1",
-        "lastName": "1",
-        "password": "1",
-        "height": 0,
-        "weight": "1",
-        "bmi": "1",
-        "age": "1"
-    },
-    "c": {
-        "firstName": "a",
-        "lastName": "b",
-        "password": "d",
+    "test": {
+        "firstName": "test",
+        "lastName": "shmest",
+        "email": "a@b",
+        "password": "p",
         "height": 0,
         "weight": 0,
         "bmi": 0,
-        "age": 0,
-        "loginID": 0
+        "age": 0
     }
 }

@@ -8,6 +8,7 @@ function signUp()
     const firstName = document.getElementById("firstName").value;
     const lastName = document.getElementById("lastName").value;
     const username = document.getElementById("username").value;
+    const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     const passwordConfirm = document.getElementById("passwordConfirm").value;
     const height = document.getElementById("height").value;
@@ -28,6 +29,7 @@ function signUp()
             firstName: firstName,
             lastName: lastName,
             username: username,
+            email: email,
             password: password
         }
     };

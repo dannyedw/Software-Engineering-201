@@ -1,18 +1,19 @@
 
-const fs = require("fs");
+const database = require("./database");
 
 function login(content)
 {
     if (!content.username) return { status: 400, content: "Missing required data - username" };
     if (!content.password) return { status: 400, content: "Missing required data - password" };
 
-    let db = getDB();
-    if (!db[content.username]) return { status: 400, content: "Invalid username" };
+    const table = database.getTable("USERS");
+    if (!table[content.username]) return { status: 400, content: "Invalid username or password" };
 
-    if (content.password === db[content.username].password)
+    if (content.password === table[content.username].password)
     {
         return { status: 200, content: "Successfully logged in" };
     }
+    else return { status: 400, content: "Invalid username or password" };
 }
 
 function signup(content)
@@ -20,6 +21,7 @@ function signup(content)
     let userInfo = {
         firstName: "",
         lastName: "",
+        email: "",
         password: "",
         height: 0,
         weight: 0,
@@ -39,6 +41,9 @@ function signup(content)
     if (content.username) username = content.username;
     else return { status: 400, content: "Missing required data - username" };
 
+    if (content.email) userInfo.email = content.email;
+    else return { status: 400, content: "Missing required data - email" };
+
     if (content.password) userInfo.password = content.password;
     else return { status: 400, content: "Missing required data - password" };
 
@@ -48,8 +53,7 @@ function signup(content)
     if (content.bmi) userInfo.bmi = content.bmi;
     if (content.age) userInfo.age = content.age;
 
-    if (addUser(username, userInfo)) return { status: 201, content: "User successfully added" };
-    else return { status: 400, content: "Username already taken" };
+    return addUser(username, userInfo);
 }
 
 function update(content)
@@ -58,17 +62,18 @@ function update(content)
     if (!content.loginID) return { status: 400, content: "Missing required data - loginID" };
 
     const u = content.username;
-    let db = getDB();
+    let table = database.getTable("USERS");
 
-    if (content.firstName) db[u].firstName = content.firstName;
-    if (content.lastName) db[u].lastName = content.lastName;
-    if (content.password) db[u].password = content.password;
-    if (content.height) db[u].height = content.height;
-    if (content.weight) db[u].weight = content.weight;
-    if (content.bmi) db[u].bmi = content.bmi;
-    if (content.age) db[u].age = content.age;
+    if (content.firstName) table[u].firstName = content.firstName;
+    if (content.lastName) table[u].lastName = content.lastName;
+    if (content.email) table[u].email = content.email;
+    if (content.password) table[u].password = content.password;
+    if (content.height) table[u].height = content.height;
+    if (content.weight) table[u].weight = content.weight;
+    if (content.bmi) table[u].bmi = content.bmi;
+    if (content.age) table[u].age = content.age;
 
-    updateDB(db);
+    database.overwriteTable("USERS", table);
 
     return { status: 200, content: "Updated user info" };
 }
@@ -80,7 +85,7 @@ function dataRequest(content)
     if (!content.requestKeys) return { status: 400, content: "Missing required data - request keys" };
 
     let data = {};
-    let db = getDB();
+    let table = database.getTable("USERS");
     const acceptedKeys = [
         "firstName",
         "lastName",
@@ -94,9 +99,9 @@ function dataRequest(content)
     {
         if (!acceptedKeys.includes(key)) continue;
 
-        if (db[content.username][key])
+        if (table[content.username][key])
         {
-            data[key] = db[u][key];
+            data[key] = table[content.username][key];
         }
     }
 
@@ -106,24 +111,19 @@ function dataRequest(content)
 
 function addUser(username, userInfo)
 {
-    let db = getDB();
+    let table = database.getTable("USERS");
 
-    if (db[username]) return false; //username taken, must be unique
-    else db[username] = userInfo;
+    if (table[username]) return { status: 400, content: "Username already taken" }; //username taken, must be unique
 
-    updateDB(db);
+    for (let k in table)
+    {
+        if (table[k].email === userInfo.email) return { status: 400, content: "Email already taken" };
+    }
+    
+    table[username] = userInfo;
+    database.overwriteTable("USERS", table);
 
-    return true;
-}
-
-function getDB()
-{
-    return JSON.parse(fs.readFileSync("model/database/users.json").toString());
-}
-
-function updateDB(newDB)
-{
-    fs.writeFileSync("model/database/users.json", JSON.stringify(newDB, null, 4));
+    return { status: 201, content: "User successfully added" };
 }
 
 exports.login = login;
