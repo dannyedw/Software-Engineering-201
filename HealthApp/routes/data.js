@@ -7,7 +7,7 @@ router.post('/', (req, res) => {
     if (!req.session.user) result = { status: 401, content: "User not logged in" };
     else
     {
-        result = dataManager.request(req.body);
+        result = dataManager.request(req.session.user, req.body);
     }
 
     res.status(result.status).json(result);

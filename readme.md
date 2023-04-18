@@ -1,5 +1,12 @@
 
 # Software Engineering 2.01 Health App
+
+# this is mostly out of date now i'll change it at some point
+
+
+
+
+
 ## Sever Interaction
 The server responds to GET and POST requests sent to /data. I have created a somewhat friendly interface to make requests
 easier to deal with. It is in the file public/javascripts/dataInteraction.js which will need to be included in the pug

@@ -3,7 +3,8 @@ const fs = require("fs");
 const files = Object.freeze({
     USERS: "model/database/users.json",
     GROUPS: "model/database/groups.json",
-    FOODS: "model/database/foodoptions.json"
+    FOODS: "model/database/foodoptions.json",
+    EXERCISES: "model/database/exercises.json"
 });
 
 function getTable(table)
