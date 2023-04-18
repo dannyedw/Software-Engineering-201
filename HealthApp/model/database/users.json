@@ -8,5 +8,15 @@
         "weight": 0,
         "bmi": 0,
         "age": 0
+    },
+    "test2": {
+        "firstName": "testy",
+        "lastName": "man",
+        "email": "fsddf@yummers.com",
+        "password": "p",
+        "height": "150",
+        "weight": "60",
+        "bmi": "54",
+        "age": "28"
     }
 }
