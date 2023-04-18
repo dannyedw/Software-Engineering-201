@@ -40,13 +40,21 @@
     height: 45px;
     line-height: 40px;  
     width: 45px;  
-    font-size: 2em;
+    font-size: 2.5em;
     font-weight: bold;
     border-radius: 50%;
     background-color: #00BFFF;
     color: white;
     text-align: center;
     cursor: pointer;
+}
+
+#exerciseButtonCenter
+{
+    position: fixed;
+    top: 90%;
+    left: 20%;
+    transform: translate(250%, -50%);
 }
 
 #addDietButton
@@ -62,13 +70,21 @@
     height: 45px;
     line-height: 40px;  
     width: 45px;  
-    font-size: 2em;
+    font-size: 2.5em;
     font-weight: bold;
     border-radius: 50%;
     background-color: #00BFFF;
     color: white;
     text-align: center;
     cursor: pointer;
+}
+
+#dietButtonCenter
+{
+    position: fixed;
+    top: 90%;
+    left: 80%;
+    transform: translate(-145%, -50%);
 }
 
 .exerciseDietContainer
@@ -88,7 +104,7 @@
     transform: translate(-50%, -50%);
 
     padding-top: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 50px;
 }
 
 /* .line
@@ -113,6 +129,7 @@
     padding-left: 5px;
     padding-right: 5px;
     padding-bottom: 5px;
+    overflow-y: auto;
 }
 
 .exercise > p
@@ -135,7 +152,8 @@
     margin-right: 12px;
     padding-left: 5px;
     padding-right: 5px;
-    padding-bottom: 5px;   
+    padding-bottom: 5px;
+    overflow-y: auto;   
 }
 
 .diet > p
