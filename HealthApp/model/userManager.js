@@ -56,32 +56,26 @@ function signup(content)
     return addUser(username, userInfo);
 }
 
-function update(content)
+function update(username, content)
 {
-    if (!content.username) return { status: 400, content: "Missing required data - username" };
-    if (!content.loginID) return { status: 400, content: "Missing required data - loginID" };
-
-    const u = content.username;
     let table = database.getTable("USERS");
 
-    if (content.firstName) table[u].firstName = content.firstName;
-    if (content.lastName) table[u].lastName = content.lastName;
-    if (content.email) table[u].email = content.email;
-    if (content.password) table[u].password = content.password;
-    if (content.height) table[u].height = content.height;
-    if (content.weight) table[u].weight = content.weight;
-    if (content.bmi) table[u].bmi = content.bmi;
-    if (content.age) table[u].age = content.age;
+    if (content.firstName) table[username].firstName = content.firstName;
+    if (content.lastName) table[username].lastName = content.lastName;
+    if (content.email) table[username].email = content.email;
+    if (content.password) table[username].password = content.password;
+    if (content.height) table[username].height = content.height;
+    if (content.weight) table[username].weight = content.weight;
+    if (content.bmi) table[username].bmi = content.bmi;
+    if (content.age) table[username].age = content.age;
 
     database.overwriteTable("USERS", table);
 
     return { status: 200, content: "Updated user info" };
 }
 
-function dataRequest(content)
+function dataRequest(username, content)
 {
-    if (!content.username) return { status: 400, content: "Missing required data - username" };
-    if (!content.loginID) return { status: 400, content: "Missing required data - loginID" };
     if (!content.requestKeys) return { status: 400, content: "Missing required data - request keys" };
 
     let data = {};
@@ -97,11 +91,13 @@ function dataRequest(content)
 
     for (let key of content.requestKeys)
     {
-        if (!acceptedKeys.includes(key)) continue;
-
-        if (table[content.username][key])
+        if (acceptedKeys.includes(key) && table[username][key])
         {
-            data[key] = table[content.username][key];
+            data[key] = table[username][key];
+        }
+        else
+        {
+            data[key] = "INVALID KEY";
         }
     }
 
@@ -113,7 +109,7 @@ function addUser(username, userInfo)
 {
     let table = database.getTable("USERS");
 
-    if (table[username]) return { status: 400, content: "Username already taken" }; //username taken, must be unique
+    if (table[username]) return { status: 400, content: "Username already taken" };
 
     for (let k in table)
     {

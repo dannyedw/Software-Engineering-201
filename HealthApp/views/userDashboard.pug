@@ -13,6 +13,7 @@ block variables
 block header
   link(rel='stylesheet' href='stylesheets/userDashboard_style.css')
   script(src='javascripts/dashboard.js', defer)
+  script(src='javascripts/dataInteraction.js', defer)
   title My Dashboard
 
 block content
@@ -91,6 +92,7 @@ block content
   // date header to be changed to be interactable and changeable
   h2 
   form#dataForm(onsubmit="return false;")
+    <div id="dateWarning"></div>  
      input#date(type='date' name='deadlines' placeholder='Deadlines' min='01-01-2023' max='31-12-2023')
         
   .exerciseDietContainer
