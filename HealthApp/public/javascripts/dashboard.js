@@ -20,11 +20,14 @@ function addExercise() {
   
 
   //links the buttons to the functions
-  document.getElementById("addExerciseButton").addEventListener("click", addExercise)
-  document.getElementById("addDietButton").addEventListener("click", addDiet)
   document.getElementById("addGoalButton").addEventListener("click", addGoal)
+  document.getElementById("addExerciseButton").addEventListener("click", displayWarning)
+  document.getElementById("addDietButton").addEventListener("click", displayWarning)
   
-  
+  function displayWarning(){
+    var warning = document.getElementById("dateWarning")
+    warning.innerHTML = '<h1>Please Select a Date!</h1>'
+  }
 
   document.getElementById("addCustomDiet").addEventListener("click", function(){
   overlay.style.display = "block";
@@ -125,8 +128,16 @@ exerciseTable.innerHTML = exerciseTable.innerHTML +"<td>"+selectedExercise+"</td
 const mainDate = document.getElementById("dataForm");
     mainDate.addEventListener("change", (event) =>{
     var s = document.getElementById("date").value;
-    //dataSubmit(data, responseHandler);
-    console.log(s)
+    
+    //links the buttons to the functions
+    document.getElementById("addExerciseButton").removeEventListener("click", displayWarning);
+    document.getElementById("addDietButton").removeEventListener("click", displayWarning);
+    document.getElementById("addExerciseButton").addEventListener("click", addExercise);
+    document.getElementById("addDietButton").addEventListener("click", addDiet);
+    var warning = document.getElementById("dateWarning");
+    warning.innerHTML = '';
+
+    console.log(s);
   })
 
 // this is the diet section of code //
