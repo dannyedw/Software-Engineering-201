@@ -91,9 +91,14 @@ function dataRequest(username, content)
 
     for (let key of content.requestKeys)
     {
-        if (acceptedKeys.includes(key) && table[username][key])
+        if (acceptedKeys.includes(key))
         {
-            data[key] = table[username][key];
+            try{
+                data[key] = table[username][key];
+            }
+            catch{
+                data[key] = "INVALID KEY";
+            }
         }
         else
         {
