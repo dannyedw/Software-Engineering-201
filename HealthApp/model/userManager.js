@@ -81,7 +81,6 @@ function update(content)
 function dataRequest(content)
 {
     if (!content.username) return { status: 400, content: "Missing required data - username" };
-    if (!content.loginID) return { status: 400, content: "Missing required data - loginID" };
     if (!content.requestKeys) return { status: 400, content: "Missing required data - request keys" };
 
     let data = {};

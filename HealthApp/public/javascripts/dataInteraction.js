@@ -3,21 +3,6 @@ function dataRequest(data, callback)
 {
     const url = "/data";
     const requestOptions = {
-        method: 'GET', headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    };
-
-    let req = new Request(url, requestOptions);
-    makeRequest(req, callback);
-}
-
-function dataSubmit(data, callback)
-{
-    const url = "/data";
-    const requestOptions = {
         method: 'POST', headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'

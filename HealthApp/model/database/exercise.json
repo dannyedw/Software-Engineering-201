@@ -1,0 +1,25 @@
+{
+    "abc": {
+        "2023-04-18":
+        [
+            {
+                "exercise-name": "pullups",
+                "time": "60",
+                "amount": "123"
+            },
+            {
+                "exercise-name": "legs",
+                "time": "60",
+                "amount": "123"
+            }
+        ],
+        "2023-04-20":
+        [
+            {
+                "exercise-name": "pullups",
+                "time": "60",
+                "amount": "123"
+            }
+        ]
+    }
+}
