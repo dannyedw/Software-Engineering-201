@@ -47,6 +47,7 @@ block content
   //If you are wondering, script tag at the bottom otherwise it does not work and says that style for slides is null.
   script.
     let slideIndex = 0;
+    let timeout;
     showSlides();
 
     function currentSlide(n) {
@@ -55,7 +56,6 @@ block content
 
     function showSlides() {
     let i;
-    let timeout;
     let slides = document.getElementsByClassName("mySlides");
     let dots = document.getElementsByClassName("dot");
     for (i = 0; i < slides.length; i++)
