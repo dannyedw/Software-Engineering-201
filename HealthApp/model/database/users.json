@@ -16,7 +16,7 @@
         "password": "p",
         "height": "150",
         "weight": "60",
-        "bmi": "54",
+        "bmi": 27,
         "age": "28"
     }
 }

@@ -249,22 +249,20 @@ function displayUserInformation(userInformation){
   let adviceContainer = document.getElementById("userAdvice");
 
   // TO IMPLEMENT LATER: Recalculates bmi and updates if the new bmi is different
-  // let newBmi = weight/((height/100)**2);
-  // if (newBmi != bmi)
-  // {
-  //   let data = {
-  //     type: "user-update",
-  //     content: {bmi: newBmi}
-  //   };
-  //   makeRequest(data,getUserInformation);
-  // }
-
-  // console.log(newBmi);
+  let newBmi = Math.round(weight/((height/100)**2));
+  if (newBmi != bmi)
+  {
+    let data = {
+      type: "user-update",
+      content: {bmi: newBmi}
+    };
+    dataRequest(data,getUserInformation);
+  }
 
   userInformationTitleContainer.innerHTML = firstName + "'s Information: ";
   userInformationContainer.innerHTML = "Height: " + height + "cm Weight: " + weight + "kg bmi: " + bmi+ " Age: " + age;
 
-  console.log(bmi);
+  console.log(Math.round(newBmi));
   if (bmi<=18){
     adviceContainer.innerHTML = "Bmi low: You need to gain weight";
   }
@@ -279,5 +277,6 @@ function displayUserInformation(userInformation){
     adviceContainer.innerHTML = "Bmi Obese: You need to immedialty lose weight as you are very unhealthy";
   }
 }
+
 
 getUserInformation();
