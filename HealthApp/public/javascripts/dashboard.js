@@ -145,7 +145,8 @@ const mainDate = document.getElementById("dataForm");
     dataRequest(data,responseHandler)
 
     function responseHandler(response){
-      for(let ex of response){
+      console.log(response);
+      for(let ex of response.content){
         console.log(ex["exercise-name"])
         console.log(ex["time"])
         console.log(ex["amount"])
