@@ -131,7 +131,7 @@ const selectedExercise = document.getElementById("exercises").value;
 // dataSubmit(data,responseHandler)
 // function responseHandler(response){
 //   if(response.status != 200){
-//     console.log("There was an issue submitting exercise to server!")
+//     console.log(reponse.content)
 //   }
 // }
 
@@ -171,11 +171,15 @@ const mainDate = document.getElementById("dataForm");
     dataRequest(data,responseHandler)
 
     function responseHandler(response){
+      if(response.status != 200){
+        console.log(response.content);
+      }else{
       for(let ex of response.content){
         const selectedExercise = document.getElementById("exercises").value;
         exerciseTable.innerHTML = exerciseTable.innerHTML +"<td>"+ex["exercise-set"]+"</td> <td>"+ex["exercise-name"]+"</td> <td>"+ex["time"]+"</td> <td>"+ex["amount"]+"</td>";
       }
     }
+  }
   })
 
 // this is the diet section of code //
