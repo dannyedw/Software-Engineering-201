@@ -254,14 +254,14 @@ function displayUserInformation(userInformation){
 
   // TO IMPLEMENT LATER: Recalculates bmi and updates if the new bmi is different
   let newBmi = 0;
-  
+
   if (bmi == 0)
   {
-    let newBmi = 0
+    newBmi = 0
   }
   else
   {
-    let newBmi = Math.round(weight/((height/100)**2));
+    newBmi = Math.round(weight/((height/100)**2));
   }
 
   if (newBmi != bmi)
