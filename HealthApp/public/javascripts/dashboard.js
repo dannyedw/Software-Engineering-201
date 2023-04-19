@@ -136,6 +136,7 @@ const mainDate = document.getElementById("dataForm");
       "</tr>";
     var dateValue = document.getElementById("date").value;
     
+    
     //links the buttons to the functions
     document.getElementById("addExerciseButton").removeEventListener("click", displayWarning);
     document.getElementById("addDietButton").removeEventListener("click", displayWarning);
@@ -156,7 +157,7 @@ const mainDate = document.getElementById("dataForm");
     function responseHandler(response){
       for(let ex of response.content){
         const selectedExercise = document.getElementById("exercises").value;
-        exerciseTable.innerHTML = exerciseTable.innerHTML +"<td>"+selectedExercise+"</td> <td>"+ex["exercise-name"]+"</td> <td>"+ex["time"]+"</td> <td>"+ex["amount"]+"</td>";
+        exerciseTable.innerHTML = exerciseTable.innerHTML +"<td>"+ex["exercise-set"]+"</td> <td>"+ex["exercise-name"]+"</td> <td>"+ex["time"]+"</td> <td>"+ex["amount"]+"</td>";
       }
     }
   })
