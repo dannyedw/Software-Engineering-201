@@ -14,6 +14,15 @@
     transform: translate(-50%, -50%);
 }
 
+#dateWarning
+{
+    position: fixed;
+    top: 24%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
 #goals
 {
     text-align: center;
@@ -240,6 +249,45 @@
   background-color: white;    
   text-align: center;
   padding: 10px;
+}
+
+#adde
+{
+    margin-top: 10px;
+}
+
+#addCustomDiet
+{
+    margin-top: 10px;
+}
+
+#addDiet
+{
+    margin-top: 10px;
+}
+
+#exitButtonExercise
+{
+    float: right;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+}
+
+#exitButtonDiet
+{
+    float: right;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+}
+
+#exitCustomDiets
+{
+    float: right;
+    background-color: white;
+    color: black;
+    font-weight: bold;    
 }
 
 tr:hover {

@@ -24,8 +24,8 @@ block content
   .overlay(style='display:none;')
     // popup for add exercise
     #addExerciseContainer.popup(style='display:none;')
-      button#exitButtonExercise(type='button') Close
-      h3 Add Exercise
+      button#exitButtonExercise(type='button') X
+      h3(style="margin-left: 30px;") Add Exercise
       //form(action='http://localhost:3000/userDashboard' method='post' id="dietForm")
       form#exerciseForm(onsubmit="return false;")
         label(for='exercise')
@@ -45,12 +45,12 @@ block content
         //- label(for='distance')
         //- input#distance(type='text' name='distance' placeholder='Distance')
         //- br
-        input(type='submit' id ="adde" value='Add Exercise')
+        //input(type='submit' id ="adde" value='Add Exercise')
 
     // popup for add diet
     #addDietContainer.popup(style='display:none;')
-      h3 Add Diet
-      button#exitButtonDiet(type='button') Close
+      button#exitButtonDiet(type='button') X
+      h3(style="margin-left: 44px;") Add Diet
       p Your Food List: 
       table#dietTable(style='width:100%', border='1')
         tr
@@ -62,7 +62,8 @@ block content
         input(type='submit' id="addCustomDiet" value='Add Custom Diet')
 
     #addCustomDietsContainer.popup(style='display:none;')    
-      button#exitCustomDiets(type='button') Close
+      button#exitCustomDiets(type='button') X
+      br
       form#CustomDietsForm(onsubmit="return false;")
         label(for='mealType')
         select(name="Meal Type" id="mealType")
