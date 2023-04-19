@@ -4,42 +4,41 @@ block variables
 
 html
   head
-    link(rel='stylesheet', href='stylesheets/layout_style.css')
+    link(rel='stylesheet' href='stylesheets/layout_style.css')
     title= title
     block header
   body
-    nav
-      .menu-left
+    #main_menu
+      .company-logo
+        a(href='http://localhost:3000/')
+          img(src='images/company-logo.png' alt='Company logo' height='150px' width='150px')
+      .inner_main_menu
         ul
           li
-            a(href='/') Home 
+            a(href='http://localhost:3000/') Home
           li
-            a(href='/userDashboard') My Dashboard 
+            a(href='http://localhost:3000/userDashboard') My Dashboard
           li
-            a(href='/groupDashboard') Group Dashboard
+            a(href='http://localhost:3000/groupDashboard') Group Dashboard
           li
-            a(href='/about') About
-      .menu-logo
-        img(src='images/company-logo.png' alt='Company logo' height='150px' width='150px')
-        // added random ai generated logo, can change if you want to
-      .menu-right
-        ul
+            a(href='http://localhost:3000/about') About
+
           if USERNAME
-            p #{USERNAME}
-            a(href='/logout') Log Out
+            li
+              p #{USERNAME} 
+            li 
+              a(href='/logout') Log Out
           else
             li
-              a(href='/login') Login 
+              a(href='http://localhost:3000/login') Login
             li
-              a(href='/signUp') Sign up 
+              a(href='http://localhost:3000/signUp') Sign up 
 
     block content
-  footer
-    .footer
-      // add logo
+    footer
       p#phone-number Contact: +1 702-706-7568
       .social-media
-        img(src='images/facebook-logo.png', alt='Facebook logo', height='50px', width='50px')
-        img(src='images/twitter-logo.png', alt='Twitter logo', height='50px', width='50px')
-        img(src='images/instagram-logo.png', alt='Instagram logo', height='50px', width='50px')
+        img(src='images/facebook-logo.png' alt='Facebook logo' height='60px' width='60px')
+        img(src='images/twitter-logo.png' alt='Twitter logo' height='60px' width='60px')
+        img(src='images/instagram-logo.png' alt='Instagram logo' height='60px' width='60px')
       p#copyright &copy; 2023 A.S.C.E.N.D Health
