@@ -266,7 +266,6 @@ function displayUserInformation(userInformation){
   userInformationTitleContainer.innerHTML = firstName + "'s Information: ";
   userInformationContainer.innerHTML = "Height: " + height + "cm Weight: " + weight + "kg bmi: " + bmi+ " Age: " + age;
 
-  console.log(Math.round(newBmi));
   if (bmi<=18){
     adviceContainer.innerHTML = "Bmi low: You need to gain weight";
   }
