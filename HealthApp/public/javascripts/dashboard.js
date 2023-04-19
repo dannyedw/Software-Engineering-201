@@ -227,3 +227,57 @@ const extraDiv = document.getElementById("extra");
 divs.innerHTML = divs.innerHTML + '<tr onclick="submitDiet(\''+mealType+'\',\''+mealName+'\',\''+calories+'\');"> <td>'+mealType+'</td> <td>'+mealName+'</td> <td>'+calories+'</td> </tr>';
 foodTab.innerHTML = foodTab.innerHTML + "<td>"+mealType+"</td> <td>"+mealName+"</td> <td>"+calories+"</td>"; 
 })
+
+function getUserInformation(){
+  let data = {
+    type: "user-request",
+    content: {requestKeys:["firstName","height","weight","bmi","age"]}
+  };
+
+  dataRequest(data, displayUserInformation);
+}
+
+function displayUserInformation(userInformation){
+  let firstName = userInformation.content.firstName;
+  let height = userInformation.content.height;
+  let weight = userInformation.content.weight;
+  let bmi = userInformation.content.bmi;
+  let age = userInformation.content.age;
+
+  let userInformationTitleContainer = document.getElementById("userInformationTitle");
+  let userInformationContainer = document.getElementById("userInformation");
+  let adviceContainer = document.getElementById("userAdvice");
+
+  // TO IMPLEMENT LATER: Recalculates bmi and updates if the new bmi is different
+  // let newBmi = weight/((height/100)**2);
+  // if (newBmi != bmi)
+  // {
+  //   let data = {
+  //     type: "user-update",
+  //     content: {bmi: newBmi}
+  //   };
+  //   makeRequest(data,getUserInformation);
+  // }
+
+  // console.log(newBmi);
+
+  userInformationTitleContainer.innerHTML = firstName + "'s Information: ";
+  userInformationContainer.innerHTML = "Height: " + height + "cm Weight: " + weight + "kg bmi: " + bmi+ " Age: " + age;
+
+  console.log(bmi);
+  if (bmi<=18){
+    adviceContainer.innerHTML = "Bmi low: You need to gain weight";
+  }
+  else if(bmi >= 19 && bmi <= 24){
+    adviceContainer.innerHTML = "You are Healthy";
+  }
+  else if(bmi >= 25 && bmi <= 29)
+  {
+    adviceContainer.innerHTML = "Bmi Overweight: You need to lose some weight";
+  }
+  else{
+    adviceContainer.innerHTML = "Bmi Obese: You need to immedialty lose weight as you are very unhealthy";
+  }
+}
+
+getUserInformation();
