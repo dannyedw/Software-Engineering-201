@@ -128,7 +128,12 @@ exerciseTable.innerHTML = exerciseTable.innerHTML +"<td>"+selectedExercise+"</td
 //retrives the date selected
 const mainDate = document.getElementById("dataForm");
     mainDate.addEventListener("change", (event) =>{
-    exerciseTable.innerHTML = "";
+      exerciseTable.innerHTML = "<tr>"+
+      "<th>Exercise Set</th>" +
+      "<th>Exercise Name</th>" +
+      "<th>Time</th>" +
+      "<th>Distance/Reps</th>" +
+      "</tr>";
     var dateValue = document.getElementById("date").value;
     
     //links the buttons to the functions
