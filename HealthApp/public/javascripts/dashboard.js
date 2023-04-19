@@ -128,6 +128,7 @@ exerciseTable.innerHTML = exerciseTable.innerHTML +"<td>"+selectedExercise+"</td
 //retrives the date selected
 const mainDate = document.getElementById("dataForm");
     mainDate.addEventListener("change", (event) =>{
+    exerciseTable.innerHTML = "";
     var dateValue = document.getElementById("date").value;
     
     //links the buttons to the functions
@@ -148,11 +149,7 @@ const mainDate = document.getElementById("dataForm");
     dataRequest(data,responseHandler)
 
     function responseHandler(response){
-      console.log(response);
       for(let ex of response.content){
-        console.log(ex["exercise-name"])
-        console.log(ex["time"])
-        console.log(ex["amount"])
         const selectedExercise = document.getElementById("exercises").value;
         exerciseTable.innerHTML = exerciseTable.innerHTML +"<td>"+selectedExercise+"</td> <td>"+ex["exercise-name"]+"</td> <td>"+ex["time"]+"</td> <td>"+ex["amount"]+"</td>";
       }
