@@ -253,7 +253,17 @@ function displayUserInformation(userInformation){
   let adviceContainer = document.getElementById("userAdvice");
 
   // TO IMPLEMENT LATER: Recalculates bmi and updates if the new bmi is different
-  let newBmi = Math.round(weight/((height/100)**2));
+  let newBmi = 0;
+  
+  if (bmi == 0)
+  {
+    let newBmi = 0
+  }
+  else
+  {
+    let newBmi = Math.round(weight/((height/100)**2));
+  }
+
   if (newBmi != bmi)
   {
     let data = {
