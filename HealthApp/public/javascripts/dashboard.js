@@ -59,10 +59,6 @@ function addExercise() {
     overlay.style.display = "none";
     addCustomDietsContainer.style.display = "none";
     })
-  
-
-
-
 
 // this is the exercise section of code //
 
@@ -89,16 +85,13 @@ exerciseSelect.addEventListener("change", (event) =>
   switch(selectedExercise)
   {
     case "Upper Body":
-      data = "<input type='text' id='exerciseName' name='exercise-name' placeholder='Exercise Name'><br><input type='text' id='tim' name='time' placeholder='Time (Minutes)'><br><input type='text' id='rep' name='reps' placeholder='Reps'><br>";
-      data += "<input type='submit' id ='adde' value='Add Exercise'>"
+      data = "<input type='text' id='exerciseName' name='exercise-name' placeholder='Exercise Name'><br><input type='text' id='tim' name='time' placeholder='Time (Minutes)'><br><input type='text' id='rep' name='reps' placeholder='Reps'>";
       break;
     case "Lower Body":
-      data = "<input type='text' id='exerciseName' name='exercise-name' placeholder='Exercise Name'><br><input type='text' id='tim' name='time' placeholder='Time (Minutes)'><br><input type='text' id='rep' name='reps' placeholder='Reps'><br>";
-      data += "<input type='submit' id ='adde' value='Add Exercise'>"
+      data = "<input type='text' id='exerciseName' name='exercise-name' placeholder='Exercise Name'><br><input type='text' id='tim' name='time' placeholder='Time (Minutes)'><br><input type='text' id='rep' name='reps' placeholder='Reps'>";
       break;
     case "Cardio":
-      data = "<input type='text' id='exerciseName' name='exercise-name' placeholder='Exercise Name'><br><input type='text' id='tim' name='time' placeholder='Time (Minutes)'><br><input type='text' id='rep' name='distance' placeholder='Distance (Meters)'><br>";
-      data += "<input type='submit' id ='adde' value='Add Exercise'>"
+      data = "<input type='text' id='exerciseName' name='exercise-name' placeholder='Exercise Name'><br><input type='text' id='tim' name='time' placeholder='Time (Minutes)'><br><input type='text' id='rep' name='distance' placeholder='Distance (Meters)'>";
       break;
     default:
       // clear the variations div if no exercise is selected
@@ -112,6 +105,7 @@ exerciseSelect.addEventListener("change", (event) =>
 
 // If exercise set is added to your main panel then they are inserted into the table
 var data = document.getElementById("exerciseForm")
+const extraDiv = document.getElementById("extra");
 data.addEventListener('submit',(e)=>{
 e.preventDefault();
 
@@ -123,14 +117,15 @@ var reps = document.getElementById("rep").value;
 const selectedExercise = document.getElementById("exercises").value;
 
 //gets the div from the panel to add the inputted requirements into table
-const extraDiv = document.getElementById("extra");
 exerciseTable.innerHTML = exerciseTable.innerHTML +"<td>"+selectedExercise+"</td> <td>"+name+"</td> <td>"+time+"</td> <td>"+reps+"</td>";
 })
+
+
 
 //retrives the date selected
 const mainDate = document.getElementById("dataForm");
     mainDate.addEventListener("change", (event) =>{
-    var s = document.getElementById("date").value;
+    var dateValue = document.getElementById("date").value;
     
     //links the buttons to the functions
     document.getElementById("addExerciseButton").removeEventListener("click", displayWarning);
@@ -140,7 +135,24 @@ const mainDate = document.getElementById("dataForm");
     var warning = document.getElementById("dateWarning");
     warning.innerHTML = '';
 
-    console.log(s);
+    let data = {
+      type: "exercise-request",
+      content: {
+          date:dateValue
+      }
+    };
+
+    dataRequest(data,responseHandler)
+
+    function responseHandler(response){
+      for(let ex of response){
+        console.log(ex["exercise-name"])
+        console.log(ex["time"])
+        console.log(ex["amount"])
+        const selectedExercise = document.getElementById("exercises").value;
+        exerciseTable.innerHTML = exerciseTable.innerHTML +"<td>"+selectedExercise+"</td> <td>"+ex["exercise-name"]+"</td> <td>"+ex["time"]+"</td> <td>"+ex["amount"]+"</td>";
+      }
+    }
   })
 
 // this is the diet section of code //
@@ -215,57 +227,3 @@ const extraDiv = document.getElementById("extra");
 divs.innerHTML = divs.innerHTML + '<tr onclick="submitDiet(\''+mealType+'\',\''+mealName+'\',\''+calories+'\');"> <td>'+mealType+'</td> <td>'+mealName+'</td> <td>'+calories+'</td> </tr>';
 foodTab.innerHTML = foodTab.innerHTML + "<td>"+mealType+"</td> <td>"+mealName+"</td> <td>"+calories+"</td>"; 
 })
-
-function getUserInformation(){
-  let data = {
-    type: "user-request",
-    content: {requestKeys:["firstName","height","weight","bmi","age"]}
-  };
-
-  dataRequest(data, displayUserInformation);
-}
-
-function displayUserInformation(userInformation){
-  let firstName = userInformation.content.firstName;
-  let height = userInformation.content.height;
-  let weight = userInformation.content.weight;
-  let bmi = userInformation.content.bmi;
-  let age = userInformation.content.age;
-
-  let userInformationTitleContainer = document.getElementById("userInformationTitle");
-  let userInformationContainer = document.getElementById("userInformation");
-  let adviceContainer = document.getElementById("userAdvice");
-
-  // TO IMPLEMENT LATER: Recalculates bmi and updates if the new bmi is different
-  // let newBmi = weight/((height/100)**2);
-  // if (newBmi != bmi)
-  // {
-  //   let data = {
-  //     type: "user-update",
-  //     content: {bmi: newBmi}
-  //   };
-  //   makeRequest(data,getUserInformation);
-  // }
-
-  // console.log(newBmi);
-
-  userInformationTitleContainer.innerHTML = firstName + "'s Information: ";
-  userInformationContainer.innerHTML = "Height: " + height + "cm Weight: " + weight + "kg bmi: " + bmi+ " Age: " + age;
-
-  console.log(bmi);
-  if (bmi<=18){
-    adviceContainer.innerHTML = "Bmi low: You need to gain weight";
-  }
-  else if(bmi >= 19 && bmi <= 24){
-    adviceContainer.innerHTML = "You are Healthy";
-  }
-  else if(bmi >= 25 && bmi <= 29)
-  {
-    adviceContainer.innerHTML = "Bmi Overweight: You need to lose some weight";
-  }
-  else{
-    adviceContainer.innerHTML = "Bmi Obese: You need to immedialty lose weight as you are very unhealthy";
-  }
-}
-
-getUserInformation();
