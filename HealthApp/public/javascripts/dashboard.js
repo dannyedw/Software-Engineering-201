@@ -119,6 +119,22 @@ var time = document.getElementById("tim").value;
 var reps = document.getElementById("rep").value;
 const selectedExercise = document.getElementById("exercises").value;
 
+// let data = {
+//   type: "exercise-submit",
+//   content: {
+//     "exercise-set": selectedExercise,
+//     "exercise-name": name,
+//     "time": time,
+//     "amount": reps
+//   }
+// };
+// dataSubmit(data,responseHandler)
+// function responseHandler(response){
+//   if(response.status != 200){
+//     console.log("There was an issue submitting exercise to server!")
+//   }
+// }
+
 //gets the div from the panel to add the inputted requirements into table
 exerciseTable.innerHTML = exerciseTable.innerHTML +"<td>"+selectedExercise+"</td> <td>"+name+"</td> <td>"+time+"</td> <td>"+reps+"</td>";
 })
