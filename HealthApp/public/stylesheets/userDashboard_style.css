@@ -266,6 +266,11 @@
     margin-top: 10px;
 }
 
+#addPGoal
+{
+    margin-top: 10px;
+}
+
 #exitButtonExercise
 {
     float: right;
@@ -288,6 +293,14 @@
     background-color: white;
     color: black;
     font-weight: bold;    
+}
+
+#exitButtonGoal
+{
+    float: right;
+    background-color: white;
+    color: black;
+    font-weight: bold;
 }
 
 tr:hover {
