@@ -363,17 +363,17 @@ function displayUserInformation(userInformation){
    "kg "+ `<button type='button' onclick="displayWeightUpdate()">Update</button>` + " | Age: " + age  + " " + `<button type='button' onclick="displayAgeUpdate()">Update</button>` + " | bmi: " + bmi;
 
   if (bmi<=18){
-    adviceContainer.innerHTML = "Bmi low: You need to gain weight";
+    adviceContainer.innerHTML = "Feedback: Bmi low - You need to gain weight (a healthy bmi should be between 10 and 24)";
   }
   else if(bmi >= 19 && bmi <= 24){
-    adviceContainer.innerHTML = "You are Healthy";
+    adviceContainer.innerHTML = "Feedback: You are Healthy";
   }
   else if(bmi >= 25 && bmi <= 29)
   {
-    adviceContainer.innerHTML = "Bmi Overweight: You need to lose some weight";
+    adviceContainer.innerHTML = "Feedback: Bmi Overweight - You need to lose some weight (a healthy bmi should be between 10 and 24)";
   }
   else{
-    adviceContainer.innerHTML = "Bmi Obese: You need to immedialty lose weight as you are very unhealthy";
+    adviceContainer.innerHTML = "Feedback: Bmi Obese - You need to immedialty lose weight as you are very unhealthy (a healthy bmi should be between 10 and 24)";
   }
 }
 
