@@ -11,7 +11,7 @@
     /* Reference for positioning: https://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/*/
     top: 29%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 30%);
 }
 
 #dateWarning
@@ -19,7 +19,7 @@
     position: fixed;
     top: 24%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 115%);
     text-align: center;
 }
 
@@ -35,7 +35,7 @@
     /* Reference for positioning: https://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/*/
     top: 63.9%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 45%);
 }
 
 #addExerciseButton
@@ -110,7 +110,7 @@
     position: fixed;
     top: 45%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -25%);
 
     padding-top: 10px;
     padding-bottom: 50px;
@@ -189,7 +189,7 @@
     position: fixed;
     top: 77.5%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -25%);
 }
 
 .personalGoals
@@ -306,3 +306,14 @@
 tr:hover {
     background-color: lightblue;
   }
+
+#userInformationContainer {
+    border: 5px black solid;
+    padding-left: 10px;
+    width: 1000px;
+    
+    position:fixed;
+    top:45%;
+    left:50%;
+    transform: translate(-50%,-225%);
+}

@@ -17,9 +17,10 @@ block header
   title My Dashboard
 
 block content
-  p#userInformationTitle
-  p#userInformation 
-  p#userAdvice
+  div#userInformationContainer
+    h3#userInformationTitle
+    p#userInformation 
+    p#userAdvice
   // overlay that dimms the screen
   .overlay(style='display:none;')
     // popup for add exercise
