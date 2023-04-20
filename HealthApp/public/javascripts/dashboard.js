@@ -118,23 +118,26 @@ var name  = document.getElementById("exerciseName").value;
 var time = document.getElementById("tim").value;
 var reps = document.getElementById("rep").value;
 const selectedExercise = document.getElementById("exercises").value;
+var dateValue = document.getElementById("date").value;
 
-// let data = {
-//   type: "exercise-submit",
-//   content: {
-//     "date": date
-//     "set": selectedExercise,
-//     "name": name,
-//     "time": time,
-//     "amount": reps
-//   }
-// };
-// dataSubmit(data,responseHandler)
-// function responseHandler(response){
-//   if(response.status != 200){
-//     console.log(reponse.content)
-//   }
-// }
+let data = {
+  type: "exercise-submit",
+  content: {
+    date: dateValue,
+    set: selectedExercise,
+    name: name,
+    time: time,
+    amount: reps
+  }
+};
+
+dataSubmit(data,responseHandler);
+
+function responseHandler(response){
+  if(response.status != 200){
+    console.log(reponse.content)
+  }
+}
 
 //gets the div from the panel to add the inputted requirements into table
 exerciseTable.innerHTML = exerciseTable.innerHTML +"<td>"+selectedExercise+"</td> <td>"+name+"</td> <td>"+time+"</td> <td>"+reps+"</td>";
