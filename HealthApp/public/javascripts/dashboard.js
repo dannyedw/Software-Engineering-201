@@ -339,24 +339,23 @@ function displayUserInformation(userInformation){
   let userInformationContainer = document.getElementById("userInformation");
   let adviceContainer = document.getElementById("userAdvice");
 
-  let newBmi = 0;
+  if(height != 0 && weight !=0)
+  {
+    var newBmi = Math.round(weight/((height/100)**2));
 
-  if (bmi == 0)
-  {
-    newBmi = 0
-  }
-  else
-  {
-    newBmi = Math.round(weight/((height/100)**2));
-  }
-
-  if (newBmi != bmi)
-  {
-    let data = {
-      type: "user-update",
-      content: {bmi: newBmi}
-    };
-    dataRequest(data,getUserInformation);
+    if(isNaN(newBmi))
+    {
+      newBmi = 0
+    }
+  
+    if (newBmi != bmi)
+    {
+      let data = {
+        type: "user-update",
+        content: {bmi: newBmi}
+      };
+      dataRequest(data,getUserInformation);
+    }
   }
 
   userInformationTitleContainer.innerHTML = firstName + "'s Information: ";
