@@ -118,23 +118,26 @@ var name  = document.getElementById("exerciseName").value;
 var time = document.getElementById("tim").value;
 var reps = document.getElementById("rep").value;
 const selectedExercise = document.getElementById("exercises").value;
+var dateValue = document.getElementById("date").value;
 
-// let data = {
-//   type: "exercise-submit",
-//   content: {
-//     "date": date
-//     "set": selectedExercise,
-//     "name": name,
-//     "time": time,
-//     "amount": reps
-//   }
-// };
-// dataSubmit(data,responseHandler)
-// function responseHandler(response){
-//   if(response.status != 200){
-//     console.log(reponse.content)
-//   }
-// }
+let data = {
+  type: "exercise-submit",
+  content: {
+    date: dateValue,
+    set: selectedExercise,
+    name: name,
+    time: time,
+    amount: reps
+  }
+};
+
+dataRequest(data,responseHandler);
+
+function responseHandler(response){
+  if(response.status != 200){
+    console.log(reponse.content)
+  }
+}
 
 //gets the div from the panel to add the inputted requirements into table
 exerciseTable.innerHTML = exerciseTable.innerHTML +"<td>"+selectedExercise+"</td> <td>"+name+"</td> <td>"+time+"</td> <td>"+reps+"</td>";
@@ -177,10 +180,29 @@ const mainDate = document.getElementById("dataForm");
       }else{
       for(let ex of response.content){
         const selectedExercise = document.getElementById("exercises").value;
-        exerciseTable.innerHTML = exerciseTable.innerHTML +"<td>"+ex["exercise-set"]+"</td> <td>"+ex["exercise-name"]+"</td> <td>"+ex["time"]+"</td> <td>"+ex["amount"]+"</td>";
+        exerciseTable.innerHTML = exerciseTable.innerHTML +"<td>"+ex["set"]+"</td> <td>"+ex["name"]+"</td> <td>"+ex["time"]+"</td> <td>"+ex["amount"]+"</td>";
       }
     }
   }
+//   let dietData = {
+//     type: "diet-request",
+//     content: {
+//         date:dateValue
+//     }
+//   };
+
+//   dataRequest(dietData,responseHandle)
+
+//   function responseHandle(response){
+//     if(response.status != 200){
+//       console.log(response.content);
+//     }else{
+//     for(let diet of response.content){
+//       var foodTab = document.getElementById("foodTable");
+//       foodTab.innerHTML = foodTab.innerHTML + "<td>"+diet["type"]+"</td> <td>"+diet["names"]+"</td> <td>"+diet["calories"]+"</td>"; 
+//     }
+//   }
+// }
   })
 
 // this is the diet section of code //
@@ -216,13 +238,34 @@ divs.innerHTML = divs.innerHTML + '<tr onclick="submitDiet(\''+mealType+'\',\''+
 
 //This adds the calorie count to the total and adds the selected food item to the dashboard panel
 const dietDiv = document.getElementById("diets");
+
 function submitDiet(type,name,calories){
   foodTab.innerHTML = foodTab.innerHTML + "<td>"+type+"</td> <td>"+name+"</td> <td>"+calories+"</td>"; 
   overlay.style.display = "none";
   addDietContainer.style.display = "none";
   totalCalories += Number(calories);
   totalCalorieDiv.innerHTML = "Total Calorie Count " + totalCalories;
-  console.log(totalCalories)
+  var dateValue = document.getElementById("date").value;
+
+  //submitting diet client side
+  // let data = {
+  //   type: "diet-submit",
+  //   content: {
+  //     date: dateValue,
+  //     type: type,
+  //     name: name,
+  //     calories: calories
+  //   }
+  // };
+  
+  // dataRequest(data,responseHandler);
+  
+  // function responseHandler(response){
+  //   if(response.status != 200){
+  //     console.log(reponse.content)
+  //   }
+  // }
+
 }
 
 //removes the diet container when meal is selected
@@ -235,7 +278,7 @@ addDietContainer.style.display = "none";
 var dataForms = document.getElementById("CustomDietsForm")
 dataForms.addEventListener('submit',(e)=>{
 e.preventDefault();
-console.log("hello")
+
 overlay.style.display = "none";
 addExerciseContainer.style.display = "none";
 addCustomDietsContainer.style.display = "none";
@@ -254,6 +297,26 @@ totalCalorieDiv.innerHTML = "Total Calorie Count " + totalCalories;
 const extraDiv = document.getElementById("extra");
 divs.innerHTML = divs.innerHTML + '<tr onclick="submitDiet(\''+mealType+'\',\''+mealName+'\',\''+calories+'\');"> <td>'+mealType+'</td> <td>'+mealName+'</td> <td>'+calories+'</td> </tr>';
 foodTab.innerHTML = foodTab.innerHTML + "<td>"+mealType+"</td> <td>"+mealName+"</td> <td>"+calories+"</td>"; 
+
+var dateValue = document.getElementById("date").value;
+
+// let data = {
+//   type: "diet-submit",
+//   content: {
+//     date: dateValue,
+//     type: mealType,
+//     name: mealName,
+//     calories: calories
+//   }
+// };
+
+// dataRequest(data,responseHandler);
+
+// function responseHandler(response){
+//   if(response.status != 200){
+//     console.log(reponse.content)
+//   }
+// }
 })
 
 function getUserInformation(){
