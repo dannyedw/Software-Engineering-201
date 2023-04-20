@@ -14,9 +14,9 @@
         "lastName": "man",
         "email": "fsddf@yummers.com",
         "password": "p",
-        "height": "150",
+        "height": "165",
         "weight": "60",
-        "bmi": 27,
-        "age": "28"
+        "bmi": 22,
+        "age": "22"
     }
 }

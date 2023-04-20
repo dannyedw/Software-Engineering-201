@@ -276,7 +276,6 @@ function displayUserInformation(userInformation){
   let userInformationContainer = document.getElementById("userInformation");
   let adviceContainer = document.getElementById("userAdvice");
 
-  // TO IMPLEMENT LATER: Recalculates bmi and updates if the new bmi is different
   let newBmi = 0;
 
   if (bmi == 0)
@@ -298,7 +297,8 @@ function displayUserInformation(userInformation){
   }
 
   userInformationTitleContainer.innerHTML = firstName + "'s Information: ";
-  userInformationContainer.innerHTML = "Height: " + height + "cm Weight: " + weight + "kg bmi: " + bmi+ " Age: " + age;
+  userInformationContainer.innerHTML = "Height: " + height + "cm " + `<button type='button' onclick="displayHeightUpdate()">Update</button>` + " | Weight: " + weight +
+   "kg "+ `<button type='button' onclick="displayWeightUpdate()">Update</button>` + " | Age: " + age  + " " + `<button type='button' onclick="displayAgeUpdate()">Update</button>` + " | bmi: " + bmi;
 
   if (bmi<=18){
     adviceContainer.innerHTML = "Bmi low: You need to gain weight";
@@ -315,5 +315,150 @@ function displayUserInformation(userInformation){
   }
 }
 
+function displayHeightUpdate()
+{
+  let adviceContainer = document.getElementById("userAdvice");
+  adviceContainer.innerHTML = "Enter new Height(cm): " + `<input type="text" id="newHeight" name="newHeight"><button type='button' onclick = "updateHeight()">Update</button>`;
+}
+
+function displayWeightUpdate()
+{
+  let adviceContainer = document.getElementById("userAdvice");
+  adviceContainer.innerHTML = "Enter new Weight(kg): " + `<input type="text" id="newWeight" name="newWeight"><button type='button' onclick = "updateWeight()">Update</button>`;
+}
+
+function displayAgeUpdate()
+{
+  let adviceContainer = document.getElementById("userAdvice");
+  adviceContainer.innerHTML = "Enter new Age: " + `<input type="text" id="newAge" name="newAge"><button type='button' onclick = "updateAge()">Update</button>`;
+}
+
+function updateHeight()
+{
+  let error = false;
+  try
+  {
+    var newHeight = document.getElementById("newHeight").value;
+    if ((newHeight > 304 || newHeight <= 0) || isNaN(newHeight))    //you cant be over 10 foot
+    {
+      error = true;
+    }
+  }
+  catch
+  {
+    error = true
+    console.log("Error from catch");
+  }
+
+  if(error)
+  {
+    let adviceContainer = document.getElementById("userAdvice");
+    adviceContainer.innerHTML = "Enter new Height(cm): " + `<input type="text" id="newHeight" name="newHeight"><button type='button' onclick= "updateHeight()">Update</button>` + " Invalid Entry";
+  }
+  else
+  {
+    let data = {
+      type: "user-update",
+      content: {height: newHeight}
+    };
+    dataRequest(data,getUserInformation);
+  }
+}
+
+function updateWeight()
+{
+  let error = false;
+  try
+  {
+    var newWeight = document.getElementById("newWeight").value;
+    if ((newWeight > 500 || newWeight <= 0) || isNaN(newWeight))    //you cant be over 500kg
+    {
+      error = true;
+    }
+  }
+  catch
+  {
+    error = true
+  }
+
+  if(error)
+  {
+    let adviceContainer = document.getElementById("userAdvice");
+    adviceContainer.innerHTML = "Enter new Weight(kg): " + `<input type="text" id="newWeight" name="newWeight"><button type='button' onclick= "updateWeight()">Update</button>` + " Invalid Entry";
+    console.log("Error");
+  }
+  else
+  {
+    let data = {
+      type: "user-update",
+      content: {weight: newWeight}
+    };
+    dataRequest(data,getUserInformation);
+  }
+}
+
+function updateWeight()
+{
+  let error = false;
+  try
+  {
+    var newWeight = document.getElementById("newWeight").value;
+    if ((newWeight > 500 || newWeight <= 0) || isNaN(newWeight))    //you cant be over 500kg
+    {
+      error = true;
+    }
+  }
+  catch
+  {
+    error = true
+  }
+
+  if(error)
+  {
+    let adviceContainer = document.getElementById("userAdvice");
+    adviceContainer.innerHTML = "Enter new Weight(kg): " + `<input type="text" id="newWeight" name="newWeight"><button type='button' onclick= "updateWeight()">Update</button>` + " Invalid Entry";
+    console.log("Error");
+  }
+  else
+  {
+    let data = {
+      type: "user-update",
+      content: {weight: newWeight}
+    };
+    dataRequest(data,getUserInformation);
+  }
+}
+
+function updateAge()
+{
+  let error = false;
+  try
+  {
+    var newAge = document.getElementById("newAge").value;
+    if ((newAge > 150 || newAge <= 0) || isNaN(newAge))    //you cant be over 500kg
+    {
+      error = true;
+    }
+  }
+  catch
+  {
+    error = true
+  }
+
+  if(error)
+  {
+    let adviceContainer = document.getElementById("userAdvice");
+    adviceContainer.innerHTML = "Enter new Age: " + `<input type="text" id="newAge" name="newAge"><button type='button' onclick= "updateAge()">Update</button>` + " Invalid Entry";
+    console.log("Error");
+  }
+  else
+  {
+    let data = {
+      type: "user-update",
+      content: {age: newAge}
+    };
+    dataRequest(data,getUserInformation);
+  }
+}
 
 getUserInformation();
