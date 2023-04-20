@@ -1,7 +1,6 @@
 {
     "test": {
-        "2023-04-18":
-        [
+        "2023-04-18": [
             {
                 "set": "upper body",
                 "name": "pullups",
@@ -9,19 +8,24 @@
                 "amount": "123"
             },
             {
-                "exercise-set": "lower body",
-                "exercise-name": "legs",
+                "set": "lower body",
+                "name": "legs",
                 "time": "60",
                 "amount": "123"
             }
         ],
-        "2023-04-20":
-        [
+        "2023-04-20": [
             {
-                "exercise-set": "upper body",
-                "exercise-name": "pullups",
+                "set": "upper body",
+                "name": "pullups",
                 "time": "60",
                 "amount": "123"
+            },
+            {
+                "set": "Cardio",
+                "name": "aaaaaaaaaaa",
+                "time": "10",
+                "amount": "100"
             }
         ]
     }

@@ -131,7 +131,7 @@ let data = {
   }
 };
 
-dataSubmit(data,responseHandler);
+dataRequest(data,responseHandler);
 
 function responseHandler(response){
   if(response.status != 200){
@@ -180,7 +180,7 @@ const mainDate = document.getElementById("dataForm");
       }else{
       for(let ex of response.content){
         const selectedExercise = document.getElementById("exercises").value;
-        exerciseTable.innerHTML = exerciseTable.innerHTML +"<td>"+ex["exercise-set"]+"</td> <td>"+ex["exercise-name"]+"</td> <td>"+ex["time"]+"</td> <td>"+ex["amount"]+"</td>";
+        exerciseTable.innerHTML = exerciseTable.innerHTML +"<td>"+ex["set"]+"</td> <td>"+ex["name"]+"</td> <td>"+ex["time"]+"</td> <td>"+ex["amount"]+"</td>";
       }
     }
   }
