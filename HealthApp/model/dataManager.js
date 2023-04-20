@@ -14,6 +14,7 @@ function request(username, data)
         case "user-request": return userManager.dataRequest(username, data.content);
         case "group-request": return groupManager.dataRequest(username, data.content);
         case "exercise-request": return exerciseManager.dataRequest(username, data.content);
+        case "exercise-submit": return exerciseManager.dataSubmit(username, data.content);
         case "user-update": return userManager.update(username, data.content);
         case "group-create": return groupManager.create(username, data.content);
         case "group-delete": return groupManager.delete(username, data.content);

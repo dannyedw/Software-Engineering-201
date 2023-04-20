@@ -3,8 +3,8 @@
         "2023-04-18":
         [
             {
-                "exercise-set": "upper body",
-                "exercise-name": "pullups",
+                "set": "upper body",
+                "name": "pullups",
                 "time": "60",
                 "amount": "123"
             },

@@ -122,8 +122,9 @@ const selectedExercise = document.getElementById("exercises").value;
 // let data = {
 //   type: "exercise-submit",
 //   content: {
-//     "exercise-set": selectedExercise,
-//     "exercise-name": name,
+//     "date": date
+//     "set": selectedExercise,
+//     "name": name,
 //     "time": time,
 //     "amount": reps
 //   }
