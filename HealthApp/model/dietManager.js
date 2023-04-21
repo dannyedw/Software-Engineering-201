@@ -5,7 +5,7 @@ function dataRequest(username, content)
 {
     if (!content.date) return { status: 400, content: "Missing required data - date" };
     
-    let table = database.getTable("EXERCISE");
+    let table = database.getTable("DIET");
     let data = [];
     
     if(table[username][content.date])
@@ -31,7 +31,7 @@ function dataSubmit(username, content)
         amount: content.amount
     };
 
-    let table = database.getTable("EXERCISE");
+    let table = database.getTable("DIET");
     if (table[username][content.date])
     {
         table[username][content.date].push(data);
@@ -41,7 +41,7 @@ function dataSubmit(username, content)
         table[username][content.date] = [data];
     }
 
-    database.overwriteTable("EXERCISE", table);
+    database.overwriteTable("EXERCISES", table);
 
     return { status: 200, content: "Successfully added exercise" };
 }

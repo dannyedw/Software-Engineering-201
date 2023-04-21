@@ -1,6 +1,7 @@
 const userManager = require("./userManager");
 const groupManager = require("./groupManager");
 const exerciseManager = require("./exerciseManager");
+const dietManager = require("./dietManager");
 
 function request(username, data)
 {
@@ -12,10 +13,12 @@ function request(username, data)
     switch (data.type)
     {
         case "user-request": return userManager.dataRequest(username, data.content);
-        case "group-request": return groupManager.dataRequest(username, data.content);
+        case "user-update": return userManager.update(username, data.content);
         case "exercise-request": return exerciseManager.dataRequest(username, data.content);
         case "exercise-submit": return exerciseManager.dataSubmit(username, data.content);
-        case "user-update": return userManager.update(username, data.content);
+        case "diet-request": return dietManager.dataRequest(username, data.content);
+        case "diet-submit": return dietManager.dataSubmit(username, data.content);
+        case "group-request": return groupManager.dataRequest(username, data.content);
         case "group-create": return groupManager.create(username, data.content);
         case "group-delete": return groupManager.delete(username, data.content);
         default: return { status: 400, content: "Invalid request type" };

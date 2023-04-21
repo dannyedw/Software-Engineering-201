@@ -6,7 +6,7 @@ function login(content)
     if (!content.username) return { status: 400, content: "Missing required data - username" };
     if (!content.password) return { status: 400, content: "Missing required data - password" };
 
-    const table = database.getTable("USERS");
+    const table = database.getTable("USER");
     if (!table[content.username]) return { status: 400, content: "Invalid username or password" };
 
     if (content.password === table[content.username].password)
@@ -58,7 +58,7 @@ function signup(content)
 
 function update(username, content)
 {
-    let table = database.getTable("USERS");
+    let table = database.getTable("USER");
 
     if (content.firstName) table[username].firstName = content.firstName;
     if (content.lastName) table[username].lastName = content.lastName;
@@ -69,7 +69,7 @@ function update(username, content)
     if (content.bmi) table[username].bmi = content.bmi;
     if (content.age) table[username].age = content.age;
 
-    database.overwriteTable("USERS", table);
+    database.overwriteTable("USER", table);
 
     return { status: 200, content: "Updated user info" };
 }
@@ -79,7 +79,7 @@ function dataRequest(username, content)
     if (!content.requestKeys) return { status: 400, content: "Missing required data - request keys" };
 
     let data = {};
-    let table = database.getTable("USERS");
+    let table = database.getTable("USER");
     const acceptedKeys = [
         "firstName",
         "lastName",
@@ -112,7 +112,7 @@ function dataRequest(username, content)
 
 function addUser(username, userInfo)
 {
-    let table = database.getTable("USERS");
+    let table = database.getTable("USER");
 
     if (table[username]) return { status: 400, content: "Username already taken" };
 
@@ -122,7 +122,7 @@ function addUser(username, userInfo)
     }
     
     table[username] = userInfo;
-    database.overwriteTable("USERS", table);
+    database.overwriteTable("USER", table);
 
     return { status: 201, content: "User successfully added" };
 }
