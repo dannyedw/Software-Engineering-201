@@ -393,8 +393,15 @@ goalSelect.addEventListener("change", (event) =>
     overlay.style.display = "none";
     addGoalContainer.style.display = "none";
     timeRemaining = calculateRemaining(formatCurrentDate,targetDate);
-    personalGoals.innerHTML = "<p>Your Target Weight is: "+targetWeight+" <br> Your Target Date: "+targetDate+" <br> Time Remaining: "+timeRemaining+" days</p>";
     
+    if (timeRemaining == 1)
+    {
+      personalGoals.innerHTML = "<p class='pGoalValue'>Your Target Weight is: "+targetWeight+"kg <br> Your Target Date: "+targetDate+" <br> Time Remaining: "+timeRemaining+" day</p>";  
+    }
+    else
+    {
+      personalGoals.innerHTML = "<p class='pGoalValue'>Your Target Weight is: "+targetWeight+"kg <br> Your Target Date: "+targetDate+" <br> Time Remaining: "+timeRemaining+" days</p>";
+    }
     
   }
   
@@ -584,7 +591,7 @@ function updateAge()
   try
   {
     var newAge = document.getElementById("newAge").value;
-    if ((newAge > 150 || newAge <= 0) || isNaN(newAge))    //you cant be over 500kg
+    if ((newAge > 150 || newAge <= 0) || isNaN(newAge))    //you cant be over 150 years
     {
       error = true;
     }
