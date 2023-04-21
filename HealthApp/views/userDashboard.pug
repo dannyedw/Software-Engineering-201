@@ -86,13 +86,18 @@ block content
       button#exitButtonGoal(type='button') X
       h3(style="margin-left: 35px;") Add Goal
       form(action='http://localhost:3000/userDashboard#' method='post')
-        label(for='goal')
-        input#goal(type='text' name='goal' placeholder='Goal' required='')
-        br
-        label(for='deadline')
-        input#deadline(type='date' name='deadline' placeholder='Deadline' value ='' min='01-01-2023' max='31-12-2023')
-        br
-        input(type='submit' id="addPGoal" value='Add Goal')
+      label(for='goalType')
+        select(name="Goal Type" id="goalType")
+            option(value="") Select One ...
+            option(value="Target Weight") Target Weight
+        <div id="goalOutput"></div>    
+        //- label(for='goal')
+        //- input#goal(type='text' name='goal' placeholder='Goal' required='')
+        //- br
+        //- label(for='deadline')
+        //- input#deadline(type='date' name='deadline' placeholder='Deadline' value ='' min='01-01-2023' max='31-12-2023')
+        //- br
+        //- input(type='submit' id="addPGoal" value='Add Goal')
   // date header to be changed to be interactable and changeable
   h2 
   form#dataForm(onsubmit="return false;")
@@ -122,13 +127,7 @@ block content
   .goalContainer
     .personalGoals
       h3 Personal Goals
-      p Personal goal info here 
-    //
-      <div class="groupGoals">
-      <h3>Group Goals</h3>
-      <p>Group goal info here</p>
-      Add group goal in group page instead of in userDashboard?
-      </div>
+        <div id="personalGoals"></div>
     button#addGoalButton(type='button') +
   script.
    

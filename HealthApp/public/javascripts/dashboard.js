@@ -319,6 +319,41 @@ var dateValue = document.getElementById("date").value;
 // }
 })
 
+////Goal Section
+const goalSelect = document.getElementById("goalType");
+const goalOutputDiv = document.getElementById("goalOutput");
+const personalGoals = document.getElementById("personalGoals");
+
+// if target weight than only 
+goalSelect.addEventListener("change", (event) =>
+{
+  const selectedDiet = event.target.value;
+  let data = "";
+
+  switch(selectedDiet)
+  {
+    case "Target Weight":
+      data = "<input type='text' id='description' name='description' placeholder='Description'><br><input type='date' id='goalDate' name='deadline'><br>";
+      data += "<input type='submit' id='addPGoal' value='Add Goal'>";
+      break;
+    default:
+      // clear the variations div if no exercise is selected
+      goalOutputDiv.innerHTML = "";
+      return;
+  }
+  // update the goal ouput div with the selected exercise's data
+  goalOutputDiv.innerHTML = data;
+
+  
+  document.getElementById('addPGoal').addEventListener("click",addingTargetWeight);
+  
+}); 
+function addingTargetWeight(){
+  overlay.style.display = "none";
+  addGoalContainer.style.display = "none";
+  personalGoals.innerHTML = "<p>adding a goal</p>";
+}
+
 function getUserInformation(){
   let data = {
     type: "user-request",
