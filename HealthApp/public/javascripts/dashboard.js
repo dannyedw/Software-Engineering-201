@@ -184,25 +184,25 @@ const mainDate = document.getElementById("dataForm");
       }
     }
   }
-//   let dietData = {
-//     type: "diet-request",
-//     content: {
-//         date:dateValue
-//     }
-//   };
+  let dietData = {
+    type: "diet-request",
+    content: {
+        date:dateValue
+    }
+  };
 
-//   dataRequest(dietData,responseHandle)
+  dataRequest(dietData,responseHandle)
 
-//   function responseHandle(response){
-//     if(response.status != 200){
-//       console.log(response.content);
-//     }else{
-//     for(let diet of response.content){
-//       var foodTab = document.getElementById("foodTable");
-//       foodTab.innerHTML = foodTab.innerHTML + "<td>"+diet["type"]+"</td> <td>"+diet["names"]+"</td> <td>"+diet["calories"]+"</td>"; 
-//     }
-//   }
-// }
+  function responseHandle(response){
+    if(response.status != 200){
+      console.log(response.content);
+    }else{
+    for(let diet of response.content){
+      var foodTab = document.getElementById("foodTable");
+      foodTab.innerHTML = foodTab.innerHTML + "<td>"+diet["Meal-Type"]+"</td> <td>"+diet["Name"]+"</td> <td>"+diet["Calories"]+"</td>"; 
+    }
+  }
+}
   })
 
 // this is the diet section of code //
