@@ -79,7 +79,7 @@ function dataRequest(username, content)
     if (!content.requestKeys) return { status: 400, content: "Missing required data - request keys" };
 
     let data = {};
-    let table = database.getTable("USER");
+    const table = database.getTable("USER");
     const acceptedKeys = [
         "firstName",
         "lastName",

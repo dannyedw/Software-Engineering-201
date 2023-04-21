@@ -5,12 +5,20 @@ function dataRequest(username, content)
 {
     if (!content.date) return { status: 400, content: "Missing required data - date" };
     
-    let table = database.getTable("DIET");
-    let data = [];
+    const tbDiet = database.getTable("DIET");
+    let foodIDs = [];
     
-    if(table[username][content.date])
+    if(tbDiet[username][content.date])
     {
-        data = table[username][content.date];
+        foodIDs = tbDiet[username][content.date];
+    }
+
+    const tbFood = database.getTable("FOOD");
+    let data = [];
+
+    for (let id of foodIDs)
+    {
+        data.push(tbFood[id]);
     }
 
     return { status: 200, content: data };
@@ -19,29 +27,19 @@ function dataRequest(username, content)
 function dataSubmit(username, content)
 {
     if (!content.date) return { status: 400, content: "Missing required data - date" };
-    if (!content.set) return { status: 400, content: "Missing required data - set" };
-    if (!content.name) return { status: 400, content: "Missing required data - name" };
-    if (!content.time) return { status: 400, content: "Missing required data - time" };
-    if (!content.amount) return { status: 400, content: "Missing required data - amount" };
-
-    let data = {
-        set: content.set,
-        name: content.name,
-        time: content.time,
-        amount: content.amount
-    };
+    if (!content.foodID) return { status: 400, content: "Missing required data - foodID" };
 
     let table = database.getTable("DIET");
     if (table[username][content.date])
     {
-        table[username][content.date].push(data);
+        table[username][content.date].push(content.foodID);
     }
     else
     {
-        table[username][content.date] = [data];
+        table[username][content.date] = [content.foodID];
     }
 
-    database.overwriteTable("EXERCISES", table);
+    database.overwriteTable("DIET", table);
 
     return { status: 200, content: "Successfully added exercise" };
 }

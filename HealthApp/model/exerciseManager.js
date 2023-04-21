@@ -5,7 +5,7 @@ function dataRequest(username, content)
 {
     if (!content.date) return { status: 400, content: "Missing required data - date" };
     
-    let table = database.getTable("EXERCISE");
+    const table = database.getTable("EXERCISE");
     let data = [];
     
     if(table[username][content.date])
