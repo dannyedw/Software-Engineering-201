@@ -9,7 +9,7 @@
     
     position: fixed;
     /* Reference for positioning: https://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/*/
-    top: 29%;
+    top: 23.5%;
     left: 50%;
     transform: translate(-50%, 30%);
 }
@@ -17,7 +17,7 @@
 #dateWarning
 {
     position: fixed;
-    top: 24%;
+    top: 10%;
     left: 50%;
     transform: translate(-50%, 115%);
     text-align: center;
@@ -33,7 +33,7 @@
     
     position: fixed;
     /* Reference for positioning: https://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/*/
-    top: 63.9%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, 45%);
 }
@@ -108,7 +108,7 @@
     box-sizing: border-box;
     
     position: fixed;
-    top: 45%;
+    top: 35%;
     left: 50%;
     transform: translate(-50%, -25%);
 
@@ -187,7 +187,7 @@
     padding: 10px;
 
     position: fixed;
-    top: 77.5%;
+    top: 72%;
     left: 50%;
     transform: translate(-50%, -25%);
 }
@@ -251,6 +251,15 @@
   padding: 10px;
 }
 
+#CustomDietsForm
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 195px;
+    width: 25%;
+}
+
 #adde
 {
     margin-top: 10px;
@@ -259,6 +268,7 @@
 #addCustomDiet
 {
     margin-top: 10px;
+    margin-left: 10px;
 }
 
 #addDiet
@@ -307,13 +317,45 @@ tr:hover {
     background-color: lightblue;
   }
 
-#userInformationContainer {
-    border: 5px black solid;
-    padding-left: 10px;
-    width: 1000px;
-    
-    position:fixed;
-    top:45%;
-    left:50%;
-    transform: translate(-50%,-220%);
+#userInformationContainer 
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 10px 0;
+    border: 5px solid black;
+    width: 22%;
+    font-size: 1.25em;
+}
+
+#heightUpdateButton
+{
+    position: relative;
+    margin-top: 14px;
+    left: 15%;
+    transform: translate(-50%, -50%); 
+}
+
+#weightUpdateButton
+{
+    position: relative;
+    top: 31.9%;
+    left: 31.25%;
+    transform: translate(-50%, -50%);
+}
+
+#ageUpdateButton
+{
+    position: relative;
+    top: 31.9%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+}
+
+#userAdvice
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0;
 }

@@ -86,8 +86,10 @@ body
 
 .inner_main_menu ul li a:hover
 {
-  color: #6FDA44;
-  text-shadow: 3px 3px #514594;
+  color: #FFD700;
+  /* text-shadow: 3px 3px 3px #F5FFFA; */
+  /*Reference for outline effect for text: https://stackoverflow.com/questions/4919076/outline-effect-to-text */
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 3px 3px 3px #F5FFFA;
 }
 
 #main_menu

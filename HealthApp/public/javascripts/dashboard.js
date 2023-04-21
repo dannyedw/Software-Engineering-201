@@ -341,7 +341,8 @@ function displayUserInformation(userInformation){
 
   if(height != 0 && weight !=0)
   {
-    var newBmi = Math.round(weight/((height/100)**2));
+    var newBmi = weight/((height/100)**2);
+    newBmi = newBmi.toFixed(1);
 
     if(isNaN(newBmi))
     {
@@ -358,41 +359,45 @@ function displayUserInformation(userInformation){
     }
   }
 
+  //`<button type='button' onclick="displayHeightUpdate()">Update</button>`
+  //`<button type='button' onclick="displayWeightUpdate()">Update</button>`
+  //`<button type='button' onclick="displayAgeUpdate()">Update</button>`
+
   userInformationTitleContainer.innerHTML = firstName + "'s Information: ";
-  userInformationContainer.innerHTML = "Height: " + height + "cm " + `<button type='button' onclick="displayHeightUpdate()">Update</button>` + " | Weight: " + weight +
-   "kg "+ `<button type='button' onclick="displayWeightUpdate()">Update</button>` + " | Age: " + age  + " " + `<button type='button' onclick="displayAgeUpdate()">Update</button>` + " | bmi: " + bmi;
+  userInformationContainer.innerHTML = "Height: " + height + "cm " + " | Weight: " + weight + "kg " + " | Age: " + age + " | BMI: " + bmi + '<br>'
+  + `<button type='button' onclick="displayHeightUpdate()" id='heightUpdateButton'>Update</button>` + `<button type='button' onclick="displayWeightUpdate()" id='weightUpdateButton'>Update</button>` + `<button type='button' onclick="displayAgeUpdate()" id='ageUpdateButton'>Update</button>`;
 
   if (bmi<=18){
-    adviceContainer.innerHTML = "Feedback: Bmi low - You need to gain weight (a healthy bmi should be between 10 and 24)";
+    adviceContainer.innerHTML = "Feedback: BMI Low - You need to gain weight (a healthy bmi should be between 10 and 24)";
   }
   else if(bmi >= 19 && bmi <= 24){
     adviceContainer.innerHTML = "Feedback: You are Healthy";
   }
   else if(bmi >= 25 && bmi <= 29)
   {
-    adviceContainer.innerHTML = "Feedback: Bmi Overweight - You need to lose some weight (a healthy bmi should be between 10 and 24)";
+    adviceContainer.innerHTML = "Feedback: BMI Overweight - You need to lose some weight (a healthy bmi should be between 10 and 24)";
   }
   else{
-    adviceContainer.innerHTML = "Feedback: Bmi Obese - You need to immedialty lose weight as you are very unhealthy (a healthy bmi should be between 10 and 24)";
+    adviceContainer.innerHTML = "Feedback: BMI Obese - You need to immedialty lose weight as you are very unhealthy (a healthy BMI should be between 10 and 24)";
   }
 }
 
 function displayHeightUpdate()
 {
   let adviceContainer = document.getElementById("userAdvice");
-  adviceContainer.innerHTML = "Enter new Height(cm): " + `<input type="text" id="newHeight" name="newHeight"><button type='button' onclick = "updateHeight()">Update</button>`;
+  adviceContainer.innerHTML = "Enter new Height(cm): " + `<input type="text" id="newHeight" name="newHeight"><button type='button' onclick = "updateHeight()" style ='margin: 5px 0'>Update</button>`;
 }
 
 function displayWeightUpdate()
 {
   let adviceContainer = document.getElementById("userAdvice");
-  adviceContainer.innerHTML = "Enter new Weight(kg): " + `<input type="text" id="newWeight" name="newWeight"><button type='button' onclick = "updateWeight()">Update</button>`;
+  adviceContainer.innerHTML = "Enter new Weight(kg): " + `<input type="text" id="newWeight" name="newWeight"><button type='button' onclick = "updateWeight()" style ='margin: 5px 0'>Update</button>`;
 }
 
 function displayAgeUpdate()
 {
   let adviceContainer = document.getElementById("userAdvice");
-  adviceContainer.innerHTML = "Enter new Age: " + `<input type="text" id="newAge" name="newAge"><button type='button' onclick = "updateAge()">Update</button>`;
+  adviceContainer.innerHTML = "Enter new Age: " + `<input type="text" id="newAge" name="newAge"><button type='button' onclick = "updateAge()" style ='margin: 5px 0'>Update</button>`;
 }
 
 function updateHeight()
@@ -415,7 +420,7 @@ function updateHeight()
   if(error)
   {
     let adviceContainer = document.getElementById("userAdvice");
-    adviceContainer.innerHTML = "Enter new Height(cm): " + `<input type="text" id="newHeight" name="newHeight"><button type='button' onclick= "updateHeight()">Update</button>` + " Invalid Entry";
+    adviceContainer.innerHTML = "Enter new Height(cm): " + `<input type="text" id="newHeight" name="newHeight"><button type='button' onclick= "updateHeight()" style ='margin: 5px 0'>Update</button>` + " Invalid Entry";
   }
   else
   {
@@ -446,7 +451,7 @@ function updateWeight()
   if(error)
   {
     let adviceContainer = document.getElementById("userAdvice");
-    adviceContainer.innerHTML = "Enter new Weight(kg): " + `<input type="text" id="newWeight" name="newWeight"><button type='button' onclick= "updateWeight()">Update</button>` + " Invalid Entry";
+    adviceContainer.innerHTML = "Enter new Weight(kg): " + `<input type="text" id="newWeight" name="newWeight"><button type='button' onclick= "updateWeight()" style ='margin: 5px 0'>Update</button>` + " Invalid Entry";
     console.log("Error");
   }
   else
@@ -478,7 +483,7 @@ function updateWeight()
   if(error)
   {
     let adviceContainer = document.getElementById("userAdvice");
-    adviceContainer.innerHTML = "Enter new Weight(kg): " + `<input type="text" id="newWeight" name="newWeight"><button type='button' onclick= "updateWeight()">Update</button>` + " Invalid Entry";
+    adviceContainer.innerHTML = "Enter new Weight(kg): " + `<input type="text" id="newWeight" name="newWeight"><button type='button' onclick= "updateWeight()" style ='margin: 5px 0'>Update</button>` + " Invalid Entry";
     console.log("Error");
   }
   else
@@ -510,7 +515,7 @@ function updateAge()
   if(error)
   {
     let adviceContainer = document.getElementById("userAdvice");
-    adviceContainer.innerHTML = "Enter new Age: " + `<input type="text" id="newAge" name="newAge"><button type='button' onclick= "updateAge()">Update</button>` + " Invalid Entry";
+    adviceContainer.innerHTML = "Enter new Age: " + `<input type="text" id="newAge" name="newAge"><button type='button' onclick= "updateAge()" style ='margin: 5px 0'>Update</button>` + " Invalid Entry";
     console.log("Error");
   }
   else

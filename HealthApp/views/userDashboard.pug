@@ -51,7 +51,7 @@ block content
     // popup for add diet
     #addDietContainer.popup(style='display:none;')
       button#exitButtonDiet(type='button') X
-      h3(style="margin-left: 44px;") Add Diet
+      h3(style="margin: 10px 44px auto;") Add Diet
       p Your Food List: 
       table#dietTable(style='width:100%', border='1')
         tr
@@ -64,21 +64,20 @@ block content
 
     #addCustomDietsContainer.popup(style='display:none;')    
       button#exitCustomDiets(type='button') X
-      br
+      h3(style="margin-left: 44px;") Add Custom Diet
       form#CustomDietsForm(onsubmit="return false;")
-        label(for='mealType')
+        //label(for='mealType')
         select(name="Meal Type" id="mealType")
             option(value="") Select One ...
             option(value="BreakFast") Breakfast
             option(value="Lunch") Lunch
             option(value="Dinner") Dinner
-        br
-        label(for='foodType')
+        
+        //- label(for='foodType')
         input#foodTypes(type='text' name='foods' placeholder='Food Type' required='')
-        br
-        label(for='calories')
+    
+        //- label(for='calories') ssssssss
         input#calories(type='text' name='calories' placeholder='Calories' required='')
-        br
       
         input(type='submit' id="addDiet" value='Add Diet')
 
