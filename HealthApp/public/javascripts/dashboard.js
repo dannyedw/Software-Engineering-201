@@ -199,7 +199,7 @@ const mainDate = document.getElementById("dataForm");
     }else{
     for(let diet of response.content){
       var foodTab = document.getElementById("foodTable");
-      foodTab.innerHTML = foodTab.innerHTML + "<td>"+diet["type"]+"</td> <td>"+diet["names"]+"</td> <td>"+diet["calories"]+"</td>"; 
+      foodTab.innerHTML = foodTab.innerHTML + "<td>"+diet["Meal-Type"]+"</td> <td>"+diet["Name"]+"</td> <td>"+diet["Calories"]+"</td>"; 
     }
   }
 }
