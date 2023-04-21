@@ -324,6 +324,24 @@ const goalSelect = document.getElementById("goalType");
 const goalOutputDiv = document.getElementById("goalOutput");
 const personalGoals = document.getElementById("personalGoals");
 
+
+//https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date- reference - For the date min and max value 
+//https://www.w3resource.com/javascript-exercises/javascript-date-exercise-2.php- Reference - helping form the yyyy-mm-dd format
+const CurrentDate = new Date();
+var year  = CurrentDate.getFullYear();
+var month = CurrentDate.getMonth()+1;
+var day  = CurrentDate.getDate();
+var selectionDay = CurrentDate.getDate()+1;
+if(date<10){
+  day = "0"+date;
+}if(selectionDay<10){
+  selectionDay = "0"+selectionDay;
+}
+if(month<10){
+  month = "0"+month;
+}
+SelectionDate = year + "-" + month + "-" + selectionDay
+formatCurrentDate = year + "-" + month + "-" + day
 // if target weight than only 
 goalSelect.addEventListener("change", (event) =>
 {
@@ -333,7 +351,7 @@ goalSelect.addEventListener("change", (event) =>
   switch(selectedDiet)
   {
     case "Target Weight":
-      data = "<input type='text' id='description' name='description' placeholder='Description'><br><input type='date' id='goalDate' name='deadline'><br>";
+      data = "<input type='text' id='target-Weight' name='weight' placeholder='Target Weight(KG)'><br><input type='date' id='goalDate' name='deadline' value="+SelectionDate+" min="+formatCurrentDate+" max='2027-04-21'><br>";
       data += "<input type='submit' id='addPGoal' value='Add Goal'>";
       break;
     default:
@@ -346,13 +364,42 @@ goalSelect.addEventListener("change", (event) =>
 
   
   document.getElementById('addPGoal').addEventListener("click",addingTargetWeight);
+
+  function calculateRemaining(current,deadline){
+    //var remain = deadline - current;
+    deadline = deadline.split("-");
+    current = current.split("-");
+    remainingMonths = deadline[1]-current[1];
+    remainingDays = deadline[2]-current[2];
+    if(remainingMonths > 0){
+      if(remainingMonths == 1 || remainingMonths == 3 || remainingMonths == 5 || remainingMonths == 7 || remainingMonths == 8 || remainingMonths == 10 || remainingMonths == 12 ){
+        timeRemaining = (remainingMonths * 31) + remainingDays; 
+        return timeRemaining;
+      }else if(remainingMonths == 2){
+        timeRemaining = (remainingMonths * 28) + remainingDays; 
+        return timeRemaining;
+      }else if(remainingMonths == 4 || remainingMonths == 6 || remainingMonths == 9 || remainingMonths == 11){
+        timeRemaining = (remainingMonths * 30) + remainingDays; 
+        return timeRemaining;
+      }
+    }else{
+      return remainingDays;
+    }
+  }
+
+  function addingTargetWeight(){
+    const targetWeight = document.getElementById("target-Weight").value;
+    const targetDate = document.getElementById("goalDate").value;
+    overlay.style.display = "none";
+    addGoalContainer.style.display = "none";
+    timeRemaining = calculateRemaining(formatCurrentDate,targetDate);
+    personalGoals.innerHTML = "<p>Your Target Weight is: "+targetWeight+" <br> Your Target Date: "+targetDate+" <br> Time Remaining: "+timeRemaining+" days</p>";
+    
+    
+  }
   
 }); 
-function addingTargetWeight(){
-  overlay.style.display = "none";
-  addGoalContainer.style.display = "none";
-  personalGoals.innerHTML = "<p>adding a goal</p>";
-}
+
 
 function getUserInformation(){
   let data = {

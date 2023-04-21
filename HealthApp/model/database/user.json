@@ -4,9 +4,9 @@
         "lastName": "shmest",
         "email": "a@b",
         "password": "p",
-        "height": "183",
-        "weight": "70",
-        "bmi": "20.9",
+        "height": "170",
+        "weight": "69",
+        "bmi": "23.9",
         "age": 0
     },
     "test2": {
