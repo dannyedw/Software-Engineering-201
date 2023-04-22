@@ -160,6 +160,13 @@ const mainDate = document.getElementById("dataForm");
       "<th>Time</th>" +
       "<th>Distance/Reps</th>" +
       "</tr>";
+      var foodTab = document.getElementById("foodTable");
+      foodTab.innerHTML = 
+      "<tr>"+
+      "<th>Meal type</th>" +
+      "<th>Meal name</th>" +
+      "<th>Calories</th>" +
+      "</tr>";
     var dateValue = document.getElementById("date").value;
     
     
