@@ -33,9 +33,9 @@
     
     position: fixed;
     /* Reference for positioning: https://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/*/
-    top: 60%;
+    top: 0%;
     left: 50%;
-    transform: translate(-50%, 45%);
+    transform: translate(-50%, -150%);
 }
 
 #addExerciseButton
@@ -305,6 +305,14 @@
     background-color: white;
     color: black;
     font-weight: bold;    
+}
+
+#backToAddDiet
+{
+    float: left;
+    background-color: white;
+    color: black;
+    font-weight: bold;     
 }
 
 #exitButtonGoal

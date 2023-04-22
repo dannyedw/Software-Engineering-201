@@ -60,6 +60,12 @@ function addExercise() {
     addCustomDietsContainer.style.display = "none";
     })
 
+  document.getElementById("backToAddDiet").addEventListener("click", function(){
+    addCustomDietsContainer.style.display = "none";
+    addDietContainer.style.display = "block";
+  })
+  
+
 // this is the exercise section of code //
 
 // retrieves the exercise table and makes the Header
@@ -448,6 +454,11 @@ function displayUserInformation(userInformation){
     }
   }
 
+  if (age == 0)
+  {
+    updateAge();
+  }
+
   //`<button type='button' onclick="displayHeightUpdate()">Update</button>`
   //`<button type='button' onclick="displayWeightUpdate()">Update</button>`
   //`<button type='button' onclick="displayAgeUpdate()">Update</button>`
@@ -457,14 +468,14 @@ function displayUserInformation(userInformation){
   + `<button type='button' onclick="displayHeightUpdate()" id='heightUpdateButton'>Update</button>` + `<button type='button' onclick="displayWeightUpdate()" id='weightUpdateButton'>Update</button>` + `<button type='button' onclick="displayAgeUpdate()" id='ageUpdateButton'>Update</button>`;
 
   if (bmi<=18){
-    adviceContainer.innerHTML = "Feedback: BMI Low - You need to gain weight (a healthy bmi should be between 10 and 24)";
+    adviceContainer.innerHTML = "Feedback: BMI Low - You need to gain weight (a healthy BMI should be between 10 and 24)";
   }
   else if(bmi >= 19 && bmi <= 24){
     adviceContainer.innerHTML = "Feedback: You are Healthy";
   }
   else if(bmi >= 25 && bmi <= 29)
   {
-    adviceContainer.innerHTML = "Feedback: BMI Overweight - You need to lose some weight (a healthy bmi should be between 10 and 24)";
+    adviceContainer.innerHTML = "Feedback: BMI Overweight - You need to lose some weight (a healthy BMI should be between 10 and 24)";
   }
   else{
     adviceContainer.innerHTML = "Feedback: BMI Obese - You need to immedialty lose weight as you are very unhealthy (a healthy BMI should be between 10 and 24)";
@@ -516,38 +527,6 @@ function updateHeight()
     let data = {
       type: "user-update",
       content: {height: newHeight}
-    };
-    dataRequest(data,getUserInformation);
-  }
-}
-
-function updateWeight()
-{
-  let error = false;
-  try
-  {
-    var newWeight = document.getElementById("newWeight").value;
-    if ((newWeight > 500 || newWeight <= 0) || isNaN(newWeight))    //you cant be over 500kg
-    {
-      error = true;
-    }
-  }
-  catch
-  {
-    error = true
-  }
-
-  if(error)
-  {
-    let adviceContainer = document.getElementById("userAdvice");
-    adviceContainer.innerHTML = "Enter new Weight(kg): " + `<input type="text" id="newWeight" name="newWeight"><button type='button' onclick= "updateWeight()" style ='margin: 5px 0'>Update</button>` + " Invalid Entry";
-    console.log("Error");
-  }
-  else
-  {
-    let data = {
-      type: "user-update",
-      content: {weight: newWeight}
     };
     dataRequest(data,getUserInformation);
   }

@@ -63,11 +63,12 @@ block content
         input(type='submit' id="addCustomDiet" value='Add Custom Diet')
 
     #addCustomDietsContainer.popup(style='display:none;')    
+      button#backToAddDiet(type='button') ❮
       button#exitCustomDiets(type='button') X
       h3(style="margin-left: 44px;") Add Custom Diet
       form#CustomDietsForm(onsubmit="return false;")
         //label(for='mealType')
-        select(name="Meal Type" id="mealType")
+        select(name="Meal Type" id="mealType" required='' style="margin-bottom: 10px;")
             option(value="") Select One ...
             option(value="BreakFast") Breakfast
             option(value="Lunch") Lunch
@@ -84,13 +85,13 @@ block content
     // popup for add goal
     #addGoalContainer.popup(style='display:none;')
       button#exitButtonGoal(type='button') X
-      h3(style="margin-left: 35px;") Add Goal
+      h3(style="margin-left: 25px;") Add Goal
       form(action='http://localhost:3000/userDashboard#' method='post')
       label(for='goalType')
-        select(name="Goal Type" id="goalType")
-            option(value="") Select One ...
-            option(value="Target Weight") Target Weight
-        <div id="goalOutput"></div>    
+      select(name="Goal Type" id="goalType" style="margin-bottom: 10px;")
+        option(value="") Select One ...
+        option(value="Target Weight") Target Weight
+      <div id="goalOutput"></div>    
         //- label(for='goal')
         //- input#goal(type='text' name='goal' placeholder='Goal' required='')
         //- br
@@ -123,8 +124,8 @@ block content
       button#addDietButton(type='button') +
     </div>
       
-  h2#goals Goals
   .goalContainer
+    h2#goals Goals
     .personalGoals
       h3 Personal Goals
         <div id="personalGoals"></div>
