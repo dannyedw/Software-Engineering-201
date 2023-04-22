@@ -29,3 +29,17 @@
 {
     background-color: #000;
 }
+
+/* Fading animation */
+/* Reference for fading animation: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_slideshow_auto */
+.fade 
+{
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+  
+@keyframes fade
+{
+    from {opacity: .4;}
+    to {opacity: 1}
+}

@@ -454,6 +454,7 @@ function displayUserInformation(userInformation){
     }
   }
 
+  //this \/ will be utterly useless when we actually validate input for database
   if (age == 0)
   {
     updateAge();

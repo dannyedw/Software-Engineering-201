@@ -92,11 +92,14 @@ body
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 3px 3px 3px #F5FFFA;
 }
 
+/* Reference for colour gradient: https://cssgradient.io/ */
 #main_menu
 {
   width: 100%;
   position: relative;
-  background-color: lightblue;
+  /* background-color: lightblue; */
+  background: rgb(34,193,195);
+  background: linear-gradient(180deg, rgba(34,193,195,1) 0%, rgba(173,216,255,1) 100%);
 }
 
 .company-logo
@@ -114,8 +117,10 @@ footer
   justify-content: space-between;
   align-items: center;
   margin-top: auto;
-  background-color: lightblue;
+  /* background-color: lightblue; */
   font-weight: bold;
+  background: rgb(34,193,195);
+  background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(173,216,255,1) 100%);
 }
 
 footer p
