@@ -10,8 +10,15 @@ block variables
     //https://pugjs.org/language/interpolation.html
     const USERNAME = "#{USERNAME}";
 
+block header
+  meta(http-equiv='Content-Type' content='text/html; charset=UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(rel='stylesheet' href='stylesheets/about.css')
+  title About
+
+
 block content
-  h3 ASCEND Health tracker
+  h3(class='header') ASCEND Health tracker
   p 
     div Ascend provides a personalised space to track your fitness goals. 
       ul  
