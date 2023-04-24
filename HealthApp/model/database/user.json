@@ -18,5 +18,15 @@
         "weight": "65",
         "bmi": "25.4",
         "age": "44"
+    },
+    "Degus": {
+        "firstName": "Yon",
+        "lastName": "Stinks",
+        "email": "Degus@degusius.co.org",
+        "password": "degus",
+        "height": "20000000000000000000",
+        "weight": "1",
+        "bmi": "0.0",
+        "age": "wow"
     }
 }
