@@ -7,7 +7,7 @@
         "height": "170",
         "weight": "69",
         "bmi": "23.9",
-        "age": 0
+        "age": "10"
     },
     "test2": {
         "firstName": "testy",
@@ -16,7 +16,7 @@
         "password": "p",
         "height": "160",
         "weight": "65",
-        "bmi": 25,
+        "bmi": "25.4",
         "age": "44"
     }
 }

@@ -7,8 +7,8 @@ function dataRequest(username, content)
     
     const tbDiet = database.getTable("DIET");
     let foodIDs = [];
-    
-    if(tbDiet[username][content.date])
+
+    if(tbDiet[username] && tbDiet[username][content.date])
     {
         foodIDs = tbDiet[username][content.date];
     }
@@ -20,6 +20,7 @@ function dataRequest(username, content)
     {
         data.push(tbFood[id]);
     }
+
 
     return { status: 200, content: data };
 }

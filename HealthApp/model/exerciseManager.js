@@ -8,7 +8,7 @@ function dataRequest(username, content)
     const table = database.getTable("EXERCISE");
     let data = [];
     
-    if(table[username][content.date])
+    if(table[username] && table[username][content.date])
     {
         data = table[username][content.date];
     }
