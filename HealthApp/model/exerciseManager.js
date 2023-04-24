@@ -32,12 +32,13 @@ function dataSubmit(username, content)
     };
 
     let table = database.getTable("EXERCISE");
-    if (table[username][content.date])
+    if (table[username] && table[username][content.date])
     {
         table[username][content.date].push(data);
     }
     else
     {
+        table[username] = {};
         table[username][content.date] = [data];
     }
 

@@ -2,6 +2,7 @@ const userManager = require("./userManager");
 const groupManager = require("./groupManager");
 const exerciseManager = require("./exerciseManager");
 const dietManager = require("./dietManager");
+const foodManager = require("./foodManager");
 
 function request(username, data)
 {
@@ -18,6 +19,8 @@ function request(username, data)
         case "exercise-submit": return exerciseManager.dataSubmit(username, data.content);
         case "diet-request": return dietManager.dataRequest(username, data.content);
         case "diet-submit": return dietManager.dataSubmit(username, data.content);
+        case "food-request": return foodManager.dataRequest(username);
+        case "food-submit": return foodManager.dataSubmit(username, data.content);
         case "group-request": return groupManager.dataRequest(username, data.content);
         case "group-create": return groupManager.create(username, data.content);
         case "group-delete": return groupManager.delete(username, data.content);

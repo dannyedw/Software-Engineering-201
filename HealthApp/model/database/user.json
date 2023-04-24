@@ -1,4 +1,7 @@
 {
+    "default": {
+        
+    },
     "test": {
         "firstName": "test",
         "lastName": "shmest",

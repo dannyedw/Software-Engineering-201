@@ -210,10 +210,11 @@ const mainDate = document.getElementById("dataForm");
     if(response.status != 200){
       console.log(response.content);
     }else{
-    for(let diet of response.content){
+    for(let diet of response.content.foods){
       var foodTab = document.getElementById("foodTable");
-      foodTab.innerHTML = foodTab.innerHTML + "<td>"+diet["Meal-Type"]+"</td> <td>"+diet["Name"]+"</td> <td>"+diet["Calories"]+"</td>"; 
+      foodTab.innerHTML = foodTab.innerHTML + "<td>"+diet["meal-type"]+"</td> <td>"+diet["name"]+"</td> <td>"+diet["calories"]+"</td>"; 
     }
+    alert("total calories: " + response.content.totalCalories);
   }
 }
   })
