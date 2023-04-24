@@ -10,16 +10,23 @@ block variables
     //https://pugjs.org/language/interpolation.html
     const USERNAME = "#{USERNAME}";
 
+block header
+  meta(http-equiv='Content-Type' content='text/html; charset=UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(rel='stylesheet' href='stylesheets/about_style.css')
+  title About
+
+
 block content
-  h3 ASCEND Health tracker
-  p 
-    div Ascend provides a personalised space to track your fitness goals. 
+  h3(class="headerAbout")  ASCEND (Accessable System for Capture of Exercise and Natural Diet) Health tracker
+  p
+    div(class="headerAbout") Ascend provides a personalised space to track your fitness goals. 
       ul  
         li Goal capturing and Reporting
         li Custom workout and diet
         li Group workouts
         li Calorie tracking and BMI tracker
   
-    div ASCEND to the next level by tracking your progress your way. 
-    div Your fitness journey happens at your own pace. ASCEND will help you see how far you have come.
+    div(class="headerAbout") ASCEND to the next level by tracking your progress your way. 
+    div(class="headerAbout") Your fitness journey happens at your own pace. ASCEND will help you see how far you have come.
 

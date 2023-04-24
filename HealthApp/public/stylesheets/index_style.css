@@ -43,3 +43,20 @@
     from {opacity: .4;}
     to {opacity: 1}
 }
+
+.homePara{
+    align-self: center;
+    font-family: Calibri;
+
+}
+
+.div_class {
+    align-self: center;
+    font-family: Calibri;
+    font-size: large;
+
+}
+
+.moto{
+    align-self: center;
+}
