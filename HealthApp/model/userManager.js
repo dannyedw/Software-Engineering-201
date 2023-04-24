@@ -1,5 +1,6 @@
 
 const database = require("./database");
+const crypto = require('crypto');
 
 function login(content)
 {
@@ -9,7 +10,9 @@ function login(content)
     const table = database.getTable("USER");
     if (!table[content.username]) return { status: 400, content: "Invalid username or password" };
 
-    if (content.password === table[content.username].password)
+    const hashedPassword = crypto.createHash('sha512').update(content.password).digest('hex');
+
+    if (hashedPassword === table[content.username].password)
     {
         return { status: 200, content: "Successfully logged in" };
     }
@@ -121,6 +124,8 @@ function addUser(username, userInfo)
         if (table[k].email === userInfo.email) return { status: 400, content: "Email already taken" };
     }
     
+    userInfo.password = crypto.createHash('sha512').update(userInfo.password).digest('hex');
+
     table[username] = userInfo;
     database.overwriteTable("USER", table);
 

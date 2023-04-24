@@ -1,35 +1,23 @@
 {
-    "default": {
-        
-    },
+    "default": {},
     "test": {
         "firstName": "test",
         "lastName": "shmest",
         "email": "a@b",
-        "password": "p",
-        "height": "170",
-        "weight": "69",
-        "bmi": "23.9",
-        "age": "10"
+        "password": "929872838cb9cfe6578e11f0a323438aee5ae7f61d41412d62db72b25dac52019de2d6a355eb2d033336fb70e73f0ec0afeca3ef36dd8a90d83f998fee23b78d",
+        "height": 0,
+        "weight": 0,
+        "bmi": 0,
+        "age": 0
     },
-    "test2": {
-        "firstName": "testy",
-        "lastName": "man",
-        "email": "fsddf@yummers.com",
-        "password": "p",
-        "height": "160",
-        "weight": "65",
-        "bmi": "25.4",
-        "age": "44"
-    },
-    "Degus": {
-        "firstName": "Yon",
-        "lastName": "Stinks",
-        "email": "Degus@degusius.co.org",
-        "password": "degus",
-        "height": "20000000000000000000",
-        "weight": "1",
-        "bmi": "0.0",
-        "age": "wow"
+    "test3": {
+        "firstName": "jim",
+        "lastName": "bim",
+        "email": "feinq@fjewiqnf",
+        "password": "ddaf35a193617abacc417349ae20413112e6fa4e89a97ea20a9eeee64b55d39a2192992a274fc1a836ba3c23a3feebbd454d4423643ce80e2a9ac94fa54ca49f",
+        "height": 0,
+        "weight": 0,
+        "bmi": 0,
+        "age": 0
     }
 }
