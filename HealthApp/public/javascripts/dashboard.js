@@ -462,12 +462,6 @@ function displayUserInformation(userInformation){
     }
   }
 
-  //this \/ will be utterly useless when we actually validate input for database
-  if (age == 0)
-  {
-    updateAge();
-  }
-
   //`<button type='button' onclick="displayHeightUpdate()">Update</button>`
   //`<button type='button' onclick="displayWeightUpdate()">Update</button>`
   //`<button type='button' onclick="displayAgeUpdate()">Update</button>`
@@ -593,7 +587,6 @@ function updateAge()
   {
     let adviceContainer = document.getElementById("userAdvice");
     adviceContainer.innerHTML = "Enter new Age: " + `<input type="text" id="newAge" name="newAge"><button type='button' onclick= "updateAge()" style ='margin: 5px 0'>Update</button>` + " Invalid Entry";
-    console.log("Error");
   }
   else
   {
