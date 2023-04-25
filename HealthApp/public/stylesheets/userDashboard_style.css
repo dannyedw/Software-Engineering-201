@@ -1,7 +1,9 @@
 #date
 {
     text-align: center;
-    border: 5px black solid;
+    border: 5px solid #0793f8;
+    border-style: groove;
+    border-radius: 16px;
     
     height: 30px;
     width: 150px;
@@ -26,7 +28,9 @@
 #goals
 {
     text-align: center;
-    border: 5px black solid;
+    border: 5px solid #0793f8;
+    border-style: groove;
+    border-radius: 16px;
     
     width: 150px;
     box-sizing: border-box;
@@ -90,6 +94,11 @@
 
 #dietButtonCenter
 {
+    /* position: absolute;
+    top: 70%;
+    left: 83.5%;
+    transform: translate(0%, -50%); */
+
     position: fixed;
     top: 90%;
     left: 80%;
@@ -102,7 +111,15 @@
     flex-direction: row;
     justify-content: space-evenly;
 
-    border: 5px black solid;
+    /* Blue: #0793f8 */
+    border: 5px solid #0793f8;
+    border-style: groove;
+    border-radius: 16px;
+
+    /* #7B94B1 */
+    /* #6482a4 */
+    background-color: #B9DDE0;
+
     width: 1000px;
     height: 280px;
     box-sizing: border-box;
@@ -131,8 +148,12 @@
 
 .exercise
 {
-    border: 3px black solid;
+    border: 0px solid #0793f8;
+    border-style: groove;
+    border-radius: 12px;
     text-align: center;
+
+    background-color: #FFFFFF;
 
     margin-left: 37px;
     padding-left: 5px;
@@ -155,14 +176,19 @@
 
 .diet
 {
-    border: 3px black solid;
+    border: 0px solid #0793f8;
+    border-style: groove;
+    border-radius: 12px;
     text-align: center;
 
+    width: 300px;
+
+    background-color: #FFFFFF;
     margin-right: 12px;
     padding-left: 5px;
     padding-right: 5px;
     padding-bottom: 5px;
-    overflow-y: auto;   
+    overflow-y: auto; 
 }
 
 .diet > p
@@ -183,7 +209,9 @@
     flex-direction: column;
     align-items: center;
     
-    border: 5px solid black;
+    border: 5px solid #0793f8;
+    border-style: groove;
+    border-radius: 16px;
     padding: 10px;
 
     position: fixed;
@@ -333,7 +361,9 @@ tr:hover {
     flex-direction: column;
     align-items: center;
     margin: 10px 10px 0;
-    border: 5px solid black;
+    border: 5px solid #0793f8;
+    border-style: groove;
+    border-radius: 16px;
     width: 22%;
     font-size: 1.25em;
 }

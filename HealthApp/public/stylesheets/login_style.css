@@ -8,6 +8,12 @@ form
 {
   text-align: center;
   font-size: 2em;
+  border: 5px solid #0793f8;
+  border-style: groove;
+  border-radius: 16px;
+  width: 40%;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 label
@@ -20,10 +26,20 @@ form input
   font-size: 2em;
   margin-top: 25px;
   margin-bottom: 25px;
+  border-radius: 8px;
 }
 
 #login-button
 {
   margin-top: 20px;
   margin-bottom: 20px;
+  border-radius: 8px;
+  background-color: #0793f8;
+  color: rgb(255,255,255);
+  transition: background-color 250ms ease-in;
+}
+
+#login-button:hover
+{
+  background-color: #3E946F;
 }
