@@ -168,7 +168,7 @@ const mainDate = document.getElementById("dataForm");
       "<th>Calories</th>" +
       "</tr>";
     var dateValue = document.getElementById("date").value;
-    
+    getPersonalGoals();
     
     //links the buttons to the functions
     document.getElementById("addExerciseButton").removeEventListener("click", displayWarning);
@@ -379,48 +379,190 @@ goalSelect.addEventListener("change", (event) =>
   
   document.getElementById('addPGoal').addEventListener("click",addingTargetWeight);
 
-  function calculateRemaining(current,deadline){
-    //var remain = deadline - current;
-    deadline = deadline.split("-");
-    current = current.split("-");
-    remainingMonths = deadline[1]-current[1];
-    remainingDays = deadline[2]-current[2];
-    if(remainingMonths > 0){
-      if(remainingMonths == 1 || remainingMonths == 3 || remainingMonths == 5 || remainingMonths == 7 || remainingMonths == 8 || remainingMonths == 10 || remainingMonths == 12 ){
-        timeRemaining = (remainingMonths * 31) + remainingDays; 
-        return timeRemaining;
-      }else if(remainingMonths == 2){
-        timeRemaining = (remainingMonths * 28) + remainingDays; 
-        return timeRemaining;
-      }else if(remainingMonths == 4 || remainingMonths == 6 || remainingMonths == 9 || remainingMonths == 11){
-        timeRemaining = (remainingMonths * 30) + remainingDays; 
-        return timeRemaining;
-      }
-    }else{
-      return remainingDays;
+function calculateRemaining(current,deadline){
+  //var remain = deadline - current;
+  deadline = deadline.split("-");
+  current = current.split("-");
+  remainingMonths = deadline[1]-current[1];
+  remainingDays = deadline[2]-current[2];
+  if(remainingMonths > 0){
+    if(remainingMonths == 1 || remainingMonths == 3 || remainingMonths == 5 || remainingMonths == 7 || remainingMonths == 8 || remainingMonths == 10 || remainingMonths == 12 ){
+      timeRemaining = (remainingMonths * 31) + remainingDays; 
+      return timeRemaining;
+    }else if(remainingMonths == 2){
+      timeRemaining = (remainingMonths * 28) + remainingDays; 
+      return timeRemaining;
+    }else if(remainingMonths == 4 || remainingMonths == 6 || remainingMonths == 9 || remainingMonths == 11){
+      timeRemaining = (remainingMonths * 30) + remainingDays; 
+      return timeRemaining;
     }
+  }else{
+    return remainingDays;
   }
+}
 
   function addingTargetWeight(){
+    //next few lines are getting the information for the request
     const targetWeight = document.getElementById("target-Weight").value;
     const targetDate = document.getElementById("goalDate").value;
+
+    //i know this is probaby very bad but callback functions were annoying
+    let userInfo = document.getElementById("userInformation").textContent;
+    const startingWeight = userInfo.split(" ")[5].split("kg")[0];
+
+    var goalType = document.getElementById("goalType").value;
+    if(goalType == "Target Weight")
+    {
+      goalType = "weight";
+    }
+
+    const startDate = getAndFormatCurrentDate(); 
+
+    // validating that we got the correct values
+    // console.log("Type: " + goalType);
+    // console.log("startdate: " + startDate);
+    // console.log("endDate: " + targetDate);
+    // console.log("starting weight: " + startingWeight);
+    // console.log("target weight: " + targetWeight);
+
+    let data = {
+      type: goalType,
+      startDate: startDate,
+      endDate: targetDate,
+      extraData: [startingWeight, targetWeight]
+    };
+
+    let request = {
+      type: "personal-goal-create",
+      content: data
+    };
+
+    dataRequest(request, errorReporter);
+
     overlay.style.display = "none";
     addGoalContainer.style.display = "none";
-    timeRemaining = calculateRemaining(formatCurrentDate,targetDate);
-    
-    if (timeRemaining == 1)
-    {
-      personalGoals.innerHTML = "<p class='pGoalValue'>Your Target Weight is: "+targetWeight+"kg <br> Your Target Date: "+targetDate+" <br> Time Remaining: "+timeRemaining+" day</p>";  
-    }
-    else
-    {
-      personalGoals.innerHTML = "<p class='pGoalValue'>Your Target Weight is: "+targetWeight+"kg <br> Your Target Date: "+targetDate+" <br> Time Remaining: "+timeRemaining+" days</p>";
-    }
-    
+
+    getPersonalGoals(); //update goals once we have added one
   }
   
 }); 
 
+function errorReporter(data)  //function that basicaly prints the error when put as callback function
+{
+  if (data.status != 200)
+  {
+    console.log(data.content);
+  }
+  getPersonalGoals(); //updates stuff as this function will wait for the request to finish
+}
+
+function getPersonalGoals() //this gets the goals that are not expired by this date
+{
+  var dateValue = document.getElementById("date").value;
+  if(dateValue)
+  {
+    let dataTest = {
+      type: "personal-goal-request",
+      content: {
+          date:dateValue
+        }
+      };
+      
+    dataRequest(dataTest,displayPersonalGoals)
+    }
+}
+
+function displayPersonalGoals(data)  //this displays the goals in the goal container
+{
+  if(data.status != 200)
+  {
+    console.log(data.response);
+  }
+  else
+  {
+    let personalGoalContainer = document.getElementById("personalGoals");
+    personalGoalContainer.innerHTML = "";
+    let personalGoals = data.content;
+
+    //i know this is probaby very bad but callback functions were annoying
+    let userInfo = document.getElementById("userInformation").textContent;
+    let currentWeight = userInfo.split(" ")[5].split("kg")[0];
+
+
+    for(let i = 0; i < personalGoals.length; i++)
+    {
+      let currentGoal = personalGoals[i];
+      var goal = document.createElement("p");
+      if(currentGoal.type == "weight")
+      {
+        var goalProgress = ((currentWeight-currentGoal.extraData[0])/(currentGoal.extraData[1]-currentGoal.extraData[0]))*100;
+        if(currentGoal.status != "In Progress")
+        {
+          goal.innerHTML = "Archived goal: Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: " + currentGoal.status;
+        }
+        else if(goalProgress >= 100)
+        {
+          data = {
+            type: "personal-goal-update",
+            content: {goalId: currentGoal.goalId, status: "Goal Completed Successfully"}
+          };
+          dataRequest(data,errorReporter);
+
+          goal.innerHTML = "Archived goal: Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: Goal Completed Successfully";
+          //pass and archive/update goal
+
+        }
+        else if(currentGoal.endDate == getAndFormatCurrentDate())
+        {
+          data = {
+            type: "personal-goal-update",
+            content: {goalId: currentGoal.goalId, status: "Goal Failed"}
+          };
+          dataRequest(data,errorReporter);
+
+          goal.innerHTML = "Archived goal: Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: Goal Failed";
+          //fail and archive/update goal
+        }
+        else{
+          goal.innerHTML = "Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: " + currentGoal.status
+        + " | Progress: " + currentGoal.extraData[0] + ` <progress value="`+ goalProgress +`" max="100"></progress> ` + currentGoal.extraData[1] +
+        " " + `<button type='button' onclick = "deletePersonalGoal(` + currentGoal.goalId + `)" style ='margin: 5px 0'>Delete</button>`;
+        }
+      }
+      else
+      {
+        console.log("not implemented yet");
+      }
+      personalGoalContainer.appendChild(goal);
+    }
+  }
+  
+}
+
+function deletePersonalGoal(goalId1)
+{
+  console.log("goal id to delete: " + goalId1);
+  let data3 = {
+    type: "personal-goal-delete",
+    content: {goalId: goalId1}
+  };
+  dataRequest(data3, errorReporter);
+}
+
+function getAndFormatCurrentDate()
+{
+  const CurrentDate = new Date();
+  var year  = CurrentDate.getFullYear();
+  var month = CurrentDate.getMonth()+1;
+  var day  = CurrentDate.getDate();
+  if(date<10){
+    day = "0"+date;
+  }
+  if(month<10){
+    month = "0"+month;
+  }
+  return year + "-" + month + "-" + day; 
+}
 
 function getUserInformation(){
   let data = {
@@ -483,6 +625,7 @@ function displayUserInformation(userInformation){
   else{
     adviceContainer.innerHTML = "Feedback: BMI Obese - You need to immedialty lose weight as you are very unhealthy (a healthy BMI should be between 10 and 24)";
   }
+  getPersonalGoals();
 }
 
 function displayHeightUpdate()

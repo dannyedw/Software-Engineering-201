@@ -1,0 +1,76 @@
+{
+    "test": {
+        "0": {
+            "type": "weight",
+            "startDate": "2023-04-18",
+            "endDate": "2023-06-15",
+            "status": "In Progress",
+            "extraData": [
+                50,
+                70
+            ]
+        },
+        "1": {
+            "type": "weight",
+            "startDate": "2023-04-18",
+            "endDate": "2023-06-20",
+            "status": "In Progress",
+            "extraData": [
+                50,
+                80
+            ]
+        },
+        "2": {
+            "type": "weight",
+            "startDate": "2023-04-26",
+            "endDate": "2023-04-29",
+            "status": "In Progress",
+            "extraData": [
+                "60",
+                "90"
+            ]
+        }
+    },
+    "test2": {
+        "0": {
+            "type": "weight",
+            "startDate": "2023-04-26",
+            "endDate": "2023-06-29",
+            "status": "Goal Completed Successfully",
+            "extraData": [
+                "60",
+                "80"
+            ]
+        },
+        "1": {
+            "type": "weight",
+            "startDate": "2023-04-26",
+            "endDate": "2023-04-26",
+            "status": "Goal Failed",
+            "extraData": [
+                "80",
+                "85"
+            ]
+        },
+        "2": {
+            "type": "weight",
+            "startDate": "2023-04-26",
+            "endDate": "2023-04-26",
+            "status": "Goal Failed",
+            "extraData": [
+                "70",
+                "80"
+            ]
+        },
+        "3": {
+            "type": "weight",
+            "startDate": "2023-04-26",
+            "endDate": "2023-05-03",
+            "status": "In Progress",
+            "extraData": [
+                "70",
+                "80"
+            ]
+        }
+    }
+}

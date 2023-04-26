@@ -404,3 +404,10 @@ tr:hover {
 {
     margin: 10px 0;
 }
+
+#personalGoals
+{
+    height: 100px;
+    width: 1100px;
+    overflow: auto;
+}
