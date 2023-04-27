@@ -1,25 +1,5 @@
 {
     "test": {
-        "0": {
-            "type": "weight",
-            "startDate": "2023-04-18",
-            "endDate": "2023-06-15",
-            "status": "In Progress",
-            "extraData": [
-                50,
-                70
-            ]
-        },
-        "1": {
-            "type": "weight",
-            "startDate": "2023-04-18",
-            "endDate": "2023-06-20",
-            "status": "In Progress",
-            "extraData": [
-                50,
-                80
-            ]
-        },
         "2": {
             "type": "weight",
             "startDate": "2023-04-26",

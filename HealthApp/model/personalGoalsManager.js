@@ -22,7 +22,7 @@ function create(username, content)
     if(table[username])  //if the user has goals
     {
         let currentIds = Object.keys(table[username]);
-        let lastID =  Number(currentIds[currentIds.length-1])
+        let lastID =  Number(currentIds[currentIds.length-1]);
         let newId = lastID+ 1;
         table[username][newId] = data;
     }
@@ -43,10 +43,7 @@ function create(username, content)
 function update(username,content)
 {
     let table = database.getTable("PERSONALGOALS");
-    if(!content.goalId)
-    {
-        return { status: 400, content: "Missing Goal id"}
-    }
+    if(!content.goalId) return { status: 400, content: "Missing Goal id"};
 
     //add more of these lines for different goal atrubutes if we plan on updating more but not needed now
     if(content.status) table[username][content.goalId].status = content.status;
@@ -55,25 +52,21 @@ function update(username,content)
     return { status: 200, content: "Successfully updated goal stuff"};
 }
 
-function deleteGoal(username,content)  //not currently working???????
+function deleteGoal(username,content)
 {
-    if(!content.goalId)
-    {
-        return { status: 400, content: "Missing Goal id"}
-    }
+    console.log(content);
+    if(content.goalId === null) return { status: 400, content: "Missing Goal id" };
 
     let table = database.getTable("PERSONALGOALS");
 
-    try
+    if (table[username] && table[username][content.goalId])
     {
-        delete table[username][content.goalId]
+        delete table[username][content.goalId];
         database.overwriteTable("PERSONALGOALS", table);
         return { status: 200, content: "Successfully deleted Goal" };
     }
-    catch
-    {
-        return { status: 400, content: "Delete goal error"}
-    }
+    
+    return { status: 400, content: "No goal for username [" + username + "] and id [" + content.goalId + "]"};
 }
 
 function dataRequest(username, content)
@@ -95,7 +88,7 @@ function dataRequest(username, content)
                 data.push(userGoals[entry]);
             }
         }
-        return { status: 200, content: data};
+        return { status: 200, content: data };
     }
 
     return {status: 400, content: "User not found in Database/no goals"};  //might actualy need to make a new use entry
