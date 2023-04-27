@@ -1,5 +1,3 @@
-const { dataRequest } = require("../../model/personalGoalsManager");
-
 function addExercise() {
   overlay.style.display = "block";
   addExerciseContainer.style.display = "block";
@@ -742,3 +740,7 @@ function updateAge()
 }
 
 getUserInformation();
+
+//gives the date a default value to todays date
+var date = document.getElementById("date")
+date.value = getAndFormatCurrentDate();  
