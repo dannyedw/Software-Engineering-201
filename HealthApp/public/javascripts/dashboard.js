@@ -1,3 +1,5 @@
+const { dataRequest } = require("../../model/personalGoalsManager");
+
 function addExercise() {
   overlay.style.display = "block";
   addExerciseContainer.style.display = "block";
@@ -214,7 +216,7 @@ const mainDate = document.getElementById("dataForm");
       var foodTab = document.getElementById("foodTable");
       foodTab.innerHTML = foodTab.innerHTML + "<td>"+diet["meal-type"]+"</td> <td>"+diet["name"]+"</td> <td>"+diet["calories"]+"</td>"; 
     }
-    alert("total calories: " + response.content.totalCalories);
+    // alert("total calories: " + response.content.totalCalories);
   }
 }
   })
@@ -488,7 +490,6 @@ function displayPersonalGoals(data)  //this displays the goals in the goal conta
     let userInfo = document.getElementById("userInformation").textContent;
     let currentWeight = userInfo.split(" ")[5].split("kg")[0];
 
-
     for(let i = 0; i < personalGoals.length; i++)
     {
       let currentGoal = personalGoals[i];
@@ -541,7 +542,6 @@ function displayPersonalGoals(data)  //this displays the goals in the goal conta
 
 function deletePersonalGoal(goalId1)
 {
-  console.log("goal id to delete: " + goalId1);
   let data3 = {
     type: "personal-goal-delete",
     content: {goalId: goalId1}
