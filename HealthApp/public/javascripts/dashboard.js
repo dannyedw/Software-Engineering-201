@@ -657,8 +657,7 @@ function updateHeight()
   }
   catch
   {
-    error = true
-    console.log("Error from catch");
+    error = true;
   }
 
   if(error)
@@ -696,7 +695,6 @@ function updateWeight()
   {
     let adviceContainer = document.getElementById("userAdvice");
     adviceContainer.innerHTML = "Enter new Weight(kg): " + `<input type="text" id="newWeight" name="newWeight"><button type='button' onclick= "updateWeight()" style ='margin: 5px 0'>Update</button>` + " Invalid Entry";
-    console.log("Error");
   }
   else
   {
