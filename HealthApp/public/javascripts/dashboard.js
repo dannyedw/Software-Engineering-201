@@ -629,19 +629,25 @@ function displayUserInformation(userInformation){
 function displayHeightUpdate()
 {
   let adviceContainer = document.getElementById("userAdvice");
-  adviceContainer.innerHTML = "Enter new Height(cm): " + `<input type="text" id="newHeight" name="newHeight"><button type='button' onclick = "updateHeight()" style ='margin: 5px 0'>Update</button>`;
+  adviceContainer.innerHTML = "Enter new Height(cm): " + `<input type="text" id="newHeight" name="newHeight">
+  <button type='button' onclick = "updateHeight()" style ='margin: 5px 0'>Update</button>
+  <button type='button' onclick="getUserInformation()" id='cancelAdding'>Cancel</button>`;
 }
 
 function displayWeightUpdate()
 {
   let adviceContainer = document.getElementById("userAdvice");
-  adviceContainer.innerHTML = "Enter new Weight(kg): " + `<input type="text" id="newWeight" name="newWeight"><button type='button' onclick = "updateWeight()" style ='margin: 5px 0'>Update</button>`;
+  adviceContainer.innerHTML = "Enter new Weight(kg): " + `<input type="text" id="newWeight" name="newWeight">
+  <button type='button' onclick = "updateWeight()" style ='margin: 5px 0'>Update</button>
+  <button type='button' onclick="getUserInformation()" id='cancelAdding'>Cancel</button>`;
 }
 
 function displayAgeUpdate()
 {
   let adviceContainer = document.getElementById("userAdvice");
-  adviceContainer.innerHTML = "Enter new Age: " + `<input type="text" id="newAge" name="newAge"><button type='button' onclick = "updateAge()" style ='margin: 5px 0'>Update</button>`;
+  adviceContainer.innerHTML = "Enter new Age: " + `<input type="text" id="newAge" name="newAge">
+  <button type='button' onclick = "updateAge()" style ='margin: 5px 0'>Update</button>
+  <button type='button' onclick="getUserInformation()" id='cancelAdding'>Cancel</button>`;
 }
 
 function updateHeight()
