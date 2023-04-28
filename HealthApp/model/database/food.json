@@ -31,6 +31,16 @@
             "mealType": "BreakFast",
             "name": "pasta",
             "calories": "1000"
+        },
+        "3": {
+            "mealType": "Lunch",
+            "name": "pasta",
+            "calories": "100000000"
+        },
+        "4": {
+            "mealType": "BreakFast",
+            "name": "pasta",
+            "calories": "10000"
         }
     }
 }

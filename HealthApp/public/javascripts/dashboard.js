@@ -264,15 +264,6 @@ function responseHandler(response) {
 //This adds the calorie count to the total and adds the selected food item to the dashboard panel
 const dietDiv = document.getElementById("diets");
 
-// function submitDiet(type, name, calories) {
-// 	foodTab.innerHTML = foodTab.innerHTML + "<td>" + type + "</td> <td>" + name + "</td> <td>" + calories + "</td>";
-// 	overlay.style.display = "none";
-// 	addDietContainer.style.display = "none";
-// 	totalCalories += Number(calories);
-// 	totalCalorieDiv.innerHTML = "Total Calorie Count " + totalCalories;
-// 	var dateValue = document.getElementById("date").value;
-// }
-
 function submitsDiet(type, name, calories, res) {
 	foodTab.innerHTML = foodTab.innerHTML + "<td>" + type + "</td> <td>" + name + "</td> <td>" + calories + "</td>";
 	overlay.style.display = "none";
@@ -319,10 +310,6 @@ dataForms.addEventListener('submit', (e) => {
 	var mealName = document.getElementById("foodTypes").value
 	var calories = document.getElementById("calories").value
 	var mealType = document.getElementById("mealType").value
-
-	//adds calorie count of custom to total
-	totalCalories += Number(calories);
-	totalCalorieDiv.innerHTML = "Total Calorie Count " + totalCalories;
 
 	//submits custom diet to main dashboard panel of Meals Eaten for the day
 	//https://itecnote.com/tecnote/javascript-passing-dynamic-parameter-to-a-javascript-function-using-innerhtml/ reference for how to add mutiple parameters in inner html
