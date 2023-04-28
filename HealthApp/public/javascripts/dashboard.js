@@ -108,7 +108,22 @@ exerciseSelect.addEventListener("change", (event) => {
 	// update the variations div with the selected exercise's data
 	variationsDiv.innerHTML = data;
 
+	//When 'Add Exercise' button is clicked, remove button is added next to exercise value
+	let popupAddExButt = document.getElementById("adde");
+	popupAddExButt.addEventListener("click", event =>
+	{
+		let removeExerciseButton = document.createElement("input");
+		removeExerciseButton.setAttribute("type", "button");
+		removeExerciseButton.setAttribute("value", "Delete");
+		removeExerciseButton.setAttribute("name", "deleteDietButton");
+		removeExerciseButton.className = "deleteDietButton";
+
+		removeExerciseButtonContainer.appendChild(removeExerciseButton);
+	});
 });
+
+//Retrieving container for exercise remove buttons 
+let removeExerciseButtonContainer = document.getElementById("removeExerciseButtonsContainer");
 
 // If exercise set is added to your main panel then they are inserted into the table
 var data = document.getElementById("exerciseForm")
@@ -139,15 +154,18 @@ data.addEventListener('submit', (e) => {
 
 	function responseHandler(response) {
 		if (response.status != 200) {
-			console.log(reponse.content)
+			console.log(response.content)
 		}
 	}
 
 	//gets the div from the panel to add the inputted requirements into table
 	exerciseTable.innerHTML = exerciseTable.innerHTML + "<td>" + selectedExercise + "</td> <td>" + name + "</td> <td>" + time + "</td> <td>" + reps + "</td>";
+
 })
 
 
+//Retrieving container for diet remove buttons 
+let removeDietButtonContainer = document.getElementById("removeDietButtonsContainer");
 
 //retrives the date selected
 const mainDate = document.getElementById("dataForm");
@@ -190,9 +208,20 @@ mainDate.addEventListener("change", (event) => {
 		if (response.status != 200) {
 			console.log(response.content);
 		} else {
+			
+			//Clear any exercise values from previous date
+			removeExerciseButtonContainer.innerHTML = "";
 			for (let ex of response.content) {
 				const selectedExercise = document.getElementById("exercises").value;
 				exerciseTable.innerHTML = exerciseTable.innerHTML + "<td>" + ex["set"] + "</td> <td>" + ex["name"] + "</td> <td>" + ex["time"] + "</td> <td>" + ex["amount"] + "</td>";
+				
+				let removeExerciseButton = document.createElement("input");
+				removeExerciseButton.setAttribute("type", "button");
+				removeExerciseButton.setAttribute("value", "Delete");
+				removeExerciseButton.setAttribute("name", "deleteDietButton");
+				removeExerciseButton.className = "deleteDietButton";
+
+				removeExerciseButtonContainer.appendChild(removeExerciseButton);
 			}
 		}
 	}
@@ -209,9 +238,23 @@ mainDate.addEventListener("change", (event) => {
 		if (response.status != 200) {
 			console.log(response.content);
 		} else {
+
+			//Clear any diet values from previous date
+			removeDietButtonContainer.innerHTML = "";
 			for (let diet of response.content.foods) {
 				var foodTab = document.getElementById("foodTable");
-				foodTab.innerHTML = foodTab.innerHTML + "<td>" + diet["mealType"] + "</td> <td>" + diet["name"] + "</td> <td>" + diet["calories"] + "</td>";
+				//"<td><input type='button' id='deleteDietButton' name='deleteDietButton' placeholder='Delete' value='Delete'></td>"
+				foodTab.innerHTML += "<td>" + diet["mealType"] + "</td> <td>" + diet["name"] + "</td> <td>" + diet["calories"] + "</td>";
+				
+				//creating a button equivalent of: <input type='button' value='Delete' name='deleteDietButton' class='deleteDietButton'>
+				//then adding to container next to the table with diet values
+				let removeDietButton = document.createElement("input");
+				removeDietButton.setAttribute("type", "button");
+				removeDietButton.setAttribute("value", "Delete");
+				removeDietButton.setAttribute("name", "deleteDietButton");
+				removeDietButton.className = "deleteDietButton";
+				
+				removeDietButtonContainer.appendChild(removeDietButton);
 			}
 			totalCalories = parseInt(response.content.totalCalories);
 			totalCalorieDiv.innerHTML = "Total Calorie Count " + totalCalories;
@@ -266,6 +309,15 @@ const dietDiv = document.getElementById("diets");
 
 function submitsDiet(type, name, calories, res) {
 	foodTab.innerHTML = foodTab.innerHTML + "<td>" + type + "</td> <td>" + name + "</td> <td>" + calories + "</td>";
+
+	let removeDietButton = document.createElement("input");
+	removeDietButton.setAttribute("type", "button");
+	removeDietButton.setAttribute("value", "Delete");
+	removeDietButton.setAttribute("name", "deleteDietButton");
+	removeDietButton.className = "deleteDietButton";
+				
+	removeDietButtonContainer.appendChild(removeDietButton);
+
 	overlay.style.display = "none";
 	addDietContainer.style.display = "none";
 	totalCalories += Number(calories);
@@ -371,7 +423,7 @@ goalSelect.addEventListener("change", (event) => {
 
 	switch (selectedDiet) {
 		case "Target Weight":
-			data = "<input type='text' id='target-Weight' name='weight' placeholder='Target Weight(KG)'><br><input type='date' id='goalDate' name='deadline' value=" + SelectionDate + " min=" + formatCurrentDate + " max='2027-04-21'><br>";
+			data = "<input type='text' id='target-Weight' name='weight' placeholder='Target Weight(KG)' required><br><input type='date' id='goalDate' name='deadline' value=" + SelectionDate + " min=" + formatCurrentDate + " max='2027-04-21'><br>";
 			data += "<input type='submit' id='addPGoal' value='Add Goal'>";
 			break;
 		default:

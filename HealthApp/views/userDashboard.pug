@@ -109,7 +109,9 @@ block content
     .exercise
       h3 Exercise
       <div class="line" id="extra"></div>
-      table#exerciseTable(style='width:100%', border='1')
+      div#exercise-removeButtonsContainer
+        table#exerciseTable(style='width:100%', border='1')
+        div#removeExerciseButtonsContainer
     <div id="exerciseButtonCenter">
       button#addExerciseButton(type='button') +
     </div>
@@ -118,7 +120,9 @@ block content
     .diet
       h3 Diet
       <div class="line" id="diets"></div>
-      table#foodTable(style='width:100%', border='1')
+      div#food-removeButtonsContainer
+        table#foodTable(style='width:100%', border='1')
+        div#removeDietButtonsContainer   
       div#calorieTotal
       <div id="dietButtonCenter">
         button#addDietButton(type='button') +
