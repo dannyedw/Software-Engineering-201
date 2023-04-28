@@ -253,7 +253,6 @@ mainDate.addEventListener("change", (event) => {
 				removeDietButton.setAttribute("value", "Delete");
 				removeDietButton.setAttribute("name", "deleteDietButton");
 				removeDietButton.className = "deleteDietButton";
-				removeDietButton.addEventListener("click",removediet())
 				
 				removeDietButtonContainer.appendChild(removeDietButton);
 			}
@@ -299,7 +298,6 @@ function responseHandler(response) {
 	}
 	else {
 		for (let diet of response.content) {
-			console.log(diet)
 			divs.innerHTML = divs.innerHTML + '<tr onclick="submitsDiet(\'' + diet['mealType'] + '\',\'' + diet['name'] + '\',\'' + diet['calories'] + '\',\'' + diet.foodID + '\');"> <td>' + diet['mealType'] + '</td> <td>' + diet['name'] + '</td> <td>' + diet['calories'] + '</td> </tr>';
 		}
 	}
