@@ -30,6 +30,8 @@ function dataRequest(username, content)
         totalCalories: totalCalories
     };
 
+    let message = "Successfully requested diet";
+    console.log(message);
     return { status: 200, content: data };
 }
 
@@ -39,9 +41,16 @@ function dataSubmit(username, content)
     if (!content.foodID) return { status: 400, content: "Missing required data - foodID" };
 
     let table = database.getTable("DIET");
-    if (table[username] && table[username][content.date])
+    if (table[username])
     {
-        table[username][content.date].push(content.foodID);
+        if (table[username][content.date])
+        {
+            table[username][content.date].push(content.foodID);
+        }
+        else
+        {
+            table[username][content.date] = [content.foodID];
+        }
     }
     else
     {
@@ -51,7 +60,9 @@ function dataSubmit(username, content)
 
     database.overwriteTable("DIET", table);
 
-    return { status: 200, content: "Successfully added exercise" };
+    let message = "Successfully added diet";
+    console.log(message);
+    return { status: 200, content: message };
 }
 
 

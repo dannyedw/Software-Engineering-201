@@ -54,7 +54,6 @@ function update(username,content)
 
 function deleteGoal(username,content)
 {
-    console.log(content);
     if(content.goalId === null) return { status: 400, content: "Missing Goal id" };
 
     let table = database.getTable("PERSONALGOALS");

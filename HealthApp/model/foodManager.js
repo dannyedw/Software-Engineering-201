@@ -5,20 +5,22 @@ function dataRequest(username)
 {    
     const tbFood = database.getTable("FOOD");
     let data = [];
-
-    for (let food of tbFood["default"])
+    
+    for (let foodID in tbFood["default"])
     {
-        data.push(food);
+        data.push(tbFood["default"][foodID]);
     }
 
     if (tbFood[username])
     {
-        for (let food of tbFood[username])
+        for (let foodID in tbFood[username])
         {
-            data.push(food);
+            data.push(tbFood[username][foodID]);
         }
     }
 
+    let message = "Successfully requested food";
+    console.log(message);
     return { status: 200, content: data };
 }
 
@@ -33,6 +35,7 @@ function dataSubmit(username, content)
         name: content.name,
         calories: content.calories
     };
+
 
     let table = database.getTable("FOOD");
 
@@ -51,7 +54,9 @@ function dataSubmit(username, content)
 
     database.overwriteTable("FOOD", table);
 
-    return { status: 200, content: "Successfully added exercise" };
+    let message = "Successfully submitted food";
+    console.log(message);
+    return { status: 200, content: message };
 }
 
 

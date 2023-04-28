@@ -11,6 +11,9 @@ function request(username, data)
     {
         return { status: 400, content: "Invalid data request, missing type or content" };
     }
+
+    console.log("received request: " + data.type);
+
     switch (data.type)
     {
         case "user-request": return userManager.dataRequest(username, data.content);
