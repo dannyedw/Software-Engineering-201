@@ -178,6 +178,7 @@ const mainDate = document.getElementById("dataForm");
     var warning = document.getElementById("dateWarning");
     warning.innerHTML = '';
 
+    // first page load of exercise and diet
     let data = {
       type: "exercise-request",
       content: {
@@ -212,7 +213,7 @@ const mainDate = document.getElementById("dataForm");
     }else{
     for(let diet of response.content.foods){
       var foodTab = document.getElementById("foodTable");
-      foodTab.innerHTML = foodTab.innerHTML + "<td>"+diet["meal-type"]+"</td> <td>"+diet["name"]+"</td> <td>"+diet["calories"]+"</td>"; 
+      foodTab.innerHTML = foodTab.innerHTML + "<td>"+diet["mealType"]+"</td> <td>"+diet["name"]+"</td> <td>"+diet["calories"]+"</td>"; 
     }
     // alert("total calories: " + response.content.totalCalories);
   }
@@ -242,11 +243,6 @@ divs.innerHTML =
   "<th>Calories</th>" +
 "</tr>";
 
-//HardCoded for example
-var mealType = "Breakfast";
-var nam     = "Cereal";
-var calories = 120;
-
 let dataaa = {
   type: "food-request",
   content:{}
@@ -261,18 +257,24 @@ function responseHandler(response){
   else{
     for(let diet of response.content){
       console.log(diet)
-      divs.innerHTML = divs.innerHTML + '<tr onclick="submitDiet(\''+diet['meal-type']+'\',\''+diet['name']+'\',\''+diet['calories']+'\');"> <td>'+diet['meal-type']+'</td> <td>'+diet['name']+'</td> <td>'+diet['calories']+'</td> </tr>';
+      divs.innerHTML = divs.innerHTML + '<tr onclick="submitsDiet(\''+diet['mealType']+'\',\''+diet['name']+'\',\''+diet['calories']+'\',\''+diet.foodID+'\');"> <td>'+diet['mealType']+'</td> <td>'+diet['name']+'</td> <td>'+diet['calories']+'</td> </tr>';
     }
   }
 }
-
-//creates row to the selection of food
-divs.innerHTML = divs.innerHTML + '<tr onclick="submitDiet(\''+mealType+'\',\''+nam+'\',\''+calories+'\');"> <td>'+mealType+'</td> <td>'+nam+'</td> <td>'+calories+'</td> </tr>';
 
 //This adds the calorie count to the total and adds the selected food item to the dashboard panel
 const dietDiv = document.getElementById("diets");
 
 function submitDiet(type,name,calories){
+  foodTab.innerHTML = foodTab.innerHTML + "<td>"+type+"</td> <td>"+name+"</td> <td>"+calories+"</td>"; 
+  overlay.style.display = "none";
+  addDietContainer.style.display = "none";
+  totalCalories += Number(calories);
+  totalCalorieDiv.innerHTML = "Total Calorie Count " + totalCalories;
+  var dateValue = document.getElementById("date").value;
+}
+
+function submitsDiet(type,name,calories,res){
   foodTab.innerHTML = foodTab.innerHTML + "<td>"+type+"</td> <td>"+name+"</td> <td>"+calories+"</td>"; 
   overlay.style.display = "none";
   addDietContainer.style.display = "none";
@@ -285,7 +287,7 @@ function submitDiet(type,name,calories){
     type: "diet-submit",
     content: {
       date: dateValue,
-      foodID:"d7"
+      foodID:res
     }
   };
   
@@ -326,35 +328,17 @@ totalCalorieDiv.innerHTML = "Total Calorie Count " + totalCalories;
 //submits custom diet to main dashboard panel of Meals Eaten for the day
 //https://itecnote.com/tecnote/javascript-passing-dynamic-parameter-to-a-javascript-function-using-innerhtml/ reference for how to add mutiple parameters in inner html
 const extraDiv = document.getElementById("extra");
-divs.innerHTML = divs.innerHTML + '<tr onclick="submitDiet(\''+mealType+'\',\''+mealName+'\',\''+calories+'\');"> <td>'+mealType+'</td> <td>'+mealName+'</td> <td>'+calories+'</td> </tr>';
-foodTab.innerHTML = foodTab.innerHTML + "<td>"+mealType+"</td> <td>"+mealName+"</td> <td>"+calories+"</td>"; 
+//divs.innerHTML = divs.innerHTML + '<tr onclick="submitDiet(\''+mealType+'\',\''+mealName+'\',\''+calories+'\');"> <td>'+mealType+'</td> <td>'+mealName+'</td> <td>'+calories+'</td> </tr>';
+//foodTab.innerHTML = foodTab.innerHTML + "<td>"+mealType+"</td> <td>"+mealName+"</td> <td>"+calories+"</td>"; 
 
 var dateValue = document.getElementById("date").value;
-
-//submitting the custom food to the backend 
-//submitting diet client side
-let dataa = {
-  type: "diet-submit",
-  content: {
-    date: dateValue,
-    foodID:"d7"
-  }
-};
-
-dataRequest(dataa,responseHandler);
-
-function responseHandler(response){
-  if(response.status != 200){
-    console.log(reponse.content)
-  }
-}
 
 let data = {
   type: "food-submit",
   content: {
     name:mealName,
     calories:calories,
-    "meal-type":mealType
+    mealType:mealType
   }
 };
 
@@ -362,7 +346,9 @@ dataRequest(data,responseHandler);
 
 function responseHandler(response){
   if(response.status != 200){
-    console.log(reponse.content)
+    console.log(response.content)
+  }else{
+    divs.innerHTML = divs.innerHTML + '<tr onclick="submitsDiet(\''+mealType+'\',\''+mealName+'\',\''+calories+'\',\''+response.content.nextFoodID+'\');"> <td>'+mealType+'</td> <td>'+mealName+'</td> <td>'+calories+'</td> </tr>';
   }
 }
 
