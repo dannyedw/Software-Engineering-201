@@ -261,7 +261,7 @@ function responseHandler(response){
   else{
     for(let diet of response.content){
       console.log(diet)
-      divs.innerHTML = divs.innerHTML + '<tr onclick="submitDiet(\''+diet['mealType']+'\',\''+diet['name']+'\',\''+diet['calories']+'\');"> <td>'+diet['mealType']+'</td> <td>'+diet['nam']+'</td> <td>'+diet['calories']+'</td> </tr>';
+      divs.innerHTML = divs.innerHTML + '<tr onclick="submitDiet(\''+diet['meal-type']+'\',\''+diet['name']+'\',\''+diet['calories']+'\');"> <td>'+diet['meal-type']+'</td> <td>'+diet['name']+'</td> <td>'+diet['calories']+'</td> </tr>';
     }
   }
 }
