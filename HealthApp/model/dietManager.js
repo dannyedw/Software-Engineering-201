@@ -12,7 +12,6 @@ function dataRequest(username, content)
     {
         foodIDs = tbDiet[username][content.date];
     }
-
     
     const tbFood = database.getTable("FOOD");
     let foods = [];
@@ -20,9 +19,25 @@ function dataRequest(username, content)
     
     for (let id of foodIDs)
     {
-        let food = (id[0] === "d") ? tbFood["default"][id] : tbFood[username][id];
-        foods.push(food);
-        totalCalories += food.calories;
+        let food = null; 
+        if (id[0] === "d")
+        {
+            if (tbFood["default"][id]) food = tbFood["default"][id];
+        }
+        else
+        {
+            if (tbFood[username][id]) food = tbFood[username][id];
+        }
+
+        if (food)
+        {
+            foods.push(food);
+            totalCalories += food.calories;
+        }
+        else
+        {
+            console.log("invalid food id requested: " + id);
+        }
     }
 
     let data = {

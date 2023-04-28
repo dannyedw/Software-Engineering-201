@@ -8,14 +8,28 @@ function dataRequest(username)
     
     for (let foodID in tbFood["default"])
     {
-        data.push(tbFood["default"][foodID]);
+        let food = tbFood["default"][foodID];
+        let foodData = {
+            foodID: foodID,
+            mealType: food.mealType,
+            name: food.name,
+            calories: food.calories
+        }
+        data.push(foodData);
     }
 
     if (tbFood[username])
     {
         for (let foodID in tbFood[username])
         {
-            data.push(tbFood[username][foodID]);
+            let food = tbFood[username][foodID];
+            let foodData = {
+                foodID: foodID,
+                mealType: food.mealType,
+                name: food.name,
+                calories: food.calories
+            }
+            data.push(foodData);
         }
     }
 
@@ -26,12 +40,12 @@ function dataRequest(username)
 
 function dataSubmit(username, content)
 {
-    if (!content["meal-type"]) return { status: 400, content: "Missing required data - meal-type" };
+    if (!content.mealType) return { status: 400, content: "Missing required data - mealType" };
     if (!content.name) return { status: 400, content: "Missing required data - name" };
     if (!content.calories) return { status: 400, content: "Missing required data - calories" };
 
     let food = {
-        "meal-type": content["meal-type"],
+        mealType: content.mealType,
         name: content.name,
         calories: content.calories
     };

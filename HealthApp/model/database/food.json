@@ -1,29 +1,29 @@
 {
     "default": {
         "d0": {
-            "meal-type": "Lunch",
+            "mealType": "Lunch",
             "name": "CheeseBurger",
             "calories": 450
         },
         "d1": {
-            "meal-type": "Dinner",
+            "mealType": "Dinner",
             "name": "Pizza",
             "calories": 700
         },
         "d2": {
-            "meal-type": "Breakfast",
+            "mealType": "Breakfast",
             "name": "Cereal",
             "calories": 125
         },
         "d3": {
-            "meal-type": "Dinner",
+            "mealType": "Dinner",
             "name": "Pasta",
             "calories": 220
         }
     },
     "test": {
         "0": {
-            "meal-type": "BreakFast",
+            "mealType": "BreakFast",
             "name": "pasta",
             "calories": "150"
         }
