@@ -247,6 +247,25 @@ var mealType = "Breakfast";
 var nam     = "Cereal";
 var calories = 120;
 
+let dataaa = {
+  type: "food-request",
+  content:{}
+};
+
+dataRequest(dataaa,responseHandler);
+
+function responseHandler(response){
+  if(response.status != 200){
+    console.log(response.content)
+  }
+  else{
+    for(let diet of response.content){
+      console.log(diet)
+      divs.innerHTML = divs.innerHTML + '<tr onclick="submitDiet(\''+diet['mealType']+'\',\''+diet['name']+'\',\''+diet['calories']+'\');"> <td>'+diet['mealType']+'</td> <td>'+diet['nam']+'</td> <td>'+diet['calories']+'</td> </tr>';
+    }
+  }
+}
+
 //creates row to the selection of food
 divs.innerHTML = divs.innerHTML + '<tr onclick="submitDiet(\''+mealType+'\',\''+nam+'\',\''+calories+'\');"> <td>'+mealType+'</td> <td>'+nam+'</td> <td>'+calories+'</td> </tr>';
 
@@ -262,23 +281,21 @@ function submitDiet(type,name,calories){
   var dateValue = document.getElementById("date").value;
 
   //submitting diet client side
-  // let data = {
-  //   type: "diet-submit",
-  //   content: {
-  //     date: dateValue,
-  //     type: type,
-  //     name: name,
-  //     calories: calories
-  //   }
-  // };
+  let data = {
+    type: "diet-submit",
+    content: {
+      date: dateValue,
+      foodID:"d7"
+    }
+  };
   
-  // dataRequest(data,responseHandler);
+  dataRequest(data,responseHandler);
   
-  // function responseHandler(response){
-  //   if(response.status != 200){
-  //     console.log(reponse.content)
-  //   }
-  // }
+  function responseHandler(response){
+    if(response.status != 200){
+      console.log(reponse.content)
+    }
+  }
 
 }
 
@@ -314,23 +331,42 @@ foodTab.innerHTML = foodTab.innerHTML + "<td>"+mealType+"</td> <td>"+mealName+"<
 
 var dateValue = document.getElementById("date").value;
 
-// let data = {
-//   type: "diet-submit",
-//   content: {
-//     date: dateValue,
-//     type: mealType,
-//     name: mealName,
-//     calories: calories
-//   }
-// };
+//submitting the custom food to the backend 
+//submitting diet client side
+let dataa = {
+  type: "diet-submit",
+  content: {
+    date: dateValue,
+    foodID:"d7"
+  }
+};
 
-// dataRequest(data,responseHandler);
+dataRequest(dataa,responseHandler);
 
-// function responseHandler(response){
-//   if(response.status != 200){
-//     console.log(reponse.content)
-//   }
-// }
+function responseHandler(response){
+  if(response.status != 200){
+    console.log(reponse.content)
+  }
+}
+
+let data = {
+  type: "food-submit",
+  content: {
+    name:mealName,
+    calories:calories,
+    "meal-type":mealType
+  }
+};
+
+dataRequest(data,responseHandler);
+
+function responseHandler(response){
+  if(response.status != 200){
+    console.log(reponse.content)
+  }
+}
+
+
 })
 
 ////Goal Section
