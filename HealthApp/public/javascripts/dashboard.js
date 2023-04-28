@@ -253,6 +253,7 @@ mainDate.addEventListener("change", (event) => {
 				removeDietButton.setAttribute("value", "Delete");
 				removeDietButton.setAttribute("name", "deleteDietButton");
 				removeDietButton.className = "deleteDietButton";
+				removeDietButton.addEventListener("click",removediet())
 				
 				removeDietButtonContainer.appendChild(removeDietButton);
 			}
@@ -337,7 +338,7 @@ function submitsDiet(type, name, calories, res) {
 
 	function responseHandler(response) {
 		if (response.status != 200) {
-			console.log(reponse.content)
+			console.log(response.content)
 		}
 	}
 
@@ -392,6 +393,42 @@ dataForms.addEventListener('submit', (e) => {
 
 
 })
+
+//// these two functions are for removing the food and exercise from the backend
+
+// function removediet(foodID){
+// 	let data = {
+// 		type: "foodID-submit",
+// 		content: {
+// 			foodID:foodID
+// 		}
+// 	};
+
+// 	dataRequest(data, responseHandler);
+
+// 	function responseHandler(response) {
+// 		if (response.status != 200) {
+// 			console.log(response.content)
+// 		} 
+// 	}
+// }
+// function removeExercise(exerciseID){
+// 	let data = {
+// 		type: "exerciseID-submit",
+// 		content: {
+// 			exerciseID:exerciseID
+// 		}
+// 	};
+
+// 	dataRequest(data, responseHandler);
+
+// 	function responseHandler(response) {
+// 		if (response.status != 200) {
+// 			console.log(response.content)
+// 		} 
+// 	}
+// }
+
 
 ////Goal Section
 const goalSelect = document.getElementById("goalType");

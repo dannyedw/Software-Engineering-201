@@ -41,6 +41,11 @@
             "mealType": "BreakFast",
             "name": "pasta",
             "calories": "10000"
+        },
+        "5": {
+            "mealType": "Dinner",
+            "name": "pasta",
+            "calories": "150"
         }
     }
 }
