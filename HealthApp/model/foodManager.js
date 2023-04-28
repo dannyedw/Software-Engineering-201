@@ -53,10 +53,11 @@ function dataSubmit(username, content)
 
     let table = database.getTable("FOOD");
 
+    let nextFoodID;
     if (table[username])
     {
         let keys = Object.keys(table[username]);
-        let nextFoodID = parseInt(keys[keys.length - 1]) + 1;
+        nextFoodID = parseInt(keys[keys.length - 1]) + 1;
         table[username][nextFoodID].push(food);
     }
     else
@@ -64,13 +65,16 @@ function dataSubmit(username, content)
         table[username] = {
             "0": food
         };
+        nextFoodID = "0";
     }
 
     database.overwriteTable("FOOD", table);
 
     let message = "Successfully submitted food";
     console.log(message);
-    return { status: 200, content: message };
+    return { status: 200, content: {
+        nextFoodID: nextFoodID
+    }};
 }
 
 
