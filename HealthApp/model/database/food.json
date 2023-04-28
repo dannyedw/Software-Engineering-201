@@ -3,22 +3,22 @@
         "d0": {
             "mealType": "Lunch",
             "name": "CheeseBurger",
-            "calories": 450
+            "calories": "450"
         },
         "d1": {
             "mealType": "Dinner",
             "name": "Pizza",
-            "calories": 700
+            "calories": "700"
         },
         "d2": {
             "mealType": "Breakfast",
             "name": "Cereal",
-            "calories": 125
+            "calories": "125"
         },
         "d3": {
             "mealType": "Dinner",
             "name": "Pasta",
-            "calories": 220
+            "calories": "220"
         }
     },
     "test": {
@@ -26,6 +26,11 @@
             "mealType": "BreakFast",
             "name": "pasta",
             "calories": "150"
+        },
+        "1": {
+            "mealType": "BreakFast",
+            "name": "cake",
+            "calories": "rake"
         }
     }
 }

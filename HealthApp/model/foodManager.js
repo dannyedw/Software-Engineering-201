@@ -50,15 +50,15 @@ function dataSubmit(username, content)
         calories: content.calories
     };
 
-
+    
     let table = database.getTable("FOOD");
-
+    
     let nextFoodID;
     if (table[username])
     {
         let keys = Object.keys(table[username]);
         nextFoodID = parseInt(keys[keys.length - 1]) + 1;
-        table[username][nextFoodID].push(food);
+        table[username][nextFoodID] = food;
     }
     else
     {
@@ -67,7 +67,7 @@ function dataSubmit(username, content)
         };
         nextFoodID = "0";
     }
-
+    
     database.overwriteTable("FOOD", table);
 
     let message = "Successfully submitted food";
