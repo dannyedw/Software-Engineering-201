@@ -32,7 +32,7 @@ function dataRequest(username, content)
         if (food)
         {
             foods.push(food);
-            totalCalories += food.calories;
+            totalCalories += parseInt(food.calories);
         }
         else
         {
