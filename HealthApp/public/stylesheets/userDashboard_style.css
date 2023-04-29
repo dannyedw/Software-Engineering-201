@@ -106,7 +106,7 @@
 {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     margin-top: 28px;
 }
 
@@ -114,13 +114,18 @@
 {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     margin-top: 28px;
 }
 
 .deleteDietButton
 {
-   margin-left: 5px;
+   margin: 5px 5px;
+}
+
+.deleteExerciseButton
+{
+    margin: 5px 5px;
 }
 
 #dietButtonCenter
@@ -182,6 +187,7 @@
     border: 0px solid #0793f8;
     border-style: groove;
     border-radius: 12px;
+    box-shadow: 1px 1px 10px 3px;
     text-align: center;
 
     background-color: #FFFFFF;
@@ -210,6 +216,7 @@
     border: 0px solid #0793f8;
     border-style: groove;
     border-radius: 12px;
+    box-shadow: 1px 1px 10px 3px;
     text-align: center;
 
     width: 325px;

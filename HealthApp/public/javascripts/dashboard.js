@@ -35,7 +35,7 @@ document.getElementById("addCustomDiet").addEventListener("click", function () {
 })
 
 
-//add a anonymas function to each exit button to hide the popup
+//add a anonymous function to each exit button to hide the popup
 document.getElementById("exitButtonExercise").addEventListener("click", function () {
 	overlay.style.display = "none";
 	addExerciseContainer.style.display = "none";
@@ -64,6 +64,20 @@ document.getElementById("backToAddDiet").addEventListener("click", function () {
 	addCustomDietsContainer.style.display = "none";
 	addDietContainer.style.display = "block";
 })
+
+function deleteRow(increment, isFoodTable) 
+{
+	console.log(increment);
+	Boolean(isFoodTable);
+	if (isFoodTable)
+	{
+		document.getElementById("foodTable").deleteRow(increment+1);
+	}
+	else
+	{
+		document.getElementById("exerciseTable").deleteRow(increment+1);
+	}
+}
 
 
 // this is the exercise section of code //
@@ -110,16 +124,25 @@ exerciseSelect.addEventListener("change", (event) => {
 
 	//When 'Add Exercise' button is clicked, remove button is added next to exercise value
 	let popupAddExButt = document.getElementById("adde");
+	let lastRow;
 	popupAddExButt.addEventListener("click", event =>
 	{
 		let removeExerciseButton = document.createElement("input");
 		removeExerciseButton.setAttribute("type", "button");
 		removeExerciseButton.setAttribute("value", "Delete");
 		removeExerciseButton.setAttribute("name", "deleteDietButton");
-		removeExerciseButton.className = "deleteDietButton";
-
+		removeExerciseButton.className = "deleteExerciseButton";
+	
+		// //Reference for stripping all non-numeric characters: https://stackoverflow.com/questions/1862130/strip-all-non-numeric-characters-from-string-in-javascript
+		removeExerciseButton.onclick = function(){deleteRow(lastRow-1, 0)};
+		removeExerciseButton.addEventListener("click", event =>
+		{
+			event.target.remove();
+		});
 		removeExerciseButtonContainer.appendChild(removeExerciseButton);
+		lastRow = exerciseTable.children.length;
 	});
+
 });
 
 //Retrieving container for exercise remove buttons 
@@ -211,17 +234,28 @@ mainDate.addEventListener("change", (event) => {
 			
 			//Clear any exercise values from previous date
 			removeExerciseButtonContainer.innerHTML = "";
+			let increment = 0;
 			for (let ex of response.content) {
 				const selectedExercise = document.getElementById("exercises").value;
-				exerciseTable.innerHTML = exerciseTable.innerHTML + "<td>" + ex["set"] + "</td> <td>" + ex["name"] + "</td> <td>" + ex["time"] + "</td> <td>" + ex["amount"] + "</td>";
+				exerciseTable.innerHTML += `<tr id='exRow${increment}'><td>${ex["set"]}</td> <td>${ex["name"]}</td> <td>${ex["time"]}</td> <td>${ex["amount"]}</td></tr>`;
 				
 				let removeExerciseButton = document.createElement("input");
 				removeExerciseButton.setAttribute("type", "button");
 				removeExerciseButton.setAttribute("value", "Delete");
-				removeExerciseButton.setAttribute("name", "deleteDietButton");
-				removeExerciseButton.className = "deleteDietButton";
+				removeExerciseButton.setAttribute("name", "deleteExerciseButton");
+				removeExerciseButton.className = "deleteExerciseButton";
 
+				let id = document.getElementById(`exRow${increment}`).id;
+				
+				//Reference for stripping all non-numeric characters: https://stackoverflow.com/questions/1862130/strip-all-non-numeric-characters-from-string-in-javascript
+				removeExerciseButton.onclick = function(){deleteRow(parseInt(id.replace(/\D/g, '')), 0)};
+				removeExerciseButton.addEventListener("click", event =>
+				{
+					event.target.remove();
+				});
+				
 				removeExerciseButtonContainer.appendChild(removeExerciseButton);
+				increment++;
 			}
 		}
 	}
@@ -241,10 +275,11 @@ mainDate.addEventListener("change", (event) => {
 
 			//Clear any diet values from previous date
 			removeDietButtonContainer.innerHTML = "";
+			let increment = 0;
 			for (let diet of response.content.foods) {
 				var foodTab = document.getElementById("foodTable");
 				//"<td><input type='button' id='deleteDietButton' name='deleteDietButton' placeholder='Delete' value='Delete'></td>"
-				foodTab.innerHTML += "<td>" + diet["mealType"] + "</td> <td>" + diet["name"] + "</td> <td>" + diet["calories"] + "</td>";
+				foodTab.innerHTML += `<tr id='dtRow${increment}'><td>${diet["mealType"]}</td> <td>${diet["name"]}</td> <td>${diet["calories"]}</td></tr>`;
 				
 				//creating a button equivalent of: <input type='button' value='Delete' name='deleteDietButton' class='deleteDietButton'>
 				//then adding to container next to the table with diet values
@@ -253,8 +288,19 @@ mainDate.addEventListener("change", (event) => {
 				removeDietButton.setAttribute("value", "Delete");
 				removeDietButton.setAttribute("name", "deleteDietButton");
 				removeDietButton.className = "deleteDietButton";
+				let id = document.getElementById(`dtRow${increment}`).id;
+				
+				//Reference for stripping all non-numeric characters: https://stackoverflow.com/questions/1862130/strip-all-non-numeric-characters-from-string-in-javascript
+				removeDietButton.onclick = function(){deleteRow(parseInt(id.replace(/\D/g, '')), 1)};
+				removeDietButton.addEventListener("click", event =>
+				{
+					event.target.remove();
+				});
 				
 				removeDietButtonContainer.appendChild(removeDietButton);
+				increment++;
+				// alert(id.replace(/\D/g, ''));
+
 			}
 			totalCalories = parseInt(response.content.totalCalories);
 			totalCalorieDiv.innerHTML = "Total Calorie Count " + totalCalories;
