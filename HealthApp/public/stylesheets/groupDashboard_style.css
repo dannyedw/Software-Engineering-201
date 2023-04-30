@@ -1,79 +1,127 @@
 #createGroupButton
 {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 650px;
-    font-size: 30px;
-    border-radius: 16px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 650px;
+  font-size: 30px;
+  border-radius: 16px;
 }
 
-.overlay {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,0.5);
-    z-index: 1;
-  }
+.overlay 
+{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 1;
+}
   
-  .overlayHidden {
-      display:none;
-  }
+.overlayHidden {
+    display:none;
+}
   
-  .popup {
-    margin:auto;
-    width: 500px;
-    border-top: 500px;
+.popup {
+  margin:auto;
+  width: 500px;
+  border-top: 500px;
+
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background-color: white;    
+  /* text-align: center; */
+  padding: 10px;
+}
+
+#addGroupContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+  border: 5px solid #0793f8;
+  border-style: groove;
+  border-radius: 16px;
+
+  background-color: #B9DDE0;
+
+  width: 1000px;
+  height: 400px;
+  box-sizing: border-box;
   
-    position: fixed;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  
-    background-color: white;    
-    text-align: center;
-    padding: 10px;
-  }
+  position: fixed;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -25%);
 
-  #addGroupContainer{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+  padding-top: 10px;
+  padding-bottom: 50px;
+}
 
-    border: 5px solid #0793f8;
-    border-style: groove;
-    border-radius: 16px;
+#gcHeader
+{
+  text-align: center;
+}
 
-    background-color: #B9DDE0;
+#exitButtonCreateGroup
+{
+  float: right;
+  background-color: white;
+  color: black;
+  font-weight: bold;
+}
 
-    width: 1000px;
-    height: 280px;
-    box-sizing: border-box;
-    
-    position: fixed;
-    top: 35%;
-    left: 50%;
-    transform: translate(-50%, -25%);
+#cgContainer
+{
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+  margin-left: 125px;
+}
 
-    padding-top: 10px;
-    padding-bottom: 50px;
-  }
-  #groupName{
-    margin-right: 400px;
-  }
-  #groupDescription{
-    margin-right: 300px;
-    margin-left: 110px ;
-  }
-  #memberEmail{
-    margin-right: auto;
-    margin-left: 150px;
-    
-  }
-  #addMemberEmail{
-    margin-left: auto;
-    margin-right: 500px;
-  }
+#groupName
+{
+  margin: 10px 0;
+}
+
+#descriptionHeader
+{
+  margin: 0px 0;
+}
+
+#groupDescription
+{
+  /* margin: 10px 0; */
+}
+
+#memberEmail
+{
+  margin: 10px 0;
+}
+
+#addMemberEmail
+{
+  margin-left: 5px;
+}
+
+#email-AddButtContainer
+{
+  display: flex;
+  align-items: baseline;
+}
+
+#submitGroupForm
+{
+  margin: 0;
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  width: 10%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5em;
+}

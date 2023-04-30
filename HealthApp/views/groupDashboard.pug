@@ -7,15 +7,23 @@ block header
     title My Group Dashboard
    
 block content
- button#createGroupButton(type='button') Create Group
+  button#createGroupButton(type='button') Create Group
   .overlay(style='display:none;')
-   #addGroupContainer.popup(style='display:none;')
-     p Group Creation Form
+    #addGroupContainer.popup(style='display:none;')
+      button#exitButtonCreateGroup(type='button') X
+      h1#gcHeader Group Creation Form
       form#groupCreationForm(onsubmit="return false;")
-        input#groupName(type='text' name='group-name' placeholder='Group Name' required='')
-        input#groupDescription(type='text' name='group-Description' placeholder='Group Description' required='' size="50px")
-        <div id="memberEmails">
-        </div> 
+        div#cgContainer
+          input#groupName(type='text' name='group-name' placeholder='Group Name' required='')
+          <h2 id="descriptionHeader"><label for="description">Description:</label></h2>
+          textarea#groupDescription(name="description", rows="4", cols="50") 
+          //- input#groupDescription(type='text' name='group-Description' placeholder='Group Description' required='' size="50px")
+          div#email-AddButtContainer
+            input#memberEmail(type='text' name='members-email' placeholder='Member Email' required='' size='30px')
+            button#addMemberEmail(type='button' name='members-email' placeholder='Member Email') Add
+          button#submitGroupForm(type='button' name='submit' placeholder='submit') Submit
+        <div id="memberEmails"></div>
+       
 
 
 
