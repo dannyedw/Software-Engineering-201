@@ -47,4 +47,18 @@ function removeMail(m){
     }
 }
 
+document.getElementById("submitGroupForm").addEventListener("click",function(){
+    var groupName = document.getElementById("groupName").value;
+    var description = document.getElementById("groupDescription").value;
+    console.log(groupName);
+    console.log(description);
+    console.log(emails);
+
+    overlay.style.display = "none";
+	addGroupContainer.style.display = "none";
+    memberEmails.innerHTML = "";
+    document.getElementById("groupName").value        = "";
+    document.getElementById("groupDescription").value = "";
+})
+
 
