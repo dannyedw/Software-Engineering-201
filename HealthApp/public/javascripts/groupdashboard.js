@@ -10,23 +10,41 @@ const overlay = document.querySelector('.overlay');
 const addGroupContainer = document.querySelector('#addGroupContainer');
 
 
-// member emails section
-// const memberEmails = document.getElementById("memberEmails")
-// memberEmails.innerHTML = "<input type='text' id= 'memberEmail' name='members-email' placeholder='Member Email' required='' size='30px'>"
+//member emails section
+const memberEmails = document.getElementById("memberEmails")
 
-// document.getElementById("addMemberEmail").addEventListener("click",addMemberEmail);
-// emails = [];
-// function addMemberEmail(){
-//     const email = document.getElementById("memberEmail").value;
-//     emails.push(email);
-//     //memberEmails.innerHTML = "";
-//     for(mail in emails){
-//         memberEmails.innerHTML += "<br>"+emails[mail]+"";
-//     }
-//     //memberEmails.innerHTML = "<input type='text' id= 'memberEmail' name='members-email' placeholder='Member Email' required='' size='30px'><button type='button' id='addMemberEmail'>ADD</button>"
-// }
+
+document.getElementById("addMemberEmail").addEventListener("click",addMemberEmail);
+emails = [];
+function addMemberEmail(){
+    const email = document.getElementById("memberEmail").value;
+    emails.push(email);
+    memberEmails.innerHTML = "";
+    for(mail in emails){
+        memberEmails.innerHTML += "<br>"+emails[mail]+"<button id=deleteEmail onclick=removeMail("+mail+") type=button>remove</button>";
+    }
+    document.getElementById("memberEmail").value = "";
+}
 
 document.getElementById("exitButtonCreateGroup").addEventListener("click",function(){
     overlay.style.display = "none";
 	addGroupContainer.style.display = "none";
 })
+function removeMail(m){
+    if(emails.length == 1){
+        emails.shift();
+        memberEmails.innerHTML = "";
+    }else{
+        var temp = emails[m];
+        emails[m] = emails[0];
+        emails[0] = temp;
+        emails.shift();
+        console.log(emails)
+        memberEmails.innerHTML = "";
+        for(mail in emails){
+            memberEmails.innerHTML += "<br>"+emails[mail]+"<button id=deleteEmail type=button onclick=removeMail("+mail+")>remove</button>";
+        }
+    }
+}
+
+

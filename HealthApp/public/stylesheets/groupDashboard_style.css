@@ -114,6 +114,13 @@
   margin-left: 5px;
 }
 
+#memberEmails{
+    overflow: auto;
+    width: 200px;
+    height: 100px;
+    border-color: aqua;
+}
+
 #email-AddButtContainer
 {
   display: flex;
