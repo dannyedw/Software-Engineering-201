@@ -21,7 +21,7 @@ function addMemberEmail(){
     emails.push(email);
     memberEmails.innerHTML = "";
     for(mail in emails){
-        memberEmails.innerHTML += "<br>"+emails[mail]+"<button id=deleteEmail type=button>remove</button>";
+        memberEmails.innerHTML += "<br>"+emails[mail]+"<button id=deleteEmail onclick=removeMail("+mail+") type=button>remove</button>";
     }
     document.getElementById("memberEmail").value = "";
 }
@@ -30,15 +30,21 @@ document.getElementById("exitButtonCreateGroup").addEventListener("click",functi
     overlay.style.display = "none";
 	addGroupContainer.style.display = "none";
 })
-document.getElementById("deleteEmail").addEventListener("click",function(){
-    memberEmails.innerHTML = "";
-    var temp = emails[removeMail];
-    emails[removeMail] = emails[0];
-    emails[0] = temp;
-    emails.shift();
-    for(mail in emails){
-        memberEmails.innerHTML += "<br>"+emails[mail]+"<button id=deleteEmail type=button onclick="+deleteEmail()+">delete</button>";
+function removeMail(m){
+    if(emails.length == 1){
+        emails.shift();
+        memberEmails.innerHTML = "";
+    }else{
+        var temp = emails[m];
+        emails[m] = emails[0];
+        emails[0] = temp;
+        emails.shift();
+        console.log(emails)
+        memberEmails.innerHTML = "";
+        for(mail in emails){
+            memberEmails.innerHTML += "<br>"+emails[mail]+"<button id=deleteEmail type=button onclick=removeMail("+mail+")>remove</button>";
+        }
     }
-})
+}
 
 
