@@ -65,6 +65,7 @@ document.getElementById("backToAddDiet").addEventListener("click", function () {
 	addDietContainer.style.display = "block";
 })
 
+//Reference for deleteRow function: https://www.w3schools.com/jsref/met_table_deleterow.asp
 function deleteRow(r, isFoodTable) 
 {	
 	var i = r.parentNode.parentNode.rowIndex;
