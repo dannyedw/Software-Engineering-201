@@ -25,3 +25,8 @@ const addGroupContainer = document.querySelector('#addGroupContainer');
 //     }
 //     //memberEmails.innerHTML = "<input type='text' id= 'memberEmail' name='members-email' placeholder='Member Email' required='' size='30px'><button type='button' id='addMemberEmail'>ADD</button>"
 // }
+
+document.getElementById("exitButtonCreateGroup").addEventListener("click",function(){
+    overlay.style.display = "none";
+	addGroupContainer.style.display = "none";
+})
