@@ -1,0 +1,79 @@
+#createGroupButton
+{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 650px;
+    font-size: 30px;
+    border-radius: 16px;
+}
+
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1;
+  }
+  
+  .overlayHidden {
+      display:none;
+  }
+  
+  .popup {
+    margin:auto;
+    width: 500px;
+    border-top: 500px;
+  
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  
+    background-color: white;    
+    text-align: center;
+    padding: 10px;
+  }
+
+  #addGroupContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    border: 5px solid #0793f8;
+    border-style: groove;
+    border-radius: 16px;
+
+    background-color: #B9DDE0;
+
+    width: 1000px;
+    height: 280px;
+    box-sizing: border-box;
+    
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -25%);
+
+    padding-top: 10px;
+    padding-bottom: 50px;
+  }
+  #groupName{
+    margin-right: 400px;
+  }
+  #groupDescription{
+    margin-right: 300px;
+    margin-left: 110px ;
+  }
+  #memberEmail{
+    margin-right: auto;
+    margin-left: 150px;
+    
+  }
+  #addMemberEmail{
+    margin-left: auto;
+    margin-right: 500px;
+  }

@@ -1,12 +1,25 @@
 extends layout
 
 block header 
-    link(rel='stylesheet' href='stylesheets/groupDashboard.css')
+    link(rel='stylesheet' href='stylesheets/groupDashboard_style.css')
     script(src='javascripts/groupdashboard.js', defer)
     script(src='javascripts/dataInteraction.js')
     title My Group Dashboard
    
 block content
- p hello
+ button#createGroupButton(type='button') Create Group
+  .overlay(style='display:none;')
+   #addGroupContainer.popup(style='display:none;')
+     p Group Creation Form
+      form#groupCreationForm(onsubmit="return false;")
+        input#groupName(type='text' name='group-name' placeholder='Group Name' required='')
+        input#groupDescription(type='text' name='group-Description' placeholder='Group Description' required='' size="50px")
+        <div id="memberEmails">
+        </div> 
+
+
+
+ 
+   
     
   
