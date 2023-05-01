@@ -3,6 +3,11 @@ function groupCreation(){
     overlay.style.display = "block";
 	addGroupContainer.style.display = "block";
 }
+// exits group creation  pop up
+document.getElementById("exitButtonCreateGroup").addEventListener("click",function(){
+    overlay.style.display = "none";
+	addGroupContainer.style.display = "none";
+})
 
 document.getElementById('createGroupButton').addEventListener("click",groupCreation);
 
@@ -13,7 +18,7 @@ const addGroupContainer = document.querySelector('#addGroupContainer');
 //member emails section
 const memberEmails = document.getElementById("memberEmails")
 
-
+// adds emails to the list of emails
 document.getElementById("addMemberEmail").addEventListener("click",addMemberEmail);
 emails = [];
 function addMemberEmail(){
@@ -25,11 +30,7 @@ function addMemberEmail(){
     }
     document.getElementById("memberEmail").value = "";
 }
-
-document.getElementById("exitButtonCreateGroup").addEventListener("click",function(){
-    overlay.style.display = "none";
-	addGroupContainer.style.display = "none";
-})
+// removes the email
 function removeMail(m){
     if(emails.length == 1){
         emails.shift();
@@ -46,7 +47,7 @@ function removeMail(m){
         }
     }
 }
-
+//submits group information to the backend
 document.getElementById("submitGroupForm").addEventListener("click",function(){
     var groupName = document.getElementById("groupName").value;
     var description = document.getElementById("groupDescription").value;
@@ -59,6 +60,25 @@ document.getElementById("submitGroupForm").addEventListener("click",function(){
     memberEmails.innerHTML = "";
     document.getElementById("groupName").value        = "";
     document.getElementById("groupDescription").value = "";
+
+    //form submission to backend
+    // let data = {
+	// 	type: "group-submit",
+	// 	content: {
+    //         groupname:groupName,
+    //         description:description,
+    //         emails:emails
+	// 	}
+	// };
+
+	// dataRequest(data, responseHandler);
+
+	// function responseHandler(response) {
+	// 	if (response.status != 200) {
+	// 		console.log(response.content)
+	// 	}
+	// }
+
 })
 
 

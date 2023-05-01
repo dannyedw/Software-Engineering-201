@@ -65,14 +65,21 @@ document.getElementById("backToAddDiet").addEventListener("click", function () {
 	addDietContainer.style.display = "block";
 })
 
+// this is the diet section of code //
+//total calories and the div section for total calorie display area
+var totalCalories = 0;
+var totalCalorieDiv = document.getElementById("calorieTotal");
+
 //Reference for deleteRow function: https://www.w3schools.com/jsref/met_table_deleterow.asp
-function deleteRow(r, isFoodTable) 
+function deleteRow(r, isFoodTable,calories) 
 {	
 	var i = r.parentNode.parentNode.rowIndex;
 	Boolean(isFoodTable);
 	if (isFoodTable)
 	{
 		document.getElementById("foodTable").deleteRow(i);
+		totalCalories -= parseInt(calories);
+		totalCalorieDiv.innerHTML = "Total Calorie Count " + totalCalories;
 	}
 	else
 	{
@@ -249,7 +256,7 @@ mainDate.addEventListener("change", (event) => {
 			for (let ex of response.content) {
 				const selectedExercise = document.getElementById("exercises").value;
 				exerciseTable.innerHTML += `<td>${ex["set"]}</td> <td>${ex["name"]}</td> <td>${ex["time"]}</td> <td>${ex["amount"]}</td> 
-				<td><input type='button' value='Delete' name='deleteExerciseButton' class='deleteExerciseButton' onclick='deleteRow(this, 0)'></td>`;
+				<td><input type='button' value='Delete' name='deleteExerciseButton' class='deleteExerciseButton' onclick='deleteRow(this, 0,0)'></td>`;
 				
 				// let removeExerciseButton = document.createElement("input");
 				// removeExerciseButton.setAttribute("type", "button");
@@ -271,6 +278,7 @@ mainDate.addEventListener("change", (event) => {
 			}
 		}
 	}
+	
 	let dietData = {
 		type: "diet-request",
 		content: {
@@ -292,7 +300,7 @@ mainDate.addEventListener("change", (event) => {
 				var foodTab = document.getElementById("foodTable");
 				//"<td><input type='button' id='deleteDietButton' name='deleteDietButton' placeholder='Delete' value='Delete'></td>"
 				foodTab.innerHTML += `<td>${diet["mealType"]}</td> <td>${diet["name"]}</td> <td>${diet["calories"]}</td>
-				<td><input type='button' value='Delete' name='deleteDietButton' class='deleteDietButton' onclick='deleteRow(this, 1)'></td>`;
+				<td><input type='button' value='Delete' name='deleteDietButton' class='deleteDietButton' onclick='deleteRow(this, 1,`+diet["calories"]+`)'></td>`;
 				
 				//creating a button equivalent of: <input type='button' value='Delete' name='deleteDietButton' class='deleteDietButton'>
 				//then adding to container next to the table with diet values
@@ -321,10 +329,7 @@ mainDate.addEventListener("change", (event) => {
 	}
 })
 
-// this is the diet section of code //
-//total calories and the div section for total calorie display area
-var totalCalories = 0;
-var totalCalorieDiv = document.getElementById("calorieTotal");
+
 
 // food table of outputted results in the dashboard panel with headers for table
 var foodTab = document.getElementById("foodTable");
