@@ -496,6 +496,7 @@ const personalGoals = document.getElementById("personalGoals");
 
 //https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date- reference - For the date min and max value 
 //https://www.w3resource.com/javascript-exercises/javascript-date-exercise-2.php- Reference - helping form the yyyy-mm-dd format
+
 const CurrentDate = new Date();
 var year = CurrentDate.getFullYear();
 var month = CurrentDate.getMonth() + 1;

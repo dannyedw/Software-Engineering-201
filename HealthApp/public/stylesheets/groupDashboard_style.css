@@ -27,8 +27,9 @@
   z-index: 1;
 }
   
-.overlayHidden {
-    display:none;
+.overlayHidden 
+{
+  display:none;
 }
   
 .popup {
@@ -101,7 +102,7 @@
 
 #groupDescription
 {
-  /* margin: 10px 0; */
+  resize: none;
 }
 
 #memberEmail
@@ -114,11 +115,25 @@
   margin-left: 5px;
 }
 
-#memberEmails{
-    overflow: auto;
-    width: 200px;
-    height: 100px;
-    border-color: aqua;
+#deleteEmail
+{
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
+
+#memberEmails
+{
+  overflow: auto;
+  width: 200px;
+  height: 100px;
+  border-color: aqua;
+}
+
+#memEmail-removeMemButt-Container
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #email-AddButtContainer

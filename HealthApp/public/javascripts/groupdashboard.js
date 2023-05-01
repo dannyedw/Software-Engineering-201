@@ -21,7 +21,7 @@ function addMemberEmail(){
     emails.push(email);
     memberEmails.innerHTML = "";
     for(mail in emails){
-        memberEmails.innerHTML += "<br>"+emails[mail]+"<button id=deleteEmail onclick=removeMail("+mail+") type=button>remove</button>";
+        memberEmails.innerHTML += "<br>"+emails[mail]+"<button id=deleteEmail onclick=removeMail("+mail+") type=button>Remove</button>";
     }
     document.getElementById("memberEmail").value = "";
 }
@@ -42,7 +42,7 @@ function removeMail(m){
         console.log(emails)
         memberEmails.innerHTML = "";
         for(mail in emails){
-            memberEmails.innerHTML += "<br>"+emails[mail]+"<button id=deleteEmail type=button onclick=removeMail("+mail+")>remove</button>";
+            memberEmails.innerHTML += "<br>"+emails[mail]+"<button id=deleteEmail type=button onclick=removeMail("+mail+")>Remove</button>";
         }
     }
 }
