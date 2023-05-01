@@ -23,7 +23,7 @@ router.post('/', (req, res) => {
 			req.session.user = req.body.content.username;
 			req.session.save((err) => {
 				if (err) throw err;
-				res.redirect('/userDashboard');
+				res.redirect('back');
 			});
 		});
 	}
