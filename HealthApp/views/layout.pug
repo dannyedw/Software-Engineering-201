@@ -9,31 +9,60 @@ html
     title= title
     block header
   body
+    //- #main_menu
+    //-   .company-logo
+    //-     a(href='/')
+    //-       img(src='images/company-logo.png' alt='Company logo' height='150px' width='150px')
+    //-   .inner_main_menu
+    //-     ul
+    //-       li
+    //-         a(href='/') Home
+    //-       li
+    //-         a(href='/userDashboard') My Dashboard
+    //-       li
+    //-         a(href='/groupDashboard') Group Dashboard
+    //-       li
+    //-         a(href='/about') About
+
+    //-       if USERNAME
+    //-         li
+    //-           p(style={margin:'-50px 0 0'}) #{USERNAME} 
+    //-         li 
+    //-           a(href='/logout') Log Out
+    //-       else
+    //-         li
+    //-           a(style={margin:'-50px 0 0'} href='/login') Login
+    //-         li
+    //-           a(href='/signUp') Sign up
+
+    //Reference for sidebar: https://www.w3schools.com/howto/howto_js_collapse_sidebar.asp
+    .sidebar#mySidebar
+      a.closebtn(href='javascript:void(0)' onclick='closeNav()') &times;
+      a(href='/') Home
+      a(href='/userDashboard') My Dashboard
+      a(href='/groupDashboard') Group Dashboard
+      a(href='/about') About
+
     #main_menu
+      button.openbtn(onclick='openNav()') &#x2630;
+
       .company-logo
         a(href='/')
           img(src='images/company-logo.png' alt='Company logo' height='150px' width='150px')
-      .inner_main_menu
+
+      if USERNAME
         ul
           li
-            a(href='/') Home
+            p(style={margin:'-50px 0 0'}) #{USERNAME}  
           li
-            a(href='/userDashboard') My Dashboard
+            a(href='/logout') Log Out
+      
+      else
+        ul
           li
-            a(href='/groupDashboard') Group Dashboard
+            a(style={margin:'-50px 0 0'} href='/login') Login
           li
-            a(href='/about') About
-
-          if USERNAME
-            li
-              p(style={margin:'-50px 0 0'}) #{USERNAME} 
-            li 
-              a(href='/logout') Log Out
-          else
-            li
-              a(style={margin:'-50px 0 0'} href='/login') Login
-            li
-              a(href='/signUp') Sign up 
+            a(href='/signUp') Sign up
 
     block content
     footer
@@ -43,3 +72,19 @@ html
         img(src='images/twitter-logo.png' alt='Twitter logo' height='60px' width='60px')
         img(src='images/instagram-logo.png' alt='Instagram logo' height='60px' width='60px')
       p#copyright &copy; 2023 A.S.C.E.N.D Health
+  
+  //Reference for sidebar JS: https://www.w3schools.com/howto/howto_js_collapse_sidebar.asp
+  script.
+    /* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
+    function openNav() 
+    {
+      document.getElementById("mySidebar").style.width = "250px";
+      document.getElementById("main").style.marginLeft = "250px";
+    }
+
+    /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
+    function closeNav() 
+    {
+      document.getElementById("mySidebar").style.width = "0";
+      document.getElementById("main").style.marginLeft = "0";
+    }    
