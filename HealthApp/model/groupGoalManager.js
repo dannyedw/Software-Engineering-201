@@ -61,6 +61,21 @@ function deleteGoal(content)
 //this would be triggered when the user answers the email
 function addUser(username, content)   //username is user to delete, req from data manager and mailer may be different
 {
+    if(content.groupName === null) return { status: 400, content: "Missing Group Name" };
+    if(content.goalId === null) return { status: 400, content: "Missing Goal id"};
+
+    let table = database.getTable("GROUPGOALS");
+
+    if(table[content.groupName][content.goalId].users.includes(username))
+    {
+        return { status: 400, content: "User already in goal"}
+    }
+
+    table[content.groupName][content.goalId].users.push(username);
+    table[content.groupName][content.goalId].status.push("In Progress")
+
+    database.overwriteTable("GROUPGOALS", table);
+    return { status: 200, content: "Successfully updated goal stuff"};
 
 }
 
@@ -68,13 +83,39 @@ function addUser(username, content)   //username is user to delete, req from dat
 //will be triggered when the user wants to leave the goal
 function deleteUser(username, content) //username is user to delete, req from data manager and mailer may be different
 {
+    if(content.groupName === null) return { status: 400, content: "Missing Group Name" };
+    if(content.goalId === null) return { status: 400, content: "Missing Goal id"};
 
+    let table = database.getTable("GROUPGOALS");
+
+    let userIndex = table[content.groupName][content.goalId].users.indexOf(username);
+    if(userIndex = -1) return { status: 400, content: "User not found in Goal"};
+
+    table[content.groupName][content.goalId].users.splice(userIndex, 1);
+    table[content.groupName][content.goalId].status.splice(userIndex, 1);
+
+    database.overwriteTable("GROUPGOALS", table);
+    return { status: 200, content: "Successfully updated goal stuff"};
 }
 
 //this will primarily used to update the status of each user individualy when they load up the group
 function update(username, content)
 {
+    let table = database.getTable("GROUPGOALS");
+    if(content.goalId === null) return { status: 400, content: "Missing Goal id"};
+    if(content.groupName === null) return { status: 400, content: "Missing Group Name" };
 
+    //add more of these lines for different goal atrubutes if we plan on updating more but not needed now
+    if(content.status)
+    {
+        //finds user index as this index is the same for the status array
+        let userIndex = table[content.groupName][content.goalId].users.indexOf(username);
+        if(userIndex = -1) return { status: 400, content: "User not found in Goal"};
+        table[content.groupName][content.goalId].status[userIndex] = content.status;
+    } 
+
+    database.overwriteTable("GROUPGOALS", table);
+    return { status: 200, content: "Successfully updated goal stuff"};
 }
 
 //retrives the goals that the user is present in for a specific group
@@ -108,4 +149,9 @@ function dataRequest(username,content)
     return {status: 400, content: "Group not found in Database/no goals"};  //might actualy need to make a new use entry
 }
 
-//REMEMBER TO EXPORT FUNCTIONS AND ADD TO DATA MANAGER
+exports.create = create;
+exports.deleteGoal = deleteGoal;
+exports.addUser = addUser;
+exports.deleteUser = deleteUser;
+exports.update = update;
+exports.dataRequest = dataRequest;

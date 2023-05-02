@@ -38,7 +38,6 @@ function request(username, data)
         case "group-goal-delete-user": return groupGoalsManager.deleteUser(username, data.content);
         case "group-goal-update": return groupGoalsManager.update(username, data.content);
         case "group-goal-data-request": return groupGoalsManager.dataRequest(username, data.content)
-        //continue with adding stuff
         default: return { status: 400, content: "Invalid request type" };
     }
 }
