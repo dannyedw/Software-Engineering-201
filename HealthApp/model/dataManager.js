@@ -3,7 +3,8 @@ const groupManager = require("./groupManager");
 const exerciseManager = require("./exerciseManager");
 const dietManager = require("./dietManager");
 const foodManager = require("./foodManager");
-const personalGoalsManager = require("./personalGoalsManager")
+const personalGoalsManager = require("./personalGoalsManager");
+const groupGoalsManager = require("./groupGoalManager");
 
 function request(username, data)
 {
@@ -31,6 +32,13 @@ function request(username, data)
         case "personal-goal-update": return personalGoalsManager.update(username, data.content);
         case "personal-goal-request": return personalGoalsManager.dataRequest(username, data.content);
         case "personal-goal-delete": return personalGoalsManager.deleteGoal(username, data.content);
+        case "group-goal-create": return groupGoalsManager.create(username, data.content);
+        case "group-goal-delete": return groupGoalsManager.deleteGoal(data.content);
+        case "group-goal-add-user": return groupGoalsManager.addUser(username, data.content);
+        case "group-goal-delete-user": return groupGoalsManager.deleteUser(username, data.content);
+        case "group-goal-update": return groupGoalsManager.update(username, data.content);
+        case "group-goal-data-request": return groupGoalsManager.dataRequest(username, data.content)
+        //continue with adding stuff
         default: return { status: 400, content: "Invalid request type" };
     }
 }

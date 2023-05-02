@@ -1,0 +1,15 @@
+{
+    "testGroup": {
+        "0": {
+            "users": ["test","test2"],
+            "type": "weight",
+            "startDate": "2023-04-26",
+            "endDate": "2023-07-29",
+            "status": ["In Progress", "In Progress"],
+            "extraData": [
+                "60",
+                "90"
+            ]
+        }
+    }
+}
