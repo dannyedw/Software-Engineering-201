@@ -35,9 +35,6 @@ function create(username, content)
     database.overwriteTable("PERSONALGOALS", table);
     
     return{ status: 200, content: "Successfully added exercise"};
-    //find a way to get a unique id either just incrementing it till you find a empty one or fining last element and taking key next to it
-    //also make sure ids are given to the front end so they can be used
-    
 }
 
 function update(username,content)
@@ -89,8 +86,12 @@ function dataRequest(username, content)
         }
         return { status: 200, content: data };
     }
-
-    return {status: 400, content: "User not found in Database/no goals"};  //might actualy need to make a new use entry
+    else
+    {
+        //if no goals we make a blank entry for the user and return nothing (since no goals)
+        table[username] = {};
+        return { status: 200, content: data };
+    }
 }
 
 exports.update = update;
