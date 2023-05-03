@@ -13,6 +13,8 @@ function dataRequest(username, content)
         data = table[username][content.date];
     }
 
+    let message = "Successfully requested exercise";
+    console.log(message);
     return { status: 200, content: data };
 }
 
@@ -32,18 +34,28 @@ function dataSubmit(username, content)
     };
 
     let table = database.getTable("EXERCISE");
-    if (table[username][content.date])
+    if (table[username])
     {
-        table[username][content.date].push(data);
+        if (table[username][content.date])
+        {
+            table[username][content.date].push(data);
+        }
+        else
+        {
+            table[username][content.date] = [data];
+        }
     }
     else
     {
+        table[username] = {};
         table[username][content.date] = [data];
     }
 
     database.overwriteTable("EXERCISE", table);
 
-    return { status: 200, content: "Successfully added exercise" };
+    let message = "Successfully added exercise";
+    console.log(message);
+    return { status: 200, content: message };
 }
 
 

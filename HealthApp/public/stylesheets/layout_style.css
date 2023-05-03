@@ -6,7 +6,8 @@ body
   display: flex;
   flex-direction: column;
   background-color: white;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-family: 'Open Sans';
 }
 
 /* a 
@@ -14,6 +15,125 @@ body
   color: #00B7FF;
   text-decoration: none;
 } */
+
+/* Reference for sidebar CSS: https://www.w3schools.com/howto/howto_js_collapse_sidebar.asp */
+
+/* The sidebar menu */
+.sidebar 
+{
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0;
+  left: 0;
+  background-color: #111; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+}
+
+/* The sidebar links */
+.sidebar a 
+{
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidebar a:hover 
+{
+color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidebar .closebtn 
+{
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* The button used to open the sidebar */
+.openbtn 
+{
+  font-size: 4em;
+  cursor: pointer;
+  background-color: #111;
+  /* border-radius: 16px; */
+  height: 100%;
+  color: white;
+  padding: 20px 30px;
+  border: none;
+}
+
+.openbtn:hover 
+{
+  background-color: #444;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main_menu 
+{
+  transition: margin-left .5s; /* If you want a transition effect */
+  /* padding: 20px; */
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background-color: lightblue; */
+  background: rgb(34,193,195);
+  background: linear-gradient(180deg, rgba(34,193,195,1) 0%, rgba(173,216,255,1) 100%);
+  width: 100%;
+  height: 150px;
+}
+
+#main_menu ul
+{
+  margin: 0;
+  /* padding: 50px 0 0; */
+  list-style: none;
+  text-align: right;
+}
+
+#main_menu ul li
+{
+  float: none;
+  display: inline-block;
+  line-height: 100%;
+  font-size: 3em;
+}
+
+#main_menu ul li a
+{
+  color: #262626;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: bold;
+  display: block;
+  padding: 10px 20px;
+}
+
+#main_menu ul li a:hover
+{
+  color: #7CFC00;
+  /* text-shadow: 3px 3px 3px #F5FFFA; */
+  /*Reference for outline effect for text: https://stackoverflow.com/questions/4919076/outline-effect-to-text */
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 3px 3px 3px #F5FFFA;
+}
+
+.company-logo
+{
+  position: relative;
+  left: 7.5%;
+  transform: translate(0%, 0%); 
+}
 
 .inner_main_menu
 {
@@ -93,23 +213,16 @@ body
 }
 
 /* Reference for colour gradient: https://cssgradient.io/ */
-#main_menu
+
+/* background-color: lightblue; */
+/* #main_menu
 {
   width: 100%;
   position: relative;
-  /* background-color: lightblue; */
+  
   background: rgb(34,193,195);
   background: linear-gradient(180deg, rgba(34,193,195,1) 0%, rgba(173,216,255,1) 100%);
-}
-
-.company-logo
-{
-  position: absolute;
-  left: 50%;
-  top: 0%;
-  content: "";
-  margin-left: -75px;
-}
+} */
 
 footer
 {
@@ -117,6 +230,7 @@ footer
   justify-content: space-between;
   align-items: center;
   margin-top: auto;
+  width: 100%;
   /* background-color: lightblue; */
   font-weight: bold;
   background: rgb(34,193,195);

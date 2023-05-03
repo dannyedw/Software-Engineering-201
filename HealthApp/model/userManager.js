@@ -1,5 +1,7 @@
 
 const database = require("./database");
+const emailManager = require("./emailManager");
+const crypto = require('crypto');
 
 function login(content)
 {
@@ -9,7 +11,9 @@ function login(content)
     const table = database.getTable("USER");
     if (!table[content.username]) return { status: 400, content: "Invalid username or password" };
 
-    if (content.password === table[content.username].password)
+    const hashedPassword = crypto.createHash('sha512').update(content.password).digest('hex');
+
+    if (hashedPassword === table[content.username].password)
     {
         return { status: 200, content: "Successfully logged in" };
     }
@@ -26,7 +30,8 @@ function signup(content)
         height: 0,
         weight: 0,
         bmi: 0,
-        age: 0
+        age: 0,
+        groups: []
     };
 
     let username;
@@ -53,7 +58,7 @@ function signup(content)
     if (content.bmi) userInfo.bmi = content.bmi;
     if (content.age) userInfo.age = content.age;
 
-    return addUser(username, userInfo);
+    return addPendingUser(username, userInfo);
 }
 
 function update(username, content)
@@ -76,7 +81,7 @@ function update(username, content)
 
 function dataRequest(username, content)
 {
-    if (!content.requestKeys) return { status: 400, content: "Missing required data - request keys" };
+    if (!content.requestKeys) return { status: 400, content: "Missing required data - requestKeys" };
 
     let data = {};
     const table = database.getTable("USER");
@@ -86,48 +91,76 @@ function dataRequest(username, content)
         "height",
         "weight",
         "bmi",
-        "age"
+        "age",
+        "groups"
     ];
 
     for (let key of content.requestKeys)
     {
         if (acceptedKeys.includes(key))
         {
-            try{
-                data[key] = table[username][key];
+            if (table[username])
+            {
+                if (table[username][key]) data[key] = table[username][key];
+                else data[key] = "Invalid key: " + key;
             }
-            catch{
-                data[key] = "INVALID KEY";
-            }
+            else data[key] = "Invalid username: " + username;
         }
         else
         {
-            data[key] = "INVALID KEY";
+            data[key] = "Invald key: " + key;
         }
     }
 
     return { status: 200, content: data };
 }
 
-
-function addUser(username, userInfo)
+function addPendingUser(username, userInfo)
 {
-    let table = database.getTable("USER");
+    const userTable = database.getTable("USER");
+    let pendingUserTable = database.getTable("PENDINGUSER");
 
-    if (table[username]) return { status: 400, content: "Username already taken" };
+    if (userTable[username] || pendingUserTable[username]) return { status: 400, content: "Username already taken" };
 
-    for (let k in table)
+    for (let k in userTable)
     {
-        if (table[k].email === userInfo.email) return { status: 400, content: "Email already taken" };
+        if (userTable[k].email === userInfo.email) return { status: 400, content: "Email already taken" };
+    }
+
+    for (let k in pendingUserTable)
+    {
+        if (pendingUserTable[k].email === userInfo.email) return { status: 400, content: "Email already taken" };
     }
     
-    table[username] = userInfo;
-    database.overwriteTable("USER", table);
+    userInfo.password = crypto.createHash('sha512').update(userInfo.password).digest('hex');
 
-    return { status: 201, content: "User successfully added" };
+    pendingUserTable[username] = userInfo;
+    database.overwriteTable("PENDINGUSER", pendingUserTable);
+
+    emailManager.notifyEmailVerification(username);
+
+    return { status: 201, content: "User awaiting verification" };
+}
+
+function addUser(username)
+{
+    let userTable = database.getTable("USER");
+    let pendingUserTable = database.getTable("PENDINGUSER");
+
+    if (!pendingUserTable[username]) return { status: 400, content: "User does not exist" };
+    if (userTable[username]) return { status: 400, content: "User already verified" };
+
+    userTable[username] = pendingUserTable[username];
+    delete pendingUserTable[username];
+
+    database.overwriteTable("USER", userTable);
+    database.overwriteTable("PENDINGUSER", pendingUserTable);
+
+    return { status: 201, content: "User successfully verified" };
 }
 
 exports.login = login;
 exports.signup = signup;
 exports.update = update;
 exports.dataRequest = dataRequest;
+exports.addUser = addUser;

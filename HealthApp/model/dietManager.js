@@ -12,16 +12,41 @@ function dataRequest(username, content)
     {
         foodIDs = tbDiet[username][content.date];
     }
-
+    
     const tbFood = database.getTable("FOOD");
-    let data = [];
-
+    let foods = [];
+    let totalCalories = 0;
+    
     for (let id of foodIDs)
     {
-        data.push(tbFood[id]);
+        let food = null; 
+        if (id[0] === "d")
+        {
+            if (tbFood["default"][id]) food = tbFood["default"][id];
+        }
+        else
+        {
+            if (tbFood[username][id]) food = tbFood[username][id];
+        }
+
+        if (food)
+        {
+            foods.push(food);
+            totalCalories += parseInt(food.calories);
+        }
+        else
+        {
+            console.log("invalid food id requested: " + id);
+        }
     }
 
+    let data = {
+        foods: foods,
+        totalCalories: totalCalories
+    };
 
+    let message = "Successfully requested diet";
+    console.log(message);
     return { status: 200, content: data };
 }
 
@@ -31,18 +56,28 @@ function dataSubmit(username, content)
     if (!content.foodID) return { status: 400, content: "Missing required data - foodID" };
 
     let table = database.getTable("DIET");
-    if (table[username][content.date])
+    if (table[username])
     {
-        table[username][content.date].push(content.foodID);
+        if (table[username][content.date])
+        {
+            table[username][content.date].push(content.foodID);
+        }
+        else
+        {
+            table[username][content.date] = [content.foodID];
+        }
     }
     else
     {
+        table[username] = {};
         table[username][content.date] = [content.foodID];
     }
 
     database.overwriteTable("DIET", table);
 
-    return { status: 200, content: "Successfully added exercise" };
+    let message = "Successfully added diet";
+    console.log(message);
+    return { status: 200, content: message };
 }
 
 

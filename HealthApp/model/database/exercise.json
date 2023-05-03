@@ -12,6 +12,12 @@
                 "name": "legs",
                 "time": "60",
                 "amount": "123"
+            },
+            {
+                "set": "Cardio",
+                "name": "running",
+                "time": "30",
+                "amount": "2000"
             }
         ],
         "2023-04-20": [

@@ -1,0 +1,46 @@
+{
+    "test": {
+        "2": {
+            "type": "weight",
+            "startDate": "2023-04-26",
+            "endDate": "2023-04-29",
+            "status": "In Progress",
+            "extraData": [
+                "60",
+                "90"
+            ]
+        }
+    },
+    "test2": {
+        "0": {
+            "type": "weight",
+            "startDate": "2023-04-26",
+            "endDate": "2023-06-29",
+            "status": "Goal Completed Successfully",
+            "extraData": [
+                "60",
+                "80"
+            ]
+        },
+        "1": {
+            "type": "weight",
+            "startDate": "2023-04-26",
+            "endDate": "2023-04-26",
+            "status": "Goal Failed",
+            "extraData": [
+                "80",
+                "85"
+            ]
+        },
+        "2": {
+            "type": "weight",
+            "startDate": "2023-05-03",
+            "endDate": "2023-07-13",
+            "status": "In Progress",
+            "extraData": [
+                "75",
+                "90"
+            ]
+        }
+    }
+}

@@ -1,4 +1,36 @@
 extends layout
 
+block header 
+    link(rel='stylesheet' href='stylesheets/groupDashboard_style.css')
+    script(src='javascripts/groupdashboards/createGroup.js', defer)
+    script(src='javascripts/groupdashboards/viewGroup.js', defer)
+    script(src='javascripts/dataInteraction.js')
+    title My Group Dashboard
+   
 block content
+  <div id="groups"></div>
+  button#createGroupButton(type='button') Create Group
+  .overlay(style='display:none;')
+    #addGroupContainer.popup(style='display:none;')
+      button#exitButtonCreateGroup(type='button') X
+      h1#gcHeader Group Creation Form
+      form#groupCreationForm(onsubmit="return false;")
+        div#cgContainer
+          input#groupName(type='text' name='group-name' placeholder='Group Name' required='')
+          <h2 id="descriptionHeader"><label for="description">Description:</label></h2>
+          textarea#groupDescription(name="description", rows="4", cols="50") 
+          //- input#groupDescription(type='text' name='group-Description' placeholder='Group Description' required='' size="50px")
+          div#email-AddButtContainer
+            input#memberEmail(type='email' name='members-email' placeholder='Member Email' required='' size='30px')
+            button#addMemberEmail(type='button' name='members-email' placeholder='Member Email') Add
+          <div id="memberEmails"></div>
+          button#submitGroupForm(type='button' name='submit' placeholder='submit') Submit
+          
+       
+
+
+
+ 
+   
+    
   

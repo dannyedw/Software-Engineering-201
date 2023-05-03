@@ -98,18 +98,19 @@ block content
         //- label(for='deadline')
         //- input#deadline(type='date' name='deadline' placeholder='Deadline' value ='' min='01-01-2023' max='31-12-2023')
         //- br
-        //- input(type='submit' id="addPGoal" value='Add Goal')
+        //- input(type='submit' id="addPGoal" value='Add Goal') 
   // date header to be changed to be interactable and changeable
   h2 
   form#dataForm(onsubmit="return false;")
     <div id="dateWarning"></div>  
-     input#date(type='date' name='deadlines' placeholder='Deadlines' min='01-01-2023' max='31-12-2023')
+      input#date(type='date' name='deadlines' placeholder='Deadlines' min='01-01-2023' max='31-12-2023')
         
   .exerciseDietContainer
     .exercise
       h3 Exercise
       <div class="line" id="extra"></div>
       table#exerciseTable(style='width:100%', border='1')
+      div#removeExerciseButtonsContainer
     <div id="exerciseButtonCenter">
       button#addExerciseButton(type='button') +
     </div>
@@ -119,7 +120,8 @@ block content
       h3 Diet
       <div class="line" id="diets"></div>
       table#foodTable(style='width:100%', border='1')
-      div#calorieTotal 
+      div#removeDietButtonsContainer   
+      div#calorieTotal
     <div id="dietButtonCenter">
       button#addDietButton(type='button') +
     </div>
@@ -128,7 +130,7 @@ block content
     h2#goals Goals
     .personalGoals
       h3 Personal Goals
-        <div id="personalGoals"></div>
+      <div id="personalGoals"></div>
     button#addGoalButton(type='button') +
   script.
    

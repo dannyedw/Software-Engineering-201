@@ -1,62 +1,24 @@
-.slideshow-container 
-{
-    max-width: 1000px;
-    position: relative;
-    margin: 30px auto;
-}
-
-.mySlides 
-{   
-    height: 350px;
-    width: 800px;
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-.dot 
-{
-    cursor: pointer;
-    height: 15px;
-    width: 15px;
-    margin: 0 2px;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: inline-block;
-    transition: background-color 0.6s ease;
-}
-
-.active 
-{
-    background-color: #000;
-}
-
-/* Fading animation */
-/* Reference for fading animation: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_slideshow_auto */
-.fade 
-{
-    animation-name: fade;
-    animation-duration: 1.5s;
-}
-  
-@keyframes fade
-{
-    from {opacity: .4;}
-    to {opacity: 1}
-}
-
 .homePara{
-    align-self: center;
-    font-family: Calibri;
+    text-align: center;
+    font-size: 1.25em;
+    /* font-family: Calibri; */
 
 }
 
 .div_class {
     align-self: center;
-    font-family: Calibri;
-    font-size: large;
+    /* font-family: Calibri; */
+    font-size: 1.5em;
 
 }
 
 .moto{
-    align-self: center;
+    text-align: center;
+}
+
+#tutorialVid
+{
+    margin: 0 auto 30px;
+    border: 3px solid grey;
+    box-shadow: 1px 1px 10px 3px;
 }

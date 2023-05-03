@@ -17,14 +17,7 @@ router.post('/', (req, res) => {
 	let response = userManager.signup(req.body.content);
 	if (response.status === 201)
 	{
-		req.session.regenerate((err) => {
-			if (err) throw err;
-			req.session.user = req.body.content.username;
-			req.session.save((err) => {
-				if (err) throw err;
-				res.redirect('/userDashboard');
-			});
-		});
+		res.redirect('/verifyUser/');
 	}
 	else res.status(response.status).json(response.content);
 });

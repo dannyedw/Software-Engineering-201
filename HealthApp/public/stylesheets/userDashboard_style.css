@@ -1,22 +1,24 @@
 #date
 {
     text-align: center;
-    border: 5px black solid;
+    border: 5px solid #0793f8;
+    border-style: groove;
+    border-radius: 16px;
     
     height: 30px;
     width: 150px;
     box-sizing: border-box;
     
-    position: fixed;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    /* transform: translate(0%, -455%); */
     /* Reference for positioning: https://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/*/
-    top: 23.5%;
-    left: 50%;
-    transform: translate(-50%, 30%);
 }
 
 #dateWarning
 {
-    position: fixed;
+    position: absolute;
     top: 10%;
     left: 50%;
     transform: translate(-50%, 115%);
@@ -26,7 +28,9 @@
 #goals
 {
     text-align: center;
-    border: 5px black solid;
+    border: 5px solid #0793f8;
+    border-style: groove;
+    border-radius: 16px;
     
     width: 150px;
     box-sizing: border-box;
@@ -60,10 +64,10 @@
 
 #exerciseButtonCenter
 {
-    position: fixed;
-    top: 90%;
-    left: 20%;
-    transform: translate(250%, -50%);
+    position: relative;
+    top: 102%;
+    left: -23.5%;
+    /* transform: translate(250%, -50%); */
 }
 
 #addDietButton
@@ -88,32 +92,84 @@
     cursor: pointer;
 }
 
+/* #food-removeButtonsContainer
+{
+    display: flex;
+}
+
+#exercise-removeButtonsContainer
+{
+    display: flex;
+}
+
+#removeDietButtonsContainer
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 28px;
+}
+
+#removeExerciseButtonsContainer
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 28px;
+} */
+
+.deleteDietButton
+{
+   /* margin: 5px 5px; */
+}
+
+.deleteExerciseButton
+{
+    /* margin: 5px 5px; */
+}
+
 #dietButtonCenter
 {
-    position: fixed;
-    top: 90%;
-    left: 80%;
-    transform: translate(-145%, -50%);
+    /* position: absolute;
+    top: 70%;
+    left: 83.5%;
+    transform: translate(0%, -50%); */
+
+    position: relative;
+    top: 102%;
+    left: -24%;
+    /* transform: translate(-145%, -50%); */
 }
 
 .exerciseDietContainer
 {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: right;
 
-    border: 5px black solid;
-    width: 1000px;
+    margin: 0 auto 25px;
+    /* transform: translate(0%, -50%); */
+
+    /* Blue: #0793f8 */
+    border: 5px solid #0793f8;
+    border-style: groove;
+    border-radius: 16px;
+
+    /* #7B94B1 */
+    /* #6482a4 */
+    background-color: #B9DDE0;
+
+    width: 850px;
     height: 280px;
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     
-    position: fixed;
-    top: 35%;
+    position: relative;
+    /* top: 35%;
     left: 50%;
-    transform: translate(-50%, -25%);
+    transform: translate(-50%, -25%); */
 
-    padding-top: 10px;
-    padding-bottom: 50px;
+    padding-top: 30px;
+    padding-bottom: 60px;
 }
 
 /* .line
@@ -131,10 +187,17 @@
 
 .exercise
 {
-    border: 3px black solid;
+    border: 0px solid #0793f8;
+    border-style: groove;
+    border-radius: 12px;
+    box-shadow: 1px 1px 10px 3px;
     text-align: center;
 
-    margin-left: 37px;
+    background-color: #FFFFFF;
+
+    width: 350px;
+    
+    /* margin-left: 37px; */
     padding-left: 5px;
     padding-right: 5px;
     padding-bottom: 5px;
@@ -155,14 +218,21 @@
 
 .diet
 {
-    border: 3px black solid;
+    border: 0px solid #0793f8;
+    border-style: groove;
+    border-radius: 12px;
+    box-shadow: 1px 1px 10px 3px;
     text-align: center;
 
-    margin-right: 12px;
+    width: 350px;
+
+    background-color: #FFFFFF;
+    /* margin-right: 12px; */
     padding-left: 5px;
     padding-right: 5px;
     padding-bottom: 5px;
-    overflow-y: auto;   
+    overflow-y: auto;
+    overflow-x: auto; 
 }
 
 .diet > p
@@ -183,13 +253,18 @@
     flex-direction: column;
     align-items: center;
     
-    border: 5px solid black;
+    border: 5px solid #0793f8;
+    border-style: groove;
+    border-radius: 16px;
     padding: 10px;
 
-    position: fixed;
-    top: 72%;
+    width: 40%;
+    margin: 0 auto 20px;
+
+    position: relative;
+    /* top: 72%;
     left: 50%;
-    transform: translate(-50%, -25%);
+    transform: translate(-50%, -25%); */
 }
 
 .personalGoals
@@ -243,14 +318,26 @@
   width: 500px;
   border-top: 500px;
 
+  border: 5px solid #0793f8;
+  border-style: groove;
+  border-radius: 16px;
+
+  background-color: #B9DDE0;
+
   position: fixed;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
 
-  background-color: white;    
+  /* background-color: white;     */
   text-align: center;
   padding: 10px;
+}
+
+#dietTable
+{
+    font-weight: bold;
+    font-size: 1.5em;
 }
 
 #CustomDietsForm
@@ -333,9 +420,14 @@ tr:hover {
     flex-direction: column;
     align-items: center;
     margin: 10px 10px 0;
-    border: 5px solid black;
+    border: 5px solid #0793f8;
+    border-style: groove;
+    border-radius: 16px;
     width: 22%;
     font-size: 1.25em;
+
+    position: absolute;
+    top: 18%;
 }
 
 #heightUpdateButton
@@ -373,4 +465,10 @@ tr:hover {
 .pGoalValue
 {
     margin: 10px 0;
+}
+
+#personalGoals
+{
+    width: 100%;
+    overflow: auto;
 }
