@@ -34,22 +34,12 @@
         },
         "2": {
             "type": "weight",
-            "startDate": "2023-04-26",
-            "endDate": "2023-04-26",
-            "status": "Goal Failed",
-            "extraData": [
-                "70",
-                "80"
-            ]
-        },
-        "3": {
-            "type": "weight",
-            "startDate": "2023-04-26",
-            "endDate": "2023-05-03",
+            "startDate": "2023-05-03",
+            "endDate": "2023-07-13",
             "status": "In Progress",
             "extraData": [
-                "70",
-                "80"
+                "75",
+                "90"
             ]
         }
     }
