@@ -86,8 +86,12 @@ function dataRequest(username, content)
         }
         return { status: 200, content: data };
     }
-
-    return {status: 400, content: "User not found in Database/no goals"};  //might actualy need to make a new use entry
+    else
+    {
+        //if no goals we make a blank entry for the user and return nothing (since no goals)
+        table[username] = {};
+        return { status: 200, content: data };
+    }
 }
 
 exports.update = update;

@@ -636,50 +636,60 @@ function displayPersonalGoals(data)  //this displays the goals in the goal conta
 		personalGoalContainer.innerHTML = "";
 		let personalGoals = data.content;
 
-		//i know this is probaby very bad but callback functions were annoying
-		let userInfo = document.getElementById("userInformation").textContent;
-		let currentWeight = userInfo.split(" ")[5].split("kg")[0];
+		console.log(personalGoals);
+		if(personalGoals.length === 0)
+		{
+			let emptyGoalMessage = document.createElement("p");
+			emptyGoalMessage.innerHTML = "No goals found for this date!";
+			personalGoalContainer.appendChild(emptyGoalMessage);
+		}
+		else
+		{
+			//i know this is probaby very bad but callback functions were annoying
+			let userInfo = document.getElementById("userInformation").textContent;
+			let currentWeight = userInfo.split(" ")[5].split("kg")[0];
 
-		for (let i = 0; i < personalGoals.length; i++) {
-			let currentGoal = personalGoals[i];
-			var goal = document.createElement("p");
-			if (currentGoal.type == "weight") {
-				var goalProgress = ((currentWeight - currentGoal.extraData[0]) / (currentGoal.extraData[1] - currentGoal.extraData[0])) * 100;
-				if (currentGoal.status != "In Progress") {
-					goal.innerHTML = "Archived goal: Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: " + currentGoal.status;
-				}
-				else if (goalProgress >= 100) {
-					data = {
-						type: "personal-goal-update",
-						content: { goalId: currentGoal.goalId, status: "Goal Completed Successfully" }
-					};
-					dataRequest(data, errorReporter);
+			for (let i = 0; i < personalGoals.length; i++) {
+				let currentGoal = personalGoals[i];
+				var goal = document.createElement("p");
+				if (currentGoal.type == "weight") {
+					var goalProgress = ((currentWeight - currentGoal.extraData[0]) / (currentGoal.extraData[1] - currentGoal.extraData[0])) * 100;
+					if (currentGoal.status != "In Progress") {
+						goal.innerHTML = "Archived goal: Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: " + currentGoal.status;
+					}
+					else if (goalProgress >= 100) {
+						data = {
+							type: "personal-goal-update",
+							content: { goalId: currentGoal.goalId, status: "Goal Completed Successfully" }
+						};
+						dataRequest(data, errorReporter);
 
-					goal.innerHTML = "Archived goal: Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: Goal Completed Successfully";
-					//pass and archive/update goal
+						goal.innerHTML = "Archived goal: Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: Goal Completed Successfully";
+						//pass and archive/update goal
 
-				}
-				else if (currentGoal.endDate == getAndFormatCurrentDate()) {
-					data = {
-						type: "personal-goal-update",
-						content: { goalId: currentGoal.goalId, status: "Goal Failed" }
-					};
-					dataRequest(data, errorReporter);
+					}
+					else if (currentGoal.endDate == getAndFormatCurrentDate()) {
+						data = {
+							type: "personal-goal-update",
+							content: { goalId: currentGoal.goalId, status: "Goal Failed" }
+						};
+						dataRequest(data, errorReporter);
 
-					goal.innerHTML = "Archived goal: Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: Goal Failed";
-					//fail and archive/update goal
+						goal.innerHTML = "Archived goal: Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: Goal Failed";
+						//fail and archive/update goal
+					}
+					else {
+						daysRemaining = calculateRemaining(getAndFormatCurrentDate(),currentGoal.endDate);
+						goal.innerHTML = "Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: " + currentGoal.status
+							+ " | Days Remaining: " + daysRemaining +" <br> Progress: " + currentGoal.extraData[0] + ` <progress value="` + goalProgress + `" max="100"></progress> ` + currentGoal.extraData[1] +
+							" " + `<button type='button' onclick = "deletePersonalGoal(` + currentGoal.goalId + `)" style ='margin: 5px 0'>Delete</button>`;
+					}
 				}
 				else {
-					daysRemaining = calculateRemaining(getAndFormatCurrentDate(),currentGoal.endDate);
-					goal.innerHTML = "Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: " + currentGoal.status
-						+ " | Days Remaining: " + daysRemaining +" <br> Progress: " + currentGoal.extraData[0] + ` <progress value="` + goalProgress + `" max="100"></progress> ` + currentGoal.extraData[1] +
-						" " + `<button type='button' onclick = "deletePersonalGoal(` + currentGoal.goalId + `)" style ='margin: 5px 0'>Delete</button>`;
+					console.log("not implemented yet");
 				}
+				personalGoalContainer.appendChild(goal);
 			}
-			else {
-				console.log("not implemented yet");
-			}
-			personalGoalContainer.appendChild(goal);
 		}
 	}
 
