@@ -46,21 +46,22 @@ html
     #main_menu
       button.openbtn(onclick='openNav()') &#x2630;
 
-      .company-logo
-        a(href='/')
-          img(src='images/company-logo.png' alt='Company logo' height='150px' width='150px')
+      a#hrefLogo(href='/')
+        img#company-logo(src='images/company-logo.png' alt='Company logo' height='150px' width='150px')
 
       if USERNAME
         ul
           li
-            p(style={margin:'-50px 0 0'}) #{USERNAME}  
+            img#user-logo(src='images/user-logo.png' alt='User icon' height='50px' width='50px')
+          li
+            p #{USERNAME}  
           li
             a(href='/logout') Log Out
       
       else
         ul
           li
-            a(style={margin:'-50px 0 0'} href='/login') Login
+            a(href='/login') Login
           li
             a(href='/signUp') Sign up
 

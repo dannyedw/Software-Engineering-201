@@ -12,16 +12,16 @@
     display: block;
     margin: 0 auto;
     position: relative;
-    /* transform: translate(0%, -455%); */
+    transform: translate(0%, -625%);
     /* Reference for positioning: https://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/*/
 }
 
 #dateWarning
 {
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    transform: translate(-50%, 115%);
+    position: relative;
+    /* top: 0%;
+    left: 0%; */
+    transform: translate(0%, -500%);
     text-align: center;
 }
 
@@ -165,8 +165,8 @@
     
     position: relative;
     /* top: 35%;
-    left: 50%;
-    transform: translate(-50%, -25%); */
+    left: 50%; */
+    transform: translate(0%, -50%);
 
     padding-top: 30px;
     padding-bottom: 60px;
@@ -426,8 +426,9 @@ tr:hover {
     width: 22%;
     font-size: 1.25em;
 
-    position: absolute;
-    top: 18%;
+    position: relative;
+    transform: translate(0%, 0%);
+    /* top: 18%; */
 }
 
 #heightUpdateButton
