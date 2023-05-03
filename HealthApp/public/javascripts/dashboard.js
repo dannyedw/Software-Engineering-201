@@ -538,28 +538,6 @@ goalSelect.addEventListener("change", (event) => {
 
 	document.getElementById('addPGoal').addEventListener("click", addingTargetWeight);
 
-	function calculateRemaining(current, deadline) {
-		//var remain = deadline - current;
-		deadline = deadline.split("-");
-		current = current.split("-");
-		remainingMonths = deadline[1] - current[1];
-		remainingDays = deadline[2] - current[2];
-		if (remainingMonths > 0) {
-			if (remainingMonths == 1 || remainingMonths == 3 || remainingMonths == 5 || remainingMonths == 7 || remainingMonths == 8 || remainingMonths == 10 || remainingMonths == 12) {
-				timeRemaining = (remainingMonths * 31) + remainingDays;
-				return timeRemaining;
-			} else if (remainingMonths == 2) {
-				timeRemaining = (remainingMonths * 28) + remainingDays;
-				return timeRemaining;
-			} else if (remainingMonths == 4 || remainingMonths == 6 || remainingMonths == 9 || remainingMonths == 11) {
-				timeRemaining = (remainingMonths * 30) + remainingDays;
-				return timeRemaining;
-			}
-		} else {
-			return remainingDays;
-		}
-	}
-
 	function addingTargetWeight() {
 		//next few lines are getting the information for the request
 		const targetWeight = document.getElementById("target-Weight").value;
@@ -599,11 +577,31 @@ goalSelect.addEventListener("change", (event) => {
 
 		overlay.style.display = "none";
 		addGoalContainer.style.display = "none";
-
-		getPersonalGoals(); //update goals once we have added one
 	}
 
 });
+
+function calculateRemaining(current, deadline) {
+	//var remain = deadline - current;
+	deadline = deadline.split("-");
+	current = current.split("-");
+	remainingMonths = deadline[1] - current[1];
+	remainingDays = deadline[2] - current[2];
+	if (remainingMonths > 0) {
+		if (remainingMonths == 1 || remainingMonths == 3 || remainingMonths == 5 || remainingMonths == 7 || remainingMonths == 8 || remainingMonths == 10 || remainingMonths == 12) {
+			timeRemaining = (remainingMonths * 31) + remainingDays;
+			return timeRemaining;
+		} else if (remainingMonths == 2) {
+			timeRemaining = (remainingMonths * 28) + remainingDays;
+			return timeRemaining;
+		} else if (remainingMonths == 4 || remainingMonths == 6 || remainingMonths == 9 || remainingMonths == 11) {
+			timeRemaining = (remainingMonths * 30) + remainingDays;
+			return timeRemaining;
+		}
+	} else {
+		return remainingDays;
+	}
+}
 
 function errorReporter(data)  //function that basicaly prints the error when put as callback function
 {
@@ -672,8 +670,9 @@ function displayPersonalGoals(data)  //this displays the goals in the goal conta
 					//fail and archive/update goal
 				}
 				else {
+					daysRemaining = calculateRemaining(getAndFormatCurrentDate(),currentGoal.endDate);
 					goal.innerHTML = "Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: " + currentGoal.status
-						+ " | Progress: " + currentGoal.extraData[0] + ` <progress value="` + goalProgress + `" max="100"></progress> ` + currentGoal.extraData[1] +
+						+ " | Days Remaining: " + daysRemaining +" <br> Progress: " + currentGoal.extraData[0] + ` <progress value="` + goalProgress + `" max="100"></progress> ` + currentGoal.extraData[1] +
 						" " + `<button type='button' onclick = "deletePersonalGoal(` + currentGoal.goalId + `)" style ='margin: 5px 0'>Delete</button>`;
 				}
 			}
