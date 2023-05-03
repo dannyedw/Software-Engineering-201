@@ -41,6 +41,16 @@
                 "75",
                 "90"
             ]
+        },
+        "3": {
+            "type": "weight",
+            "startDate": "2023-05-03",
+            "endDate": "2023-05-04",
+            "status": "In Progress",
+            "extraData": [
+                "75",
+                "90"
+            ]
         }
     }
 }

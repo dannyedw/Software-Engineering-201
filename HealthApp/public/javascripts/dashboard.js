@@ -636,7 +636,6 @@ function displayPersonalGoals(data)  //this displays the goals in the goal conta
 		personalGoalContainer.innerHTML = "";
 		let personalGoals = data.content;
 
-		console.log(personalGoals);
 		if(personalGoals.length === 0)
 		{
 			let emptyGoalMessage = document.createElement("p");
@@ -648,6 +647,8 @@ function displayPersonalGoals(data)  //this displays the goals in the goal conta
 			//i know this is probaby very bad but callback functions were annoying
 			let userInfo = document.getElementById("userInformation").textContent;
 			let currentWeight = userInfo.split(" ")[5].split("kg")[0];
+			
+			let minDaysRemaining = 11; //11 as we want to find minimum, any goal under 10 days will be smaller than this
 
 			for (let i = 0; i < personalGoals.length; i++) {
 				let currentGoal = personalGoals[i];
@@ -680,15 +681,30 @@ function displayPersonalGoals(data)  //this displays the goals in the goal conta
 					}
 					else {
 						daysRemaining = calculateRemaining(getAndFormatCurrentDate(),currentGoal.endDate);
+						if(daysRemaining <= 10 && daysRemaining < minDaysRemaining)
+						{
+							minDaysRemaining = daysRemaining;
+						}
 						goal.innerHTML = "Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: " + currentGoal.status
 							+ " | Days Remaining: " + daysRemaining +" <br> Progress: " + currentGoal.extraData[0] + ` <progress value="` + goalProgress + `" max="100"></progress> ` + currentGoal.extraData[1] +
 							" " + `<button type='button' onclick = "deletePersonalGoal(` + currentGoal.goalId + `)" style ='margin: 5px 0'>Delete</button>`;
 					}
 				}
 				else {
+					//other goal types will need to implement the alert minimum days
 					console.log("not implemented yet");
 				}
 				personalGoalContainer.appendChild(goal);
+				if(minDaysRemaining === 1 && userDeadlineAlert === false)
+				{
+					alert("You have a goal deadline in " + minDaysRemaining + " day!");
+					userDeadlineAlert = true;
+				}
+				else if(minDaysRemaining < 11 && userDeadlineAlert === false)
+				{
+					alert("You have a goal deadline in " + minDaysRemaining + " days!")
+					userDeadlineAlert = true;
+				}
 			}
 		}
 	}
@@ -878,6 +894,9 @@ function updateAge() {
 		dataRequest(data, getUserInformation);
 	}
 }
+
+var userDeadlineAlert = false; //used so the user isnt notified every time an active goal is displayed
+console.log("We are running");
 
 getUserInformation();
 
