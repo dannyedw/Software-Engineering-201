@@ -87,6 +87,38 @@ function notifyGroupDeletion(username, groupname)
     sendEmail(emailAddress, subject, text);
 }
 
+function notifyGroupGoalCreation(username, groupname, goalDetails)
+{
+    const table = database.getTable("USER");
+    if (!table[username])
+    {
+        console.log("Failed to send email due to invalid username: " + username);
+        return;
+    }
+
+    const emailAddress = table[username].email;
+    const subject = "ASCEND - New group goal for " + groupname;
+    const text = "Group " + groupname + " has created a new goal.";
+
+    sendEmail(emailAddress, subject, text);
+}
+
+function notifyGroupGoalCompletion(username, groupname, goalDetails)
+{
+    const table = database.getTable("USER");
+    if (!table[username])
+    {
+        console.log("Failed to send email due to invalid username: " + username);
+        return;
+    }
+
+    const emailAddress = table[username].email;
+    const subject = "ASCEND - Group goal completed for " + groupname;
+    const text = "Group " + groupname + " has completed a goal.";
+
+    sendEmail(emailAddress, subject, text);
+}
+
 
 function sendEmail(emailAddress, subject, text)
 {
@@ -107,3 +139,5 @@ exports.notifyEmailVerification = notifyEmailVerification;
 exports.notifyAccountCreation = notifyAccountCreation;
 exports.notifyGroupInvitation = notifyGroupInvitation;
 exports.notifyGroupDeletion = notifyGroupDeletion;
+exports.notifyGroupGoalCreation = notifyGroupGoalCreation;
+exports.notifyGroupGoalCompletion = notifyGroupGoalCompletion;
