@@ -16,6 +16,9 @@ function create(username, content)
         pendingMembers: []
     };
 
+    let groupname = content.groupname;
+    groupname.replace(" ", "_"); //replace spaces to prevent issues with urls and the groupname
+
     //check if users actually exist before adding them to the group
     const usertable = database.getTable("USER");
     let warningInfo = [];
@@ -23,8 +26,18 @@ function create(username, content)
     {
         if (usertable[uname])
         {
-            groupData.pendingMembers.push(uname);
-            emailManager.notifyGroupInvitation(uname, content.groupname);
+            //check if user is already in group in case somehow added more than once
+            let index = groupData.pendingMembers.indexOf(uname);
+            if (index === -1)
+            {
+                groupData.pendingMembers.push(uname);
+                emailManager.notifyGroupInvitation(uname, groupname);
+            }
+            else
+            {
+                warningInfo.push("User already invited to group: " + uname);
+            }
+            
         }
         else
         {
@@ -34,18 +47,17 @@ function create(username, content)
 
     let grouptable = database.getTable("GROUP");
 
-    if (grouptable[content.groupname] != null)
+    if (grouptable[groupname] != null)
     {
         //group already exists, cannot be created
         return { status: 400, content: "Group name already taken" };
     }
 
-    grouptable[content.groupname] = groupData;
-    // console.log(grouptable);
+    grouptable[groupname] = groupData;
     database.overwriteTable("GROUP", grouptable);
 
     return { status: 200, content: {
-        message: "Successfully created group " + content.groupname,
+        message: "Successfully created group " + groupname,
         warnings: warningInfo
     }};
 }

@@ -16,7 +16,8 @@ block header
     title My Group Dashboard
    
 block content
-  <div id="groups"></div>
+  div#groups
+
   button#createGroupButton(type='button') Create Group
   .overlay(style='display:none;')
     #addGroupContainer.popup(style='display:none;')
@@ -33,8 +34,7 @@ block content
             button#addMemberEmail(type='button' name='members-email' placeholder='Member Email') Add
           <div id="memberEmails"></div>
           button#submitGroupForm(type='button' name='submit' placeholder='submit') Submit
-          
-       
+
 
 
 
