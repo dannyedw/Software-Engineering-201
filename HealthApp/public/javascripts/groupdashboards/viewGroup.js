@@ -20,7 +20,7 @@ var numOfGoals = 5;
 // groups.innerHTML += `<br> <h1 id="divsID" onclick=selectGroup(`+"1" + ","+"membersSize"+","+"memberType"+","+"numOfGoals"+`);>Group Name: `+1+` Number of Members: `+membersSize+` >  `+memberType+` Number of Group Goals `+numOfGoals+`  </h1>`
 
 groups.innerHTML = `<div><h1 id="divsID" class='collapsible'>` + groupname + `:` + ` Members: `+membersSize+` ` + ` Group Goals: `+numOfGoals+`</h1>
-<div class='content'><p> sadnasfasfasfasf </p> </div> </div>`;
+<div class='content'><div id="membersDiv"> Members </div> <div id = "groupGoalsDiv"> Group Goals </div> </div> </div>`;
 //groups.innerHTML += `<div><h1 id="divsID" class='collapsible' onclick=selectGroup(`+"2" + ","+"membersSize"+","+"memberType"+","+"numOfGoals"+`);>` + groupname + `:` + ` Members: `+membersSize+` ` + ` Group Goals: `+numOfGoals+`  </h1></div></div>`;
 
 var coll = document.getElementsByClassName("collapsible");
@@ -98,16 +98,16 @@ function requestGroupInformation(data)
 
 function displayGroup(data)
 {
-    data = {
-        DannyGsgroup: {
-            owner: "DannyGee",
-            description: " fsfsfs",
-            members: ["alexf13"]
+    console.log(data)
+    for(let group of data.content.groups)
+        {
+            console.log(group)
+            console.log(group.content.owner)
+            //groups.innerHTML = `<div><h1 id="divsID" class='collapsible'>` + group + `:` + ` Members: `+membersSize+` ` + ` Group Goals: `+numOfGoals+`</h1>
+            //<div class='content'><p> sadnasfasfasfasf </p> </div><div class='content2'><p> text </p> </div> </div>`;
+            
+           
         }
-    }
-
-    
-
     //this function should get the group data then paste it to a div
     //this div should have all of drop downs
     //this function will create a goal dropdown in this div
@@ -115,5 +115,18 @@ function displayGroup(data)
     //if user is admin have delete button for members
 }
 
+data = {
+    DannyGsgroup: {
+        owner: "DannyGee",
+        description: " fsfsfs",
+        members: ["alexf13"]
+    },
+    DannyGsgroup2: {
+        owner: "DannyGee2",
+        description: "text",
+        members: ["member"]
+    }
+}
+// getUserGroups(data);
 
-getUserGroups();
+displayGroup(data)
