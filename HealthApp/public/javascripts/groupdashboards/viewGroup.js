@@ -7,33 +7,15 @@ function selectGroup(groupname,groupsize,memberType,numberOfGoals){
     console.log(numberOfGoals)
 }
 var groupname = "name";
-groupname = groupname.charAt(0).toUpperCase() + groupname.slice(1);
 var membersSize = 10;
 var memberType = "Admin";
 var numOfGoals = 5;
 
-let newDiv = document.createElement("div");
-
-
-groups.innerHTML = `<div><h1 id="divsID" class='collapsible'>` + groupname + `:` + ` Members: `+membersSize+` ` + ` Group Goals: `+numOfGoals+`</h1>
-<div class='content'><p> sadnasfasfasfasf </p> </div> </div>`;
-//groups.innerHTML += `<div><h1 id="divsID" class='collapsible' onclick=selectGroup(`+"2" + ","+"membersSize"+","+"memberType"+","+"numOfGoals"+`);>` + groupname + `:` + ` Members: `+membersSize+` ` + ` Group Goals: `+numOfGoals+`  </h1></div></div>`;
-
-var coll = document.getElementsByClassName("collapsible");
-var i;
-
-for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.maxHeight){
-      content.style.maxHeight = null;
-    } else {
-      content.style.maxHeight = content.scrollHeight + "px";
-    }
-  });
-}
-
+groups.innerHTML = `<div ><h1 id="divsID" onclick=selectGroup(`+"5" + ","+"membersSize"+","+"memberType"+","+"numOfGoals"+`);>Group Name: `+groupname+` Number of Members: `+membersSize+` >  `+memberType+` Number of Group Goals `+numOfGoals+`  </h1></div> <br>`
+groups.innerHTML += `<div> <br> <h1 id="divsID" onclick=selectGroup(`+"4" + ","+"membersSize"+","+"memberType"+","+"numOfGoals"+`);>Group Name: `+4+` Number of Members: `+membersSize+` >  `+memberType+` Number of Group Goals `+numOfGoals+`  </h1> </div>`
+groups.innerHTML += `<br> <h1 id="divsID" onclick=selectGroup(`+"3" + ","+"membersSize"+","+"memberType"+","+"numOfGoals"+`);>Group Name: `+3+` Number of Members: `+membersSize+` >  `+memberType+` Number of Group Goals `+numOfGoals+`  </h1>`
+groups.innerHTML += `<br> <h1 id="divsID" onclick=selectGroup(`+"2" + ","+"membersSize"+","+"memberType"+","+"numOfGoals"+`);>Group Name: `+2+` Number of Members: `+membersSize+` >  `+memberType+` Number of Group Goals `+numOfGoals+`  </h1>`
+groups.innerHTML += `<br> <h1 id="divsID" onclick=selectGroup(`+"1" + ","+"membersSize"+","+"memberType"+","+"numOfGoals"+`);>Group Name: `+1+` Number of Members: `+membersSize+` >  `+memberType+` Number of Group Goals `+numOfGoals+`  </h1>`
 // //form request of groups from backend
 //     let data = {
 // 		type: "group-request",
@@ -94,10 +76,22 @@ function requestGroupInformation(data)
 
 function displayGroup(data)
 {
+    data = {
+        DannyGsgroup: {
+            owner: "DannyGee",
+            description: " fsfsfs",
+            members: ["alexf13"]
+        }
+    }
+
+    
+
     //this function should get the group data then paste it to a div
     //this div should have all of drop downs
     //this function will create a goal dropdown in this div
     //also leave a space for the group goals
+    //if user is admin have delete button for members
 }
+
 
 getUserGroups();
