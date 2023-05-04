@@ -40,6 +40,7 @@ function create(username, content)
     }
 
     grouptable[content.groupname] = groupData;
+    // console.log(grouptable);
     database.overwriteTable("GROUP", grouptable);
 
     return { status: 200, content: {

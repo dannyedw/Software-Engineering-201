@@ -32,3 +32,42 @@ groups.innerHTML += `<br> <h1 id="divsID" onclick=selectGroup(`+"1" + ","+"membe
 //             groups.innerHTML = `Group Name: `+group['groupname']+` Number of Members: `+group['membersSize']+` >  `+group['memberType']+` Number of Group Goals`+group["numberGoals"]+` `
 //     }
 // 	}
+
+function getUserGroups()
+{
+    data = {
+        type: "user-request",
+        content: {requestKeys:["groups"]}
+    }
+
+    dataRequest(data, requestGroupInformation)
+}
+
+function requestGroupInformation(data)
+{
+    if(data.status != 200)
+    {
+        console.log(data);
+    }
+    else
+    {
+        if(data.content.groups.length === 0)
+        {
+            console.log("No Groups")
+        }
+        else
+        {
+            console.log(data.content);
+            for(let group of data.content.groups)
+            {
+                data = {
+                    type: "group-request",
+                    content: data.content[group]
+                }
+                console.log(data);
+            }
+        }
+    }
+}
+
+getUserGroups();

@@ -62,22 +62,22 @@ document.getElementById("submitGroupForm").addEventListener("click",function(){
     document.getElementById("groupDescription").value = "";
 
     //form submission to backend
-    // let data = {
-	// 	type: "group-submit",
-	// 	content: {
-    //         groupname:groupName,
-    //         description:description,
-    //         emails:emails
-	// 	}
-	// };
+    let data = {
+		type: "group-create",
+		content: {
+            groupname:groupName,
+            description:description,
+            members:emails
+		}
+	};
 
-	// dataRequest(data, responseHandler);
+	dataRequest(data, responseHandler);
 
-	// function responseHandler(response) {
-	// 	if (response.status != 200) {
-	// 		console.log(response.content)
-	// 	}
-	// }
+	function responseHandler(response) {
+		if (response.status != 200) {
+			console.log(response.content)
+		}
+	}
 
 })
 

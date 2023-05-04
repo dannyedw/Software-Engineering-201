@@ -1,5 +1,13 @@
 extends layout
 
+block variables
+  //-username comes from res.render() on the server, USERNAME is the name of the variable in the pug, USERNAME is also
+  //-defined in a script so it can be used in the js files
+  - const USERNAME = username
+  script.
+    //https://pugjs.org/language/interpolation.html
+    const USERNAME = "#{USERNAME}";
+
 block header 
     link(rel='stylesheet' href='stylesheets/groupDashboard_style.css')
     script(src='javascripts/groupdashboards/createGroup.js', defer)
