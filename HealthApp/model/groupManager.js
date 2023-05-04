@@ -33,7 +33,7 @@ function create(username, content)
 
     let grouptable = database.getTable("GROUP");
 
-    if (grouptable[content.groupname])
+    if (grouptable[content.groupname] != null)
     {
         //group already exists, cannot be created
         return { status: 400, content: "Group name already taken" };
