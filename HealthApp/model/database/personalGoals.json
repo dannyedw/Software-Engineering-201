@@ -42,5 +42,17 @@
                 "90"
             ]
         }
+    },
+    "DannyGee": {
+        "0": {
+            "type": "weight",
+            "startDate": "2023-05-04",
+            "endDate": "2023-05-09",
+            "status": "In Progress",
+            "extraData": [
+                "70",
+                "80"
+            ]
+        }
     }
 }

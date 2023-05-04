@@ -34,6 +34,7 @@ groups.innerHTML += `<br> <h1 id="divsID" onclick=selectGroup(`+"1" + ","+"membe
 // 	}
 
 function getUserGroups()
+//this get all the groups that the user is in
 {
     data = {
         type: "user-request",
@@ -44,6 +45,8 @@ function getUserGroups()
 }
 
 function requestGroupInformation(data)
+//this loops through all the groups the user is in and requests data
+//it should then call the display group function
 {
     if(data.status != 200)
     {
@@ -65,9 +68,18 @@ function requestGroupInformation(data)
                     content: data.content[group]
                 }
                 console.log(data);
+                //dataRequest(data, displayGroup)
             }
         }
     }
+}
+
+function displayGroup(data)
+{
+    //this function should get the group data then paste it to a div
+    //this div should have all of drop downs
+    //this function will create a goal dropdown in this div
+    //also leave a space for the group goals
 }
 
 getUserGroups();
