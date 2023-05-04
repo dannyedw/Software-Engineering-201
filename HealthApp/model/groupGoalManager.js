@@ -35,7 +35,7 @@ function create(username, content)
 
     database.overwriteTable("GROUPGOALS", table);
     
-    return{ status: 200, content: "Successfully added exercise"};
+    return{ status: 200, content: "Successfully created group goal" };
 }
 
 //delete goal, only user that created the goal can do this (or who ever is first in user array)
