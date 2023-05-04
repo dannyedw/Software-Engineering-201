@@ -26,8 +26,18 @@ function create(username, content)
     {
         if (usertable[uname])
         {
-            groupData.pendingMembers.push(uname);
-            emailManager.notifyGroupInvitation(uname, groupname);
+            //check if user is already in group in case somehow added more than once
+            let index = groupData.pendingMembers.indexOf(uname);
+            if (index === -1)
+            {
+                groupData.pendingMembers.push(uname);
+                emailManager.notifyGroupInvitation(uname, groupname);
+            }
+            else
+            {
+                warningInfo.push("User already invited to group: " + uname);
+            }
+            
         }
         else
         {
