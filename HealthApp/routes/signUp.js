@@ -17,7 +17,7 @@ router.post('/', (req, res) => {
 	let response = userManager.signup(req.body.content);
 	if (response.status === 201)
 	{
-		res.redirect('/verifyUser/');
+		res.redirect('/verifyUser');
 	}
 	else res.status(response.status).json(response.content);
 });
