@@ -40,7 +40,7 @@ function removeMail(m){
         emails[m] = emails[0];
         emails[0] = temp;
         emails.shift();
-        console.log(emails)
+    
         memberEmails.innerHTML = "";
         for(mail in emails){
             memberEmails.innerHTML += "<br>"+emails[mail]+"<button id=deleteEmail type=button onclick=removeMail("+mail+")>Remove</button>";
@@ -51,9 +51,7 @@ function removeMail(m){
 document.getElementById("submitGroupForm").addEventListener("click",function(){
     var groupName = document.getElementById("groupName").value;
     var description = document.getElementById("groupDescription").value;
-    console.log(groupName);
-    console.log(description);
-    console.log(emails);
+  
 
     overlay.style.display = "none";
 	addGroupContainer.style.display = "none";
