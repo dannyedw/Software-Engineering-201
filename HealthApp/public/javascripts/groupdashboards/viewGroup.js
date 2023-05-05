@@ -98,11 +98,13 @@ function requestGroupInformation(data)
 
 function displayGroup(data)
 {
-    console.log(data)
-    for(let group of data.content.groups)
+    console.log(data.content);
+    for(var key in data.content)
         {
-            console.log(group)
-            console.log(group.content.owner)
+            group = data.content[key]
+            console.log(group.key)
+            console.log(group.description)
+
             //groups.innerHTML = `<div><h1 id="divsID" class='collapsible'>` + group + `:` + ` Members: `+membersSize+` ` + ` Group Goals: `+numOfGoals+`</h1>
             //<div class='content'><p> sadnasfasfasfasf </p> </div><div class='content2'><p> text </p> </div> </div>`;
             
@@ -115,18 +117,13 @@ function displayGroup(data)
     //if user is admin have delete button for members
 }
 
-data = {
+dataTest = {"content": {
     DannyGsgroup: {
         owner: "DannyGee",
         description: " fsfsfs",
         members: ["alexf13"]
-    },
-    DannyGsgroup2: {
-        owner: "DannyGee2",
-        description: "text",
-        members: ["member"]
     }
-}
+}}
 // getUserGroups(data);
 
-displayGroup(data)
+displayGroup(dataTest);
