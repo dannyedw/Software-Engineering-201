@@ -33,9 +33,9 @@ function create(username, content)
         table[content.group][0] = data;
     }
 
-    database.overwriteTable("PERSONALGOALS", table);
+    database.overwriteTable("GROUPGOALS", table);
     
-    return{ status: 200, content: "Successfully added exercise"};
+    return{ status: 200, content: "Successfully created group goal" };
 }
 
 //delete goal, only user that created the goal can do this (or who ever is first in user array)
@@ -50,7 +50,7 @@ function deleteGoal(content)
     if (table[content.groupName] && table[content.groupName][content.goalId])
     {
         delete table[content.groupName][content.goalId];
-        database.overwriteTable("PERSONALGOALS", table);
+        database.overwriteTable("GROUPGOALS", table);
         return { status: 200, content: "Successfully deleted Goal" };
     }
     
