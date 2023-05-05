@@ -1,14 +1,20 @@
 {
-    "testGroup": {
+    "Danny_Gs_group": {
         "0": {
-            "users": ["test","test2"],
+            "users": [
+                "DannyGee",
+                "alexf13"
+            ],
             "type": "weight",
             "startDate": "2023-04-26",
-            "endDate": "2023-07-29",
-            "status": ["In Progress", "In Progress"],
+            "endDate": "2023-07-07",
+            "status": [
+                "In Progress",
+                "In Progress"
+            ],
             "extraData": [
                 "60",
-                "90"
+                "70"
             ]
         }
     }
