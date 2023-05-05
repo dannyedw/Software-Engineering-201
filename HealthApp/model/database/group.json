@@ -1,10 +1,14 @@
 {
-    "Danny Gs group": {
+    "Danny-Gs-group": {
         "owner": "DannyGee",
-        "description": " fsfsfs",
-        "members": [],
-        "pendingMembers": [
-            "alexf13"
-        ]
+        "description": " danny gs group",
+        "members": ["alexf13", "test", "DannyGee"],
+        "pendingMembers": []
+    },
+    "Yons's-group": {
+        "owner": "test",
+        "description": " hello yon group",
+        "members": ["alexf13", "test", "DannyGee"],
+        "pendingMembers": []
     }
 }
