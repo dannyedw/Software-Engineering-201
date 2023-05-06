@@ -30,7 +30,8 @@ function displayGroup(data)
             currentGroup = data.content[key];
 
             groups.innerHTML += `<div><h1 id="divsID" class='collapsible'>` + key + `:` + ` Members: `+currentGroup.members.length+` ` + ` Group Goals: `+10+`</h1>
-            <div class='content'><div class='groupDivs'id="` + key + "-info" + `"> Members<br> </div> <div class='groupDivs' id = "` + key + "-goals" + `"> Group Goals </div>   <br>
+            <div class='content'><div class='groupDivs'id="` + key + "-info" + `"> Members <br> <input type="text" id="addingMember" placeholder="Enter Member"><button type="button" id="addMember" onclick="addMember('${currentGroup},${key + "-info"}')">Add Member</button> <br></div>
+            <div class='groupDivs' id = "` + key + "-goals" + `"> Group Goals </div><br>
             <button type="button" id="description" onclick="DisplayDescription('${currentGroup.description}');">Description</button><br>
             <button type="button" id="LeaveGroupButton" onclick="LeavegGroup('${key}');">LeaveGroup</button> </div></div>`;
 
@@ -40,13 +41,13 @@ function displayGroup(data)
             displayGroupInfo(currentGroup, key + "-info")
             displayGroupGoals(currentGroup, key + "-goals")
 
-            for (var i = 0; i < coll.length; i++) {
+            for (var i = 0; i < coll.length; i++){
                 coll[i].addEventListener("click", function() {
                   this.classList.toggle("active");
                   var content = this.nextElementSibling;
-                  if (content.style.maxHeight){
+                  if(content.style.maxHeight){
                     content.style.maxHeight = null;
-                  } else {
+                  }else{
                     content.style.maxHeight = content.scrollHeight + "px";
                   }
                 });
@@ -73,10 +74,20 @@ function displayGroupInfo(data, divId)
     // container.innerHTML += '<button onclick=addMember("+name+ '\',\'' +data+"); type='button'> Add </button>';
 }
 
-function addMember(member,data){
-    console.log(member);
-    console.log(data);
-    console.log("click")
+function addMember(data,divId){
+    data = data.split(',')
+    console.log(data)
+    var member = document.getElementById("addingMember").value;
+    data.push(member)
+    container = document.getElementById(divId);
+    container.innerHTML = "";
+    
+    for (var i = 0; i < data.members.length; i++) {
+        var member = data[i]
+      
+        container.innerHTML += member+'<button id=somebutton type=button onclick="removeMember(\'' +i+ '\',\'' +data.members +'\',\'' +divId +'\')">remove</button><br>';
+    
+    }
 }
 function removeMember(member,data,div){
     data = data.split(',')
