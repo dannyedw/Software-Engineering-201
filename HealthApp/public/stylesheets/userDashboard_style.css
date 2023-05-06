@@ -47,6 +47,7 @@
     /* font-size: 30px;
     width: 40px;
     height: 40px; */
+    margin-top: 5px;
     margin-left: auto;
     margin-right: auto;
 
@@ -55,6 +56,8 @@
     width: 45px;  
     font-size: 2.5em;
     font-weight: bold;
+    /* Text outline \/ remove this if you think it looks ugly */
+    -webkit-text-stroke: 2px black;
     border-radius: 50%;
     background-color: #00BFFF;
     color: white;
@@ -75,6 +78,7 @@
     /* font-size: 30px;
     width: 40px;
     height: 40px; */
+    margin-top: 5px;
     margin-left: auto;
     margin-right: auto;
     
@@ -85,6 +89,8 @@
     width: 45px;  
     font-size: 2.5em;
     font-weight: bold;
+    /* Text outline \/ remove this if you think it looks ugly */
+    -webkit-text-stroke: 2px black;
     border-radius: 50%;
     background-color: #00BFFF;
     color: white;
@@ -145,7 +151,8 @@
 {
     display: flex;
     flex-direction: row;
-    justify-content: right;
+    justify-content: space-around;
+    align-items: center;
 
     margin: 0 auto 25px;
     /* transform: translate(0%, -50%); */
@@ -159,8 +166,8 @@
     /* #6482a4 */
     background-color: #B9DDE0;
 
-    width: 850px;
-    height: 280px;
+    /* width: 45vw; */
+    /* height: 28vh; */
     /* box-sizing: border-box; */
     
     position: relative;
@@ -168,8 +175,7 @@
     left: 50%; */
     transform: translate(0%, -50%);
 
-    padding-top: 30px;
-    padding-bottom: 60px;
+    padding: 15px 0;
 }
 
 /* .line
@@ -185,6 +191,12 @@
     transform: translate(-50%);
 } */
 
+#exerciseCont-AddButtContainer
+{
+    display: flex;
+    flex-direction: column;
+}
+
 .exercise
 {
     border: 0px solid #0793f8;
@@ -195,12 +207,15 @@
 
     background-color: #FFFFFF;
 
-    width: 350px;
+    width: 20vmax;
+    height: 30vmin;
     
-    /* margin-left: 37px; */
+    /* margin-left: 50px;
     padding-left: 5px;
     padding-right: 5px;
-    padding-bottom: 5px;
+    padding-bottom: 5px; */
+    margin: 0 25px;
+    padding: 0 10px;
     overflow-y: auto;
 }
 
@@ -216,6 +231,12 @@
     font-size: 30px;
 }
 
+#dietCont-AddButtContainer
+{
+    display: flex;
+    flex-direction: column;
+}
+
 .diet
 {
     border: 0px solid #0793f8;
@@ -224,13 +245,16 @@
     box-shadow: 1px 1px 10px 3px;
     text-align: center;
 
-    width: 350px;
+    width: 20vmax;
+    height: 30vmin;
 
     background-color: #FFFFFF;
     /* margin-right: 12px; */
-    padding-left: 5px;
+    /* padding-left: 5px;
     padding-right: 5px;
-    padding-bottom: 5px;
+    padding-bottom: 5px; */
+    margin: 0 25px;
+    padding: 0 10px;
     overflow-y: auto;
     overflow-x: auto; 
 }
@@ -472,4 +496,29 @@ tr:hover {
 {
     width: 100%;
     overflow: auto;
+}
+
+@media (max-width: 600px)
+{
+    .exerciseDietContainer
+    {
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+        padding: 30px;
+    }
+
+    .exercise
+    {
+        height: 50vmax;
+        width: 35vmax;
+        margin: 0;
+    }
+
+    .diet
+    {
+        height: 50vmax;
+        width: 35vmax;
+        margin: 20px 0 0 0;
+    }
 }

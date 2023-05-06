@@ -30,9 +30,9 @@ function displayGroup(data)
             currentGroup = data.content[key];
 
             groups.innerHTML += `<div><h1 id="divsID" class='collapsible'>` + key + `:` + ` Members: `+currentGroup.members.length+` ` + ` Group Goals: `+10+`</h1>
-            <div class='content'><div class='groupDivs'id="` + key + "-info" + `"> Members<br> </div> <div class='groupDivs' id = "` + key + "-goals" + `"> Group Goals </div>   <br>
+            <div class='content'><div class='groupDivs'id="` + key + "-info" + `"> <h1>Members</h1><br> </div> <div class='groupDivs' id = "` + key + "-goals" + `"> Group Goals </div>   <br>
             <button type="button" id="description" onclick="DisplayDescription('${currentGroup.description}');">Description</button><br>
-            <button type="button" id="LeaveGroupButton" onclick="LeavegGroup('${key}');">LeaveGroup</button> </div></div>`;
+            <button type="button" id="LeaveGroupButton" onclick="LeavegGroup('${key}');">Leave Group</button> </div></div>`;
 
             var membersSection = document.getElementById(key + "-info"); 
             var groupGoalsSection = document.getElementById(key + "-goals");    
@@ -40,6 +40,7 @@ function displayGroup(data)
             displayGroupInfo(currentGroup, key + "-info")
             displayGroupGoals(currentGroup, key + "-goals")
 
+            //Reference for collapsible JS: https://www.w3schools.com/howto/howto_js_collapsible.asp
             for (var i = 0; i < coll.length; i++) {
                 coll[i].addEventListener("click", function() {
                   this.classList.toggle("active");
@@ -64,7 +65,8 @@ function displayGroupInfo(data, divId)
     for (var i = 0; i < data.members.length; i++) {
         var member = data.members[i]
       
-        container.innerHTML += member+'<button id=somebutton type=button onclick="removeMember(\'' +i+ '\',\'' +data.members +'\',\'' +divId +'\')">remove</button><br>';
+        //container.innerHTML += '<div id = "memberContainer"><p>'+ member +'</p><button id="somebutton" type=button onclick="removeMember(\'' +i+ '\',\'' +data.members +'\',\'' +divId +'\')">Remove</button><div>';
+        container.innerHTML += '<div id = "memberContainer"><p>'+ member +'</p><button id="removeMemberButton" type=button onclick="removeMember(this)">Remove</button></div>';
     
     }
     // container.innerHTML += '<br><br><input type=text id=membername placeholder=Member Name>';
@@ -78,8 +80,10 @@ function addMember(member,data){
     console.log(data);
     console.log("click")
 }
-function removeMember(member,data,div){
-    data = data.split(',')
+function removeMember(r){
+    //parentDiv in this case would be <div id = "memberContainer"></div>
+    let parentDiv = r.parentNode;
+    parentDiv.remove();
   
     // removes user from server
     // data ={
@@ -111,11 +115,10 @@ function removeMember(member,data,div){
         container.innerHTML="";
     for (var i = 0; i < data.length; i++) {
         var member = data[i]
-        container.innerHTML += member+'<button id=somebutton type=button onclick="removeMember(\'' +member+ '\',\'' +data +'\',\'' +div +'\')">remove</button><br>';
+        container.innerHTML += member+'<button id=somebutton type=button onclick="removeMember(\'' +member+ '\',\'' +data +'\',\'' +div +'\')">Remove</button><br>';
        }
     }
 }
-
 
 const addDescriptionContainer = document.querySelector('#addDescriptionContainer');
 function DisplayDescription(description){
@@ -123,7 +126,7 @@ function DisplayDescription(description){
     overlay.style.display = "block";
 	addDescriptionContainer.style.display = "block";
     var descritpionInfo = document.getElementById("descriptionInfo");
-    descritpionInfo.innerHTML = ``+description+``;
+    descritpionInfo.innerHTML = `<p>`+description+`</p>`;
     const removeDescriptionContainer = document.querySelector('#exitButtonDescription');
     removeDescriptionContainer.addEventListener("click",function(){
     overlay.style.display = "none";
