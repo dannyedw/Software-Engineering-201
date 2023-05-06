@@ -112,13 +112,25 @@ function removeMember(member,data,div){
     for (var i = 0; i < data.length; i++) {
         var member = data[i]
         container.innerHTML += member+'<button id=somebutton type=button onclick="removeMember(\'' +member+ '\',\'' +data +'\',\'' +div +'\')">remove</button><br>';
-    
-    }
+       }
     }
 }
+
+
+const addDescriptionContainer = document.querySelector('#addDescriptionContainer');
 function DisplayDescription(description){
     console.log(description);
+    overlay.style.display = "block";
+	addDescriptionContainer.style.display = "block";
+    var descritpionInfo = document.getElementById("descriptionInfo");
+    descritpionInfo.innerHTML = ``+description+``;
+    const removeDescriptionContainer = document.querySelector('#exitButtonDescription');
+    removeDescriptionContainer.addEventListener("click",function(){
+    overlay.style.display = "none";
+	addDescriptionContainer.style.display = "none";
+    })
 }
+
 function LeavegGroup(groupName){
     console.log("leaving group:"+groupName);
      // removes user from server
@@ -135,6 +147,7 @@ function LeavegGroup(groupName){
     //     }
     // }
 }
+
 
 function displayGroupGoals(data, divId)
 {

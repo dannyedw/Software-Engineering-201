@@ -17,9 +17,12 @@ block header
    
 block content
   div#groups
-
   button#createGroupButton(type='button') Create Group
   .overlay(style='display:none;')
+    #addDescriptionContainer.popup(style='display:none;')
+      button#exitButtonDescription(type='button') X
+      h1 Description 
+      div#descriptionInfo
     #addGroupContainer.popup(style='display:none;')
       button#exitButtonCreateGroup(type='button') X
       h1#gcHeader Group Creation Form

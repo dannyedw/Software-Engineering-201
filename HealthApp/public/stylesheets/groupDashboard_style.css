@@ -257,3 +257,34 @@
   color: rgb(255,255,255);
   background-color: #3E946F;
 }
+#addDescriptionContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+  border: 5px solid #0793f8;
+  border-style: groove;
+  border-radius: 16px;
+
+  background-color: #B9DDE0;
+
+  width: 1000px;
+  height: 400px;
+  box-sizing: border-box;
+  
+  position: fixed;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -25%);
+
+  padding-top: 10px;
+  padding-bottom: 50px;
+}
+
+#exitButtonDescription
+{
+  float: right;
+  background-color: white;
+  color: black;
+  font-weight: bold;
+}
