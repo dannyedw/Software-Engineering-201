@@ -28,10 +28,11 @@ function displayGroup(data)
             for(let key in data.content)
         {
             currentGroup = data.content[key];
-
+            div = key + "-info";
+            
             groups.innerHTML += `<div><h1 id="divsID" class='collapsible'>` + key + `:` + ` Members: `+currentGroup.members.length+` ` + ` Group Goals: `+10+`</h1>
-            <div class='content'><div class='groupDivs'id="` + key + "-info" + `"> <h1>Members</h1><br> <input type="text" placeholder="Enter Member here"> <button onclick="addMember(${currentGroup},${key + "-info"})">Add Member</button></div>  
-            <div class='groupDivs' id = "` + key + "-goals" + `"> Group Goals </div><br>
+            <div class='content'><div class='groupDivs'id="` + key + "-info" + `"> <h1>Members</h1><br>` + '<input type="text" id="addingMember" placeholder="Enter Member here"> <button type="button" onclick="addMember(\'' + currentGroup + '\',\'' + div + '\');">Add Member</button></div>' +
+            `<div class='groupDivs' id = "` + key + "-goals" + `"> Group Goals </div><br>
             <button type="button" id="description" onclick="DisplayDescription('${currentGroup.description}');">Description</button><br>
             <button type="button" id="LeaveGroupButton" onclick="LeavegGroup('${key}');">Leave Group</button> </div></div>`;
 
@@ -77,20 +78,38 @@ function displayGroupInfo(data, divId)
 }
 
 function addMember(data,divId){
-    data = data.split(',')
+
+    // adds user to server
+    // data ={
+    //     type:"add-user",
+    //     content:{
+    //         username:"USERNAME"
+    //     }
+    // }
+    // dataRequest(data,addMemberHandler)
+    // function addMemberHandler(response){
+    //     if(response.status !=200){
+    //         console.log(response.content)
+    //     }
+    // }
+ 
     console.log(data)
-    var member = document.getElementById("addingMember").value;
-    data.push(member)
-    container = document.getElementById(divId);
+    console.log(divId)
+
+    var memberss = document.getElementById("addingMember").value;
     container.innerHTML = "";
     
+
+    container = document.getElementById(divId);
+
     for (var i = 0; i < data.members.length; i++) {
-        var member = data[i]
+        var member = data.members[i]
       
-        container.innerHTML += member+'<button id=somebutton type=button onclick="removeMember(\'' +i+ '\',\'' +data.members +'\',\'' +divId +'\')">remove</button><br>';
+        container.innerHTML += '<div id = "memberContainer"><p>'+ member +'</p><button id="removeMemberButton" type=button onclick="removeMember(this)">Remove</button></div>';
     
     }
 }
+
 function removeMember(r){
     //parentDiv in this case would be <div id = "memberContainer"></div>
     let parentDiv = r.parentNode;
