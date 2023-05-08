@@ -31,7 +31,7 @@ function displayGroup(data)
             div = key + "-info";
             
             groups.innerHTML += `<div><h1 id="divsID" class='collapsible'>` + key + `:` + ` Members: `+currentGroup.members.length+` ` + ` Group Goals: `+10+`</h1>
-            <div class='content'><div class='groupDivs'id="` + key + "-info" + `"> <h1>Members</h1><br>` + '<input type="text" id="addingMember" placeholder="Enter Member here"> <button type="button" onclick="addMember(\'' + currentGroup + '\',\'' + div + '\');">Add Member</button></div>' +
+            <div class='content'><div class='groupDivs'id="` + key + "-info" + `"> <h1>Members</h1><br>` + '<input type="text" id="addingMember" placeholder="Enter Member here"> <button type="button" onclick="addMember(\'' + currentGroup.members + '\',\'' + div + '\');">Add Member</button></div>' +
             `<div class='groupDivs' id = "` + key + "-goals" + `"> Group Goals </div><br>
             <button type="button" id="description" onclick="DisplayDescription('${currentGroup.description}');">Description</button><br>
             <button type="button" id="LeaveGroupButton" onclick="LeavegGroup('${key}');">Leave Group</button> </div></div>`;
@@ -78,7 +78,7 @@ function displayGroupInfo(data, divId)
 }
 
 function addMember(data,divId){
-
+    data = data.split(",")
     // adds user to server
     // data ={
     //     type:"add-user",
@@ -93,17 +93,16 @@ function addMember(data,divId){
     //     }
     // }
  
-    console.log(data)
-    console.log(divId)
-
     var memberss = document.getElementById("addingMember").value;
+    data.push(memberss);
+    container = document.getElementById(divId);
     container.innerHTML = "";
+
+    container.innerHTML = '<h1>Members</h1><br> <input type="text" id="addingMember" placeholder="Enter Member here"> <button type="button" onclick="addMember(\'' + currentGroup.members + '\',\'' + div + '\');">Add Member</button></div>'
     
 
-    container = document.getElementById(divId);
-
-    for (var i = 0; i < data.members.length; i++) {
-        var member = data.members[i]
+    for (var i = 0; i < data.length; i++) {
+        var member = data[i]
       
         container.innerHTML += '<div id = "memberContainer"><p>'+ member +'</p><button id="removeMemberButton" type=button onclick="removeMember(this)">Remove</button></div>';
     
