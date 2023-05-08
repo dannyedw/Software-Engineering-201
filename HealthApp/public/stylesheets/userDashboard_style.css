@@ -499,7 +499,7 @@ tr:hover {
 {    
     display: flex;
     align-items: center;
-    margin: 0 10px 22px;
+    margin: 0 10px 33px;
 }
 
 #adviceInfo
@@ -515,7 +515,7 @@ tr:hover {
     transform: translate(-50%, -50%);  */
 
     margin: 0 10px;
-    
+    font-size: 2.5vmin;
 }
 
 #weightUpdateButton
@@ -526,6 +526,7 @@ tr:hover {
     transform: translate(-50%, -50%); */
 
     margin: 0 10px;
+    font-size: 2.5vmin;
 }
 
 #ageUpdateButton
@@ -536,6 +537,7 @@ tr:hover {
     transform: translate(-50%, -50%); */
 
     margin: 0 10px;
+    font-size: 2.5vmin;
 }
 
 #userAdvice
@@ -555,6 +557,11 @@ tr:hover {
 {
     width: 100%;
     overflow: auto;
+}
+
+#deletePersonalGoalButton
+{
+    font-size: 2vmin;
 }
 
 @media (max-width: 600px)
@@ -595,6 +602,21 @@ tr:hover {
         display: flex;
         margin: 10px auto;
     }
+
+    #heightUpdateButton
+    {
+        font-size: 2.5vmax;
+    }
+
+    #weightUpdateButton
+    {
+        font-size: 2.5vmax;
+    }
+
+    #ageUpdateButton
+    {
+        font-size: 2.5vmax;
+    }
     
     .exerciseDietContainer
     {
@@ -618,4 +640,10 @@ tr:hover {
         width: 35vmax;
         margin: 20px 0 0 0;
     }
+
+    #deletePersonalGoalButton
+    {
+        font-size: 2vmax;
+    }
+
 }

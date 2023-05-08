@@ -689,7 +689,7 @@ function displayPersonalGoals(data)  //this displays the goals in the goal conta
 						"</div id='statusContainer'>" + "<p> Status: " + currentGoal.status + "</p></div>" +
 							"<div id='daysContainer'><p> Days Remaining: " + daysRemaining +"</p></div>" + "<div id='progressContainer'><p>Progress: " + currentGoal.extraData[0] +
 							` <progress value="` + goalProgress + `" max="100"></progress>` + currentGoal.extraData[1] +
-							" " + `<button type='button' onclick = "deletePersonalGoal(` + currentGoal.goalId + `)" style ='margin: 5px 0'>Delete</button></div>`;
+							" " + `<button type='button' id='deletePersonalGoalButton' onclick = "deletePersonalGoal(` + currentGoal.goalId + `)" style ='margin: 5px 0'>Delete</button></div>`;
 					}
 				}
 				else {
