@@ -104,7 +104,7 @@ function addMember(data,divId){
     for (var i = 0; i < data.length; i++) {
         var member = data[i]
       
-        container.innerHTML += '<div id = "memberContainer"><p>'+ member +'</p><button id="removeMemberButton" type=button onclick="removeMember(this)">Remove</button></div>';
+        container.innerHTML += '<div id = "memberContainer"><p>'+ member +'</p><button id="removeMemberButton" type=button onclick="removeMember(\'' +member+ '\',\'' +data +'\',\'' +div +'\')">Remove</button></div>';
     
     }
 }
@@ -137,9 +137,8 @@ function removeMember(r){
         const temp = data[member];
         data[member] = data[0];
         data[0] = temp;
-        data.pop[0];
-        
         data.shift()
+
         console.log(data)
         container.innerHTML="";
     for (var i = 0; i < data.length; i++) {
