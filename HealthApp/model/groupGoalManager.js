@@ -110,7 +110,7 @@ function update(username, content)
     {
         //finds user index as this index is the same for the status array
         let userIndex = table[content.groupName][content.goalId].users.indexOf(username);
-        if(userIndex = -1) return { status: 400, content: "User not found in Goal"};
+        if(userIndex === -1) return { status: 400, content: "User not found in Goal"};
         table[content.groupName][content.goalId].status[userIndex] = content.status;
     } 
 
@@ -125,28 +125,32 @@ function dataRequest(username,content)
     if (!content.groupName) return { status: 400, content: "Missing required data - date" };
 
     const table = database.getTable("GROUPGOALS");
-    let data = [];
+    groupName = content.groupName
+    let data = {groupName: groupName,
+                goals: []            
+    };
 
     if(table[content.groupName])
     {
-        let groupGoals = table[username];
+        let groupGoals = table[content.groupName];
         let currentDateSplit = content.date.split("-");
         for(entry in groupGoals){
             let currentGoalSplit = groupGoals[entry].endDate.split("-");
-            if((currentDateSplit[0] < currentGoalSplit[0]) || (currentDateSplit[1] < currentGoalSplit[1]) || 
+            if((currentDateSplit[0] <= currentGoalSplit[0]) && (currentDateSplit[1] <= currentGoalSplit[1]) && 
                     (currentDateSplit[2] <= currentGoalSplit[2]))
             {
                 if (groupGoals[entry].users.includes(username))
                 {
                     groupGoals[entry]["goalId"] = entry;
-                    data.push(groupGoals[entry]);
+                    data.goals.push(groupGoals[entry]);
                 }
             }
         }
         return { status: 200, content: data };
     }
 
-    return {status: 400, content: "Group not found in Database/no goals"};  //might actualy need to make a new use entry
+    table[content.groupName] = {};
+    return {status: 200, content: data}; 
 }
 
 exports.create = create;

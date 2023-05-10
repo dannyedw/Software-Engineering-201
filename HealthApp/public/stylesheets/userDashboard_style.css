@@ -11,8 +11,8 @@
     
     display: block;
     margin: 0 auto;
-    position: relative;
-    transform: translate(0%, -625%);
+    /* position: relative; */
+    /* transform: translate(0%, -625%); */
     /* Reference for positioning: https://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/*/
 }
 
@@ -21,7 +21,7 @@
     position: relative;
     /* top: 0%;
     left: 0%; */
-    transform: translate(0%, -500%);
+    /* transform: translate(0%, -500%); */
     text-align: center;
 }
 
@@ -162,6 +162,8 @@
     border-style: groove;
     border-radius: 16px;
 
+    width: 75%;
+
     /* #7B94B1 */
     /* #6482a4 */
     background-color: #B9DDE0;
@@ -173,7 +175,7 @@
     position: relative;
     /* top: 35%;
     left: 50%; */
-    transform: translate(0%, -50%);
+    /* transform: translate(0%, -50%); */
 
     padding: 15px 0;
 }
@@ -208,7 +210,7 @@
     background-color: #FFFFFF;
 
     width: 20vmax;
-    height: 30vmin;
+    height: 50vmin;
     
     /* margin-left: 50px;
     padding-left: 5px;
@@ -246,7 +248,7 @@
     text-align: center;
 
     width: 20vmax;
-    height: 30vmin;
+    height: 50vmin;
 
     background-color: #FFFFFF;
     /* margin-right: 12px; */
@@ -282,6 +284,10 @@
     border-radius: 16px;
     padding: 10px;
 
+    background-color: #B9DDE0;
+    font-weight: bolder;
+
+
     width: 40%;
     margin: 0 auto 20px;
 
@@ -314,6 +320,7 @@
     width: 45px;  
     font-size: 2em;
     font-weight: bold;
+    -webkit-text-stroke: 2px black;
     border-radius: 50%;
     background-color: #00BFFF;
     color: white;
@@ -445,38 +452,92 @@ tr:hover {
     align-items: center;
     margin: 10px 10px 0;
     border: 5px solid #0793f8;
+    background-color: #B9DDE0;
+    font-weight: bolder;
     border-style: groove;
     border-radius: 16px;
-    width: 22%;
-    font-size: 1.25em;
+    width: 50vmax;
+    font-size: 1.5em;
 
     position: relative;
-    transform: translate(0%, 0%);
+    margin: 10px auto 0;
+    /* transform: translate(0%, 0%); */
     /* top: 18%; */
+}
+
+#userInfoValues
+{
+    display: flex;
+    flex-direction: row;
+}
+
+#heightContainer
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 10px;
+}
+
+#weightContainer
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 10px;
+}
+
+#ageContainer
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 10px;
+}
+
+#bmiContainer
+{    
+    display: flex;
+    align-items: center;
+    margin: 0 10px 33px;
+}
+
+#adviceInfo
+{
+    text-align: center;
 }
 
 #heightUpdateButton
 {
-    position: relative;
+    /* position: relative;
     margin-top: 14px;
     left: 15%;
-    transform: translate(-50%, -50%); 
+    transform: translate(-50%, -50%);  */
+
+    margin: 0 10px;
+    font-size: 2.5vmin;
 }
 
 #weightUpdateButton
 {
-    position: relative;
+    /* position: relative;
     top: 31.9%;
     left: 31.25%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); */
+
+    margin: 0 10px;
+    font-size: 2.5vmin;
 }
 
 #ageUpdateButton
 {
-    position: relative;
+    /* position: relative;
     top: 31.9%;
     left: 40%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); */
+
+    margin: 0 10px;
+    font-size: 2.5vmin;
 }
 
 #userAdvice
@@ -498,14 +559,72 @@ tr:hover {
     overflow: auto;
 }
 
+#deletePersonalGoalButton
+{
+    font-size: 2vmin;
+}
+
 @media (max-width: 600px)
 {
+    #userInformationContainer 
+    {
+        position: relative;
+        margin: 10px auto 0;
+        /* transform: translate(0%, 0%); */
+        /* top: 18%; */
+    }
+
+    #userInfoValues
+    {
+        flex-direction: column;
+    }
+
+    #heightContainer
+    {
+        display: flex;
+        margin: 10px 0;
+    }
+
+    #weightContainer
+    {
+        display: flex;
+        margin: 10px 0;
+    }
+
+    #ageContainer
+    {
+        display: flex;
+        margin: 10px 0;
+    }
+
+    #bmiContainer
+    {
+        display: flex;
+        margin: 10px auto;
+    }
+
+    #heightUpdateButton
+    {
+        font-size: 2.5vmax;
+    }
+
+    #weightUpdateButton
+    {
+        font-size: 2.5vmax;
+    }
+
+    #ageUpdateButton
+    {
+        font-size: 2.5vmax;
+    }
+    
     .exerciseDietContainer
     {
         display: flex;
         flex-direction: column;
         align-self: center;
         padding: 30px;
+        position: relative;
     }
 
     .exercise
@@ -521,4 +640,114 @@ tr:hover {
         width: 35vmax;
         margin: 20px 0 0 0;
     }
+
+    #deletePersonalGoalButton
+    {
+        font-size: 2vmax;
+    }
+    
 }
+#viewCalorieGraph
+    {
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 30px;
+        border-radius: 16px;
+        transition: background-color 250ms ease-in;
+    }
+#viewCalorieGraph:hover
+    {
+        color: rgb(255,255,255);
+        background-color: #3E946F;
+    }
+#addCalorieGraphContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  
+    border: 5px solid #0793f8;
+    border-style: groove;
+    border-radius: 16px;
+  
+    background-color: #B9DDE0;
+  
+    width: 50vw;
+    height: 40vh;
+    box-sizing: border-box;
+    
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -25%);
+  
+    padding-top: 10px;
+    padding-bottom: 50px;
+    }
+
+#exitCalorieGraphContainer{
+    float: right;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+}    
+
+
+
+#viewWeightGraph
+    {
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 30px;
+        border-radius: 16px;
+        transition: background-color 250ms ease-in;
+    }
+#viewWeightGraph:hover
+    {
+        color: rgb(255,255,255);
+        background-color: #3E946F;
+    }
+#addWeightGraphContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  
+    border: 5px solid #0793f8;
+    border-style: groove;
+    border-radius: 16px;
+  
+    background-color: #B9DDE0;
+  
+    width: 50vw;
+    height: 40vh;
+    box-sizing: border-box;
+    
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -25%);
+  
+    padding-top: 10px;
+    padding-bottom: 50px;
+    }
+
+#exitWeightGraphContainer{
+    float: right;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+}    
+.overlay2 {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1;
+  }
+  
+  .overlay2Hidden {
+      display:none;
+  }

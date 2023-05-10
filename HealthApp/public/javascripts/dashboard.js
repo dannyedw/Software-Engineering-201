@@ -646,8 +646,8 @@ function displayPersonalGoals(data)  //this displays the goals in the goal conta
 		{
 			//i know this is probaby very bad but callback functions were annoying
 			let userInfo = document.getElementById("userInformation").textContent;
-			let currentWeight = userInfo.split(" ")[5].split("kg")[0];
-			
+			let currentWeight = userInfo.split(" ")[3].split("kg")[0];
+
 			let minDaysRemaining = 11; //11 as we want to find minimum, any goal under 10 days will be smaller than this
 
 			for (let i = 0; i < personalGoals.length; i++) {
@@ -685,9 +685,11 @@ function displayPersonalGoals(data)  //this displays the goals in the goal conta
 						{
 							minDaysRemaining = daysRemaining;
 						}
-						goal.innerHTML = "Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: " + currentGoal.status
-							+ " | Days Remaining: " + daysRemaining +" <br> Progress: " + currentGoal.extraData[0] + ` <progress value="` + goalProgress + `" max="100"></progress> ` + currentGoal.extraData[1] +
-							" " + `<button type='button' onclick = "deletePersonalGoal(` + currentGoal.goalId + `)" style ='margin: 5px 0'>Delete</button>`;
+						goal.innerHTML = "<div id='weightGoalContainer'><p>Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + 
+						"</div id='statusContainer'>" + "<p> Status: " + currentGoal.status + "</p></div>" +
+							"<div id='daysContainer'><p> Days Remaining: " + daysRemaining +"</p></div>" + "<div id='progressContainer'><p>Progress: " + currentGoal.extraData[0] +
+							` <progress value="` + goalProgress + `" max="100"></progress>` + currentGoal.extraData[1] +
+							" " + `<button type='button' id='deletePersonalGoalButton' onclick = "deletePersonalGoal(` + currentGoal.goalId + `)" style ='margin: 5px 0'>Delete</button></div>`;
 					}
 				}
 				else {
@@ -776,41 +778,43 @@ function displayUserInformation(userInformation) {
 	//`<button type='button' onclick="displayAgeUpdate()">Update</button>`
 
 	userInformationTitleContainer.innerHTML = firstName + "'s Information: ";
-	userInformationContainer.innerHTML = "Height: " + height + "cm " + " | Weight: " + weight + "kg " + " | Age: " + age + " | BMI: " + bmi + '<br>'
-		+ `<button type='button' onclick="displayHeightUpdate()" id='heightUpdateButton'>Update</button>` + `<button type='button' onclick="displayWeightUpdate()" id='weightUpdateButton'>Update</button>` + `<button type='button' onclick="displayAgeUpdate()" id='ageUpdateButton'>Update</button>`;
+	userInformationContainer.innerHTML = "<div id='userInfoValues'><div id = 'heightContainer'><p>Height: " + height + "cm </p><button type='button' onclick='displayHeightUpdate()' id='heightUpdateButton'>Update</button></div>" + 
+	"<div id='weightContainer'><p>Weight: " + weight + "kg </p><button type='button' onclick='displayWeightUpdate()' id='weightUpdateButton'>Update</button></div>" + 
+	"<div id='ageContainer'><p>Age: " + age + "</p><button type='button' onclick='displayAgeUpdate()' id='ageUpdateButton'>Update</button></div>" + 
+	"<div id='bmiContainer'>BMI: " + bmi + '</div><div>';
 
 	if (bmi <= 18) {
-		adviceContainer.innerHTML = "Feedback: BMI Low - You need to gain weight (a healthy BMI should be between 10 and 24)";
+		adviceContainer.innerHTML = "<p id='adviceInfo'>Feedback: BMI Low - You need to gain weight (a healthy BMI should be between 10 and 24)</p>";
 	}
 	else if (bmi >= 19 && bmi <= 24) {
-		adviceContainer.innerHTML = "Feedback: You are Healthy";
+		adviceContainer.innerHTML = "<p id='adviceInfo'>Feedback: You are Healthy</p>";
 	}
 	else if (bmi >= 25 && bmi <= 29) {
-		adviceContainer.innerHTML = "Feedback: BMI Overweight - You need to lose some weight (a healthy BMI should be between 10 and 24)";
+		adviceContainer.innerHTML = "<p id='adviceInfo'>Feedback: BMI Overweight - You need to lose some weight (a healthy BMI should be between 10 and 24)</p>";
 	}
 	else {
-		adviceContainer.innerHTML = "Feedback: BMI Obese - You need to immedialty lose weight as you are very unhealthy (a healthy BMI should be between 10 and 24)";
+		adviceContainer.innerHTML = "<p id='adviceInfo'>Feedback: BMI Obese - You need to immedialty lose weight as you are very unhealthy (a healthy BMI should be between 10 and 24)</p>";
 	}
 	getPersonalGoals();
 }
 
 function displayHeightUpdate() {
 	let adviceContainer = document.getElementById("userAdvice");
-	adviceContainer.innerHTML = "Enter new Height(cm): " + `<input type="text" id="newHeight" name="newHeight">
+	adviceContainer.innerHTML = "<p>Enter new Height(cm): </p>" + `<input type="text" id="newHeight" name="newHeight">
   <button type='button' onclick = "updateHeight()" style ='margin: 5px 0'>Update</button>
   <button type='button' onclick="getUserInformation()" id='cancelAdding'>Cancel</button>`;
 }
 
 function displayWeightUpdate() {
 	let adviceContainer = document.getElementById("userAdvice");
-	adviceContainer.innerHTML = "Enter new Weight(kg): " + `<input type="text" id="newWeight" name="newWeight">
+	adviceContainer.innerHTML = "<p>Enter new Weight(kg): </p>" + `<input type="text" id="newWeight" name="newWeight">
   <button type='button' onclick = "updateWeight()" style ='margin: 5px 0'>Update</button>
   <button type='button' onclick="getUserInformation()" id='cancelAdding'>Cancel</button>`;
 }
 
 function displayAgeUpdate() {
 	let adviceContainer = document.getElementById("userAdvice");
-	adviceContainer.innerHTML = "Enter new Age: " + `<input type="text" id="newAge" name="newAge">
+	adviceContainer.innerHTML = "<p>Enter new Age: </p>" + `<input type="text" id="newAge" name="newAge">
   <button type='button' onclick = "updateAge()" style ='margin: 5px 0'>Update</button>
   <button type='button' onclick="getUserInformation()" id='cancelAdding'>Cancel</button>`;
 }
@@ -831,7 +835,7 @@ function updateHeight() {
 
 	if (error) {
 		let adviceContainer = document.getElementById("userAdvice");
-		adviceContainer.innerHTML = "Enter new Height(cm): " + `<input type="text" id="newHeight" name="newHeight"><button type='button' onclick= "updateHeight()" style ='margin: 5px 0'>Update</button>` + " Invalid Entry";
+		adviceContainer.innerHTML = "<p>Enter new Height(cm): </p>" + `<input type="text" id="newHeight" name="newHeight"><button type='button' onclick= "updateHeight()" style ='margin: 5px 0'>Update</button>` + " Invalid Entry";
 	}
 	else {
 		let data = {
@@ -858,7 +862,7 @@ function updateWeight() {
 
 	if (error) {
 		let adviceContainer = document.getElementById("userAdvice");
-		adviceContainer.innerHTML = "Enter new Weight(kg): " + `<input type="text" id="newWeight" name="newWeight"><button type='button' onclick= "updateWeight()" style ='margin: 5px 0'>Update</button>` + " Invalid Entry";
+		adviceContainer.innerHTML = "<p>Enter new Weight(kg): </p>" + `<input type="text" id="newWeight" name="newWeight"><button type='button' onclick= "updateWeight()" style ='margin: 5px 0'>Update</button>` + " Invalid Entry";
 	}
 	else {
 		let data = {
@@ -885,7 +889,7 @@ function updateAge() {
 
 	if (error) {
 		let adviceContainer = document.getElementById("userAdvice");
-		adviceContainer.innerHTML = "Enter new Age: " + `<input type="text" id="newAge" name="newAge"><button type='button' onclick= "updateAge()" style ='margin: 5px 0'>Update</button>` + " Invalid Entry";
+		adviceContainer.innerHTML = "<p>Enter new Age: </p>" + `<input type="text" id="newAge" name="newAge"><button type='button' onclick= "updateAge()" style ='margin: 5px 0'>Update</button>` + " Invalid Entry";
 	}
 	else {
 		let data = {
@@ -897,10 +901,49 @@ function updateAge() {
 }
 
 var userDeadlineAlert = false; //used so the user isnt notified every time an active goal is displayed
-console.log("We are running");
 
 getUserInformation();
 
 //gives the date a default value to todays date
 var date = document.getElementById("date")
 date.value = getAndFormatCurrentDate();  
+
+
+/// Graph section of the Dashboard ///
+
+//weight graph section
+var weightGraph = document.getElementById("viewWeightGraph");
+var WeightGraphExit = document.getElementById("exitWeightGraphContainer");
+
+weightGraph.addEventListener("click",displayWeightGraph);
+WeightGraphExit.addEventListener("click",removeWeightGraph);
+const weightGraphContainer = document.querySelector('#addWeightGraphContainer')
+
+function displayWeightGraph(){
+	overlay.style.display = "block";
+	weightGraphContainer.style.display = "block";
+}
+
+function removeWeightGraph(){
+	overlay.style.display = "none";
+	weightGraphContainer.style.display = "none";
+}
+
+//food graph section
+const overlay2 = document.querySelector('.overlay2');
+var foodGraphExit = document.getElementById("exitCalorieGraphContainer");
+var foodGraph = document.getElementById("viewCalorieGraph");
+
+foodGraph.addEventListener("click",displayFoodGraph);
+foodGraphExit.addEventListener("click",removeFoodGraph);
+const foodGraphContainer = document.querySelector('#addCalorieGraphContainer')
+
+function displayFoodGraph(){
+	overlay2.style.display = "block";
+	foodGraphContainer.style.display = "block";
+}
+
+function removeFoodGraph(){
+	overlay2.style.display = "none";
+	foodGraphContainer.style.display = "none";
+}

@@ -1,5 +1,20 @@
 var groups = document.getElementById("groups");
 
+function getAndFormatCurrentDate() {
+	const CurrentDate = new Date();
+	var year = CurrentDate.getFullYear();
+	var month = CurrentDate.getMonth() + 1;
+	var day = CurrentDate.getDate();
+	if (day < 10) {
+		day = "0" + day;
+	}
+	if (month < 10) {
+		month = "0" + month;
+	}
+	
+	return year + "-" + month + "-" + day;
+}
+
 function requestGroupInformation()
 //this loops through all the groups the user is in and requests data
 //it should then call the display group function
@@ -31,7 +46,7 @@ function displayGroup(data)
             div = key + "-info";
             
             groups.innerHTML += `<div><h1 id="divsID" class='collapsible'>` + key + `:` + ` Members: `+currentGroup.members.length+` ` + ` Group Goals: `+10+`</h1>
-            <div class='content'><div class='groupDivs'id="` + key + "-info" + `"> <h1>Members</h1><br>` + '<input type="text" id="addingMember" placeholder="Enter Member here"> <button type="button" onclick="addMember(\'' + currentGroup + '\',\'' + div + '\');">Add Member</button></div>' +
+            <div class='content'><div class='groupDivs'id="` + key + "-info" + `"> <h1>Members</h1><br>` + '<input type="text" id="addingMember" placeholder="Enter Member here"> <button type="button" onclick="addMember(\'' + currentGroup.members + '\',\'' + div + '\');">Add Member</button></div>' +
             `<div class='groupDivs' id = "` + key + "-goals" + `"> Group Goals </div><br>
             <button type="button" id="description" onclick="DisplayDescription('${currentGroup.description}');">Description</button><br>
             <button type="button" id="LeaveGroupButton" onclick="LeavegGroup('${key}');">Leave Group</button> </div></div>`;
@@ -40,7 +55,15 @@ function displayGroup(data)
             var groupGoalsSection = document.getElementById(key + "-goals");    
 
             displayGroupInfo(currentGroup, key + "-info")
-            displayGroupGoals(currentGroup, key + "-goals")
+
+            let groupReqData = {
+                type: "group-goal-request",
+                content: {
+                    date: getAndFormatCurrentDate(),
+                    groupName: key
+                }
+            }
+            dataRequest(groupReqData, displayGroupGoals);
 
             //Reference for collapsible JS: https://www.w3schools.com/howto/howto_js_collapsible.asp
             for (var i = 0; i < coll.length; i++) {
@@ -78,7 +101,7 @@ function displayGroupInfo(data, divId)
 }
 
 function addMember(data,divId){
-
+    data = data.split(",")
     // adds user to server
     // data ={
     //     type:"add-user",
@@ -93,19 +116,18 @@ function addMember(data,divId){
     //     }
     // }
  
-    console.log(data)
-    console.log(divId)
-
     var memberss = document.getElementById("addingMember").value;
+    data.push(memberss);
+    container = document.getElementById(divId);
     container.innerHTML = "";
+
+    container.innerHTML = '<h1>Members</h1><br> <input type="text" id="addingMember" placeholder="Enter Member here"> <button type="button" onclick="addMember(\'' + currentGroup.members + '\',\'' + div + '\');">Add Member</button></div>'
     
 
-    container = document.getElementById(divId);
-
-    for (var i = 0; i < data.members.length; i++) {
-        var member = data.members[i]
+    for (var i = 0; i < data.length; i++) {
+        var member = data[i]
       
-        container.innerHTML += '<div id = "memberContainer"><p>'+ member +'</p><button id="removeMemberButton" type=button onclick="removeMember(this)">Remove</button></div>';
+        container.innerHTML += '<div id = "memberContainer"><p>'+ member +'</p><button id="removeMemberButton" type=button onclick="removeMember(\'' +member+ '\',\'' +data +'\',\'' +div +'\')">Remove</button></div>';
     
     }
 }
@@ -138,9 +160,8 @@ function removeMember(r){
         const temp = data[member];
         data[member] = data[0];
         data[0] = temp;
-        data.pop[0];
-        
         data.shift()
+
         console.log(data)
         container.innerHTML="";
     for (var i = 0; i < data.length; i++) {
@@ -181,15 +202,179 @@ function LeavegGroup(groupName){
     // }
 }
 
-
-function displayGroupGoals(data, divId)
+function displayGroupGoals(data)
 {
-    container = document.getElementById(divId);
-    container.innerHTML = `<p>Hello goals here</p>`
+    // let key = Object.keys(data.content)[0];
+    let key = data.content.groupName
+    let container = document.getElementById(key + '-goals')
+    container.innerHTML = "";
+    if(data.content.goals.length === 0)
+    {
+        container.innerHTML = `No Goals to Show`
+    }
+    else
+    {
+        goals = data.content.goals;
+        // console.log(key + " goals: ")
+        var minDaysRemaining = 11;
+        for (let i = 0; i < goals.length; i++)
+        {
+            currentGoal = goals[i];
+            // /START    CREATE POPUP TO GET USER DATA THEN PUT IN SERVER AND UPDATE PAGE (update done by error reporter if used)
+            var goal = document.createElement("p");
+            var userIndex = currentGoal.users.indexOf(USERNAME)
+            let friendGoalProgress = "";
+            for(let j = 0; j < currentGoal.users.length; j++)
+            {
+                if(j != userIndex)
+                {
+                    friendGoalProgress = friendGoalProgress + currentGoal.users[j] + " - " + currentGoal.status[j] + "    ";
+                }
+            }
+
+				if (currentGoal.type == "weight") {
+					var goalProgress = ((weight - currentGoal.extraData[0]) / (currentGoal.extraData[1] - currentGoal.extraData[0])) * 100;
+					if (currentGoal.status[userIndex] != "In Progress") {
+						goal.innerHTML = "Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: " + currentGoal.status[userIndex] + 
+							 `<br> Friends Progress: ` + friendGoalProgress;
+					}
+					else if (goalProgress >= 100) {
+						data = {
+							type: "group-goal-update",
+							content: { goalId: currentGoal.goalId, status: "Goal Completed Successfully", groupName: key}
+						};
+						dataRequest(data, errorReporter);
+
+                        goalProgress = 100;
+						goal.innerHTML = "Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: Goal Completed Successfully" + 
+							+ "| Progress: " + currentGoal.extraData[0] + ` <progress value="` + goalProgress + `" max="100"></progress> ` + currentGoal.extraData[1] +
+							" " + `<br> Friends Progress: ` + friendGoalProgress;
+						//pass and archive/update goal
+
+					}
+					else if (currentGoal.endDate == getAndFormatCurrentDate()) {
+						data = {
+							type: "group-goal-update",
+							content: { goalId: currentGoal.goalId, status: "Goal Failed", groupName: key}
+						};
+						dataRequest(data, errorReporter);
+
+                        goal.innerHTML = "Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: Goal Failed" + 
+							 + " " + `<br> Friends Progress: ` + friendGoalProgress;
+						//fail and archive/update goal
+					}
+					else {
+						daysRemaining = calculateRemaining(getAndFormatCurrentDate(),currentGoal.endDate);
+						if(daysRemaining <= 10 && daysRemaining < minDaysRemaining)
+						{
+							minDaysRemaining = daysRemaining;
+						}
+                        let leaveGoalFuncton = `onclick = "leaveGoal('` + key + `',` + currentGoal.goalId + `)"`;
+
+						goal.innerHTML = "Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: " + currentGoal.status[userIndex]
+							+ " | Days Remaining: " + daysRemaining +"| Progress: " + currentGoal.extraData[0] + ` <progress value="` + goalProgress + `" max="100"></progress> ` + currentGoal.extraData[1] +
+							" " + `<button type='button'  ` + leaveGoalFuncton + ` style ='margin: 5px 0'>Leave</button><br> Friends Progress: ` + friendGoalProgress;
+					}
+				}
+				else {
+					//other goal types will need to implement the alert minimum days
+					console.log("not implemented yet");
+				}
+				container.appendChild(goal);
+				if(minDaysRemaining === 1 && userDeadlineAlert === false)
+				{
+					alert(key + ": You have a goal deadline in " + minDaysRemaining + " day!");
+					userDeadlineAlert = true;
+				}
+				else if(minDaysRemaining < 11 && userDeadlineAlert === false)
+				{
+					alert(key + ": You have a goal deadline in " + minDaysRemaining + " days!")
+					userDeadlineAlert = true;
+				}
+        }
+    }
+    var addGoalButton = document.createElement("p");
+    addGoalButton.innerHTML = `<button type='button'  onclick = displayAddGoalPopup('` + key +`') style ='margin: 5px 0'>Add Goal</button>`
+    container.appendChild(addGoalButton);
 }
 
+function updateGroupSummary(noGoals, groupName)
+{
+    //iterate through divs and find correct group name?????
+    console.log("Update user summary not implemented yet!");
+}
+
+function leaveGoal(groupName, goalID)
+{
+    console.log("Not implemented yet");
+    //leave goal
+    data = {
+        type: "group-goal-delete-user",
+        content: { goalId: currentGoal.goalId, groupName: key}
+    };
+    dataRequest(data, errorReporter);
+}
+
+function displayAddGoalPopup(groupName)
+{
+    console.log("Popup: " + groupName);
+    //create goal, send email to everybody and then add them to goal if accepted
+}
+
+function errorReporter(data)  //function that basicaly prints the error when put as callback function
+{
+	if (data.status != 200) {
+		console.log(data.content);
+	}
+	requestGroupInformation(); //updates stuff as this function will wait for the request to finish
+}
+
+function saveUserInformation(data)
+{
+    if (data.status != 200)
+    {
+        console.log(content);
+    }
+    else
+    {
+        //Only weight needed currently
+        // console.log(data.content);
+        weight = data.content.weight;
+    }
+}
+
+function calculateRemaining(current, deadline) {
+	//var remain = deadline - current;
+	deadline = deadline.split("-");
+	current = current.split("-");
+	remainingMonths = deadline[1] - current[1];
+	remainingDays = deadline[2] - current[2];
+	if (remainingMonths > 0) {
+		if (remainingMonths == 1 || remainingMonths == 3 || remainingMonths == 5 || remainingMonths == 7 || remainingMonths == 8 || remainingMonths == 10 || remainingMonths == 12) {
+			timeRemaining = (remainingMonths * 31) + remainingDays;
+			return timeRemaining;
+		} else if (remainingMonths == 2) {
+			timeRemaining = (remainingMonths * 28) + remainingDays;
+			return timeRemaining;
+		} else if (remainingMonths == 4 || remainingMonths == 6 || remainingMonths == 9 || remainingMonths == 11) {
+			timeRemaining = (remainingMonths * 30) + remainingDays;
+			return timeRemaining;
+		}
+	} else {
+		return remainingDays;
+	}
+}
+
+let weight = 0
 requestGroupInformation()
 
+var userDeadlineAlert = false;
 
+let userInfoReq = {
+    type: "user-request",
+    content: { requestKeys: ["firstName", "height", "weight", "bmi", "age"] }
+};
+
+dataRequest(userInfoReq, saveUserInformation);
 
 var coll = document.getElementsByClassName("collapsible");
