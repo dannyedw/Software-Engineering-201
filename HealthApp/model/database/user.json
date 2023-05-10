@@ -9,7 +9,7 @@
         "weight": "61",
         "bmi": 0,
         "age": 0,
-        "groups": []
+        "groups": ["Danny-Gs-group","Yons's-group"]
     },
     "test3": {
         "firstName": "jim",
@@ -42,6 +42,17 @@
         "weight": 0,
         "bmi": 0,
         "age": 0,
-        "groups": []
+        "groups": ["Danny-Gs-group","Yons's-group"]
+    },
+    "DannyGee": {
+        "firstName": "Danny",
+        "lastName": "GmyG",
+        "email": "danielgaraway@gmail.com",
+        "password": "929872838cb9cfe6578e11f0a323438aee5ae7f61d41412d62db72b25dac52019de2d6a355eb2d033336fb70e73f0ec0afeca3ef36dd8a90d83f998fee23b78d",
+        "height": "185",
+        "weight": "70",
+        "bmi": "20.5",
+        "age": "20",
+        "groups": ["Danny-Gs-group","Yons's-group"]
     }
 }

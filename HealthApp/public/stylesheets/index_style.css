@@ -16,6 +16,12 @@
     text-align: center;
 }
 
+video
+{
+    height: auto;
+    width: 65%;
+}
+
 #tutorialVid
 {
     margin: 0 auto 30px;

@@ -11,13 +11,13 @@ form
 
 form > input
 {
-  font-size: 3em;
+  font-size: 2.5vw;
   border-radius: 8px;
 }
 
 form > label
 {
-  font-size: 2em;
+  font-size: 2vw;
   line-height: 3em;
 }
 
@@ -30,21 +30,26 @@ form > p
 {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
-.name-container > p
+.name-container > p:nth-child(1)
 {
-  
-  margin-left: 145px;
-  margin-right: 140px;
-  font-size: 2.5em;
+  font-size: 2.5vw;
+  margin: 25px 13%;
+}
+
+.name-container > p:nth-child(2)
+{
+  font-size: 2.5vw;
+  margin: 25px 12.5%;
 }
 
 .name-container > input
 {
   margin-left: 5px;
   margin-right: 5px;
-  font-size: 2.5em;
+  font-size: 2.5vw;
   border-radius: 8px;
 }
 
@@ -59,7 +64,7 @@ form > p
 .other-details-container > input
 {
   margin-left: 10px;
-  font-size: 1.9em;
+  font-size: 1.25vw;
   border-radius: 8px;
 }
 
@@ -67,8 +72,9 @@ form > p
 {
   margin-top: 30px;
   margin-bottom: 30px;
-  border-radius: 8px;
+  border-radius: 16px;
   background-color: #0793f8;
+  cursor: pointer;
   /* #0793f8 */
   /* #4F99FE */
   color: rgb(255,255,255);
@@ -96,6 +102,35 @@ form > p
 {
   ul li {
     display: none;
+  }
+
+  form > label
+  {
+    font-size: 3vw;
+    line-height: 3em;
+  }
+  
+  .other-details-container 
+  {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .other-details-container > input
+  {
+    margin-left: 10px;
+    font-size: 2.5vw;
+    border-radius: 8px;
+  }
+
+  #sign-up-button
+  {
+    /* width: 12.5vw;
+    height: 5vw; */
+
+    width: 12.5vmin;
   }
 }
 

@@ -14,16 +14,17 @@ form
   width: 40%;
   margin-right: auto;
   margin-left: auto;
+  margin-bottom: 50px;
 }
 
 label
 {
-  font-size: 1.5em;
+  font-size: 3vmax;
 }
 
 form input
 {
-  font-size: 2em;
+  font-size: 2.999vw;
   margin-top: 25px;
   margin-bottom: 25px;
   border-radius: 8px;
@@ -33,7 +34,8 @@ form input
 {
   margin-top: 20px;
   margin-bottom: 20px;
-  border-radius: 8px;
+  border-radius: 16px;
+  cursor: pointer;
   background-color: #0793f8;
   color: rgb(255,255,255);
   transition: background-color 250ms ease-in;
@@ -42,4 +44,12 @@ form input
 #login-button:hover
 {
   background-color: #3E946F;
+}
+
+@media (max-width: 600px) 
+{
+  #login-button
+  {
+    width: 7.5vmax;
+  }
 }

@@ -101,7 +101,7 @@ function dataRequest(username, content)
         {
             if (table[username])
             {
-                if (table[username][key]) data[key] = table[username][key];
+                if (table[username][key] != null) data[key] = table[username][key];
                 else data[key] = "Invalid key: " + key;
             }
             else data[key] = "Invalid username: " + username;

@@ -40,7 +40,7 @@ function removeMail(m){
         emails[m] = emails[0];
         emails[0] = temp;
         emails.shift();
-        console.log(emails)
+    
         memberEmails.innerHTML = "";
         for(mail in emails){
             memberEmails.innerHTML += "<br>"+emails[mail]+"<button id=deleteEmail type=button onclick=removeMail("+mail+")>Remove</button>";
@@ -51,9 +51,7 @@ function removeMail(m){
 document.getElementById("submitGroupForm").addEventListener("click",function(){
     var groupName = document.getElementById("groupName").value;
     var description = document.getElementById("groupDescription").value;
-    console.log(groupName);
-    console.log(description);
-    console.log(emails);
+  
 
     overlay.style.display = "none";
 	addGroupContainer.style.display = "none";
@@ -62,22 +60,22 @@ document.getElementById("submitGroupForm").addEventListener("click",function(){
     document.getElementById("groupDescription").value = "";
 
     //form submission to backend
-    // let data = {
-	// 	type: "group-submit",
-	// 	content: {
-    //         groupname:groupName,
-    //         description:description,
-    //         emails:emails
-	// 	}
-	// };
+    let data = {
+		type: "group-create",
+		content: {
+            groupname:groupName,
+            description:description,
+            members:emails
+		}
+	};
 
-	// dataRequest(data, responseHandler);
+	dataRequest(data, responseHandler);
 
-	// function responseHandler(response) {
-	// 	if (response.status != 200) {
-	// 		console.log(response.content)
-	// 	}
-	// }
+	function responseHandler(response) {
+		if (response.status != 200) {
+			console.log(response.content)
+		}
+	}
 
 })
 

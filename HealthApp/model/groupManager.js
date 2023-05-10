@@ -1,6 +1,7 @@
 
 const database = require("./database");
 const userManager = require("./userManager")
+const emailManager = require("./emailManager");
 
 function create(username, content)
 {
@@ -15,35 +16,48 @@ function create(username, content)
         pendingMembers: []
     };
 
+    let groupname = content.groupname;
+    groupname.replace(" ", "_"); //replace spaces to prevent issues with urls and the groupname
+
     //check if users actually exist before adding them to the group
     const usertable = database.getTable("USER");
     let warningInfo = [];
-    for (let un of content.members)
+    for (let uname of content.members)
     {
-        if (usertable[un])
+        if (usertable[uname])
         {
-            groupData.pendingMembers.push(un);
+            //check if user is already in group in case somehow added more than once
+            let index = groupData.pendingMembers.indexOf(uname);
+            if (index === -1)
+            {
+                groupData.pendingMembers.push(uname);
+                emailManager.notifyGroupInvitation(uname, groupname);
+            }
+            else
+            {
+                warningInfo.push("User already invited to group: " + uname);
+            }
+            
         }
         else
         {
-
-            warningInfo.push("No user found with username: " + un);
+            warningInfo.push("No user found with username: " + uname);
         }
     }
 
     let grouptable = database.getTable("GROUP");
 
-    if (grouptable[content.groupname])
+    if (grouptable[groupname] != null)
     {
         //group already exists, cannot be created
         return { status: 400, content: "Group name already taken" };
     }
 
-    grouptable[content.groupname] = groupData;
+    grouptable[groupname] = groupData;
     database.overwriteTable("GROUP", grouptable);
 
     return { status: 200, content: {
-        message: "Successfully created group " + content.groupname,
+        message: "Successfully created group " + groupname,
         warnings: warningInfo
     }};
 }
@@ -74,6 +88,74 @@ function addPendingUser(username, groupname)
     return { status: 200, content: "User successfully added to group" };
 }
 
+function removeMember(username, content)
+{
+    if (!content.groupname) return { status: 400, content: "Missing required data - groupname" };
+    if (!content.memberToRemove) return { status: 400, content: "Missing required data - memberToRemove" };
+
+    let grouptable = database.getTable("GROUP");
+    let usertable = database.getTable("USER");
+
+    let group = grouptable[content.groupename];
+    let memberPresent = false;
+
+    if (group)
+    {
+        if (username === group.owner)
+        {
+            let index = group.members.indexOf(content.memberToRemove);
+            if (index != -1)
+            {
+                //member is in members of group
+                group.members.splice(index, 1);
+                grouptable[content.groupname];
+                memberPresent = true;
+            }
+            else
+            {
+                //member not verified part of group, check if they were still pending
+                index = group.pendingMembers.indexOf(content.memberToRemove);
+                if (index != -1)
+                {
+                    //member is in pending members, remove them
+                    group.pendingMembers.splice(index, 1);
+                    grouptable[content.groupname]
+                    memberPresent = true;
+                }
+                else
+                {
+                    //member not pending either
+                    return { status: 400, content: "Specified member is not part of group so cannot be removed: " + content.memberToRemove };
+                }                
+            }
+        }
+        else
+        {
+            return { status: 401, content: "You do not have permission to delete members" };
+        }
+    }
+
+    if (memberPresent)
+    {
+        if (usertable[content.memberToRemove])
+        {
+            let user = usertable[content.memberToRemove];
+            let index = user.groups.indexOf(content.groupname);
+            if (index != -1)
+            {
+                user.groups.splice(index, 1);
+                usertable[content.memberToRemove] = user;
+            }
+        }
+        else
+        {
+            console.log("member (somehow) removed from group they weren't part of. member: " + content.memberToRemove + ", group: " + content.groupname);
+        }
+    }
+
+    return { status: 200, content: "Member: " + content.memberToRemove + "successfully removed from group: " + content.groupname };
+}
+
 function erase(username, content)
 {
     if (!content.groupname) return { status: 400, content: "Missing required data - groupname" };
@@ -102,38 +184,24 @@ function erase(username, content)
     }
 }
 
-function dataRequest(username, content)
+function getUserGroupData(username)
 {
-    if (!content.groupname) return { status: 400, content: "Missing required data - groupname" };
-
     let data = {};
-    const table = database.getTable("GROUP");
-    const group = table[content.groupname];
+    const usertable = database.getTable("USER");
+    const user = usertable[username];
 
-    if (!group) return { status: 400, content: "Invalid groupname: " + content.groupname };
+    let grouptable = database.getTable("GROUP");
 
-    let isOwner = (username === group.owner);
-    let isMember = false;
-    for (let member of group.members)
+    for (let groupname of user.groups)
     {
-        if (username === member)
+        if (grouptable[groupname])
         {
-            isMember = true;
-            break;
+            data[groupname] = grouptable[groupname];
         }
-    }
-
-    if (isOwner || isMember)
-    {
-        data = {
-            owner: group.owner,
-            description: group.description,
-            members: group.members
-        };
-    }
-    else
-    {
-        if (!group) return { status: 401, content: "You do not have permission to view this group" };
+        else
+        {
+            data[groupname] = "Invalid groupname";
+        }
     }
 
     return { status: 200, content: data };
@@ -143,5 +211,6 @@ function dataRequest(username, content)
 
 exports.create = create;
 exports.addPendingUser = addPendingUser;
+exports.removeMember = removeMember;
 exports.erase = erase;
-exports.dataRequest = dataRequest;
+exports.getUserGroupData = getUserGroupData;

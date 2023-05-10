@@ -106,25 +106,22 @@ block content
       input#date(type='date' name='deadlines' placeholder='Deadlines' min='01-01-2023' max='31-12-2023')
         
   .exerciseDietContainer
-    .exercise
-      h3 Exercise
-      <div class="line" id="extra"></div>
-      table#exerciseTable(style='width:100%', border='1')
-      div#removeExerciseButtonsContainer
-    <div id="exerciseButtonCenter">
+    div#exerciseCont-AddButtContainer
+      .exercise
+        h3 Exercise
+        <div class="line" id="extra"></div>
+        table#exerciseTable(style='width:100%', border='1')
+        div#removeExerciseButtonsContainer
       button#addExerciseButton(type='button') +
-    </div>
 
-    
-    .diet
-      h3 Diet
-      <div class="line" id="diets"></div>
-      table#foodTable(style='width:100%', border='1')
-      div#removeDietButtonsContainer   
-      div#calorieTotal
-    <div id="dietButtonCenter">
+    div#dietCont-AddButtContainer
+      .diet
+        h3 Diet
+        <div class="line" id="diets"></div>
+        table#foodTable(style='width:100%', border='1')
+        div#removeDietButtonsContainer   
+        div#calorieTotal
       button#addDietButton(type='button') +
-    </div>
       
   .goalContainer
     h2#goals Goals

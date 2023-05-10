@@ -34,7 +34,7 @@ function request(username, data)
         case "personal-goal-request": return personalGoalsManager.dataRequest(username, data.content);
         case "personal-goal-delete": return personalGoalsManager.deleteGoal(username, data.content);
 
-        case "group-request": return groupManager.dataRequest(username, data.content);
+        case "group-request": return groupManager.getUserGroupData(username);
         case "group-create": return groupManager.create(username, data.content);
         case "group-delete": return groupManager.erase(username, data.content);
 

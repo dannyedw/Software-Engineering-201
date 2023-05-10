@@ -131,16 +131,33 @@ color: #f1f1f1;
 .company-logo
 {
   position: relative;
-  left: 7.5%;
-  transform: translate(0%, 0%); 
+  display: block;
+  /* left: 7.5%;
+  transform: translate(0%, 0%);  */
 }
 
-.inner_main_menu
+#company-logo
+{
+  display: block;
+}
+
+#user-logo
+{
+  display: block;
+  margin: 0 10px -10px;
+}
+
+#hrefLogo
+{
+  position: relative;
+  display: block;
+  transform: translate(100%, 0%);
+}
+
+/* .inner_main_menu
 {
   margin: 0 auto;
   padding: 0;
-  /* width: 98%; */
-  /* border: 10px solid black; */
   height: 150px;
 }
 
@@ -207,10 +224,10 @@ color: #f1f1f1;
 .inner_main_menu ul li a:hover
 {
   color: #7CFC00;
-  /* text-shadow: 3px 3px 3px #F5FFFA; */
-  /*Reference for outline effect for text: https://stackoverflow.com/questions/4919076/outline-effect-to-text */
+  text-shadow: 3px 3px 3px #F5FFFA;
+  Reference for outline effect for text: https://stackoverflow.com/questions/4919076/outline-effect-to-text
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 3px 3px 3px #F5FFFA;
-}
+} */
 
 /* Reference for colour gradient: https://cssgradient.io/ */
 
@@ -245,17 +262,42 @@ footer p
 
 @media screen and (max-width: 600px)
 {
+  
+  #main_menu
+  {
+    justify-content: space-between;
+  }
+
   #company-logo
   {
     position: relative;
     top: 0;
     left: 0;
     transform: none;
+    width: 25vmin;
   }
 
-  .menu-right
+  #main_menu ul
   {
-    float: none;
-    display: block;
+    margin: 0;
+    /* padding: 50px 0 0; */
+    list-style: none;
+    text-align: right;
+    font-size: 1vw;
   }
+
+  #main_menu ul li
+  { 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    float: none;
+    line-height: 100%;
+    font-size: 4em;
+    margin-left: 50px;
+  }
+
+
+
+  
 }

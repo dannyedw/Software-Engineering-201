@@ -1,8 +1,6 @@
 #createGroupButton
 {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 650px;
+  margin: 50vh auto 1vh;
   font-size: 30px;
   border-radius: 16px;
   transition: background-color 250ms ease-in;
@@ -58,8 +56,8 @@
 
   background-color: #B9DDE0;
 
-  width: 1000px;
-  height: 400px;
+  width: 50vw;
+  height: 40vh;
   box-sizing: border-box;
   
   position: fixed;
@@ -155,10 +153,164 @@
 
 #divsID
 {
-  background-color: grey;
+  background-color: #4AAFB5;
+  font-size: 2vmax;
+  text-align: center;
+  margin: 10px 0 0;
 } 
 
 #divsID:hover
 {
-  background-color: lightgrey;
-} 
+  background-color: lightblue;
+}
+
+/* Reference for collapsible: https://www.w3schools.com/howto/howto_js_collapsible.asp */
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px 0;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .collapsible:hover {
+  background-color: #ccc;
+}
+
+.collapsible:after {
+  content: '\02795'; /* Unicode character for "plus" sign (+) */
+  font-size: 1em;
+  color: white;
+  float: right;
+  margin-right: 15px;
+}
+
+.active:after {
+  content: "\2796"; /* Unicode character for "minus" sign (-) */
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+  /* margin: 0;
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1; */
+
+  margin: 0;
+  padding: 0 18px;
+  background-color: darkgray;
+  color: black;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+#groupGoalsDiv{
+  margin-left: 1000px;
+  width: 900px;
+  border: 5px solid lightblue;
+}
+
+#membersDiv{
+  margin-top: 20px;
+  width: 900px;
+  border: 5px solid skyblue;
+}
+
+.groupDivs {
+  border: 5px solid black;
+  border-radius: 16px;
+  margin: 10px;
+  padding: 5px;
+}
+
+#memberContainer
+{
+  margin: 0;
+  display: flex;
+  height: 3vh;
+  align-items: center;
+}
+
+#removeMemberButton
+{
+  margin: 0 10px;
+  border-radius: 8px;
+  transition: background-color 250ms ease-in;
+  font-family: 'Open Sans';
+  font-size: 1em;
+}
+
+#removeMemberButton:hover
+{
+  color: rgb(255,255,255);
+  background-color: #3E946F;
+}
+
+#LeaveGroupButton{
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 30px;
+  border-radius: 16px;
+  transition: background-color 250ms ease-in;
+}
+#LeaveGroupButton:hover
+{
+  color: rgb(255,255,255);
+  background-color: #3E946F;
+}
+#description{
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 30px;
+  border-radius: 16px;
+  transition: background-color 250ms ease-in;
+}
+#description:hover
+{
+  color: rgb(255,255,255);
+  background-color: #3E946F;
+}
+#addDescriptionContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+  border: 5px solid #0793f8;
+  border-style: groove;
+  border-radius: 16px;
+
+  background-color: #B9DDE0;
+
+  width: 50vw;
+  height: 40vh;
+  box-sizing: border-box;
+  
+  position: fixed;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -25%);
+
+  padding-top: 10px;
+  padding-bottom: 50px;
+}
+
+#descriptionInfo
+{
+  font-size: 1.15em;
+}
+
+#exitButtonDescription
+{
+  float: right;
+  background-color: white;
+  color: black;
+  font-weight: bold;
+}
