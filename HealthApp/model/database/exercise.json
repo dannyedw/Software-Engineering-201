@@ -32,6 +32,12 @@
                 "name": "aaaaaaaaaaa",
                 "time": "10",
                 "amount": "100"
+            },
+            {
+                "set": "Upper Body",
+                "name": "Bench press",
+                "time": "20",
+                "amount": "6"
             }
         ]
     }

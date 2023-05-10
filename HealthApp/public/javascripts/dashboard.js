@@ -646,8 +646,8 @@ function displayPersonalGoals(data)  //this displays the goals in the goal conta
 		{
 			//i know this is probaby very bad but callback functions were annoying
 			let userInfo = document.getElementById("userInformation").textContent;
-			let currentWeight = userInfo.split(" ")[5].split("kg")[0];
-			
+			let currentWeight = userInfo.split(" ")[3].split("kg")[0];
+
 			let minDaysRemaining = 11; //11 as we want to find minimum, any goal under 10 days will be smaller than this
 
 			for (let i = 0; i < personalGoals.length; i++) {
@@ -901,7 +901,6 @@ function updateAge() {
 }
 
 var userDeadlineAlert = false; //used so the user isnt notified every time an active goal is displayed
-console.log("We are running");
 
 getUserInformation();
 
