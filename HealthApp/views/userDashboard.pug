@@ -19,13 +19,11 @@ block header
 block content
   div#weightGraphDiv   
     button#viewWeightGraph(type='button') View Weight Graph
-    .overlay(style='display:none;')
+    button#viewCalorieGraph(type='button') View Calorie Graph
+    .overlay2(style='display:none;')
       #addWeightGraphContainer.popup(style='display:none;')
         h1 Weight Graph 
         button#exitWeightGraphContainer(type='button') X 
-  div#calorieGraphDiv
-    button#viewCalorieGraph(type='button') View Calorie Graph
-    .overlay2(style='display:none;')
       #addCalorieGraphContainer.popup(style='display:none;')
         h1 Calorie Graph 
         button#exitCalorieGraphContainer(type='button') X 

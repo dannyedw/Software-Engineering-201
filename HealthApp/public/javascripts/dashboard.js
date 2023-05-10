@@ -461,7 +461,7 @@ dataForms.addEventListener('submit', (e) => {
 
 // function removediet(foodID){
 // 	let data = {
-// 		type: "foodID-submit",
+// 		type: "food-remove",
 // 		content: {
 // 			foodID:foodID
 // 		}
@@ -477,7 +477,7 @@ dataForms.addEventListener('submit', (e) => {
 // }
 // function removeExercise(exerciseID){
 // 	let data = {
-// 		type: "exerciseID-submit",
+// 		type: "exercise-remove",
 // 		content: {
 // 			exerciseID:exerciseID
 // 		}
@@ -910,7 +910,7 @@ date.value = getAndFormatCurrentDate();
 
 
 /// Graph section of the Dashboard ///
-
+const overlay2 = document.querySelector('.overlay2');
 //weight graph section
 var weightGraph = document.getElementById("viewWeightGraph");
 var WeightGraphExit = document.getElementById("exitWeightGraphContainer");
@@ -920,17 +920,17 @@ WeightGraphExit.addEventListener("click",removeWeightGraph);
 const weightGraphContainer = document.querySelector('#addWeightGraphContainer')
 
 function displayWeightGraph(){
-	overlay.style.display = "block";
+	overlay2.style.display = "block";
 	weightGraphContainer.style.display = "block";
 }
 
 function removeWeightGraph(){
-	overlay.style.display = "none";
+	overlay2.style.display = "none";
 	weightGraphContainer.style.display = "none";
 }
 
 //food graph section
-const overlay2 = document.querySelector('.overlay2');
+
 var foodGraphExit = document.getElementById("exitCalorieGraphContainer");
 var foodGraph = document.getElementById("viewCalorieGraph");
 
