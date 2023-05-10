@@ -33,6 +33,8 @@ function create(username, content)
         table[content.group][0] = data;
     }
 
+    //NOTIFY ALL MEMBERS IN GROUP AND ADD THEM TO GOAL IF ACCEPTED 
+
     database.overwriteTable("GROUPGOALS", table);
     
     return{ status: 200, content: "Successfully created group goal" };

@@ -545,7 +545,7 @@ goalSelect.addEventListener("change", (event) => {
 
 		//i know this is probaby very bad but callback functions were annoying
 		let userInfo = document.getElementById("userInformation").textContent;
-		const startingWeight = userInfo.split(" ")[5].split("kg")[0];
+		const startingWeight = userInfo.split(" ")[3].split("kg")[0];
 
 		var goalType = document.getElementById("goalType").value;
 		if (goalType == "Target Weight") {

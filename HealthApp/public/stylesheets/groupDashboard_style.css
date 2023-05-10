@@ -314,3 +314,22 @@
   color: black;
   font-weight: bold;
 }
+
+#exitButtonGoal
+{
+    float: right;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+}
+
+#addPGoal
+{
+    margin-top: 10px;
+}
+
+#addGoalContainer
+{
+  text-align: center;
+  padding: 10px;
+}

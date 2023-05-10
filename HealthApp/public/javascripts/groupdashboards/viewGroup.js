@@ -1,6 +1,10 @@
 var groups = document.getElementById("groups");
 
 function getAndFormatCurrentDate() {
+
+    //https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date- reference - For the date min and max value 
+    //https://www.w3resource.com/javascript-exercises/javascript-date-exercise-2.php- Reference - helping form the yyyy-mm-dd format
+
 	const CurrentDate = new Date();
 	var year = CurrentDate.getFullYear();
 	var month = CurrentDate.getMonth() + 1;
@@ -47,7 +51,7 @@ function displayGroup(data)
             
             groups.innerHTML += `<div><h1 id="divsID" class='collapsible'>` + key + `:` + ` Members: `+currentGroup.members.length+` ` + ` Group Goals: `+10+`</h1>
             <div class='content'><div class='groupDivs'id="` + key + "-info" + `"> <h1>Members</h1><br>` + '<input type="text" id="addingMember" placeholder="Enter Member here"> <button type="button" onclick="addMember(\'' + currentGroup.members + '\',\'' + div + '\');">Add Member</button></div>' +
-            `<div class='groupDivs' id = "` + key + "-goals" + `"> Group Goals </div><br>
+            `<div class='groupDivs' id = "` + key + "-goals" + `"></div><br>
             <button type="button" id="description" onclick="DisplayDescription('${currentGroup.description}');">Description</button><br>
             <button type="button" id="LeaveGroupButton" onclick="LeavegGroup('${key}');">Leave Group</button> </div></div>`;
 
@@ -207,7 +211,14 @@ function displayGroupGoals(data)
     // let key = Object.keys(data.content)[0];
     let key = data.content.groupName
     let container = document.getElementById(key + '-goals')
+
     container.innerHTML = "";
+
+    const h1 = document.createElement("h1");
+    const textNode = document.createTextNode("Group Goals");
+    h1.appendChild(textNode);
+    container.appendChild(h1);
+
     if(data.content.goals.length === 0)
     {
         container.innerHTML = `No Goals to Show`
@@ -306,7 +317,6 @@ function updateGroupSummary(noGoals, groupName)
 
 function leaveGoal(groupName, goalID)
 {
-    console.log("Not implemented yet");
     //leave goal
     data = {
         type: "group-goal-delete-user",
@@ -317,7 +327,9 @@ function leaveGoal(groupName, goalID)
 
 function displayAddGoalPopup(groupName)
 {
-    console.log("Popup: " + groupName);
+    groupInPopup = groupName;
+    overlay.style.display = "block";
+	addGoalContainer.style.display = "block";
     //create goal, send email to everybody and then add them to goal if accepted
 }
 
@@ -365,10 +377,90 @@ function calculateRemaining(current, deadline) {
 	}
 }
 
+///goal popup stuff
+document.getElementById("exitButtonGoal").addEventListener("click", function () {
+	overlay.style.display = "none";
+	addGoalContainer.style.display = "none";
+})
+
+const goalSelect = document.getElementById("goalType");
+const goalOutputDiv = document.getElementById("goalOutput");
+const personalGoals = document.getElementById("personalGoals");
+
+let currentDate = getAndFormatCurrentDate();
+// if target weight than only 
+goalSelect.addEventListener("change", (event) => {
+	const selectedDiet = event.target.value;
+	let data = "";
+
+	switch (selectedDiet) {
+		case "Target Weight":
+			data = "<input type='text' id='target-Weight' name='weight' placeholder='Target Weight(KG)' required><br><input type='date' id='goalDate' name='deadline' value=" + currentDate + " min=" + currentDate + " max='2027-04-21'><br>";
+			data += "<input type='submit' id='addPGoal' value='Add Goal'>";
+			break;
+		default:
+			// clear the variations div if no exercise is selected
+			goalOutputDiv.innerHTML = "";
+			return;
+	}
+	// update the goal ouput div with the selected exercise's data
+	goalOutputDiv.innerHTML = data;
+
+
+	document.getElementById('addPGoal').addEventListener("click", addingTargetWeight);
+
+	function addingTargetWeight() {
+		//next few lines are getting the information for the request
+		const targetWeight = document.getElementById("target-Weight").value;
+		const targetDate = document.getElementById("goalDate").value;
+
+		var goalType = document.getElementById("goalType").value;
+		if (goalType == "Target Weight") {
+			goalType = "weight";
+		}
+
+		const startDate = getAndFormatCurrentDate();
+
+		// validating that we got the correct values
+		// console.log("Type: " + goalType);
+		// console.log("startdate: " + startDate);
+		// console.log("endDate: " + targetDate);
+		// console.log("starting weight: " + startingWeight);
+		// console.log("target weight: " + targetWeight);
+
+        console.log(groupInPopup);
+
+		let data = {
+            group: groupInPopup,
+			type: goalType,
+			startDate: startDate,
+			endDate: targetDate,
+			extraData: [weight, targetWeight]
+		};
+
+		let request = {
+			type: "personal-goal-create",
+			content: data
+		};
+
+        console.log(request);
+		// dataRequest(request, errorReporter);
+
+		overlay.style.display = "none";
+		addGoalContainer.style.display = "none";
+	}
+
+    document.getElementById('addPGoal').addEventListener("click", addingTargetWeight);
+});
+
+
+
+//end of goal pop uup stuff
 let weight = 0
 requestGroupInformation()
 
 var userDeadlineAlert = false;
+var groupInPopup;
 
 let userInfoReq = {
     type: "user-request",
