@@ -11,7 +11,7 @@
         "age": 0,
         "groups": [
             "Danny_Gs_group",
-            "Yons's_group"
+            "Yons_s_group"
         ]
     },
     "test3": {
@@ -47,7 +47,7 @@
         "age": 0,
         "groups": [
             "Danny_Gs_group",
-            "Yons's_group"
+            "Yons_s_group"
         ]
     },
     "DannyGee": {
@@ -61,7 +61,7 @@
         "age": "20",
         "groups": [
             "Danny_Gs_group",
-            "Yons's_group"
+            "Yons_s_group"
         ]
     }
 }

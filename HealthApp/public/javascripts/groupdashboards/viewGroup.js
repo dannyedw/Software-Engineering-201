@@ -43,7 +43,6 @@ function displayGroup(data)
             for(let key in data.content)
         {
             let currentGroup = data.content[key];
-            console.log(currentGroup);
 
             groups.innerHTML += `<div><h1 id="divsID" class='collapsible'>` + key + `:` + ` Members: `+ currentGroup.members.length +` ` + ` Group Goals: `+10+`</h1>
             <div class='content'><div class='groupDivs'id="` + key + "-info" + `"> Members </div> <div class='groupDivs' id = "` + key + "-goals" + `"> Group Goals </div> </div> </div> <br>`;
@@ -99,13 +98,12 @@ function displayGroupGoals(data)
     else
     {
         goals = data.content.goals;
-        console.log(key + " goals: ")
+        // console.log(key + " goals: ")
         var minDaysRemaining = 11;
         for (let i = 0; i < goals.length; i++)
         {
             currentGoal = goals[i];
-            console.log(currentGoal);
-            ///START
+            // /START    CREATE POPUP TO GET USER DATA THEN PUT IN SERVER AND UPDATE PAGE (update done by error reporter if used)
             var goal = document.createElement("p");
             var userIndex = currentGoal.users.indexOf(USERNAME)
             let friendGoalProgress = "";
@@ -176,10 +174,11 @@ function displayGroupGoals(data)
 					alert(key + ": You have a goal deadline in " + minDaysRemaining + " days!")
 					userDeadlineAlert = true;
 				}
-
-            ///END
         }
     }
+    var addGoalButton = document.createElement("p");
+    addGoalButton.innerHTML = `<button type='button'  onclick = displayAddGoalPopup('` + key +`') style ='margin: 5px 0'>Add Goal</button>`
+    container.appendChild(addGoalButton);
 }
 
 function updateGroupSummary(noGoals, groupName)
@@ -199,8 +198,9 @@ function leaveGoal(groupName, goalID)
     dataRequest(data, errorReporter);
 }
 
-function createGoal()
+function displayAddGoalPopup(groupName)
 {
+    console.log("Popup: " + groupName);
     //create goal, send email to everybody and then add them to goal if accepted
 }
 
@@ -221,7 +221,7 @@ function saveUserInformation(data)
     else
     {
         //Only weight needed currently
-        console.log(data.content);
+        // console.log(data.content);
         weight = data.content.weight;
     }
 }
