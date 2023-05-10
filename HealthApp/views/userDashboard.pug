@@ -17,21 +17,22 @@ block header
   title My Dashboard
 
 block content
-  div#weightGraphDiv   
-    button#viewWeightGraph(type='button') View Weight Graph
-    button#viewCalorieGraph(type='button') View Calorie Graph
-    .overlay2(style='display:none;')
-      #addWeightGraphContainer.popup(style='display:none;')
-        h1 Weight Graph 
-        button#exitWeightGraphContainer(type='button') X 
-      #addCalorieGraphContainer.popup(style='display:none;')
-        h1 Calorie Graph 
-        button#exitCalorieGraphContainer(type='button') X 
-
   div#userInformationContainer
     h3#userInformationTitle
     p#userInformation 
     p#userAdvice
+    
+    div#weightGraphDiv   
+      button#viewWeightGraph(type='button') Weight Trend
+      button#viewCalorieGraph(type='button') Calorie Trend
+    .overlay2(style='display:none;')
+      #addWeightGraphContainer.popup(style='display:none;')
+        button#exitWeightGraphContainer(type='button') X
+        h1 Weight Graph  
+      #addCalorieGraphContainer.popup(style='display:none;')
+        button#exitCalorieGraphContainer(type='button') X 
+        h1 Calorie Graph 
+
   // overlay that dimms the screen
   .overlay(style='display:none;')
     // popup for add exercise
