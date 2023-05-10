@@ -5,9 +5,9 @@
         "lastName": "shmest",
         "email": "a@b",
         "password": "929872838cb9cfe6578e11f0a323438aee5ae7f61d41412d62db72b25dac52019de2d6a355eb2d033336fb70e73f0ec0afeca3ef36dd8a90d83f998fee23b78d",
-        "height": 0,
-        "weight": "61",
-        "bmi": 0,
+        "height": "172",
+        "weight": "70",
+        "bmi": "23.7",
         "age": 0,
         "groups": [
             "Danny_Gs_group",
@@ -45,10 +45,7 @@
         "weight": 0,
         "bmi": 0,
         "age": 0,
-        "groups": [
-            "Danny_Gs_group",
-            "Yons_s_group"
-        ]
+        "groups": ["Danny_Gs_group","Yons_s_group"]
     },
     "DannyGee": {
         "firstName": "Danny",
@@ -59,9 +56,6 @@
         "weight": "60",
         "bmi": "17.5",
         "age": "20",
-        "groups": [
-            "Danny_Gs_group",
-            "Yons_s_group"
-        ]
+        "groups": ["Danny_Gs_group","Yons_s_group"]
     }
 }
