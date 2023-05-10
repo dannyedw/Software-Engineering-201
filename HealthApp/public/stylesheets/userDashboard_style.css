@@ -645,5 +645,109 @@ tr:hover {
     {
         font-size: 2vmax;
     }
-
+    
 }
+#viewCalorieGraph
+    {
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 30px;
+        border-radius: 16px;
+        transition: background-color 250ms ease-in;
+    }
+#viewCalorieGraph:hover
+    {
+        color: rgb(255,255,255);
+        background-color: #3E946F;
+    }
+#addCalorieGraphContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  
+    border: 5px solid #0793f8;
+    border-style: groove;
+    border-radius: 16px;
+  
+    background-color: #B9DDE0;
+  
+    width: 50vw;
+    height: 40vh;
+    box-sizing: border-box;
+    
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -25%);
+  
+    padding-top: 10px;
+    padding-bottom: 50px;
+    }
+
+#exitCalorieGraphContainer{
+    float: right;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+}    
+
+
+
+#viewWeightGraph
+    {
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 30px;
+        border-radius: 16px;
+        transition: background-color 250ms ease-in;
+    }
+#viewWeightGraph:hover
+    {
+        color: rgb(255,255,255);
+        background-color: #3E946F;
+    }
+#addWeightGraphContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  
+    border: 5px solid #0793f8;
+    border-style: groove;
+    border-radius: 16px;
+  
+    background-color: #B9DDE0;
+  
+    width: 50vw;
+    height: 40vh;
+    box-sizing: border-box;
+    
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -25%);
+  
+    padding-top: 10px;
+    padding-bottom: 50px;
+    }
+
+#exitWeightGraphContainer{
+    float: right;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+}    
+.overlay2 {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1;
+  }
+  
+  .overlay2Hidden {
+      display:none;
+  }

@@ -907,3 +907,43 @@ getUserInformation();
 //gives the date a default value to todays date
 var date = document.getElementById("date")
 date.value = getAndFormatCurrentDate();  
+
+
+/// Graph section of the Dashboard ///
+
+//weight graph section
+var weightGraph = document.getElementById("viewWeightGraph");
+var WeightGraphExit = document.getElementById("exitWeightGraphContainer");
+
+weightGraph.addEventListener("click",displayWeightGraph);
+WeightGraphExit.addEventListener("click",removeWeightGraph);
+const weightGraphContainer = document.querySelector('#addWeightGraphContainer')
+
+function displayWeightGraph(){
+	overlay.style.display = "block";
+	weightGraphContainer.style.display = "block";
+}
+
+function removeWeightGraph(){
+	overlay.style.display = "none";
+	weightGraphContainer.style.display = "none";
+}
+
+//food graph section
+const overlay2 = document.querySelector('.overlay2');
+var foodGraphExit = document.getElementById("exitCalorieGraphContainer");
+var foodGraph = document.getElementById("viewCalorieGraph");
+
+foodGraph.addEventListener("click",displayFoodGraph);
+foodGraphExit.addEventListener("click",removeFoodGraph);
+const foodGraphContainer = document.querySelector('#addCalorieGraphContainer')
+
+function displayFoodGraph(){
+	overlay2.style.display = "block";
+	foodGraphContainer.style.display = "block";
+}
+
+function removeFoodGraph(){
+	overlay2.style.display = "none";
+	foodGraphContainer.style.display = "none";
+}
