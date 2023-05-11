@@ -91,7 +91,7 @@ function deleteUser(username, content) //username is user to delete, req from da
     let table = database.getTable("GROUPGOALS");
 
     let userIndex = table[content.groupName][content.goalId].users.indexOf(username);
-    if(userIndex = -1) return { status: 400, content: "User not found in Goal"};
+    if(userIndex === -1) return { status: 400, content: "User not found in Goal"};
 
     table[content.groupName][content.goalId].users.splice(userIndex, 1);
     table[content.groupName][content.goalId].status.splice(userIndex, 1);
