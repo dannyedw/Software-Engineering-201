@@ -999,18 +999,19 @@ function getFoodHistoryForGraph()
 		content: {}
 	};
 	
-	calorieRequest(data, displayFoodGraph)
+	dataRequest(data, displayFoodGraph)
 
 }
-function displayFoodGraph(data){
+function displayFoodGraph(response){
 	overlay2.style.display = "block";
 	foodGraphContainer.style.display = "block";
 	if (response.status != 200) {
 		console.log(response.content);
 	} 
-		// else {
-		// 	totalCalories = parseInt(response.content.totalCalories);
-		// }
+	else {
+		// totalCalories = parseInt(response.content.totalCalories);
+		console.log(response.content);
+		}
 
 }
 
