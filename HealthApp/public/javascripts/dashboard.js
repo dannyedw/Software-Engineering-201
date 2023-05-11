@@ -955,7 +955,7 @@ function displayWeightGraph(data){
 		// console.log(yValues);
 		// console.log(maxWeight);
 
-		//game on
+		//Reference for graphing tool:  https://www.w3schools.com/js/tryit.asp?filename=tryai_chartjs_lines
 		new Chart("myChart", {
 			type: "line",
 			data: {
