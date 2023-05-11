@@ -941,16 +941,19 @@ function displayWeightGraph(data){
 		let weightGraph = document.getElementById("myChart")
 		let xValues = Object.keys(data.content.weight);
 		let yValues = [];
-		let max = 0;
+		let maxWeight = 0;
+		let minWeight = 500;
 		for (key in data.content.weight)
 		{
 			let value = data.content.weight[key]
 			yValues.push(value);
-			if(value > max) max = value;
+			if(value > maxWeight) maxWeight = value;
+			if(value < minWeight) minWeight = value;
 		}
+
 		// console.log(xValues);
 		// console.log(yValues);
-		// console.log(max);
+		// console.log(maxWeight);
 
 		//game on
 		new Chart("myChart", {
@@ -968,7 +971,7 @@ function displayWeightGraph(data){
 			options: {
 			  legend: {display: false},
 			  scales: {
-				yAxes: [{ticks: {min: 0, max:200}}],
+				yAxes: [{ticks: {min: Number(minWeight), max: Number(maxWeight)}}],
 			  }
 			}
 		  });
