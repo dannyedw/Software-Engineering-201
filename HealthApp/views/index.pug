@@ -14,16 +14,20 @@ block header
   meta(http-equiv='Content-Type' content='text/html; charset=UTF-8')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
   link(rel='stylesheet' href='stylesheets/index_style.css')
+  script(src='/javascripts/index.js')
   title Home
 
 block content
   h2(class='moto') ASCEND (Accessable System for Capture of Exercise and Natural Diet)
   h3(class='moto') YOUR LADDER TO SUCCESS
-  p(class='homePara')
-    | From the start of your journey to the end, track your progress and set your goals.
-    | ASCEND will provide you customised personal workout and diet plans. 
-    | ASCEND Together with friends in our groups feature
-    div(class = 'div_class') 
+
+
+  
+  div(class = 'div_class') 
+    div(class = 'writing')
+      | From the start of your journey to the end, track your progress and set your goals.
+      | ASCEND will provide you customised personal workout and diet plans. 
+      | ASCEND Together with friends in our groups feature
       ul
         li ASCEND Together 
           ul
@@ -34,11 +38,32 @@ block content
             li Every step of the way push yourself harder with ASCEND Auto goal tracking 
             li Fuel yourself with ASCEND diet plans, chosen by you and personalised for you.
 
-  //Reference for vid tag: https://www.w3schools.com/tags/tag_video.asp
-  video#tutorialVid(width='1280' height='720' controls='' autoplay='' muted='')
-    source(src='video/sampleVid.mp4' type='video/mp4')
-    source(src='video/sampleVid.ogg' type='video/ogg')
-    |   Your browser does not support the video tag.
+    //Reference for vid tag: https://www.w3schools.com/tags/tag_video.asp
+    video#tutorialVid(class="video" width='1280' height='720' controls='' autoplay='' muted='')
+      source(src='video/sampleVid.mp4' type='video/mp4')
+      source(src='video/sampleVid.ogg' type='video/ogg')
+      |   Your browser does not support the video tag.
+
+
+  
+  // Reference for layout https://www.w3schools.com/howto/howto_css_images_side_by_side.asp
+
+  div(class="ImageRow")
+    div(class="ImageColumn")
+      img(class="IconImage" src="images/weights.png" alt="Weights" height='60px' width='60px')
+    div(class="ImageColumn")
+      img(class="IconImage" src="images/cardio.png" alt="cardio" height='60px' width='60px')
+    div(class="ImageColumn")
+      img(class="IconImage" src="images/diet.png" alt="diet" height='60px' width='60px')
+
+  // reference https://www.w3schools.com/howto/howto_js_popup.asp
+  div.popup(onlcick="myfunction()") click me
+    span(class="popuptext" id="myPopup") popup text
+
+
+
+    
+
 
 
 
