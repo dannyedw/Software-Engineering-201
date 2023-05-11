@@ -320,7 +320,7 @@ function leaveGoal(groupName, goalID)
     //leave goal
     data = {
         type: "group-goal-delete-user",
-        content: { goalId: currentGoal.goalId, groupName: key}
+        content: { goalId: goalID, groupName: groupName}
     };
     dataRequest(data, errorReporter);
 }
