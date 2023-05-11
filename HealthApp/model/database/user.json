@@ -6,7 +6,9 @@
         "email": "a@b",
         "password": "929872838cb9cfe6578e11f0a323438aee5ae7f61d41412d62db72b25dac52019de2d6a355eb2d033336fb70e73f0ec0afeca3ef36dd8a90d83f998fee23b78d",
         "height": "172",
-        "weight": "70",
+        "weight": {
+            "2023-05-11": "70"
+        },
         "bmi": "23.7",
         "age": 0,
         "groups": [
@@ -20,7 +22,9 @@
         "email": "feinq@fjewiqnf",
         "password": "ddaf35a193617abacc417349ae20413112e6fa4e89a97ea20a9eeee64b55d39a2192992a274fc1a836ba3c23a3feebbd454d4423643ce80e2a9ac94fa54ca49f",
         "height": 0,
-        "weight": 0,
+        "weight": {
+            "2023-05-11": "0"
+        },
         "bmi": 0,
         "age": 0,
         "groups": []
@@ -31,7 +35,9 @@
         "email": "fsddf@yummers.com",
         "password": "929872838cb9cfe6578e11f0a323438aee5ae7f61d41412d62db72b25dac52019de2d6a355eb2d033336fb70e73f0ec0afeca3ef36dd8a90d83f998fee23b78d",
         "height": "170",
-        "weight": "75",
+        "weight": {
+            "2023-05-11": "75"
+        },
         "bmi": "26.0",
         "age": "20",
         "groups": []
@@ -42,7 +48,9 @@
         "email": "alex.w.faulkner13@gmail.com",
         "password": "929872838cb9cfe6578e11f0a323438aee5ae7f61d41412d62db72b25dac52019de2d6a355eb2d033336fb70e73f0ec0afeca3ef36dd8a90d83f998fee23b78d",
         "height": 0,
-        "weight": 0,
+        "weight": {
+            "2023-05-11": "0"
+        },
         "bmi": 0,
         "age": 0,
         "groups": [
@@ -56,8 +64,14 @@
         "email": "danielgaraway@gmail.com",
         "password": "929872838cb9cfe6578e11f0a323438aee5ae7f61d41412d62db72b25dac52019de2d6a355eb2d033336fb70e73f0ec0afeca3ef36dd8a90d83f998fee23b78d",
         "height": "185",
-        "weight": "65",
-        "bmi": "19.0",
+        "weight": {
+            "2023-05-07": "62",
+            "2023-05-08": "57",
+            "2023-05-09": "60",
+            "2023-05-10": "63",
+            "2023-05-11": "67"
+        },
+        "bmi": "19.6",
         "age": "20",
         "groups": [
             "Danny_Gs_group",

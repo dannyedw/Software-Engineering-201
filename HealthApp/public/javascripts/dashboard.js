@@ -748,7 +748,8 @@ function getUserInformation() {
 function displayUserInformation(userInformation) {
 	let firstName = userInformation.content.firstName;
 	let height = userInformation.content.height;
-	let weight = userInformation.content.weight;
+	let weightKeys = Object.keys(userInformation.content.weight);
+	let weight = userInformation.content.weight[weightKeys[weightKeys.length - 1]]
 	let bmi = userInformation.content.bmi;
 	let age = userInformation.content.age;
 
@@ -915,13 +916,63 @@ const overlay2 = document.querySelector('.overlay2');
 var weightGraph = document.getElementById("viewWeightGraph");
 var WeightGraphExit = document.getElementById("exitWeightGraphContainer");
 
-weightGraph.addEventListener("click",displayWeightGraph);
+weightGraph.addEventListener("click",getWeightHistoryForGraph);
 WeightGraphExit.addEventListener("click",removeWeightGraph);
 const weightGraphContainer = document.querySelector('#addWeightGraphContainer')
 
-function displayWeightGraph(){
-	overlay2.style.display = "block";
-	weightGraphContainer.style.display = "block";
+function getWeightHistoryForGraph()
+{
+	let data = {
+		type: "user-request",
+		content: { requestKeys: ["weight"] }
+	};
+
+	dataRequest(data, displayWeightGraph);
+}
+function displayWeightGraph(data){
+	if(data.status != 200)
+	{
+		console.log(data.content);
+	}
+	else
+	{
+		overlay2.style.display = "block";
+		weightGraphContainer.style.display = "block";
+		let weightGraph = document.getElementById("myChart")
+		let xValues = Object.keys(data.content.weight);
+		let yValues = [];
+		let max = 0;
+		for (key in data.content.weight)
+		{
+			let value = data.content.weight[key]
+			yValues.push(value);
+			if(value > max) max = value;
+		}
+		// console.log(xValues);
+		// console.log(yValues);
+		// console.log(max);
+
+		//game on
+		new Chart("myChart", {
+			type: "line",
+			data: {
+			  labels: xValues,
+			  datasets: [{
+				fill: false,
+				lineTension: 0,
+				backgroundColor: "rgba(0,0,255,1.0)",
+				borderColor: "rgba(0,0,255,0.1)",
+				data: yValues
+			  }]
+			},
+			options: {
+			  legend: {display: false},
+			  scales: {
+				yAxes: [{ticks: {min: 0, max:200}}],
+			  }
+			}
+		  });
+	}
 }
 
 function removeWeightGraph(){

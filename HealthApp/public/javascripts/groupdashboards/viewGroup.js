@@ -351,7 +351,8 @@ function saveUserInformation(data)
     {
         //Only weight needed currently
         // console.log(data.content);
-        weight = data.content.weight;
+        let weightKeys = Object.keys(data.content.weight);
+        weight = data.content.weight[weightKeys[weightKeys.length - 1]]
     }
 }
 

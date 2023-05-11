@@ -3,6 +3,25 @@ const database = require("./database");
 const emailManager = require("./emailManager");
 const crypto = require('crypto');
 
+function getAndFormatCurrentDate() {
+
+    //https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date- reference - For the date min and max value 
+    //https://www.w3resource.com/javascript-exercises/javascript-date-exercise-2.php- Reference - helping form the yyyy-mm-dd format
+
+	const CurrentDate = new Date();
+	var year = CurrentDate.getFullYear();
+	var month = CurrentDate.getMonth() + 1;
+	var day = CurrentDate.getDate();
+	if (day < 10) {
+		day = "0" + day;
+	}
+	if (month < 10) {
+		month = "0" + month;
+	}
+	
+	return year + "-" + month + "-" + day;
+}
+
 function login(content)
 {
     if (!content.username) return { status: 400, content: "Missing required data - username" };
@@ -54,7 +73,12 @@ function signup(content)
 
     //optional information
     if (content.height) userInfo.height = content.height;
-    if (content.weight) userInfo.weight = content.weight;
+
+    let date = getAndFormatCurrentDate
+    if (content.weight) userInfo.weight = {
+        date: content.weight}
+    //add date here
+
     if (content.bmi) userInfo.bmi = content.bmi;
     if (content.age) userInfo.age = content.age;
 
@@ -70,7 +94,10 @@ function update(username, content)
     if (content.email) table[username].email = content.email;
     if (content.password) table[username].password = content.password;
     if (content.height) table[username].height = content.height;
-    if (content.weight) table[username].weight = content.weight;
+    if (content.weight)
+    {    
+        table[username].weight[getAndFormatCurrentDate()] = content.weight; 
+    }
     if (content.bmi) table[username].bmi = content.bmi;
     if (content.age) table[username].age = content.age;
 
