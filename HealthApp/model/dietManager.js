@@ -80,6 +80,56 @@ function dataSubmit(username, content)
     return { status: 200, content: message };
 }
 
+function calorieRequest(username)
+{
+    console.log("here")
+    const tbDiet = database.getTable("DIET");
+    let foodIDs = [];
+
+    
+    if(tbDiet[username])
+    {
+        foodIDs = tbDiet[username];
+    }
+    
+    const tbFood = database.getTable("FOOD");
+    let foods = [];
+    let totalCalories = 0;
+    
+    for (let id of foodIDs)
+    {
+        let food = null; 
+        if (id[0] === "d")
+        {
+            if (tbFood["default"][id]) food = tbFood["default"][id];
+        }
+        else
+        {
+            if (tbFood[username][id]) food = tbFood[username][id];
+        }
+
+        if (food)
+        {
+            foods.push(food);
+            totalCalories += parseInt(food.calories);
+        }
+        else
+        {
+            console.log("invalid food id requested: " + id);
+        }
+    }
+
+    let data = {
+        foods: foods,
+        totalCalories: totalCalories
+    };
+
+    let message = "Successfully requested diet";
+    console.log(message);
+    return { status: 200, content: data };
+}
+
 
 exports.dataRequest = dataRequest;
 exports.dataSubmit = dataSubmit;
+exports.calorieRequest = calorieRequest;

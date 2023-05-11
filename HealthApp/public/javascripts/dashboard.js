@@ -988,13 +988,31 @@ function removeWeightGraph(){
 var foodGraphExit = document.getElementById("exitCalorieGraphContainer");
 var foodGraph = document.getElementById("viewCalorieGraph");
 
-foodGraph.addEventListener("click",displayFoodGraph);
+foodGraph.addEventListener("click",getFoodHistoryForGraph);
 foodGraphExit.addEventListener("click",removeFoodGraph);
 const foodGraphContainer = document.querySelector('#addCalorieGraphContainer')
 
-function displayFoodGraph(){
+function getFoodHistoryForGraph()
+{
+	let data = {
+		type: "diet-calories-request",
+		content: {}
+	};
+	
+	dataRequest(data, displayFoodGraph)
+
+}
+function displayFoodGraph(response){
 	overlay2.style.display = "block";
 	foodGraphContainer.style.display = "block";
+	if (response.status != 200) {
+		console.log(response.content);
+	} 
+	else {
+		// totalCalories = parseInt(response.content.totalCalories);
+		console.log(response.content);
+		}
+
 }
 
 function removeFoodGraph(){
