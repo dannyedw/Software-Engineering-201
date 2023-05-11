@@ -25,6 +25,7 @@ function request(username, data)
 
         case "diet-request": return dietManager.dataRequest(username, data.content);
         case "diet-submit": return dietManager.dataSubmit(username, data.content);
+        case "calories-request": return dietManager.calorieRequest(username);
 
         case "food-request": return foodManager.dataRequest(username);
         case "food-submit": return foodManager.dataSubmit(username, data.content);
