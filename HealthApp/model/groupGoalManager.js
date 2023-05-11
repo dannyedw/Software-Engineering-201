@@ -65,6 +65,7 @@ function addUser(username, content)   //username is user to delete, req from dat
 {
     if(content.groupName === null) return { status: 400, content: "Missing Group Name" };
     if(content.goalId === null) return { status: 400, content: "Missing Goal id"};
+    if(content.startWeight === null) return { status: 400, content: "Missing User Starting weight"};
 
     let table = database.getTable("GROUPGOALS");
 
@@ -75,6 +76,7 @@ function addUser(username, content)   //username is user to delete, req from dat
 
     table[content.groupName][content.goalId].users.push(username);
     table[content.groupName][content.goalId].status.push("In Progress")
+    table[content.groupName][content.goalId].extraData[0].push(content.startWeight)
 
     database.overwriteTable("GROUPGOALS", table);
     return { status: 200, content: "Successfully updated goal stuff"};
@@ -95,6 +97,7 @@ function deleteUser(username, content) //username is user to delete, req from da
 
     table[content.groupName][content.goalId].users.splice(userIndex, 1);
     table[content.groupName][content.goalId].status.splice(userIndex, 1);
+    table[content.groupName][content.goalId].extraData[0].splice(userIndex, 1);
 
     database.overwriteTable("GROUPGOALS", table);
     return { status: 200, content: "Successfully updated goal stuff"};

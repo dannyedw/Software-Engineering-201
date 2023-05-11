@@ -244,7 +244,7 @@ function displayGroupGoals(data)
             }
 
 				if (currentGoal.type == "weight") {
-					var goalProgress = ((weight - currentGoal.extraData[0]) / (currentGoal.extraData[1] - currentGoal.extraData[0])) * 100;
+					var goalProgress = ((weight - currentGoal.extraData[0][userIndex]) / (currentGoal.extraData[1] - currentGoal.extraData[0][userIndex])) * 100;
 					if (currentGoal.status[userIndex] != "In Progress") {
 						goal.innerHTML = "Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: " + currentGoal.status[userIndex] + 
 							 `<br> Friends Progress: ` + friendGoalProgress;
@@ -258,7 +258,7 @@ function displayGroupGoals(data)
 
                         goalProgress = 100;
 						goal.innerHTML = "Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: Goal Completed Successfully" + 
-							+ "| Progress: " + currentGoal.extraData[0] + ` <progress value="` + goalProgress + `" max="100"></progress> ` + currentGoal.extraData[1] +
+							+ "| Progress: " + currentGoal.extraData[0][userIndex] + ` <progress value="` + goalProgress + `" max="100"></progress> ` + currentGoal.extraData[1] +
 							" " + `<br> Friends Progress: ` + friendGoalProgress;
 						//pass and archive/update goal
 
@@ -283,7 +283,7 @@ function displayGroupGoals(data)
                         let leaveGoalFuncton = `onclick = "leaveGoal('` + key + `',` + currentGoal.goalId + `)"`;
 
 						goal.innerHTML = "Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: " + currentGoal.status[userIndex]
-							+ " | Days Remaining: " + daysRemaining +"| Progress: " + currentGoal.extraData[0] + ` <progress value="` + goalProgress + `" max="100"></progress> ` + currentGoal.extraData[1] +
+							+ " | Days Remaining: " + daysRemaining +"| Progress: " + currentGoal.extraData[0][userIndex] + ` <progress value="` + goalProgress + `" max="100"></progress> ` + currentGoal.extraData[1] +
 							" " + `<button type='button'  ` + leaveGoalFuncton + ` style ='margin: 5px 0'>Leave</button><br> Friends Progress: ` + friendGoalProgress;
 					}
 				}
@@ -436,7 +436,7 @@ goalSelect.addEventListener("change", (event) => {
 			type: goalType,
 			startDate: startDate,
 			endDate: targetDate,
-			extraData: [weight, targetWeight]
+			extraData: [[weight], targetWeight]
 		};
 
 		let request = {
@@ -454,9 +454,8 @@ goalSelect.addEventListener("change", (event) => {
     document.getElementById('addPGoal').addEventListener("click", addingTargetWeight);
 });
 
-
-
 //end of goal pop uup stuff
+
 let weight = 0
 requestGroupInformation()
 
