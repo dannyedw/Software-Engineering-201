@@ -82,7 +82,6 @@ function dataSubmit(username, content)
 
 function calorieRequest(username)
 {
-    console.log("here")
     const tbDiet = database.getTable("DIET");
     let foodIDs = [];
 
@@ -91,14 +90,17 @@ function calorieRequest(username)
     {
         foodIDs = tbDiet[username];
     }
+    else {return { status: 400, content: "user not in the diet database" };}
+    // console.log(foodIDs)
     
     const tbFood = database.getTable("FOOD");
     let foods = [];
     let totalCalories = 0;
     
-    for (let id of foodIDs)
+    for (let id in foodIDs)
     {
         let food = null; 
+        console.log(foodIDs[id])
         if (id[0] === "d")
         {
             if (tbFood["default"][id]) food = tbFood["default"][id];
