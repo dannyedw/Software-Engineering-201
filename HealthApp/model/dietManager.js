@@ -84,46 +84,56 @@ function calorieRequest(username)
 {
     const tbDiet = database.getTable("DIET");
     let foodIDs = [];
-
-    
-    if(tbDiet[username])
-    {
-        foodIDs = tbDiet[username];
-    }
-    else {return { status: 400, content: "user not in the diet database" };}
-    // console.log(foodIDs)
     
     const tbFood = database.getTable("FOOD");
     let foods = [];
-    let totalCalories = 0;
-    
-    for (let id in foodIDs)
-    {
-        let food = null; 
-        console.log(foodIDs[id])
-        if (id[0] === "d")
-        {
-            if (tbFood["default"][id]) food = tbFood["default"][id];
-        }
-        else
-        {
-            if (tbFood[username][id]) food = tbFood[username][id];
-        }
+    let totalCalories = [];
+    let dates = [];
+    let sumCalories=0;
 
-        if (food)
+    if(tbDiet[username])
+    {
+        foodIDs = tbDiet[username];
+
+        for (let id in foodIDs)
         {
-            foods.push(food);
-            totalCalories += parseInt(food.calories);
-        }
-        else
-        {
-            console.log("invalid food id requested: " + id);
+            let sumCalories = 0;
+            console.log(id)
+            foodids = foodIDs[id]
+            dates.push(id)
+            for (let foodid of foodids){
+            let food = null; 
+            console.log(foodid)
+            if (foodid[0] === "d")
+            {
+                if (tbFood["default"][foodid]) food = tbFood["default"][foodid];
+            }
+            else
+            {
+                if (tbFood[username][foodid]) food = tbFood[username][foodid];
+            }
+
+            if (food)
+            {
+                sumCalories += parseInt(food.calories);
+                
+            }
+            else
+            {
+                console.log("invalid food id requested: " + foodid);
+            }
+        }   
+        totalCalories.push(sumCalories);
+        sumCalories = 0;
         }
     }
 
+    else {return { status: 400, content: "user not in the diet database" };}
+
+    console.log(dates)
     let data = {
-        foods: foods,
-        totalCalories: totalCalories
+        totalCalories: totalCalories,
+        dates:dates
     };
 
     let message = "Successfully requested diet";

@@ -936,15 +936,18 @@ function displayWeightGraph(data){
 	}
 	else
 	{
+		
 		overlay2.style.display = "block";
 		weightGraphContainer.style.display = "block";
 		let weightGraph = document.getElementById("myChart")
 		let xValues = Object.keys(data.content.weight);
+		
 		let yValues = [];
 		let maxWeight = 0;
 		let minWeight = 500;
 		for (key in data.content.weight)
 		{
+			
 			let value = data.content.weight[key]
 			yValues.push(value);
 			if(value > maxWeight) maxWeight = value;
@@ -954,7 +957,8 @@ function displayWeightGraph(data){
 		// console.log(xValues);
 		// console.log(yValues);
 		// console.log(maxWeight);
-
+		console.log(yValues)
+		console.log(xValues)
 		//Reference for graphing tool:  https://www.w3schools.com/js/tryit.asp?filename=tryai_chartjs_lines
 		new Chart("myChart", {
 			type: "line",
@@ -1011,8 +1015,47 @@ function displayFoodGraph(response){
 	else {
 		// totalCalories = parseInt(response.content.totalCalories);
 		console.log(response.content);
+
+		let weightGraph = document.getElementById("myChart2")
+		let xValues = response.content.dates;
+		let yValues = [];
+		let maxWeight = 0;
+		let minWeight = 500;
+		for (let key of response.content.totalCalories)
+		{
+			let value = key.toString()
+			yValues.push(value);
+			console.log(value)
+			if(value > maxWeight) maxWeight = value;
+			if(value < minWeight) minWeight = value;
 		}
 
+		// console.log(xValues);
+		// console.log(yValues);
+		// console.log(maxWeight);
+		console.log(yValues)
+		console.log(xValues)
+		//Reference for graphing tool:  https://www.w3schools.com/js/tryit.asp?filename=tryai_chartjs_lines
+		new Chart("myChart2", {
+			type: "line",
+			data: {
+			  labels: xValues,
+			  datasets: [{
+				fill: false,
+				lineTension: 0,
+				backgroundColor: "rgba(0,0,255,1.0)",
+				borderColor: "rgba(0,0,255,0.1)",
+				data: yValues
+			  }]
+			},
+			options: {
+			  legend: {display: false},
+			  scales: {
+				yAxes: [{ticks: {min: Number(minWeight), max: Number(maxWeight)}}],
+			  }
+			}
+		  });
+	}
 }
 
 function removeFoodGraph(){
