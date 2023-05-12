@@ -70,6 +70,7 @@ function displayGroup(data)
             dataRequest(groupReqData, displayGroupGoals);
 
             //Reference for collapsible JS: https://www.w3schools.com/howto/howto_js_collapsible.asp
+            //Reference for collapsible https://www.w3schools.com/howto/howto_js_collapsible.asp
             for (var i = 0; i < coll.length; i++) {
                 coll[i].addEventListener("click", function() {
                   this.classList.toggle("active");

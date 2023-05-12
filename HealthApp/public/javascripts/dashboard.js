@@ -957,8 +957,6 @@ function displayWeightGraph(data){
 		// console.log(xValues);
 		// console.log(yValues);
 		// console.log(maxWeight);
-		console.log(yValues)
-		console.log(xValues)
 		//Reference for graphing tool:  https://www.w3schools.com/js/tryit.asp?filename=tryai_chartjs_lines
 		new Chart("myChart", {
 			type: "line",
@@ -1013,9 +1011,6 @@ function displayFoodGraph(response){
 		console.log(response.content);
 	} 
 	else {
-		// totalCalories = parseInt(response.content.totalCalories);
-		console.log(response.content);
-
 		let weightGraph = document.getElementById("myChart2")
 		let xValues = response.content.dates;
 		let yValues = [];
@@ -1025,7 +1020,7 @@ function displayFoodGraph(response){
 		{
 			let value = key.toString()
 			yValues.push(value);
-			console.log(value)
+	
 			if(value > maxWeight) maxWeight = value;
 			if(value < minWeight) minWeight = value;
 		}
@@ -1033,8 +1028,7 @@ function displayFoodGraph(response){
 		// console.log(xValues);
 		// console.log(yValues);
 		// console.log(maxWeight);
-		console.log(yValues)
-		console.log(xValues)
+
 		//Reference for graphing tool:  https://www.w3schools.com/js/tryit.asp?filename=tryai_chartjs_lines
 		new Chart("myChart2", {
 			type: "line",

@@ -98,12 +98,10 @@ function calorieRequest(username)
         for (let id in foodIDs)
         {
             let sumCalories = 0;
-            console.log(id)
             foodids = foodIDs[id]
             dates.push(id)
             for (let foodid of foodids){
             let food = null; 
-            console.log(foodid)
             if (foodid[0] === "d")
             {
                 if (tbFood["default"][foodid]) food = tbFood["default"][foodid];
@@ -130,7 +128,6 @@ function calorieRequest(username)
 
     else {return { status: 400, content: "user not in the diet database" };}
 
-    console.log(dates)
     let data = {
         totalCalories: totalCalories,
         dates:dates
