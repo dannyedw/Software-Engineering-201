@@ -92,15 +92,6 @@ function notifyGroupGoalCreation(username, groupname, goalId, goalDetails)
     const userTable = database.getTable("USER");
     const groupTable = database.getTable("GROUP");
 
-    // if (!table[username])
-    // {
-    //     console.log("Failed to send email due to invalid username: " + username);
-    //     return;
-    // }
-
-    //get all users in group
-    
-    //ERROR IN HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     if(groupTable[groupName])
     {
         var usersInGroup = groupTable[groupName].members;
