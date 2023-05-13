@@ -38,9 +38,10 @@ function displayGroup(data)
     }
     else
     {
+        groups.innerHTML = ``;
         if(Object.keys(data.content).length === 0)
         {
-            console.log("No Groups");
+            groups.innerHTML = `<h2>You are in no groups</h2>`;
         }
         else
         {
@@ -48,7 +49,6 @@ function displayGroup(data)
         {
             currentGroup = data.content[key];
             div = key + "-info";
-            
             groups.innerHTML += `<div><h1 id="divsID" class='collapsible'>` + key + `:` + ` Members: `+currentGroup.members.length+` ` + ` Group Goals: `+10+`</h1>
             <div class='content'><div class='groupDivs'id="` + key + "-info" + `"> <h1>Members</h1><br>` + '<input type="text" id="addingMember" placeholder="Enter Member here"> <button type="button" onclick="addMember(\'' + currentGroup.members + '\',\'' + div + '\');">Add Member</button></div>' +
             `<div class='groupDivs' id = "` + key + "-goals" + `"></div><br>
@@ -227,7 +227,7 @@ function displayGroupGoals(data)
     else
     {
         goals = data.content.goals;
-        console.log(goals);
+        // console.log(goals);
         // console.log(key + " goals: ")
         var minDaysRemaining = 11;
         for (let i = 0; i < goals.length; i++)

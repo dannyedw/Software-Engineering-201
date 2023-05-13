@@ -92,10 +92,10 @@ function notifyGroupGoalCreation(username, groupname, goalId, goalDetails)
     const userTable = database.getTable("USER");
     const groupTable = database.getTable("GROUP");
 
+    //gets all members in group
     if(groupTable[groupName])
     {
         var usersInGroup = groupTable[groupName].members;
-        console.log("We have a group with the group name given");
     }
     else
     {
@@ -103,7 +103,7 @@ function notifyGroupGoalCreation(username, groupname, goalId, goalDetails)
         return {status: 400, content: "No content in group"}
     }
 
-    //get all users email
+    //get all users email and emails
     for(userIndex in usersInGroup)
     {
         let user = usersInGroup[userIndex];
@@ -115,7 +115,7 @@ function notifyGroupGoalCreation(username, groupname, goalId, goalDetails)
             let text = "Hello " + userFirstName + ",\n" + username + " has set a new goal in group " + groupname + "\nGoal Description: " + goalDetails +
             "\n\nPlease click this link to accept the new goal: https://localhost:3000/joinGoal/" + groupname + "/" + goalId;
             sendEmail(email, subject, text);
-            console.log("E-mailed to :" + email);
+            // console.log("E-mailed to :" + email); //if you need to see where the email went
         }
     }
     return {status: 200, content: "Send emails to all provided emails in database"}
@@ -123,16 +123,34 @@ function notifyGroupGoalCreation(username, groupname, goalId, goalDetails)
 
 function notifyGroupGoalCompletion(username, groupname, goalDetails)
 {
-    const table = database.getTable("USER");
-    if (!table[username])
+    const userTable = database.getTable("USER");
+    const groupTable = database.getTable("GROUP");
+
+    if(groupTable[groupName])
     {
-        console.log("Failed to send email due to invalid username: " + username);
-        return;
+        var usersInGroup = groupTable[groupName].members;
+    }
+    else
+    {
+        console.log("No users in group");
+        return {status: 400, content: "No content in group"}
     }
 
-    const emailAddress = table[username].email;
-    const subject = "ASCEND - Group goal completed for " + groupname;
-    const text = "Group " + groupname + " has completed a goal.";
+    for(userIndex in usersInGroup)
+    {
+        let user = usersInGroup[userIndex];
+        if(userTable[user].email && user != username)
+        {
+            let email = userTable[user].email;
+            let userFirstName = userTable[user].firstName;
+            let subject = "ASCEND - User in group " + groupname + " has completed a goal";
+            let text = "Hello " + userFirstName + ",\n" + username + " has completed a goal in group " + groupname + "\nGoal Description: " + goalDetails;
+            sendEmail(email, subject, text);
+            // console.log("E-mailed to :" + email); //if you need to see where the email went
+        }
+    }
+    return {status: 200, content: "Send emails to all provided emails in database"}
+
 
     sendEmail(emailAddress, subject, text);
 }

@@ -10,6 +10,8 @@ function create(username, content)
     if (!content.endDate) return { status: 400, content: "Missing required data - end date" };
     if (!content.extraData) return { status: 400, content: "Missing required data - extra data" };
 
+    if(content.type != "weight") return { status: 400, content: "Invaid goal type" } ///CHANGE IF ADDING MORE GOAL TYPES
+
     let table = database.getTable("GROUPGOALS");
     let data = {
         users: [username],
@@ -20,11 +22,12 @@ function create(username, content)
         extraData: content.extraData
     };
 
+    let newId;
     if(table[content.group])  //if the group has goals
     {
         let currentIds = Object.keys(table[content.group]);
         let lastID =  Number(currentIds[currentIds.length-1]);
-        var newId = lastID+ 1;
+        newId = lastID+ 1;
         table[content.group][newId] = data;
     }
     else  //if the group has no goals
@@ -34,7 +37,16 @@ function create(username, content)
     }
 
     //NOTIFY ALL MEMBERS IN GROUP AND ADD THEM TO GOAL IF ACCEPTED 
-    let goalDetails = "Place holder info (I will change later)";
+    let goalDetails;
+    if(content.type === "weight")
+    {
+        goalDetails = "Get to " + content.extraData[1] + "kg by " + content.endDate;
+    }
+    else
+    {
+        goalDetails = "Not valid goal";
+    }
+
     let emailReqResponse = emailManager.notifyGroupGoalCreation(username, content.group, newId, goalDetails);
     if(emailReqResponse.status != 200)
     {
@@ -68,11 +80,16 @@ function deleteGoal(content)
 //this would be triggered when the user answers the email
 function addUser(username, content)   //username is user to delete, req from data manager and mailer may be different
 {
+    //WILL NEED CHANGING IF ANOTHER GOAL type IS ADDED
     if(content.groupName === null) return { status: 400, content: "Missing Group Name" };
     if(content.goalId === null) return { status: 400, content: "Missing Goal id"};
     if(content.startWeight === null) return { status: 400, content: "Missing User Starting weight"};
 
+    //make sure used adding is in group
+
     let table = database.getTable("GROUPGOALS");
+    let userTable = database.getTable("USER");
+    if(!userTable[username].groups.includes(content.groupName)) return { status: 400, content: "User does not exist in group"};
 
     if(table[content.groupName][content.goalId].users.includes(username))
     {
@@ -116,15 +133,28 @@ function update(username, content)
     if(content.groupName === null) return { status: 400, content: "Missing Group Name" };
 
     //add more of these lines for different goal atrubutes if we plan on updating more but not needed now
+    let userIndex;
     if(content.status)
     {
         //finds user index as this index is the same for the status array
-        let userIndex = table[content.groupName][content.goalId].users.indexOf(username);
+        userIndex = table[content.groupName][content.goalId].users.indexOf(username);
         if(userIndex === -1) return { status: 400, content: "User not found in Goal"};
         table[content.groupName][content.goalId].status[userIndex] = content.status;
     } 
 
+    let goalDetails;
+    if(table[content.groupName][content.goalId].type === "weight")
+    {
+        goalDetails = "Get to " + table[content.groupName][content.goalId].extraData[1] + "kg by " + 
+        table[content.groupName][content.goalId].endDate;
+    }
+    else
+    {
+        goalDetails = "Not valid goal";
+    }
+
     database.overwriteTable("GROUPGOALS", table);
+    emailManager.notifyGroupGoalCompletion(username, content.groupName, goalDetails);
     return { status: 200, content: "Successfully updated goal stuff"};
 }
 
