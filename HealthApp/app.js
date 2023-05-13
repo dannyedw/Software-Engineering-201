@@ -16,6 +16,7 @@ const aboutRouter = require('./routes/about');
 const dataRouter = require('./routes/data');
 const verifyUserRouter = require('./routes/verifyUser');
 const joinGroupRouter = require('./routes/joinGroup');
+const joinGoalRouter = require('./routes/joinGoal');
 
 var app = express();
 
@@ -44,6 +45,7 @@ app.use('/about', aboutRouter);
 app.use('/data', dataRouter);
 app.use('/verifyUser', verifyUserRouter);
 app.use('/joinGroup', joinGroupRouter);
+app.use('/joinGoal', joinGoalRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

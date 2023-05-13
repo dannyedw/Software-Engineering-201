@@ -226,6 +226,7 @@ function displayGroupGoals(data)
     else
     {
         goals = data.content.goals;
+        console.log(goals);
         // console.log(key + " goals: ")
         var minDaysRemaining = 11;
         for (let i = 0; i < goals.length; i++)
@@ -260,6 +261,8 @@ function displayGroupGoals(data)
 						goal.innerHTML = "Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: Goal Completed Successfully" + 
 							+ "| Progress: " + currentGoal.extraData[0][userIndex] + ` <progress value="` + goalProgress + `" max="100"></progress> ` + currentGoal.extraData[1] +
 							" " + `<br> Friends Progress: ` + friendGoalProgress;
+
+                        //SEND EMAIL FOR SUCCESSFUL GOAL COMPLETION
 						//pass and archive/update goal
 
 					}
@@ -440,12 +443,12 @@ goalSelect.addEventListener("change", (event) => {
 		};
 
 		let request = {
-			type: "personal-goal-create",
+			type: "group-goal-create",
 			content: data
 		};
 
         console.log(request);
-		// dataRequest(request, errorReporter);
+		dataRequest(request, errorReporter);
 
 		overlay.style.display = "none";
 		addGoalContainer.style.display = "none";

@@ -87,20 +87,47 @@ function notifyGroupDeletion(username, groupname)
     sendEmail(emailAddress, subject, text);
 }
 
-function notifyGroupGoalCreation(username, groupname, goalDetails)
+function notifyGroupGoalCreation(username, groupname, goalId, goalDetails)
 {
-    const table = database.getTable("USER");
-    if (!table[username])
+    const userTable = database.getTable("USER");
+    const groupTable = database.getTable("GROUP");
+
+    // if (!table[username])
+    // {
+    //     console.log("Failed to send email due to invalid username: " + username);
+    //     return;
+    // }
+
+    //get all users in group
+    
+    //ERROR IN HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    if(groupTable[groupName])
     {
-        console.log("Failed to send email due to invalid username: " + username);
-        return;
+        var usersInGroup = groupTable[groupName].members;
+        console.log("We have a group with the group name given");
+    }
+    else
+    {
+        console.log("No users in group");
+        return {status: 400, content: "No content in group"}
     }
 
-    const emailAddress = table[username].email;
-    const subject = "ASCEND - New group goal for " + groupname;
-    const text = "Group " + groupname + " has created a new goal.";
-
-    sendEmail(emailAddress, subject, text);
+    //get all users email
+    for(userIndex in usersInGroup)
+    {
+        let user = usersInGroup[userIndex];
+        if(userTable[user].email && user != username)
+        {
+            let email = userTable[user].email;
+            let userFirstName = userTable[user].firstName;
+            let subject = "ASCEND - New group goal for " + groupname;
+            let text = "Hello " + userFirstName + ",\n" + username + " has set a new goal in group " + groupname + "\nGoal Description: " + goalDetails +
+            "\n\nPlease click this link to accept the new goal: https://localhost:3000/joinGoal/" + groupname + "/" + goalId;
+            sendEmail(email, subject, text);
+            console.log("E-mailed to :" + email);
+        }
+    }
+    return {status: 200, content: "Send emails to all provided emails in database"}
 }
 
 function notifyGroupGoalCompletion(username, groupname, goalDetails)

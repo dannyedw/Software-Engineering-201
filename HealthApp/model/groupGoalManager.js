@@ -1,4 +1,5 @@
-const database = require("./database")
+const database = require("./database");
+const emailManager = require("../model/emailManager");
 
 //create new goal, only adds the user that has created the goal as other users will need to answer email
 function create(username, content)
@@ -10,7 +11,6 @@ function create(username, content)
     if (!content.extraData) return { status: 400, content: "Missing required data - extra data" };
 
     let table = database.getTable("GROUPGOALS");
-
     let data = {
         users: [username],
         type: content.type,
@@ -24,7 +24,7 @@ function create(username, content)
     {
         let currentIds = Object.keys(table[content.group]);
         let lastID =  Number(currentIds[currentIds.length-1]);
-        let newId = lastID+ 1;
+        var newId = lastID+ 1;
         table[content.group][newId] = data;
     }
     else  //if the group has no goals
@@ -34,9 +34,14 @@ function create(username, content)
     }
 
     //NOTIFY ALL MEMBERS IN GROUP AND ADD THEM TO GOAL IF ACCEPTED 
+    let goalDetails = "Place holder info (I will change later)";
+    let emailReqResponse = emailManager.notifyGroupGoalCreation(username, content.group, newId, goalDetails);
+    if(emailReqResponse.status != 200)
+    {
+        return{status: 400, content: ("Error when sending emails: " + goalDetails.content)}
+    }
 
     database.overwriteTable("GROUPGOALS", table);
-    
     return{ status: 200, content: "Successfully created group goal" };
 }
 
@@ -141,7 +146,7 @@ function dataRequest(username,content)
         let currentDateSplit = content.date.split("-");
         for(entry in groupGoals){
             let currentGoalSplit = groupGoals[entry].endDate.split("-");
-            if((currentDateSplit[0] <= currentGoalSplit[0]) && (currentDateSplit[1] <= currentGoalSplit[1]) && 
+            if((currentDateSplit[0] < currentGoalSplit[0]) || (currentDateSplit[1] < currentGoalSplit[1]) || 
                     (currentDateSplit[2] <= currentGoalSplit[2]))
             {
                 if (groupGoals[entry].users.includes(username))
