@@ -57,8 +57,7 @@ function create(username, content)
     return{ status: 200, content: "Successfully created group goal" };
 }
 
-//delete goal, only user that created the goal can do this (or who ever is first in user array)
-//the checking if the user created the goal shall be done client side
+//this function is probably useless now as goals are auto deleted if all members have left the goal
 function deleteGoal(content) 
 {
     if(content.groupName === null) return { status: 400, content: "Missing Group Name" };
@@ -105,8 +104,7 @@ function addUser(username, content)   //username is user to delete, req from dat
 
 }
 
-//deletes a user from the goal, could make is so creator of goal cant delete themselves from it
-//will be triggered when the user wants to leave the goal
+//this function deletes a user from a goal, if their are no users left in a goal then the goal is deleted
 function deleteUser(username, content) //username is user to delete, req from data manager and mailer may be different
 {
     if(content.groupName === null) return { status: 400, content: "Missing Group Name" };
@@ -120,6 +118,11 @@ function deleteUser(username, content) //username is user to delete, req from da
     table[content.groupName][content.goalId].users.splice(userIndex, 1);
     table[content.groupName][content.goalId].status.splice(userIndex, 1);
     table[content.groupName][content.goalId].extraData[0].splice(userIndex, 1);
+
+    if(table[content.groupName][content.goalId].users.length === 0)
+    {
+        delete table[content.groupName][content.goalId];
+    }
 
     database.overwriteTable("GROUPGOALS", table);
     return { status: 200, content: "Successfully updated goal stuff"};

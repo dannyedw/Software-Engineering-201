@@ -227,7 +227,7 @@ function displayGroupGoals(data)
 
     if(data.content.goals.length === 0)
     {
-        container.innerHTML = `No Goals to Show`
+        container.innerHTML = `<h1>Group Goals</h1>No Goals to Show`;
     }
     else
     {
