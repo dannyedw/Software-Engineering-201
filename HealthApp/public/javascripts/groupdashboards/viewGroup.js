@@ -49,7 +49,8 @@ function displayGroup(data)
         {
             currentGroup = data.content[key];
             div = key + "-info";
-            groups.innerHTML += `<div><h1 id="divsID" class='collapsible'>` + key + `:` + ` Members: `+currentGroup.members.length+` ` + ` Group Goals: `+10+`</h1>
+            let classForGoalAmount = key + "-goalAmount"
+            groups.innerHTML += `<div><h1 id="divsID" class='collapsible ` + classForGoalAmount + `'>` + key + `:` + ` Members: `+currentGroup.members.length+` ` + ` Group Goals: ?</h1>
             <div class='content'><div class='groupDivs'id="` + key + "-info" + `"> <h1>Members</h1><br>` + '<input type="text" id="addingMember" placeholder="Enter Member here"> <button type="button" onclick="addMember(\'' + currentGroup.members + '\',\'' + div + '\');">Add Member</button></div>' +
             `<div class='groupDivs' id = "` + key + "-goals" + `"></div><br>
             <button type="button" id="description" onclick="DisplayDescription('${currentGroup.description}');">Description</button><br>
@@ -219,6 +220,10 @@ function displayGroupGoals(data)
     const textNode = document.createTextNode("Group Goals");
     h1.appendChild(textNode);
     container.appendChild(h1);
+
+    let groupSummary = document.querySelectorAll("." + key + "-goalAmount")[0];
+    let groupSummaryText = groupSummary.textContent;
+    groupSummary.innerHTML = groupSummaryText.replace("?", data.content.goals.length);
 
     if(data.content.goals.length === 0)
     {
