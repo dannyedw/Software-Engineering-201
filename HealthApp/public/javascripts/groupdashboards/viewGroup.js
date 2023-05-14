@@ -107,6 +107,7 @@ function displayGroupInfo(data, divId)
 }
 
 function addMember(data,divId){
+    
     data = data.split(",")
     // adds user to server
     // data ={
@@ -127,13 +128,13 @@ function addMember(data,divId){
     container = document.getElementById(divId);
     container.innerHTML = "";
 
-    container.innerHTML = '<h1>Members</h1><br> <input type="text" id="addingMember" placeholder="Enter Member here"> <button type="button" onclick="addMember(\'' + currentGroup.members + '\',\'' + div + '\');">Add Member</button></div>'
-    
+    container.innerHTML = '<h1>Members</h1><br> <input type="text" id="addingMember" placeholder="Enter Member here"> <button type="button" onclick="addMember(\'' + data + '\',\'' + divId + '\');">Add Member</button></div>'
+    console.log(data)
 
     for (var i = 0; i < data.length; i++) {
         var member = data[i]
       
-        container.innerHTML += '<div id = "memberContainer"><p>'+ member +'</p><button id="removeMemberButton" type=button onclick="removeMember(\'' +member+ '\',\'' +data +'\',\'' +div +'\')">Remove</button></div>';
+        container.innerHTML += '<div id = "memberContainer"><p>'+ member +'</p><button id="removeMemberButton" type=button onclick="removeMember(\'' +member+ '\',\'' +data +'\',\'' +divId +'\')">Remove</button></div>';
     
     }
 }
