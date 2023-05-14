@@ -76,9 +76,10 @@ function dataRequest(username, content)
         let userGoals = table[username];
         for(entry in userGoals){
             let currentDateSplit = content.date.split("-");
-            let currentGoalSplit = userGoals[entry].endDate.split("-");
-            if((currentDateSplit[0] < currentGoalSplit[0]) || (currentDateSplit[1] < currentGoalSplit[1]) || 
-                    (currentDateSplit[2] <= currentGoalSplit[2]))
+            let currentDate = new Date (currentDateSplit[0],currentDateSplit[1],currentDateSplit[2])
+            let currentGoalDateSplit = userGoals[entry].endDate.split("-");
+            let currentGoalDate = new Date(currentGoalDateSplit[0],currentGoalDateSplit[1],currentGoalDateSplit[2])
+            if(currentDate <= currentGoalDate)
             {
                 userGoals[entry]["goalId"] = entry;
                 data.push(userGoals[entry]);

@@ -650,6 +650,7 @@ function displayPersonalGoals(data)  //this displays the goals in the goal conta
 
 			let minDaysRemaining = 11; //11 as we want to find minimum, any goal under 10 days will be smaller than this
 
+			var archivedGoals = [];
 			for (let i = 0; i < personalGoals.length; i++) {
 				let currentGoal = personalGoals[i];
 				var goal = document.createElement("p");
@@ -657,6 +658,7 @@ function displayPersonalGoals(data)  //this displays the goals in the goal conta
 					var goalProgress = ((currentWeight - currentGoal.extraData[0]) / (currentGoal.extraData[1] - currentGoal.extraData[0])) * 100;
 					if (currentGoal.status != "In Progress") {
 						goal.innerHTML = "Archived goal: Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: " + currentGoal.status;
+						archivedGoals.push(goal);
 					}
 					else if (goalProgress >= 100) {
 						data = {
@@ -666,6 +668,7 @@ function displayPersonalGoals(data)  //this displays the goals in the goal conta
 						dataRequest(data, errorReporter);
 
 						goal.innerHTML = "Archived goal: Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: Goal Completed Successfully";
+						archivedGoals.push(goal);
 						//pass and archive/update goal
 
 					}
@@ -677,6 +680,7 @@ function displayPersonalGoals(data)  //this displays the goals in the goal conta
 						dataRequest(data, errorReporter);
 
 						goal.innerHTML = "Archived goal: Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: Goal Failed";
+						archivedGoals.push(goal);
 						//fail and archive/update goal
 					}
 					else {
@@ -690,13 +694,13 @@ function displayPersonalGoals(data)  //this displays the goals in the goal conta
 							"<div id='daysContainer'><p> Days Remaining: " + daysRemaining +"</p></div>" + "<div id='progressContainer'><p>Progress: " + currentGoal.extraData[0] +
 							` <progress value="` + goalProgress + `" max="100"></progress>` + currentGoal.extraData[1] +
 							" " + `<button type='button' id='deletePersonalGoalButton' onclick = "deletePersonalGoal(` + currentGoal.goalId + `)" style ='margin: 5px 0'>Delete</button></div>`;
+						personalGoalContainer.appendChild(goal);
 					}
 				}
 				else {
 					//other goal types will need to implement the alert minimum days
 					console.log("not implemented yet");
 				}
-				personalGoalContainer.appendChild(goal);
 				if(minDaysRemaining === 1 && userDeadlineAlert === false)
 				{
 					alert("You have a goal deadline in " + minDaysRemaining + " day!");
@@ -707,6 +711,10 @@ function displayPersonalGoals(data)  //this displays the goals in the goal conta
 					alert("You have a goal deadline in " + minDaysRemaining + " days!")
 					userDeadlineAlert = true;
 				}
+			}
+			for (let i = 0; i < archivedGoals.length; i++)
+			{
+				personalGoalContainer.appendChild(archivedGoals[i]);
 			}
 		}
 	}

@@ -179,8 +179,9 @@ function dataRequest(username,content)
         let currentDateSplit = content.date.split("-");
         for(entry in groupGoals){
             let currentGoalSplit = groupGoals[entry].endDate.split("-");
-            if((currentDateSplit[0] < currentGoalSplit[0]) || (currentDateSplit[1] < currentGoalSplit[1]) || 
-                    (currentDateSplit[2] <= currentGoalSplit[2]))
+            let currentGoalDate = new Date(currentGoalSplit[0],currentGoalSplit[1],currentGoalSplit[2]);
+            let currentDate = new Date(currentDateSplit[0],currentDateSplit[1],currentDateSplit[2]);
+            if(currentDate <= currentGoalDate)
             {
                 if (groupGoals[entry].users.includes(username))
                 {
