@@ -591,7 +591,6 @@ tr:hover {
     background-color: #B9DDE0;
   
     width: 50vw;
-    height: 40vh;
     box-sizing: border-box;
     
     position: fixed;
@@ -600,7 +599,7 @@ tr:hover {
     transform: translate(-50%, -25%);
   
     padding-top: 10px;
-    padding-bottom: 50px;
+    padding-bottom: 25px;
 }
 
 #exitCalorieGraphContainer{
@@ -649,7 +648,6 @@ tr:hover {
     background-color: #B9DDE0;
 
     width: 50vw;
-    height: 40vh;
     box-sizing: border-box;
 
     position: fixed;
@@ -658,7 +656,7 @@ tr:hover {
     transform: translate(-50%, -25%);
 
     padding-top: 10px;
-    padding-bottom: 50px;
+    padding-bottom: 25px;
 }
 
 #exitWeightGraphContainer{
