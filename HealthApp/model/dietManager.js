@@ -87,7 +87,7 @@ function dataDeleteByIndex(username, content)
 
     let table = database.getTable("DIET");
     let userDiets = table[username];
-    
+
     if (!userDiets) return { status: 400, content: "User has no diets to delete" };
     if (!userDiets[content.date]) return { status: 400, content: "User has no diets to delete for this date" };
 

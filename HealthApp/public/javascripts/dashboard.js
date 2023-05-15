@@ -77,6 +77,7 @@ function deleteRow(r, isFoodTable,calories,date)
 	console.log(date)
 	var i = r.parentNode.parentNode.rowIndex - 1;
 	Boolean(isFoodTable);
+
 	if (isFoodTable)
 	{
 		document.getElementById("foodTable").deleteRow(i);
@@ -96,12 +97,80 @@ function deleteRow(r, isFoodTable,calories,date)
 		function responseHandler(response) {
 			if (response.status != 200) {
 				console.log(response.content)
-			} 
+			}
+			else
+			{
+				var foodTab = document.getElementById("foodTable");
+				foodTab.innerHTML =
+					"<tr>" +
+					"<th>Meal type</th>" +
+					"<th>Meal name</th>" +
+					"<th>Calories</th>" +
+					"</tr>";
+					
+				let dietData = {
+					type: "diet-request",
+					content: {
+						date: date
+					}
+				};
+			
+				dataRequest(dietData, responseHandle)
+			
+				function responseHandle(response) {
+					if (response.status != 200) {
+						console.log(response.content);
+					} else {
+						//Clear any diet values from previous date
+						removeDietButtonContainer.innerHTML = "";
+						let increment = 0;
+						for (let diet of response.content.foods) {
+							var foodTab = document.getElementById("foodTable");
+							//"<td><input type='button' id='deleteDietButton' name='deleteDietButton' placeholder='Delete' value='Delete'></td>"
+							foodTab.innerHTML += `<td>${diet["mealType"]}</td> <td>${diet["name"]}</td> <td>${diet["calories"]}</td>
+							<td><input type='button' value='Delete' name='deleteDietButton' class='deleteDietButton' onclick='deleteRow(this, 1,`+diet["calories"]+`,"${date}")'></td>`;
+						}
+						totalCalories = parseInt(response.content.totalCalories);
+						totalCalorieDiv.innerHTML = "Total Calorie Count " + totalCalories;
+					}
+				}
+			}
 		}
 	}
 	else
 	{
 		document.getElementById("exerciseTable").deleteRow(i);
+		exerciseTable.innerHTML = "<tr>" +
+		"<th>Exercise Set</th>" +
+		"<th>Exercise Name</th>" +
+		"<th>Time</th>" +
+		"<th>Distance/Reps</th>" +
+		"</tr>";
+
+		let data = {
+			type: "exercise-request",
+			content: {
+				date: date
+			}
+		};
+	
+		dataRequest(data, responseHandler)
+	
+		function responseHandler(response) {
+			if (response.status != 200) {
+				console.log(response.content);
+			} else {
+				
+				//Clear any exercise values from previous date
+				removeExerciseButtonContainer.innerHTML = "";
+				//let increment = 0;
+				for (let ex of response.content) {
+					const selectedExercise = document.getElementById("exercises").value;
+					exerciseTable.innerHTML += `<td>${ex["set"]}</td> <td>${ex["name"]}</td> <td>${ex["time"]}</td> <td>${ex["amount"]}</td> 
+					<td><input type='button' value='Delete' name='deleteExerciseButton' class='deleteExerciseButton' onclick='deleteRow(this, 0,0,`+"${date}"+`)'></td>`;
+				}
+			}
+		}
 	}
 
 	//Reference for removing tbody tag from table: https://stackoverflow.com/questions/34933288/javascript-delete-a-table-tbody-tag
@@ -257,9 +326,7 @@ mainDate.addEventListener("change", (event) => {
 			for (let ex of response.content) {
 				const selectedExercise = document.getElementById("exercises").value;
 				exerciseTable.innerHTML += `<td>${ex["set"]}</td> <td>${ex["name"]}</td> <td>${ex["time"]}</td> <td>${ex["amount"]}</td> 
-				<td><input type='button' value='Delete' name='deleteExerciseButton' class='deleteExerciseButton' onclick='deleteRow(this, 0,0,`+dateValue+`)'></td>`;
-				
-	
+				<td><input type='button' value='Delete' name='deleteExerciseButton' class='deleteExerciseButton' onclick='deleteRow(this, 0,0,`+"${date}"+`)'></td>`;
 			}
 		}
 	}
