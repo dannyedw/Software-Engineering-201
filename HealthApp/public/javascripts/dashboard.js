@@ -71,7 +71,7 @@ var totalCalories = 0;
 var totalCalorieDiv = document.getElementById("calorieTotal");
 
 //Reference for deleteRow function: https://www.w3schools.com/jsref/met_table_deleterow.asp
-function deleteRow(r, isFoodTable,calories) 
+function deleteRow(r, isFoodTable,calories,date) 
 {	
 	var i = r.parentNode.parentNode.rowIndex;
 	Boolean(isFoodTable);
@@ -80,6 +80,22 @@ function deleteRow(r, isFoodTable,calories)
 		document.getElementById("foodTable").deleteRow(i);
 		totalCalories -= parseInt(calories);
 		totalCalorieDiv.innerHTML = "Total Calorie Count " + totalCalories;
+
+		let data = {
+			type: "diet-delete",
+			content: {
+				index:i,
+				date:date
+			}
+		}
+	
+		dataRequest(data, responseHandler);
+	
+		function responseHandler(response) {
+			if (response.status != 200) {
+				console.log(response.content)
+			} 
+		}
 	}
 	else
 	{
@@ -95,6 +111,7 @@ function deleteRow(r, isFoodTable,calories)
 			tb[i].parentNode.removeChild(tb[i]);
 		}
 	}
+		
 }
 
 
@@ -139,26 +156,6 @@ exerciseSelect.addEventListener("change", (event) => {
 	}
 	// update the variations div with the selected exercise's data
 	variationsDiv.innerHTML = data;
-
-	//When 'Add Exercise' button is clicked, remove button is added next to exercise value
-	// let popupAddExButt = document.getElementById("adde");
-	// let lastRow;
-	// popupAddExButt.addEventListener("click", event =>
-	// {
-	// 	let removeExerciseButton = document.createElement("input");
-	// 	removeExerciseButton.setAttribute("type", "button");
-	// 	removeExerciseButton.setAttribute("value", "Delete");
-	// 	removeExerciseButton.setAttribute("name", "deleteDietButton");
-	// 	removeExerciseButton.className = "deleteExerciseButton";
-	
-	// 	removeExerciseButton.onclick = function(){deleteRow(lastRow-1, 0)};
-	// 	removeExerciseButton.addEventListener("click", event =>
-	// 	{
-	// 		event.target.remove();
-	// 	});
-	// 	removeExerciseButtonContainer.appendChild(removeExerciseButton);
-	// 	lastRow = exerciseTable.children.length;
-	// });
 
 });
 
@@ -256,25 +253,9 @@ mainDate.addEventListener("change", (event) => {
 			for (let ex of response.content) {
 				const selectedExercise = document.getElementById("exercises").value;
 				exerciseTable.innerHTML += `<td>${ex["set"]}</td> <td>${ex["name"]}</td> <td>${ex["time"]}</td> <td>${ex["amount"]}</td> 
-				<td><input type='button' value='Delete' name='deleteExerciseButton' class='deleteExerciseButton' onclick='deleteRow(this, 0,0)'></td>`;
+				<td><input type='button' value='Delete' name='deleteExerciseButton' class='deleteExerciseButton' onclick='deleteRow(this, 0,0,mainDate)'></td>`;
 				
-				// let removeExerciseButton = document.createElement("input");
-				// removeExerciseButton.setAttribute("type", "button");
-				// removeExerciseButton.setAttribute("value", "Delete");
-				// removeExerciseButton.setAttribute("name", "deleteExerciseButton");
-				// removeExerciseButton.className = "deleteExerciseButton";
-
-				// let id = document.getElementById(`exRow${increment}`).id;
-				
-				// //Reference for stripping all non-numeric characters: https://stackoverflow.com/questions/1862130/strip-all-non-numeric-characters-from-string-in-javascript
-				// removeExerciseButton.onclick = function(){deleteRow(parseInt(id.replace(/\D/g, ''))+1, 0)};
-				// removeExerciseButton.addEventListener("click", event =>
-				// {
-				// 	event.target.remove();
-				// });
-				
-				// removeExerciseButtonContainer.appendChild(removeExerciseButton);
-				// increment++;
+	
 			}
 		}
 	}
@@ -300,27 +281,8 @@ mainDate.addEventListener("change", (event) => {
 				var foodTab = document.getElementById("foodTable");
 				//"<td><input type='button' id='deleteDietButton' name='deleteDietButton' placeholder='Delete' value='Delete'></td>"
 				foodTab.innerHTML += `<td>${diet["mealType"]}</td> <td>${diet["name"]}</td> <td>${diet["calories"]}</td>
-				<td><input type='button' value='Delete' name='deleteDietButton' class='deleteDietButton' onclick='deleteRow(this, 1,`+diet["calories"]+`)'></td>`;
+				<td><input type='button' value='Delete' name='deleteDietButton' class='deleteDietButton' onclick='deleteRow(this, 1,`+diet["calories"]+`,mainDate)'></td>`;
 				
-				//creating a button equivalent of: <input type='button' value='Delete' name='deleteDietButton' class='deleteDietButton'>
-				//then adding to container next to the table with diet values
-				// let removeDietButton = document.createElement("input");
-				// removeDietButton.setAttribute("type", "button");
-				// removeDietButton.setAttribute("value", "Delete");
-				// removeDietButton.setAttribute("name", "deleteDietButton");
-				// removeDietButton.className = "deleteDietButton";
-				// let id = document.getElementById(`dtRow${increment}`).id;
-				
-				// //Reference for stripping all non-numeric characters: https://stackoverflow.com/questions/1862130/strip-all-non-numeric-characters-from-string-in-javascript
-				// removeDietButton.onclick = function(){deleteRow(parseInt(id.replace(/\D/g, '')), 1)};
-				// removeDietButton.addEventListener("click", event =>
-				// {
-				// 	event.target.remove();
-				// });
-				
-				// removeDietButtonContainer.appendChild(removeDietButton);
-				// increment++;
-				// alert(id.replace(/\D/g, ''));
 
 			}
 			totalCalories = parseInt(response.content.totalCalories);
@@ -374,13 +336,6 @@ function submitsDiet(type, name, calories, res) {
 	foodTab.innerHTML = foodTab.innerHTML + "<td>" + type + "</td> <td>" + name + "</td> <td>" + calories + "</td>" + 
 	"<td><input type='button' value='Delete' name='deleteExerciseButton' class='deleteExerciseButton' onclick='deleteRow(this, 1)'></td>";
 
-	// let removeDietButton = document.createElement("input");
-	// removeDietButton.setAttribute("type", "button");
-	// removeDietButton.setAttribute("value", "Delete");
-	// removeDietButton.setAttribute("name", "deleteDietButton");
-	// removeDietButton.className = "deleteDietButton";
-				
-	// removeDietButtonContainer.appendChild(removeDietButton);
 
 	overlay.style.display = "none";
 	addDietContainer.style.display = "none";
@@ -459,22 +414,8 @@ dataForms.addEventListener('submit', (e) => {
 
 //// these two functions are for removing the food and exercise from the backend
 
-// function removediet(foodID){
-// 	let data = {
-// 		type: "food-remove",
-// 		content: {
-// 			foodID:foodID
-// 		}
-// 	};
 
-// 	dataRequest(data, responseHandler);
 
-// 	function responseHandler(response) {
-// 		if (response.status != 200) {
-// 			console.log(response.content)
-// 		} 
-// 	}
-// }
 // function removeExercise(exerciseID){
 // 	let data = {
 // 		type: "exercise-remove",

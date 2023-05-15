@@ -104,10 +104,8 @@ function calorieRequest(username)
     let foodIDs = [];
     
     const tbFood = database.getTable("FOOD");
-    let foods = [];
     let totalCalories = [];
     let dates = [];
-    let sumCalories=0;
 
     if(tbDiet[username])
     {
