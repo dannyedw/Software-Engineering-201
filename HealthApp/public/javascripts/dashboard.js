@@ -75,7 +75,7 @@ function deleteRow(r, isFoodTable,calories,date)
 {	
 	console.log(date)
 	console.log(date)
-	var i = r.parentNode.parentNode.rowIndex;
+	var i = r.parentNode.parentNode.rowIndex - 1;
 	Boolean(isFoodTable);
 	if (isFoodTable)
 	{

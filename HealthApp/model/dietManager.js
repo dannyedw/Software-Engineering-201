@@ -82,18 +82,19 @@ function dataSubmit(username, content)
 
 function dataDeleteByIndex(username, content)
 {
-    if (!content.index) return { status: 400, content: "Missing required data - index" };
+    if (content.index === null) return { status: 400, content: "Missing required data - index" };
     if (!content.date) return { status: 400, content: "Missing required data - date" };
 
     let table = database.getTable("DIET");
     let userDiets = table[username];
+    
     if (!userDiets) return { status: 400, content: "User has no diets to delete" };
-    if (!userDiets[date]) return { status: 400, content: "User has no diets to delete for this date" };
+    if (!userDiets[content.date]) return { status: 400, content: "User has no diets to delete for this date" };
 
-    userDiets[date].splice(content.index, 1);
+    userDiets[content.date].splice(content.index, 1);
     table[username] = userDiets;
     
-    database.getTable.overwriteTable("DIET", table);
+    database.overwriteTable("DIET", table);
 
     return { status: 200, content: "Successfully deleted diet" };
 }
