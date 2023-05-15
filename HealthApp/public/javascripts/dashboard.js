@@ -74,6 +74,7 @@ var totalCalorieDiv = document.getElementById("calorieTotal");
 function deleteRow(r, isFoodTable,calories,date) 
 {	
 	console.log(date)
+	console.log(date)
 	var i = r.parentNode.parentNode.rowIndex;
 	Boolean(isFoodTable);
 	if (isFoodTable)
@@ -256,7 +257,7 @@ mainDate.addEventListener("change", (event) => {
 			for (let ex of response.content) {
 				const selectedExercise = document.getElementById("exercises").value;
 				exerciseTable.innerHTML += `<td>${ex["set"]}</td> <td>${ex["name"]}</td> <td>${ex["time"]}</td> <td>${ex["amount"]}</td> 
-				<td><input type='button' value='Delete' name='deleteExerciseButton' class='deleteExerciseButton' onclick='deleteRow(this, 0,0,dateValue)'></td>`;
+				<td><input type='button' value='Delete' name='deleteExerciseButton' class='deleteExerciseButton' onclick='deleteRow(this, 0,0,`+dateValue+`)'></td>`;
 				
 	
 			}
@@ -276,7 +277,6 @@ mainDate.addEventListener("change", (event) => {
 		if (response.status != 200) {
 			console.log(response.content);
 		} else {
-
 			//Clear any diet values from previous date
 			removeDietButtonContainer.innerHTML = "";
 			let increment = 0;
@@ -284,9 +284,8 @@ mainDate.addEventListener("change", (event) => {
 				var foodTab = document.getElementById("foodTable");
 				//"<td><input type='button' id='deleteDietButton' name='deleteDietButton' placeholder='Delete' value='Delete'></td>"
 				foodTab.innerHTML += `<td>${diet["mealType"]}</td> <td>${diet["name"]}</td> <td>${diet["calories"]}</td>
-				<td><input type='button' value='Delete' name='deleteDietButton' class='deleteDietButton' onclick='deleteRow(this, 1,`+diet["calories"]+`,`+dateValue+`)'></td>`;
-			
-				
+				<td><input type='button' value='Delete' name='deleteDietButton' class='deleteDietButton' onclick='deleteRow(this, 1,`+diet["calories"]+`,"${dateValue}")'></td>`;
+		
 
 			}
 			totalCalories = parseInt(response.content.totalCalories);
