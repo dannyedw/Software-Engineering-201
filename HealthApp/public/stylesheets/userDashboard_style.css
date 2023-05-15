@@ -590,7 +590,7 @@ tr:hover {
   
     background-color: #B9DDE0;
   
-    width: 50vw;
+    /*width: 50vw;*/
     box-sizing: border-box;
     
     position: fixed;
@@ -647,7 +647,7 @@ tr:hover {
 
     background-color: #B9DDE0;
 
-    width: 50vw;
+   /*width: 50vw;*/
     box-sizing: border-box;
 
     position: fixed;
