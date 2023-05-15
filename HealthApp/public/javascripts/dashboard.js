@@ -689,11 +689,9 @@ function displayPersonalGoals(data)  //this displays the goals in the goal conta
 						{
 							minDaysRemaining = daysRemaining;
 						}
-						goal.innerHTML = "<div id='weightGoalContainer'><p>Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + 
-						"</div id='statusContainer'>" + "<p> Status: " + currentGoal.status + "</p></div>" +
-							"<div id='daysContainer'><p> Days Remaining: " + daysRemaining +"</p></div>" + "<div id='progressContainer'><p>Progress: " + currentGoal.extraData[0] +
-							` <progress value="` + goalProgress + `" max="100"></progress>` + currentGoal.extraData[1] +
-							" " + `<button type='button' id='deletePersonalGoalButton' onclick = "deletePersonalGoal(` + currentGoal.goalId + `)" style ='margin: 5px 0'>Delete</button></div>`;
+						goal.innerHTML = "Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: " + currentGoal.status +
+						" | Days Remaining: " + daysRemaining +" <br> Progress: " + currentGoal.extraData[0] + ` <progress value="` + goalProgress + `" max="100"></progress> ` + currentGoal.extraData[1] +
+						" " + `<button type='button' onclick = "deletePersonalGoal(` + currentGoal.goalId + `)" style ='margin: 5px 0'>Delete</button>`;
 						personalGoalContainer.appendChild(goal);
 					}
 				}

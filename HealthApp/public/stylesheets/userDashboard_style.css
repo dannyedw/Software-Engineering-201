@@ -124,15 +124,15 @@
     margin-top: 28px;
 } */
 
-.deleteDietButton
+/* .deleteDietButton
 {
-   /* margin: 5px 5px; */
+   margin: 5px 5px;
 }
 
 .deleteExerciseButton
 {
-    /* margin: 5px 5px; */
-}
+    margin: 5px 5px;
+} */
 
 #dietButtonCenter
 {
@@ -288,7 +288,7 @@
     font-weight: bolder;
 
 
-    width: 40%;
+    width: 60%;
     margin: 0 auto 20px;
 
     position: relative;
