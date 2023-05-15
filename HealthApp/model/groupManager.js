@@ -90,6 +90,7 @@ function addPendingUser(username, groupname)
 
 function removeMember(username, content)
 {
+    //MAKE SURE MEMBER IS REMOVED FROM THE GROUP,GOAL AND USER TABLES
     if (!content.groupname) return { status: 400, content: "Missing required data - groupname" };
     if (!content.memberToRemove) return { status: 400, content: "Missing required data - memberToRemove" };
 
@@ -113,14 +114,14 @@ function removeMember(username, content)
                 memberPresent = true;
 
                 //UNTESTED - TEST WHEN WE CAN DELETE MEMBER FROM GROUP
-                var goals = groupgoaltable[content.group];
-                var keys = Object.keys(goals);
-                for(let key in keys)
+                var goals = groupgoaltable[content.group]; //get all goals for the group being removed from
+                var keys = Object.keys(goals);  //gets all ids for each goal
+                for(let key in keys)  //loops through every goal
                 {
-                    if(goals[key].users.includes(content.memberToRemove))
+                    if(goals[key].users.includes(content.memberToRemove)) //if the goal has the user who is being removed participating
                     {
-                        let memberLocation = goals[key].users.indexOf(content.memberToRemove);
-                        goals[key].users.splice(memberLocation,1);
+                        let memberLocation = goals[key].users.indexOf(content.memberToRemove); //gets the index of the user
+                        goals[key].users.splice(memberLocation,1);  //next 3 lines removes user data
                         goals[key].status.splice(memberLocation,1);
                         goals[key].extraData[0].splice(memberLocation,1);
                     }
@@ -169,6 +170,10 @@ function removeMember(username, content)
         }
     }
 
+    //UPDATES ALL THE TABLES
+    database.overwriteTable("USER", usertable);
+    database.overwriteTable("GROUP", grouptable);
+    database.overwriteTable("GROUPGOAL", groupgoaltable);
     return { status: 200, content: "Member: " + content.memberToRemove + "successfully removed from group: " + content.groupname };
 }
 
