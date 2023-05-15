@@ -38,6 +38,7 @@ function request(username, data)
         case "group-request": return groupManager.getUserGroupData(username);
         case "group-create": return groupManager.create(username, data.content);
         case "group-delete": return groupManager.erase(username, data.content);
+        case "group-remove-member": return groupManager.removeMember(username,data.content);
 
         case "group-goal-create": return groupGoalsManager.create(username, data.content);
         case "group-goal-delete": return groupGoalsManager.deleteGoal(data.content);
