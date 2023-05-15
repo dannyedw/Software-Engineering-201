@@ -58,6 +58,25 @@ function dataSubmit(username, content)
     return { status: 200, content: message };
 }
 
+function dataDeleteByIndex(username, content)
+{
+    if (!content.index) return { status: 400, content: "Missing required data - index" };
+    if (!content.date) return { status: 400, content: "Missing required data - date" };
+
+    let table = database.getTable("EXERCISE");
+    let userExercises = table[username];
+    if (!userExercises) return { status: 400, content: "User has no exercises to delete" };
+    if (!userExercises[date]) return { status: 400, content: "User has no exercises to delete for this date" };
+
+    userExercises[date].splice(content.index, 1);
+    table[username] = userExercises;
+    
+    database.getTable.overwriteTable("EXERCISE", table);
+
+    return { status: 200, content: "Successfully deleted exercise" };
+}
+
 
 exports.dataRequest = dataRequest;
 exports.dataSubmit = dataSubmit;
+exports.dataDelete = dataDeleteByIndex;
