@@ -73,6 +73,7 @@ var totalCalorieDiv = document.getElementById("calorieTotal");
 //Reference for deleteRow function: https://www.w3schools.com/jsref/met_table_deleterow.asp
 function deleteRow(r, isFoodTable,calories,date) 
 {	
+	console.log(date)
 	var i = r.parentNode.parentNode.rowIndex;
 	Boolean(isFoodTable);
 	if (isFoodTable)
@@ -80,7 +81,7 @@ function deleteRow(r, isFoodTable,calories,date)
 		document.getElementById("foodTable").deleteRow(i);
 		totalCalories -= parseInt(calories);
 		totalCalorieDiv.innerHTML = "Total Calorie Count " + totalCalories;
-
+		
 		let data = {
 			type: "diet-delete",
 			content: {
@@ -208,6 +209,7 @@ let removeDietButtonContainer = document.getElementById("removeDietButtonsContai
 //retrives the date selected
 const mainDate = document.getElementById("dataForm");
 mainDate.addEventListener("change", (event) => {
+	
 	exerciseTable.innerHTML = "<tr>" +
 		"<th>Exercise Set</th>" +
 		"<th>Exercise Name</th>" +
@@ -222,6 +224,7 @@ mainDate.addEventListener("change", (event) => {
 		"<th>Calories</th>" +
 		"</tr>";
 	var dateValue = document.getElementById("date").value;
+
 	getPersonalGoals();
 
 	//links the buttons to the functions
@@ -253,7 +256,7 @@ mainDate.addEventListener("change", (event) => {
 			for (let ex of response.content) {
 				const selectedExercise = document.getElementById("exercises").value;
 				exerciseTable.innerHTML += `<td>${ex["set"]}</td> <td>${ex["name"]}</td> <td>${ex["time"]}</td> <td>${ex["amount"]}</td> 
-				<td><input type='button' value='Delete' name='deleteExerciseButton' class='deleteExerciseButton' onclick='deleteRow(this, 0,0,mainDate)'></td>`;
+				<td><input type='button' value='Delete' name='deleteExerciseButton' class='deleteExerciseButton' onclick='deleteRow(this, 0,0,dateValue)'></td>`;
 				
 	
 			}
@@ -281,7 +284,8 @@ mainDate.addEventListener("change", (event) => {
 				var foodTab = document.getElementById("foodTable");
 				//"<td><input type='button' id='deleteDietButton' name='deleteDietButton' placeholder='Delete' value='Delete'></td>"
 				foodTab.innerHTML += `<td>${diet["mealType"]}</td> <td>${diet["name"]}</td> <td>${diet["calories"]}</td>
-				<td><input type='button' value='Delete' name='deleteDietButton' class='deleteDietButton' onclick='deleteRow(this, 1,`+diet["calories"]+`,mainDate)'></td>`;
+				<td><input type='button' value='Delete' name='deleteDietButton' class='deleteDietButton' onclick='deleteRow(this, 1,`+diet["calories"]+`,`+dateValue+`)'></td>`;
+			
 				
 
 			}
