@@ -95,6 +95,7 @@ function removeMember(username, content)
 
     let grouptable = database.getTable("GROUP");
     let usertable = database.getTable("USER");
+    let groupgoaltable = database.getTable("GROUPGOAL");
 
     let group = grouptable[content.groupename];
     let memberPresent = false;
@@ -110,6 +111,21 @@ function removeMember(username, content)
                 group.members.splice(index, 1);
                 grouptable[content.groupname];
                 memberPresent = true;
+
+                //UNTESTED - TEST WHEN WE CAN DELETE MEMBER FROM GROUP
+                var goals = groupgoaltable[content.group];
+                var keys = Object.keys(goals);
+                for(let key in keys)
+                {
+                    if(goals[key].users.includes(content.memberToRemove))
+                    {
+                        let memberLocation = goals[key].users.indexOf(content.memberToRemove);
+                        goals[key].users.splice(memberLocation,1);
+                        goals[key].status.splice(memberLocation,1);
+                        goals[key].extraData[0].splice(memberLocation,1);
+                    }
+                }
+
             }
             else
             {
