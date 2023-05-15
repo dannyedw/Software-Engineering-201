@@ -62,6 +62,38 @@ function create(username, content)
     }};
 }
 
+function inviteUser(username, content)
+{
+    if (!content.groupname) return { status: 400, content: "Missing required data - groupname" };
+    if (!content.usernameToAdd) return { status: 400, content: "Missing required data - usernameToAdd" };
+
+    let grouptable = database.getTable("GROUP");
+
+    let group = grouptable[content.groupname];
+    if (!group) return { status: 400, content: "Group does not exist: " + content.groupname };
+    
+    if (username != group.owner) return { status: 400, content: "You do not have permission to invite people to this group" };
+
+
+    for (let member of group.members)
+    {
+        if (member === content.usernameToAdd) return { status: 400, content: "Member already part of group: " + content.usernameToAdd };
+    }
+
+    for (let member of group.pendingMembers)
+    {
+        if (member === content.usernameToAdd) return { status: 400, content: "Member already part of group: " + content.usernameToAdd };
+    }
+
+    group.pendingMembers.push(content.usernameToAdd);
+    emailManager.notifyGroupInvitation(content.usernameToAdd, content.groupname);
+
+    grouptable[content.groupname] = group;
+    database.overwriteTable("GROUP", grouptable);
+
+    return { status: 200, content: "User successfully invited to group" };
+}
+
 function addPendingUser(username, groupname)
 {
     let usertable = database.getTable("USER");
@@ -98,35 +130,38 @@ function removeMember(username, content)
     let usertable = database.getTable("USER");
     let groupgoaltable = database.getTable("GROUPGOAL");
 
-    let group = grouptable[content.groupename];
+    let group = grouptable[content.groupname];
     let memberPresent = false;
+
 
     if (group)
     {
-        if (username === group.owner)
+        if (username === group.owner || username === content.memberToRemove)
         {
             let index = group.members.indexOf(content.memberToRemove);
             if (index != -1)
             {
                 //member is in members of group
                 group.members.splice(index, 1);
-                grouptable[content.groupname];
+                grouptable[content.groupname] = group;
                 memberPresent = true;
 
                 //UNTESTED - TEST WHEN WE CAN DELETE MEMBER FROM GROUP
                 var goals = groupgoaltable[content.group]; //get all goals for the group being removed from
-                var keys = Object.keys(goals);  //gets all ids for each goal
-                for(let key in keys)  //loops through every goal
+                if (goals)
                 {
-                    if(goals[key].users.includes(content.memberToRemove)) //if the goal has the user who is being removed participating
+                    var keys = Object.keys(goals);  //gets all ids for each goal
+                    for(let key in keys)  //loops through every goal
                     {
-                        let memberLocation = goals[key].users.indexOf(content.memberToRemove); //gets the index of the user
-                        goals[key].users.splice(memberLocation,1);  //next 3 lines removes user data
-                        goals[key].status.splice(memberLocation,1);
-                        goals[key].extraData[0].splice(memberLocation,1);
+                        if(goals[key].users.includes(content.memberToRemove)) //if the goal has the user who is being removed participating
+                        {
+                            let memberLocation = goals[key].users.indexOf(content.memberToRemove); //gets the index of the user
+                            goals[key].users.splice(memberLocation,1);  //next 3 lines removes user data
+                            goals[key].status.splice(memberLocation,1);
+                            goals[key].extraData[0].splice(memberLocation,1);
+                        }
                     }
                 }
-
             }
             else
             {
@@ -136,7 +171,7 @@ function removeMember(username, content)
                 {
                     //member is in pending members, remove them
                     group.pendingMembers.splice(index, 1);
-                    grouptable[content.groupname]
+                    grouptable[content.groupname] = group;
                     memberPresent = true;
                 }
                 else
@@ -151,6 +186,7 @@ function removeMember(username, content)
             return { status: 401, content: "You do not have permission to delete members" };
         }
     }
+
 
     if (memberPresent)
     {
@@ -174,6 +210,7 @@ function removeMember(username, content)
     database.overwriteTable("USER", usertable);
     database.overwriteTable("GROUP", grouptable);
     database.overwriteTable("GROUPGOAL", groupgoaltable);
+
     return { status: 200, content: "Member: " + content.memberToRemove + "successfully removed from group: " + content.groupname };
 }
 
@@ -231,6 +268,7 @@ function getUserGroupData(username)
 
 
 exports.create = create;
+exports.inviteUser = inviteUser;
 exports.addPendingUser = addPendingUser;
 exports.removeMember = removeMember;
 exports.erase = erase;

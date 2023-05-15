@@ -2,13 +2,21 @@
     "Danny_Gs_group": {
         "owner": "DannyGee",
         "description": " danny gs group",
-        "members": ["alexf13", "test", "DannyGee"],
+        "members": [
+            "alexf13",
+            "test",
+            "DannyGee"
+        ],
         "pendingMembers": []
     },
     "Yons_s_group": {
         "owner": "test",
         "description": " hello yon group",
-        "members": ["alexf13", "test", "DannyGee"],
+        "members": [
+            "test",
+            "DannyGee",
+            "test2"
+        ],
         "pendingMembers": []
     }
 }

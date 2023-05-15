@@ -51,7 +51,7 @@ function displayGroup(data)
             div = key + "-info";
             let classForGoalAmount = key + "-goalAmount"
             groups.innerHTML += `<div><h1 id="divsID" class='collapsible ` + classForGoalAmount + `'>` + key + `:` + ` Members: `+currentGroup.members.length+` ` + ` Group Goals: ?</h1>
-            <div class='content'><div class='groupDivs'id="` + key + "-info" + `"> <h1>Members</h1><br>` + '<input type="text" id="addingMember'+div+'" placeholder="Enter Member here"> <button type="button" onclick="addMember(\'' + div + '\')">Add Member</button></div>' +
+            <div class='content'><div class='groupDivs'id="` + key + "-info" + `"> <h1>Members</h1><br>` + '<input type="text" id="addingMember'+div+'" placeholder="Enter Member here"> <button type="button" onclick="addMember(\'' + div + '\' , \'' + key + '\')">Add Member</button></div>' +
             `<div class='groupDivs' id = "` + key + "-goals" + `"></div><br>
             <button type="button" id="description" onclick="DisplayDescription('${currentGroup.description}');">Description</button><br>
             <button type="button" id="LeaveGroupButton" onclick="LeavegGroup('${key}');">Leave Group</button> </div></div>`;
@@ -59,7 +59,7 @@ function displayGroup(data)
             var membersSection = document.getElementById(key + "-info"); 
             var groupGoalsSection = document.getElementById(key + "-goals");    
 
-            displayGroupInfo(currentGroup, key + "-info")
+            displayGroupInfo(currentGroup, key + "-info", key)
 
             let groupReqData = {
                 type: "group-goal-request",
@@ -89,16 +89,17 @@ function displayGroup(data)
 }
 
 
-function displayGroupInfo(data, divId)
+function displayGroupInfo(data, divId, groupName)
 {
     container = document.getElementById(divId);
-
+    
     for (var i = 0; i < data.members.length; i++) {
         var member = data.members[i]
       
         //container.innerHTML += '<div id = "memberContainer"><p>'+ member +'</p><button id="somebutton" type=button onclick="removeMember(\'' +i+ '\',\'' +data.members +'\',\'' +divId +'\')">Remove</button><div>';
-        container.innerHTML += '<div id = "memberContainer"><p>'+ member +'</p><button id="removeMemberButton" type=button onclick="removeMember(this,'+member+')">Remove</button></div>';
-    
+        container.innerHTML += '<div id = "memberContainer"><p>'+ member +'</p><button id="removeMemberButton" type=button onclick="removeMember(this, \'' +member + '\', \'' + groupName + '\')">Remove</button></div>';
+        
+        
     }
     // container.innerHTML += '<br><br><input type=text id=membername placeholder=Member Name>';
     // var name = document.getElementById("membername").value
@@ -106,7 +107,7 @@ function displayGroupInfo(data, divId)
     // container.innerHTML += '<button onclick=addMember("+name+ '\',\'' +data+"); type='button'> Add </button>';
 }
 
-function addMember(divId){
+function addMember(divId, group){
     
     var newMember = document.getElementById("addingMember"+divId).value;
     
@@ -114,22 +115,23 @@ function addMember(divId){
     //groupContainer.innerHTML += '<div id = "memberContainer"><p>'+ newMember +'</p><button id="removeMemberButton" type=button onclick="removeMember(this)">Remove</button></div>';
 
     //adds user to server
-    // data ={
-    //     type:"add-user",
-    //     content:{
-    //         username:newMember
-    //     }
-    // }
-    // dataRequest(data,addMemberHandler)
-    // function addMemberHandler(response){
-    //     if(response.status !=200){
-    //         console.log(response.content)
-    //     }
-    // }
+    data ={
+        type:"group-invite",
+        content:{
+            groupname: group,
+            usernameToAdd: newMember,
+        }
+    }
+    dataRequest(data,addMemberHandler)
+    function addMemberHandler(response){
+        if(response.status !=200){
+            console.log(response.content)
+        }
+    }
  
 }
 
-function removeMember(r,member){
+function removeMember(r,member, groupname){
     //parentDiv in this case would be <div id = "memberContainer"></div>
     let parentDiv = r.parentNode;
     parentDiv.remove();
@@ -138,13 +140,15 @@ function removeMember(r,member){
     data ={
         type:"group-remove-member",
         content:{
-            username:member
+            groupname: groupname,
+            memberToRemove: member
         }
     }
     dataRequest(data,removeMemberHandler)
     function removeMemberHandler(response){
+        console.log(response.content)
+
         if(response.status !=200){
-            console.log(response.content)
         }
     }
  
