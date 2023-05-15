@@ -51,7 +51,7 @@ function displayGroup(data)
             div = key + "-info";
             let classForGoalAmount = key + "-goalAmount"
             groups.innerHTML += `<div><h1 id="divsID" class='collapsible ` + classForGoalAmount + `'>` + key + `:` + ` Members: `+currentGroup.members.length+` ` + ` Group Goals: ?</h1>
-            <div class='content'><div class='groupDivs'id="` + key + "-info" + `"> <h1>Members</h1><br>` + '<input type="text" id="addingMember'+div+'" placeholder="Enter Member here"> <button type="button" onclick="addMember(\'' + currentGroup.members + '\',\'' + div + '\');">Add Member</button></div>' +
+            <div class='content'><div class='groupDivs'id="` + key + "-info" + `"> <h1>Members</h1><br>` + '<input type="text" id="addingMember'+div+'" placeholder="Enter Member here"> <button type="button" onclick="addMember(\'' + div + '\')">Add Member</button></div>' +
             `<div class='groupDivs' id = "` + key + "-goals" + `"></div><br>
             <button type="button" id="description" onclick="DisplayDescription('${currentGroup.description}');">Description</button><br>
             <button type="button" id="LeaveGroupButton" onclick="LeavegGroup('${key}');">Leave Group</button> </div></div>`;
@@ -97,7 +97,7 @@ function displayGroupInfo(data, divId)
         var member = data.members[i]
       
         //container.innerHTML += '<div id = "memberContainer"><p>'+ member +'</p><button id="somebutton" type=button onclick="removeMember(\'' +i+ '\',\'' +data.members +'\',\'' +divId +'\')">Remove</button><div>';
-        container.innerHTML += '<div id = "memberContainer"><p>'+ member +'</p><button id="removeMemberButton" type=button onclick="removeMember(this)">Remove</button></div>';
+        container.innerHTML += '<div id = "memberContainer"><p>'+ member +'</p><button id="removeMemberButton" type=button onclick="removeMember(this,'+member+')">Remove</button></div>';
     
     }
     // container.innerHTML += '<br><br><input type=text id=membername placeholder=Member Name>';
@@ -106,16 +106,18 @@ function displayGroupInfo(data, divId)
     // container.innerHTML += '<button onclick=addMember("+name+ '\',\'' +data+"); type='button'> Add </button>';
 }
 
-function addMember(data,divId){
+function addMember(divId){
     
-    data = data.split(",")
-    var memberss = document.getElementById("addingMember"+divId).value;
-    console.log(memberss)
-    // adds user to server
+    var newMember = document.getElementById("addingMember"+divId).value;
+    
+    //let groupContainer = document.getElementById(divId);
+    //groupContainer.innerHTML += '<div id = "memberContainer"><p>'+ newMember +'</p><button id="removeMemberButton" type=button onclick="removeMember(this)">Remove</button></div>';
+
+    //adds user to server
     // data ={
     //     type:"add-user",
     //     content:{
-    //         username:memberss
+    //         username:newMember
     //     }
     // }
     // dataRequest(data,addMemberHandler)
@@ -125,59 +127,45 @@ function addMember(data,divId){
     //     }
     // }
  
-    
-    data.push(memberss);
-    container = document.getElementById(divId);
-    container.innerHTML = "";
-
-    container.innerHTML = '<h1>Members</h1><br> <input type="text" id="addingMember'+divId+'" placeholder="Enter Member here"> <button type="button" onclick="addMember(\'' + data + '\',\'' + divId + '\');">Add Member</button></div>'
-    
-
-    for (var i = 0; i < data.length; i++) {
-        var member = data[i]
-      
-        container.innerHTML += '<div id = "memberContainer"><p>'+ member +'</p><button id="removeMemberButton" type=button onclick="removeMember(\'' +member+ '\',\'' +data +'\',\'' +divId +'\')">Remove</button></div>';
-    
-    }
 }
 
-function removeMember(r){
+function removeMember(r,member){
     //parentDiv in this case would be <div id = "memberContainer"></div>
     let parentDiv = r.parentNode;
     parentDiv.remove();
   
-    // removes user from server
-    // data ={
-    //     type:"remove-user",
-    //     content:{
-    //         username:"USERNAME"
-    //     }
-    // }
-    // dataRequest(data,removeMemberHandler)
-    // function removeMemberHandler(response){
-    //     if(response.status !=200){
-    //         console.log(response.content)
-    //     }
-    // }
- 
-    container = document.getElementById(div);
-    if(data.length == 1){
-        data.pop[0];
-        data.shift();
-        container.innerHTML="";
-    }else{
-        const temp = data[member];
-        data[member] = data[0];
-        data[0] = temp;
-        data.shift()
-
-        console.log(data)
-        container.innerHTML="";
-    for (var i = 0; i < data.length; i++) {
-        var member = data[i]
-        container.innerHTML += member+'<button id=somebutton type=button onclick="removeMember(\'' +member+ '\',\'' +data +'\',\'' +div +'\')">Remove</button><br>';
-       }
+    //removes user from server
+    data ={
+        type:"group-remove-member",
+        content:{
+            username:member
+        }
     }
+    dataRequest(data,removeMemberHandler)
+    function removeMemberHandler(response){
+        if(response.status !=200){
+            console.log(response.content)
+        }
+    }
+ 
+    // container = document.getElementById(div);
+    // if(data.length == 1){
+    //     data.pop[0];
+    //     data.shift();
+    //     container.innerHTML="";
+    // }else{
+    //     const temp = data[member];
+    //     data[member] = data[0];
+    //     data[0] = temp;
+    //     data.shift()
+
+    //     console.log(data)
+    //     container.innerHTML="";
+    // for (var i = 0; i < data.length; i++) {
+    //     var member = data[i]
+    //     container.innerHTML += member+'<button id=somebutton type=button onclick="removeMember(\'' +member+ '\',\'' +data +'\',\'' +div +'\')">Remove</button><br>';
+    //    }
+    // }
 }
 
 const addDescriptionContainer = document.querySelector('#addDescriptionContainer');
