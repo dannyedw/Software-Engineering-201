@@ -46,6 +46,8 @@ document.getElementById("exitButtonDiet").addEventListener("click", function () 
 	addDietContainer.style.display = "none";
 })
 document.getElementById("exitButtonGoal").addEventListener("click", function () {
+	document.getElementById("goalType").value = 'default';
+	goalOutputDiv.innerHTML = "";
 	overlay.style.display = "none";
 	addGoalContainer.style.display = "none";
 })
@@ -536,7 +538,7 @@ goalSelect.addEventListener("change", (event) => {
 	switch (selectedDiet) {
 		case "Target Weight":
 			data = "<input type='text' id='target-Weight' name='weight' placeholder='Target Weight(KG)' required><br><input type='date' id='goalDate' name='deadline' value=" + SelectionDate + " min=" + formatCurrentDate + " max='2027-04-21'><br>";
-			data += "<input type='submit' id='addPGoal' value='Add Goal'>";
+			data += "<div id = 'goalFeedbackContainer'></div><input type='submit' id='addPGoal' value='Add Goal'>";
 			break;
 		default:
 			// clear the variations div if no exercise is selected
@@ -571,6 +573,28 @@ goalSelect.addEventListener("change", (event) => {
 		// console.log("endDate: " + targetDate);
 		// console.log("starting weight: " + startingWeight);
 		// console.log("target weight: " + targetWeight);
+		
+		let goalFeedbackContainer = document.getElementById('goalFeedbackContainer');
+
+		if(startDate === targetDate)
+		{
+			goalFeedbackContainer.innerHTML = "Current Date and target date are the same";
+			return;
+		}
+
+		if(targetWeight === "")
+		{
+			goalFeedbackContainer.innerHTML = "Please enter a target weight";
+			return;
+		}
+
+		if(startingWeight === targetWeight)
+		{
+			let bmi = parseInt(userInfo.split(" ")[6]);
+			let recomendedNewGoalText = recomendedNewGoal(goalType, bmi, startingWeight, startDate);
+			goalFeedbackContainer.innerHTML = "Target weight is already met<br>" + recomendedNewGoalText;
+			return;
+		}
 
 		let data = {
 			type: goalType,
@@ -591,6 +615,31 @@ goalSelect.addEventListener("change", (event) => {
 	}
 
 });
+
+function recomendedNewGoal(goalType,bmi,currentWeight, startDate)
+{
+	startDateSplit = startDate.split("-");
+	let startDateObject = new Date(startDateSplit[0],startDateSplit[1],startDateSplit[2]);
+
+	if(goalType === "weight")
+	{
+		if (bmi <= 18) {
+			let newWeight = parseInt(currentWeight) + 5
+			startDateObject.setDate(startDateObject.getDate() + 35)
+			return "Bmi is low so suggesting target weight of " + newWeight + " by " + startDateObject.getFullYear() + "-" + 
+			String(startDateObject.getMonth()).padStart(2, '0') + "-" + String(startDateObject.getDay()).padStart(2, '0');
+		}
+		else if (bmi >= 19 && bmi <= 24) {
+			return "Bmi is healthy so no new weight goal needs to be set";
+		}
+		else if (bmi >= 25) {
+			let newWeight = parseInt(currentWeight) - 5
+			startDateObject.setDate(startDateObject.getDate() + 35)
+			return "Bmi is High so suggesting target weight of " + newWeight + " by " + startDateObject.getFullYear() + "-" + 
+			String(startDateObject.getMonth()).padStart(2, '0') + "-" + String(startDateObject.getDay()).padStart(2, '0');
+		}
+	}
+}
 
 function calculateRemaining(current, deadline) {
 	//var remain = deadline - current;

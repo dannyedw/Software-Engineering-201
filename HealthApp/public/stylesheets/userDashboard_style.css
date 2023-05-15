@@ -682,6 +682,12 @@ tr:hover {
     display:none;
 }
 
+#goalFeedbackContainer
+{
+    color: red;
+    margin-top: 6px;
+}
+
 @media (max-width: 600px)
 {
     #userInformationContainer 
