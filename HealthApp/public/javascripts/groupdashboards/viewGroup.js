@@ -96,24 +96,25 @@ function displayGroupInfo(data, divId, groupName)
     
     for (var i = 0; i < data.members.length; i++) {
         var member = data.members[i]
-      
-        //container.innerHTML += '<div id = "memberContainer"><p>'+ member +'</p><button id="somebutton" type=button onclick="removeMember(\'' +i+ '\',\'' +data.members +'\',\'' +divId +'\')">Remove</button><div>';
-        container.innerHTML += '<div id = "memberContainer"><p>'+ member +'</p><button id="removeMemberButton" type=button onclick="removeMember(this, \'' +member + '\', \'' + groupName + '\')">Remove</button></div>';
-        
+
+        if(USERNAME === data.owner){
+            if(member === USERNAME){
+                container.innerHTML += '<div id = "memberContainer"><p>'+ member +' ADMIN</p></div>';
+            }else{
+                container.innerHTML += '<div id = "memberContainer"><p>'+ member +'</p><button id="removeMemberButton" type=button onclick="removeMember(this, \'' +member + '\', \'' + groupName + '\')">Remove</button></div>'
+            }
+        }else{
+        container.innerHTML += '<div id = "memberContainer"><p>'+ member +'</p></div>';
+        }
         
     }
-    // container.innerHTML += '<br><br><input type=text id=membername placeholder=Member Name>';
-    // var name = document.getElementById("membername").value
-    // console.log(name)
-    // container.innerHTML += '<button onclick=addMember("+name+ '\',\'' +data+"); type='button'> Add </button>';
+//<button id="removeMemberButton" type=button onclick="removeMember(this, \'' +member + '\', \'' + groupName + '\')">Remove</button>
 }
 
 function addMember(divId, group){
     
     var newMember = document.getElementById("addingMember"+divId).value;
-    
-    //let groupContainer = document.getElementById(divId);
-    //groupContainer.innerHTML += '<div id = "memberContainer"><p>'+ newMember +'</p><button id="removeMemberButton" type=button onclick="removeMember(this)">Remove</button></div>';
+
 
     //adds user to server
     data ={
@@ -152,25 +153,7 @@ function removeMember(r,member, groupname){
         if(response.status !=200){
         }
     }
- 
-    // container = document.getElementById(div);
-    // if(data.length == 1){
-    //     data.pop[0];
-    //     data.shift();
-    //     container.innerHTML="";
-    // }else{
-    //     const temp = data[member];
-    //     data[member] = data[0];
-    //     data[0] = temp;
-    //     data.shift()
 
-    //     console.log(data)
-    //     container.innerHTML="";
-    // for (var i = 0; i < data.length; i++) {
-    //     var member = data[i]
-    //     container.innerHTML += member+'<button id=somebutton type=button onclick="removeMember(\'' +member+ '\',\'' +data +'\',\'' +div +'\')">Remove</button><br>';
-    //    }
-    // }
 }
 
 const addDescriptionContainer = document.querySelector('#addDescriptionContainer');
