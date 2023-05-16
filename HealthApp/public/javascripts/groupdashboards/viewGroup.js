@@ -93,7 +93,7 @@ function displayGroup(data)
 function displayGroupInfo(data, divId, groupName)
 {
     container = document.getElementById(divId);
-    container.innerHTML += '<div id = "memberContainer"><p>'+ data.owner +' ADMIN</p></div>';
+    container.innerHTML += '<div id = "memberContainer"><p>'+ data.owner +' 👑 </p></div>';
     for (var i = 0; i < data.members.length; i++) {
         var member = data.members[i]
         if(USERNAME === data.owner){

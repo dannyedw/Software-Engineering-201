@@ -17,6 +17,18 @@ function create(username, content)
     };
 
     let groupname = content.groupname;
+
+    //checking to see if group name is already taken
+
+    let check_Group_name = database.getTable("GROUP");
+
+    if (check_Group_name[groupname] != null)
+    {
+        // 403 is the error for an already exists, this means it asks again for th use to make a name
+        return { status: 403, content: "This group name is already taken, please choose another one" };
+    }
+
+
     groupname = groupname.replaceAll(" ", "_"); //replace spaces to prevent issues with urls and the groupname
 
     //check if users actually exist before adding them to the group

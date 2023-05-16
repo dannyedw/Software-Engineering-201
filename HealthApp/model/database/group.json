@@ -15,5 +15,13 @@
             "test2"
         ],
         "pendingMembers": []
+    },
+    "tester": {
+        "owner": "test",
+        "description": "testing same name functionality",
+        "members": [],
+        "pendingMembers": [
+            "test"
+        ]
     }
 }
