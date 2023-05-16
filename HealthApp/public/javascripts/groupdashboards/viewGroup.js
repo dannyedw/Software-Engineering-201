@@ -51,10 +51,11 @@ function displayGroup(data)
             div = key + "-info";
             let classForGoalAmount = key + "-goalAmount"
             groups.innerHTML += `<div><h1 id="divsID" class='collapsible ` + classForGoalAmount + `'>` + key + `:` + ` Members: `+currentGroup.members.length+` ` + ` Group Goals: ?</h1>
-            <div class='content'><div class='groupDivs'id="` + key + "-info" + `"> <h1>Members</h1><br>` + '<input type="text" id="addingMember'+div+'" placeholder="Enter Member here"> <button type="button" onclick="addMember(\'' + div + '\' , \'' + key + '\')">Add Member</button></div>' +
+            <div class='content'><div class='groupDivs'id="` + key + "-info" + `"> <h1>Members</h1><br>` + '<input type="text" id="addingMember'+div+
+            '" placeholder="Enter Member here"> <button type="button" id="addMemberButton" onclick="addMember(\'' + div + '\' , \'' + key + '\')">Add Member</button></div>' +
             `<div class='groupDivs' id = "` + key + "-goals" + `"></div><br>
-            <button type="button" id="description" onclick="DisplayDescription('${currentGroup.description}');">Description</button><br>
-            <button type="button" id="LeaveGroupButton" onclick="LeavegGroup('${key}');">Leave Group</button> </div></div>`;
+            <div id ="descLeaveGroupButtonContainer"><button type="button" id="description" onclick="DisplayDescription('${currentGroup.description}');">Description</button>
+            <button type="button" id="LeaveGroupButton" onclick="LeavegGroup('${key}');">Leave Group</button></div> </div></div>`;
 
             var membersSection = document.getElementById(key + "-info"); 
             var groupGoalsSection = document.getElementById(key + "-goals");    
@@ -222,7 +223,7 @@ function displayGroupGoals(data)
 
     if(data.content.goals.length === 0)
     {
-        container.innerHTML = `<h1>Group Goals</h1>No Goals to Show`;
+        container.innerHTML = `<h1>Group Goals</h1><p id ='noGroupGoalInfo'>No Goals to Show</p>`;
     }
     else
     {
@@ -248,8 +249,8 @@ function displayGroupGoals(data)
 				if (currentGoal.type == "weight") {
 					var goalProgress = ((weight - currentGoal.extraData[0][userIndex]) / (currentGoal.extraData[1] - currentGoal.extraData[0][userIndex])) * 100;
 					if (currentGoal.status[userIndex] != "In Progress") {
-						goal.innerHTML = "Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: " + currentGoal.status[userIndex] + 
-							 `<br> Friends Progress: ` + friendGoalProgress;
+						goal.innerHTML = "<p id ='groupGoalInfo'>Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: " + currentGoal.status[userIndex] + 
+							 `<br> Friends Progress: ` + friendGoalProgress + "</p>";
 					}
 					else if (goalProgress >= 100) {
 						data = {
@@ -259,9 +260,9 @@ function displayGroupGoals(data)
 						dataRequest(data, errorReporter);
 
                         goalProgress = 100;
-						goal.innerHTML = "Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: Goal Completed Successfully" + 
+						goal.innerHTML = "<p id ='groupGoalInfo'>Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: Goal Completed Successfully" + 
 							+ "| Progress: " + currentGoal.extraData[0][userIndex] + ` <progress value="` + goalProgress + `" max="100"></progress> ` + currentGoal.extraData[1] +
-							" " + `<br> Friends Progress: ` + friendGoalProgress;
+							" " + `<br> Friends Progress: ` + friendGoalProgress + "</p>";
 
                         //SEND EMAIL FOR SUCCESSFUL GOAL COMPLETION
 						//pass and archive/update goal
@@ -274,8 +275,8 @@ function displayGroupGoals(data)
 						};
 						dataRequest(data, errorReporter);
 
-                        goal.innerHTML = "Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: Goal Failed" + 
-							 + " " + `<br> Friends Progress: ` + friendGoalProgress;
+                        goal.innerHTML = "<p id ='groupGoalInfo'>Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: Goal Failed" + 
+							 + " " + `<br> Friends Progress: ` + friendGoalProgress + "</p>";
 						//fail and archive/update goal
 					}
 					else {
@@ -286,9 +287,9 @@ function displayGroupGoals(data)
 						}
                         let leaveGoalFuncton = `onclick = "leaveGoal('` + key + `',` + currentGoal.goalId + `)"`;
 
-						goal.innerHTML = "Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: " + currentGoal.status[userIndex]
+						goal.innerHTML = "<p id ='groupGoalInfo'>Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: " + currentGoal.status[userIndex]
 							+ " | Days Remaining: " + daysRemaining +"| Progress: " + currentGoal.extraData[0][userIndex] + ` <progress value="` + goalProgress + `" max="100"></progress> ` + currentGoal.extraData[1] +
-							" " + `<button type='button'  ` + leaveGoalFuncton + ` style ='margin: 5px 0'>Leave</button><br> Friends Progress: ` + friendGoalProgress;
+							" " + `<button type='button'  ` + leaveGoalFuncton + `id='leaveGoalButton' style ='margin: 5px 0'>Leave</button><br> Friends Progress: ` + friendGoalProgress;
 					}
 				}
 				else {
@@ -309,7 +310,7 @@ function displayGroupGoals(data)
         }
     }
     var addGoalButton = document.createElement("p");
-    addGoalButton.innerHTML = `<button type='button'  onclick = displayAddGoalPopup('` + key +`') style ='margin: 5px 0'>Add Goal</button>`
+    addGoalButton.innerHTML = `<button type='button' id='addGroupGoalButton'  onclick = displayAddGoalPopup('` + key +`')>Add Goal</button>`
     container.appendChild(addGoalButton);
 }
 

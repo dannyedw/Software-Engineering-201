@@ -56,8 +56,8 @@
 
   background-color: #B9DDE0;
 
-  width: 50vw;
-  height: 40vh;
+  width: 33vmax;
+  /* height: 40vh; */
   box-sizing: border-box;
   
   position: fixed;
@@ -66,7 +66,7 @@
   transform: translate(-50%, -25%);
 
   padding-top: 10px;
-  padding-bottom: 50px;
+  padding-bottom: 25px;
 }
 
 #gcHeader
@@ -82,10 +82,14 @@
   font-weight: bold;
 }
 
+#groupCreationForm
+{
+  width: 10vmax;
+}
+
 #cgContainer
 {
-  width: 35%;
-  margin-left: 125px;
+  margin-left: 50%;
 }
 
 #groupName
@@ -101,16 +105,26 @@
 #groupDescription
 {
   resize: none;
+  width: 24vmin;
 }
 
 #memberEmail
 {
   margin: 10px 0;
+  width: 24vmin;
 }
 
 #addMemberEmail
 {
   margin-left: 5px;
+  border-radius: 4px;
+  transition: background-color 250ms ease-in;
+}
+
+#addMemberEmail:hover
+{
+  color: rgb(255,255,255);
+  background-color: #3E946F;
 }
 
 #deleteEmail
@@ -122,8 +136,6 @@
 #memberEmails
 {
   overflow: auto;
-  width: 200px;
-  height: 100px;
   border-color: aqua;
 }
 
@@ -142,13 +154,17 @@
 
 #submitGroupForm
 {
-  margin: 0;
-  position: absolute;
-  top: 85%;
-  left: 50%;
-  width: 10%;
-  transform: translate(-50%, -50%);
-  font-size: 1.5em;
+  position: relative;
+  left: 165%;
+  font-size: 1.25vmax;
+  border-radius: 6px;
+  transition: background-color 250ms ease-in;
+}
+
+#submitGroupForm:hover
+{
+  color: rgb(255,255,255);
+  background-color: #3E946F;
 }
 
 #divsID
@@ -205,11 +221,23 @@
 
   margin: 0;
   padding: 0 18px;
-  background-color: darkgray;
+  /*#ADD8E6*/
+  background-color: #ADD8E6;
   color: black;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
+}
+
+#groupGoalInfo
+{
+  display: inline-block;
+  font-size: 1.5em;
+}
+
+#noGroupGoalInfo
+{
+  font-size: 1.5em;
 }
 
 #groupGoalsDiv{
@@ -239,6 +267,11 @@
   align-items: center;
 }
 
+#memberContainer > p
+{
+  font-size: 1.25em;
+}
+
 #removeMemberButton
 {
   margin: 0 10px;
@@ -251,7 +284,7 @@
 #removeMemberButton:hover
 {
   color: rgb(255,255,255);
-  background-color: #3E946F;
+  background-color: #ff0606;
 }
 
 #LeaveGroupButton{
@@ -260,11 +293,13 @@
   font-size: 30px;
   border-radius: 16px;
   transition: background-color 250ms ease-in;
+  
+  float: right;
 }
 #LeaveGroupButton:hover
 {
   color: rgb(255,255,255);
-  background-color: #3E946F;
+  background-color: #ff0606;
 }
 #description{
   margin-left: auto;
@@ -272,6 +307,7 @@
   font-size: 30px;
   border-radius: 16px;
   transition: background-color 250ms ease-in;
+  display: inline-block;
 }
 #description:hover
 {
@@ -300,6 +336,11 @@
 
   padding-top: 10px;
   padding-bottom: 50px;
+}
+
+#descLeaveGroupButtonContainer
+{
+  padding-bottom: 20px;
 }
 
 #descriptionInfo
@@ -332,4 +373,66 @@
 {
   text-align: center;
   padding: 10px;
+}
+
+#addGroupGoalButton
+{
+  border-radius: 12px;
+  font-size: 1.5vmax;
+  margin-left: 5px;
+  transition: background-color 250ms ease-in;
+}
+
+#addGroupGoalButton:hover
+{
+  color: rgb(255,255,255);
+  background-color: #3E946F;
+}
+
+#addMemberButton
+{
+  border-radius: 8px;
+  transition: background-color 250ms ease-in;
+}
+
+#addMemberButton:hover
+{
+  color: rgb(255,255,255);
+  background-color: #3E946F;
+}
+
+#leaveGoalButton
+{
+  border-radius: 6px;
+  font-size: 1vmax;
+  transition: background-color 250ms ease-in;
+}
+
+#leaveGoalButton:hover
+{
+  color: rgb(255,255,255);
+  background-color: #ff0606;
+}
+
+@media (max-width: 800px)
+{
+  #email-AddButtContainer
+  {
+    flex-direction: column;
+  }
+  
+  #groupGoalInfo
+  {
+    font-size: 2vmax;
+  }
+
+  #submitGroupForm
+  {
+    font-size: 2vmax;
+  }
+
+  #leaveGoalButton
+  {
+    font-size: 1.75vmax;
+  }
 }
