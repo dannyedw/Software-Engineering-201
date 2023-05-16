@@ -3,7 +3,7 @@ const database = require("./database");
 const userManager = require("./userManager")
 const emailManager = require("./emailManager");
 
-function create(username, content)
+async function create(username, content)
 {
     if (!content.groupname) return { status: 400, content: "Missing required data - groupname" };
     if (!content.description) return { status: 400, content: "Missing required data - description" };
@@ -20,16 +20,27 @@ function create(username, content)
 
     //checking to see if group name is already taken
 
+    groupname = groupname.replaceAll(" ", "_"); //replace spaces to prevent issues with urls and the groupname
+
     let check_Group_name = database.getTable("GROUP");
 
     if (check_Group_name[groupname] != null)
     {
+        /*
         // 403 is the error for an already exists, this means it asks again for th use to make a name
+        const response = new Response(body, {
+            status: 403,
+            statusText: 'Same group name',
+            content: 'This group name is already taken, please choose another one'
+        });
+        console.log(response);
+        const copy = response.clone();
+        console.log(copy);
+        let contents = await copy.json();
+        console.log({contents});
+        */
         return { status: 403, content: "This group name is already taken, please choose another one" };
     }
-
-
-    groupname = groupname.replaceAll(" ", "_"); //replace spaces to prevent issues with urls and the groupname
 
     //check if users actually exist before adding them to the group
     let usertable = database.getTable("USER");
@@ -59,12 +70,13 @@ function create(username, content)
 
     let grouptable = database.getTable("GROUP");
 
+    /*
     if (grouptable[groupname] != null)
     {
         //group already exists, cannot be created
         return { status: 400, content: "Group name already taken" };
     }
-
+    */
     grouptable[groupname] = groupData;
     database.overwriteTable("GROUP", grouptable);
 

@@ -66,4 +66,10 @@ function responseHandler(response)
         console.log(response.json());
         usernameInUseDiv.append(pUsernameInUseWarning);
     }
+
+    /*
+    if(response.status === 403)
+    {
+        
+    } */
 }
