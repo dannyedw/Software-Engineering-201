@@ -292,7 +292,7 @@ data.addEventListener('submit', (e) => {
 
 	//gets the div from the panel to add the inputted requirements into table
 	exerciseTable.innerHTML = exerciseTable.innerHTML + "<td>" + selectedExercise + "</td> <td>" + name + "</td> <td>" + time + "</td> <td>" + reps + "</td>"
-	+ "<td><input type='button' value='Delete' name='deleteExerciseButton' class='deleteExerciseButton' onclick='deleteRow(this, 0)'></td>";
+	+ "<td><input type='button' value='Delete' name='deleteExerciseButton' class='deleteExerciseButton' onclick='deleteRow(this, 0,0,"+dateValue+")'></td>";
 
 })
 
@@ -427,15 +427,17 @@ function responseHandler(response) {
 const dietDiv = document.getElementById("diets");
 
 function submitsDiet(type, name, calories, res) {
+	var dateValue = document.getElementById("date").value;
+	console.log(dateValue)
 	foodTab.innerHTML = foodTab.innerHTML + "<td>" + type + "</td> <td>" + name + "</td> <td>" + calories + "</td>" + 
-	"<td><input type='button' value='Delete' name='deleteExerciseButton' class='deleteExerciseButton' onclick='deleteRow(this, 1)'></td>";
+	"<td><input type='button' value='Delete' name='deleteExerciseButton' class='deleteExerciseButton' onclick='deleteRow(this, 0,0,"+dateValue+")'></td>";
 
 
 	overlay.style.display = "none";
 	addDietContainer.style.display = "none";
 	totalCalories += Number(calories);
 	totalCalorieDiv.innerHTML = "Total Calorie Count " + totalCalories;
-	var dateValue = document.getElementById("date").value;
+	
 
 	//submitting diet client side
 	let data = {
