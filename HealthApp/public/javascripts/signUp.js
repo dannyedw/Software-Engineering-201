@@ -2,6 +2,10 @@
 const form = document.getElementById("fSignUp");
 form.addEventListener("submit", signUp);
 
+const usernameInUseDiv = document.getElementById("usernameInUseWarning");
+const pUsernameInUseWarning = document.createElement("p");
+pUsernameInUseWarning.innerHTML = "Username in use";
+
 
 function signUp()
 {
@@ -19,7 +23,7 @@ function signUp()
     if (password != passwordConfirm)
     {
         //tell user theyre a dummy
-        alert("passwords do not match");
+        alert("Passwords do not match");
         return;
     }
 
@@ -60,5 +64,6 @@ function responseHandler(response)
     else
     {
         console.log(response.json());
+        usernameInUseDiv.append(pUsernameInUseWarning);
     }
 }

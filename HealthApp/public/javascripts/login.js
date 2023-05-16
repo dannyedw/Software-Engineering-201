@@ -2,6 +2,10 @@
 const form = document.getElementById("fLogin");
 form.addEventListener("submit", login);
 
+const incorrectCredentialsDiv = document.getElementById("incorrectCredentialsWarning");
+const pCredentialsWarning = document.createElement("p");
+pCredentialsWarning.innerHTML = "Incorrect credentials, please try again";
+
 
 function login()
 {
@@ -37,5 +41,6 @@ function responseHandler(response)
     else
     {
         console.log(response.json());
+        incorrectCredentialsDiv.append(pCredentialsWarning);
     }
 }

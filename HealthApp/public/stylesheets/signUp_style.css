@@ -53,6 +53,13 @@ form > p
   border-radius: 8px;
 }
 
+#usernameInUseWarning
+{
+  color: #ff0606;
+  font-size: 2.5vw;
+  margin-bottom: -25px;
+}
+
 .other-details-container 
 {
   display: flex;
