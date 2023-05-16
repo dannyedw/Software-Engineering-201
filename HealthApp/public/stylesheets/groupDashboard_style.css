@@ -414,6 +414,12 @@
   background-color: #ff0606;
 }
 
+#goalFeedbackContainer
+{
+    color: red;
+    margin-top: 6px;
+}
+
 @media (max-width: 800px)
 {
   #email-AddButtContainer

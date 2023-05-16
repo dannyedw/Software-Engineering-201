@@ -96,17 +96,12 @@ function displayGroupInfo(data, divId, groupName)
     container.innerHTML += '<div id = "memberContainer"><p>'+ data.owner +' ADMIN</p></div>';
     for (var i = 0; i < data.members.length; i++) {
         var member = data.members[i]
-        console.log(member)
         if(USERNAME === data.owner){
             container.innerHTML += '<div id = "memberContainer"><p>'+ member +'</p><button id="removeMemberButton" type=button onclick="removeMember(this, \'' +member + '\', \'' + groupName + '\')">Remove</button></div>'
         }else{
             container.innerHTML += '<div id = "memberContainer"><p>'+ member +'</p></div>'
-        }
-        
-        
-        
+        }  
     }
-
 }
 
 function addMember(divId, group){
@@ -367,6 +362,9 @@ function calculateRemaining(current, deadline) {
 
 ///goal popup stuff
 document.getElementById("exitButtonGoal").addEventListener("click", function () {
+    document.getElementById("goalType").value = 'default';
+	// document.getElementById("newGoalSuggestion").innerHTML = "";
+	goalOutputDiv.innerHTML = "";
 	overlay.style.display = "none";
 	addGoalContainer.style.display = "none";
 })
@@ -384,7 +382,7 @@ goalSelect.addEventListener("change", (event) => {
 	switch (selectedDiet) {
 		case "Target Weight":
 			data = "<input type='text' id='target-Weight' name='weight' placeholder='Target Weight(KG)' required><br><input type='date' id='goalDate' name='deadline' value=" + currentDate + " min=" + currentDate + " max='2027-04-21'><br>";
-			data += "<input type='submit' id='addPGoal' value='Add Goal'>";
+			data += "<div id = 'goalFeedbackContainer'></div><input type='submit' id='addPGoal' value='Add Goal'>";
 			break;
 		default:
 			// clear the variations div if no exercise is selected
@@ -416,7 +414,25 @@ goalSelect.addEventListener("change", (event) => {
 		// console.log("starting weight: " + startingWeight);
 		// console.log("target weight: " + targetWeight);
 
-        console.log(groupInPopup);
+        let goalFeedbackContainer = document.getElementById('goalFeedbackContainer');
+
+		if(startDate === targetDate)
+		{
+			goalFeedbackContainer.innerHTML = "Current Date and target date are the same";
+			return;
+		}
+
+		if(targetWeight === "")
+		{
+			goalFeedbackContainer.innerHTML = "Please enter a target weight";
+			return;
+		}
+
+        if(targetWeight === weight)
+		{
+			goalFeedbackContainer.innerHTML = "Same target weight as current weight";
+			return;
+		}
 
 		let data = {
             group: groupInPopup,
@@ -434,6 +450,9 @@ goalSelect.addEventListener("change", (event) => {
         console.log(request);
 		dataRequest(request, errorReporter);
 
+        document.getElementById("goalType").value = 'default';
+        document.getElementById("newGoalSuggestion").innerHTML = "";
+        goalOutputDiv.innerHTML = "";
 		overlay.style.display = "none";
 		addGoalContainer.style.display = "none";
 	}
