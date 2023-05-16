@@ -93,22 +93,20 @@ function displayGroup(data)
 function displayGroupInfo(data, divId, groupName)
 {
     container = document.getElementById(divId);
-    
+    container.innerHTML += '<div id = "memberContainer"><p>'+ data.owner +' ADMIN</p></div>';
     for (var i = 0; i < data.members.length; i++) {
         var member = data.members[i]
-
+        console.log(member)
         if(USERNAME === data.owner){
-            if(member === USERNAME){
-                container.innerHTML += '<div id = "memberContainer"><p>'+ member +' ADMIN</p></div>';
-            }else{
-                container.innerHTML += '<div id = "memberContainer"><p>'+ member +'</p><button id="removeMemberButton" type=button onclick="removeMember(this, \'' +member + '\', \'' + groupName + '\')">Remove</button></div>'
-            }
+            container.innerHTML += '<div id = "memberContainer"><p>'+ member +'</p><button id="removeMemberButton" type=button onclick="removeMember(this, \'' +member + '\', \'' + groupName + '\')">Remove</button></div>'
         }else{
-        container.innerHTML += '<div id = "memberContainer"><p>'+ member +'</p></div>';
+            container.innerHTML += '<div id = "memberContainer"><p>'+ member +'</p></div>'
         }
         
+        
+        
     }
-//<button id="removeMemberButton" type=button onclick="removeMember(this, \'' +member + '\', \'' + groupName + '\')">Remove</button>
+
 }
 
 function addMember(divId, group){
@@ -173,19 +171,19 @@ function DisplayDescription(description){
 function LeaveGroup(groupName){
     console.log("leaving group:"+groupName);
 
-    // data ={
-    //     type:"group-remove-member",
-    //     content:{
-    //         groupname: groupName,
-    //         memberToRemove: USERNAME
-    //     }
-    // }
-    // dataRequest(data,removeMemberHandler)
-    // function removeMemberHandler(response){
-    //     console.log(response.content)
-    //     if(response.status !=200){
-    //     }
-    // }
+    data ={
+        type:"group-remove-member",
+        content:{
+            groupname: groupName,
+            memberToRemove: USERNAME
+        }
+    }
+    dataRequest(data,removeMemberHandler)
+    function removeMemberHandler(response){
+        console.log(response.content)
+        if(response.status !=200){
+        }
+    }
 }
 
 function displayGroupGoals(data)
