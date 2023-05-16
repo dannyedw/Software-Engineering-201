@@ -172,19 +172,20 @@ function DisplayDescription(description){
 
 function LeavegGroup(groupName){
     console.log("leaving group:"+groupName);
-     // removes user from server
-    // data ={
-    //     type:"group-delete",
-    //     content:{
-    //         groupname:groupName
-    //     }
-    // }
-    // dataRequest(data,leaveGroupHandler)
-    // function leaveGroupHandler(response){
-    //     if(response.status !=200){
-    //         console.log(response.content)
-    //     }
-    // }
+
+    data ={
+        type:"group-remove-member",
+        content:{
+            groupname: groupName,
+            memberToRemove: USERNAME
+        }
+    }
+    dataRequest(data,removeMemberHandler)
+    function removeMemberHandler(response){
+        console.log(response.content)
+        if(response.status !=200){
+        }
+    }
 }
 
 function displayGroupGoals(data)
