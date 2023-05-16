@@ -50,7 +50,7 @@ function displayGroup(data)
             currentGroup = data.content[key];
             div = key + "-info";
             let classForGoalAmount = key + "-goalAmount"
-            groups.innerHTML += `<div><h1 id="divsID" class='collapsible ` + classForGoalAmount + `'>` + key + `:` + ` Members: `+currentGroup.members.length+` ` + ` Group Goals: ?</h1>
+            groups.innerHTML += `<div><h1 id="divsID" class='collapsible ` + classForGoalAmount + `'>` + key + `:` + ` Members: `+(parseInt(currentGroup.members.length) + 1)+` ` + ` Group Goals: ?</h1>
             <div class='content'><div class='groupDivs'id="` + key + "-info" + `"> <h1>Members</h1><br>` + '<input type="text" id="addingMember'+div+
             '" placeholder="Enter Member here"> <button type="button" id="addMemberButton" onclick="addMember(\'' + div + '\' , \'' + key + '\')">Add Member</button></div>' +
             `<div class='groupDivs' id = "` + key + "-goals" + `"></div><br>
