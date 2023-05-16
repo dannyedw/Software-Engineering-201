@@ -18,5 +18,11 @@
             "test2"
         ],
         "pendingMembers": []
+    },
+    "test_group": {
+        "owner": "test",
+        "description": " aaa",
+        "members": [],
+        "pendingMembers": []
     }
 }

@@ -5,7 +5,7 @@ var groupManager = require("../model/groupManager");
 router.get('/', (req, res) => {
     if (req.session.user)
 	{
-		res.redirect('/userDashboard');
+		res.redirect('/groupDashboard');
 	}
 	else res.redirect('/');
 });
@@ -16,7 +16,7 @@ router.get('/:groupname', function (req, res, next) {
 		let response = groupManager.addPendingUser(req.session.user, req.params.groupname);
         if (response.status === 201)
         {
-            res.redirect('groupDashboard');
+            res.redirect('/groupDashboard');
         }
         else
         {

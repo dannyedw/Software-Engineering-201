@@ -17,10 +17,10 @@ function create(username, content)
     };
 
     let groupname = content.groupname;
-    groupname.replace(" ", "_"); //replace spaces to prevent issues with urls and the groupname
+    groupname = groupname.replaceAll(" ", "_"); //replace spaces to prevent issues with urls and the groupname
 
     //check if users actually exist before adding them to the group
-    const usertable = database.getTable("USER");
+    let usertable = database.getTable("USER");
     let warningInfo = [];
     for (let uname of content.members)
     {
@@ -55,6 +55,9 @@ function create(username, content)
 
     grouptable[groupname] = groupData;
     database.overwriteTable("GROUP", grouptable);
+
+    usertable[username].groups.push(groupname);
+    database.overwriteTable("USER", usertable);
 
     return { status: 200, content: {
         message: "Successfully created group " + groupname,

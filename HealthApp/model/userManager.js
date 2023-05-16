@@ -82,6 +82,8 @@ function signup(content)
     if (content.bmi) userInfo.bmi = content.bmi;
     if (content.age) userInfo.age = content.age;
 
+    username = username.replaceAll(" ", "_");
+
     return addPendingUser(username, userInfo);
 }
 
