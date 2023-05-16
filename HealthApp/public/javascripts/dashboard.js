@@ -77,11 +77,10 @@ var totalCalorieDiv = document.getElementById("calorieTotal");
 //Reference for deleteRow function: https://www.w3schools.com/jsref/met_table_deleterow.asp
 function deleteRow(r, isFoodTable,calories,date) 
 {	
-	console.log(date)
-	console.log(date)
+
 	var i = r.parentNode.parentNode.rowIndex - 1;
 	Boolean(isFoodTable);
-
+	console.log(isFoodTable)
 	if (isFoodTable)
 	{
 		document.getElementById("foodTable").deleteRow(i);
@@ -430,7 +429,7 @@ function submitsDiet(type, name, calories, res) {
 	var dateValue = document.getElementById("date").value;
 	console.log(dateValue)
 	foodTab.innerHTML = foodTab.innerHTML + `<td>` + type + `</td> <td>` + name + `</td> <td>` + calories + `</td>` + 
-	`<td><input type='button' value='Delete' name='deleteExerciseButton' class='deleteExerciseButton' onclick='deleteRow(this, 0,0, "${dateValue}")'></td>`;
+	`<td><input type='button' value='Delete' name='deleteExerciseButton' class='deleteExerciseButton' onclick='deleteRow(this, 1,0, "${dateValue}")'></td>`;
 
 
 	overlay.style.display = "none";
