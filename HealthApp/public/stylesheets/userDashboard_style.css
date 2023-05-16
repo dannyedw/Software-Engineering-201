@@ -417,6 +417,14 @@
     font-weight: bold;
 }
 
+#goalCompletionAlertExit
+{
+    float: right;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+}
+
 #exitCustomDiets
 {
     float: right;

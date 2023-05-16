@@ -17,6 +17,7 @@ const addExerciseContainer = document.querySelector('#addExerciseContainer');
 const addDietContainer = document.querySelector('#addDietContainer');
 const addGoalContainer = document.querySelector('#addGoalContainer');
 const addCustomDietsContainer = document.querySelector('#addCustomDietsContainer')
+const goalCompletionAlert = document.getElementById("goalCompletionAlert");
 
 
 //links the buttons to the functions
@@ -47,6 +48,7 @@ document.getElementById("exitButtonDiet").addEventListener("click", function () 
 })
 document.getElementById("exitButtonGoal").addEventListener("click", function () {
 	document.getElementById("goalType").value = 'default';
+	document.getElementById("newGoalSuggestion").innerHTML = "";
 	goalOutputDiv.innerHTML = "";
 	overlay.style.display = "none";
 	addGoalContainer.style.display = "none";
@@ -590,6 +592,7 @@ goalSelect.addEventListener("change", (event) => {
 
 		if(startingWeight === targetWeight)
 		{
+			document.getElementById("newGoalSuggestion").innerHTML = "";
 			let bmi = parseInt(userInfo.split(" ")[6]);
 			let recomendedNewGoalText = recomendedNewGoal(goalType, bmi, startingWeight, startDate);
 			goalFeedbackContainer.innerHTML = "Target weight is already met<br>" + recomendedNewGoalText;
@@ -610,6 +613,9 @@ goalSelect.addEventListener("change", (event) => {
 
 		dataRequest(request, errorReporter);
 
+		document.getElementById("goalType").value = 'default';
+		document.getElementById("newGoalSuggestion").innerHTML = "";
+		goalOutputDiv.innerHTML = "";
 		overlay.style.display = "none";
 		addGoalContainer.style.display = "none";
 	}
@@ -626,16 +632,16 @@ function recomendedNewGoal(goalType,bmi,currentWeight, startDate)
 		if (bmi <= 18) {
 			let newWeight = parseInt(currentWeight) + 5
 			startDateObject.setDate(startDateObject.getDate() + 35)
-			return "Bmi is low so suggesting target weight of " + newWeight + " by " + startDateObject.getFullYear() + "-" + 
+			return "Bmi is low - suggesting target weight of " + newWeight + " by " + startDateObject.getFullYear() + "-" + 
 			String(startDateObject.getMonth()).padStart(2, '0') + "-" + String(startDateObject.getDay()).padStart(2, '0');
 		}
 		else if (bmi >= 19 && bmi <= 24) {
-			return "Bmi is healthy so no new weight goal needs to be set";
+			return "Bmi is healthy - no new weight goal needs to be set";
 		}
 		else if (bmi >= 25) {
 			let newWeight = parseInt(currentWeight) - 5
 			startDateObject.setDate(startDateObject.getDate() + 35)
-			return "Bmi is High so suggesting target weight of " + newWeight + " by " + startDateObject.getFullYear() + "-" + 
+			return "Bmi is High - suggesting target weight of " + newWeight + " by " + startDateObject.getFullYear() + "-" + 
 			String(startDateObject.getMonth()).padStart(2, '0') + "-" + String(startDateObject.getDay()).padStart(2, '0');
 		}
 	}
@@ -707,7 +713,8 @@ function displayPersonalGoals(data)  //this displays the goals in the goal conta
 			//i know this is probaby very bad but callback functions were annoying
 			let userInfo = document.getElementById("userInformation").textContent;
 			let currentWeight = userInfo.split(" ")[3].split("kg")[0];
-
+			let height = parseInt(userInfo.split(" ")[1].split("cm")[0])
+			var bmi = currentWeight / ((height / 100) ** 2);
 			let minDaysRemaining = 11; //11 as we want to find minimum, any goal under 10 days will be smaller than this
 
 			var archivedGoals = [];
@@ -731,6 +738,7 @@ function displayPersonalGoals(data)  //this displays the goals in the goal conta
 						archivedGoals.push(goal);
 						//pass and archive/update goal
 
+						displayGoalCompletion("Completed", "weight", bmi, currentWeight, getAndFormatCurrentDate())
 					}
 					else if (currentGoal.endDate == getAndFormatCurrentDate()) {
 						data = {
@@ -742,6 +750,8 @@ function displayPersonalGoals(data)  //this displays the goals in the goal conta
 						goal.innerHTML = "Archived goal: Get to a weight of " + currentGoal.extraData[1] + "kg by " + currentGoal.endDate + " | Status: Goal Failed";
 						archivedGoals.push(goal);
 						//fail and archive/update goal
+
+						displayGoalCompletion("Failed", "weight", bmi, currentWeight, getAndFormatCurrentDate())
 					}
 					else {
 						daysRemaining = calculateRemaining(getAndFormatCurrentDate(),currentGoal.endDate);
@@ -777,6 +787,35 @@ function displayPersonalGoals(data)  //this displays the goals in the goal conta
 		}
 	}
 
+}
+
+function displayGoalCompletion(completed, goalType,bmi,currentWeight, startDate)
+{
+	overlay.style.display = "block";
+	goalCompletionAlert.style.display = "block";
+	let goalcompletioncontainer = document.getElementById("goalCompletionContainer");
+	let goalRecomendation = recomendedNewGoal(goalType, bmi, currentWeight, startDate);
+
+	goalcompletioncontainer.innerHTML = `<h1>You have `+ completed +` a goal!</h1><p>New Goal Recomendation: `+ goalRecomendation +`<p>
+	<button type='button' onclick='hideGoalCompletionAlert()'>Cancel</button>
+	<button type='button' onclick='addGoalFromRecomendation("`+ goalRecomendation +`")'>Set New Goal</button></h2>`;
+
+}
+
+function addGoalFromRecomendation(recomendation)
+{
+	overlay.style.display = "none";
+	goalCompletionAlert.style.display = "none";
+	
+
+	addGoal(); //maybe find values and fill in recomended goal
+	document.getElementById("newGoalSuggestion").innerHTML = recomendation;
+}
+
+function hideGoalCompletionAlert()
+{
+	overlay.style.display = "none";
+	goalCompletionAlert.style.display = "none";
 }
 
 function deletePersonalGoal(goalId1) {
