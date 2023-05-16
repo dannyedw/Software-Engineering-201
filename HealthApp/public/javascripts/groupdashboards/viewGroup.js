@@ -55,7 +55,7 @@ function displayGroup(data)
             '" placeholder="Enter Member here"> <button type="button" id="addMemberButton" onclick="addMember(\'' + div + '\' , \'' + key + '\')">Add Member</button></div>' +
             `<div class='groupDivs' id = "` + key + "-goals" + `"></div><br>
             <div id ="descLeaveGroupButtonContainer"><button type="button" id="description" onclick="DisplayDescription('${currentGroup.description}');">Description</button>
-            <button type="button" id="LeaveGroupButton" onclick="LeavegGroup('${key}');">Leave Group</button></div> </div></div>`;
+            <button type="button" id="LeaveGroupButton" onclick="LeaveGroup('${key}');">Leave Group</button></div> </div></div>`;
 
             var membersSection = document.getElementById(key + "-info"); 
             var groupGoalsSection = document.getElementById(key + "-goals");    
@@ -93,22 +93,20 @@ function displayGroup(data)
 function displayGroupInfo(data, divId, groupName)
 {
     container = document.getElementById(divId);
-    
+    container.innerHTML += '<div id = "memberContainer"><p>'+ data.owner +' ADMIN</p></div>';
     for (var i = 0; i < data.members.length; i++) {
         var member = data.members[i]
-
+        console.log(member)
         if(USERNAME === data.owner){
-            if(member === USERNAME){
-                container.innerHTML += '<div id = "memberContainer"><p>'+ member +' ADMIN</p></div>';
-            }else{
-                container.innerHTML += '<div id = "memberContainer"><p>'+ member +'</p><button id="removeMemberButton" type=button onclick="removeMember(this, \'' +member + '\', \'' + groupName + '\')">Remove</button></div>'
-            }
+            container.innerHTML += '<div id = "memberContainer"><p>'+ member +'</p><button id="removeMemberButton" type=button onclick="removeMember(this, \'' +member + '\', \'' + groupName + '\')">Remove</button></div>'
         }else{
-        container.innerHTML += '<div id = "memberContainer"><p>'+ member +'</p></div>';
+            container.innerHTML += '<div id = "memberContainer"><p>'+ member +'</p></div>'
         }
         
+        
+        
     }
-//<button id="removeMemberButton" type=button onclick="removeMember(this, \'' +member + '\', \'' + groupName + '\')">Remove</button>
+
 }
 
 function addMember(divId, group){
@@ -170,7 +168,7 @@ function DisplayDescription(description){
     })
 }
 
-function LeavegGroup(groupName){
+function LeaveGroup(groupName){
     console.log("leaving group:"+groupName);
 
     data ={

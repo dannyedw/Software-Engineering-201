@@ -7,5 +7,13 @@
             "test"
         ],
         "pendingMembers": []
+    },
+    "Yons_s_group": {
+        "owner": "test",
+        "description": " hello yon group",
+        "members": [
+            "test2"
+        ],
+        "pendingMembers": []
     }
 }
