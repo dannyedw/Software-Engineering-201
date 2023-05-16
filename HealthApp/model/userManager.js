@@ -188,8 +188,26 @@ function addUser(username)
     return { status: 201, content: "User successfully verified" };
 }
 
+function removeFromGroup(username, groupname)
+{
+    let usertable = database.getTable("USER");
+    let user = usertable[username];
+    if (user)
+    {
+        let index = user.groups.indexOf(groupname);
+        if (index != -1)
+        {
+            user.groups.splice(index, 1);
+            usertable[username] = user;
+        }
+    }
+
+    database.overwriteTable("USER", usertable);
+}
+
 exports.login = login;
 exports.signup = signup;
 exports.update = update;
 exports.dataRequest = dataRequest;
 exports.addUser = addUser;
+exports.removeFromGroup = removeFromGroup;

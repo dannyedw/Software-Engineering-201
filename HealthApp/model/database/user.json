@@ -12,9 +12,7 @@
         "bmi": "23.7",
         "age": 0,
         "groups": [
-            "Danny_Gs_group",
-            "Yons_s_group",
-            "test_group"
+            "Danny_Gs_group"
         ]
     },
     "test3": {
@@ -42,9 +40,7 @@
         },
         "bmi": "27.7",
         "age": "20",
-        "groups": [
-            "Yons_s_group"
-        ]
+        "groups": []
     },
     "alexf13": {
         "firstName": "alex",

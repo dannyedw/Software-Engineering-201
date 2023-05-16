@@ -130,7 +130,6 @@ function removeMember(username, content)
     if (!content.memberToRemove) return { status: 400, content: "Missing required data - memberToRemove" };
 
     let grouptable = database.getTable("GROUP");
-    let usertable = database.getTable("USER");
     let groupgoaltable = database.getTable("GROUPGOAL");
 
     let group = grouptable[content.groupname];
@@ -139,7 +138,24 @@ function removeMember(username, content)
 
     if (group)
     {
-        if (username === group.owner || username === content.memberToRemove)
+        //owner leaving the group
+        if (username === group.owner && content.memberToRemove === group.owner)
+        {
+            //set the owner to the next oldest group member if there is one
+            let nextMember = group.members[0];
+            if (nextMember)
+            {
+                group.owner = nextMember;
+                group.members.splice(0, 1);
+                grouptable[content.groupname]
+                memberPresent = true;
+            }
+            else  //or delete the group if no members to take over
+            {
+                return erase(username, { groupname: content.groupname });
+            }
+        }
+        else if (username === group.owner || username === content.memberToRemove) //owner removing someone or a member leaving the group
         {
             let index = group.members.indexOf(content.memberToRemove);
             if (index != -1)
@@ -149,7 +165,6 @@ function removeMember(username, content)
                 grouptable[content.groupname] = group;
                 memberPresent = true;
 
-                //UNTESTED - TEST WHEN WE CAN DELETE MEMBER FROM GROUP
                 var goals = groupgoaltable[content.group]; //get all goals for the group being removed from
                 if (goals)
                 {
@@ -184,33 +199,18 @@ function removeMember(username, content)
                 }                
             }
         }
-        else
+        else //someone trying to remove someone they shouldnt
         {
-            return { status: 401, content: "You do not have permission to delete members" };
+            return { status: 401, content: "You do not have permission to delete this member" };
+        }
+
+
+        if (memberPresent) //if a member was removed, update their groups in the user table
+        {
+            userManager.removeFromGroup(content.memberToRemove, content.groupname);
         }
     }
 
-
-    if (memberPresent)
-    {
-        if (usertable[content.memberToRemove])
-        {
-            let user = usertable[content.memberToRemove];
-            let index = user.groups.indexOf(content.groupname);
-            if (index != -1)
-            {
-                user.groups.splice(index, 1);
-                usertable[content.memberToRemove] = user;
-            }
-        }
-        else
-        {
-            console.log("member (somehow) removed from group they weren't part of. member: " + content.memberToRemove + ", group: " + content.groupname);
-        }
-    }
-
-    //UPDATES ALL THE TABLES
-    database.overwriteTable("USER", usertable);
     database.overwriteTable("GROUP", grouptable);
     database.overwriteTable("GROUPGOAL", groupgoaltable);
 
@@ -231,11 +231,15 @@ function erase(username, content)
         //update members' user table entries, and send them a notification of the group's deletion
         for (let user of group.members)
         {
-            userManager.removeFromGroup(user, group.groupname);
-            emailManager.notifyGroupDeletion(user, group.groupname);
+            userManager.removeFromGroup(user, content.groupname);
+            emailManager.notifyGroupDeletion(user, content.groupname);
         }
 
-        delete grouptable[group.groupname];
+        userManager.removeFromGroup(group.owner, content.groupname);
+
+        delete grouptable[content.groupname];
+
+        database.overwriteTable("GROUP", grouptable);
         return { status: 200, content: "Group successfully deleted" };
 
     }

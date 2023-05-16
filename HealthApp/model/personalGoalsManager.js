@@ -7,7 +7,7 @@ function create(username, content)
     if (!content.endDate) return { status: 400, content: "Missing required data - end date" };
     if (!content.extraData) return { status: 400, content: "Missing required data - extra data" };
 
-    let table = database.getTable("PERSONALGOALS");
+    let table = database.getTable("PERSONALGOAL");
 
     //gets the last key and adds 1 for the new key
 
@@ -32,20 +32,20 @@ function create(username, content)
         table[username][0] = data;
     }
 
-    database.overwriteTable("PERSONALGOALS", table);
+    database.overwriteTable("PERSONALGOAL", table);
     
     return{ status: 200, content: "Successfully added exercise"};
 }
 
 function update(username,content)
 {
-    let table = database.getTable("PERSONALGOALS");
+    let table = database.getTable("PERSONALGOAL");
     if(!content.goalId) return { status: 400, content: "Missing Goal id"};
 
     //add more of these lines for different goal atrubutes if we plan on updating more but not needed now
     if(content.status) table[username][content.goalId].status = content.status;
 
-    database.overwriteTable("PERSONALGOALS", table);
+    database.overwriteTable("PERSONALGOAL", table);
     return { status: 200, content: "Successfully updated goal stuff"};
 }
 
@@ -53,12 +53,12 @@ function deleteGoal(username,content)
 {
     if(content.goalId === null) return { status: 400, content: "Missing Goal id" };
 
-    let table = database.getTable("PERSONALGOALS");
+    let table = database.getTable("PERSONALGOAL");
 
     if (table[username] && table[username][content.goalId])
     {
         delete table[username][content.goalId];
-        database.overwriteTable("PERSONALGOALS", table);
+        database.overwriteTable("PERSONALGOAL", table);
         return { status: 200, content: "Successfully deleted Goal" };
     }
     
@@ -68,7 +68,7 @@ function deleteGoal(username,content)
 function dataRequest(username, content)
 {
     if (!content.date) return { status: 400, content: "Missing required data - date" };
-    const table = database.getTable("PERSONALGOALS");
+    const table = database.getTable("PERSONALGOAL");
     let data = [];
 
     if(table[username])
