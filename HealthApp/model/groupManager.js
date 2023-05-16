@@ -239,6 +239,14 @@ function erase(username, content)
 
         delete grouptable[content.groupname];
 
+        //delete goals for the group if there are any
+        let groupGoalsTable = database.getTable("GROUPGOAL");
+        if (groupGoalsTable[content.groupname])
+        {
+            delete groupGoalsTable[content.groupname];
+            database.overwriteTable("GROUPGOAL", groupGoalsTable);
+        }
+
         database.overwriteTable("GROUP", grouptable);
         return { status: 200, content: "Group successfully deleted" };
 
