@@ -18,36 +18,40 @@ block header
 
 
 block content
-  h3(class="headerAbout")  ASCEND (Accessable System for Capture of Exercise and Natural Diet) Health tracker
-  p
-    div(class="headerAbout") Ascend provides a personalised space to track your fitness goals. 
-      ul  
-        li Goal capturing and Reporting
-        li Custom workout and diet
-        li Group workouts
-        li Calorie tracking and BMI tracker
+  h3#productName  ASCEND (Accessable System for Capture of Exercise and Natural Diet) Health tracker
   
-    div(class="headerAbout") ASCEND to the next level by tracking your progress your way. 
-    div(class="headerAbout") Your fitness journey happens at your own pace. ASCEND will help you see how far you have come.
 
   // Reference for automatic slideshow: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_slideshow_auto
-  .slideshow-container
-    #slideshow
-      img.mySlides.fade(src='images/Running.jpg')
-      img.mySlides.fade(src='images/ShoulderPress.jpg')
-      img.mySlides.fade(src='images/High5.jpg')
-      img.mySlides.fade(src='images/Superman.jpg')
-      img.mySlides.fade(src='images/Treadmill.jpg')
-      img.mySlides.fade(src='images/Weights.jpeg')
-  // Reference for dot buttons: https://www.w3schools.com/howto/howto_js_slideshow.asp
-  div(style='text-align:center')
-    span.dot(onclick='currentSlide(0)')
-    span.dot(onclick='currentSlide(1)')
-    span.dot(onclick='currentSlide(2)')
-    span.dot(onclick='currentSlide(3)')
-    span.dot(onclick='currentSlide(4)')
-    span.dot(onclick='currentSlide(5)')
+  div#infoSlideShowContainer
+    .slideshow-container
+      #slideshow
+        img.mySlides.fade(src='images/Running.jpg')
+        img.mySlides.fade(src='images/ShoulderPress.jpg')
+        img.mySlides.fade(src='images/High5.jpg')
+        img.mySlides.fade(src='images/Superman.jpg')
+        img.mySlides.fade(src='images/Treadmill.jpg')
+        img.mySlides.fade(src='images/Weights.jpeg')
+      
+      // Reference for dot buttons: https://www.w3schools.com/howto/howto_js_slideshow.asp
+      div#dotContainer
+        span.dot(onclick='currentSlide(0)')
+        span.dot(onclick='currentSlide(1)')
+        span.dot(onclick='currentSlide(2)')
+        span.dot(onclick='currentSlide(3)')
+        span.dot(onclick='currentSlide(4)')
+        span.dot(onclick='currentSlide(5)')
 
+    div#aboutPageInfo
+      p Ascend provides a personalised space to track your fitness goals. 
+        ul  
+          li Goal capturing and Reporting
+          li Custom workout and diet
+          li Group workouts
+          li Calorie tracking and BMI tracker
+
+      p ASCEND to the next level by tracking your progress your way. 
+      p#fitnessJourneySent Your fitness journey happens at your own pace. ASCEND will help you see how far you have come.
+  
   //If you are wondering, script tag at the bottom otherwise it does not work and says that style for slides is null.
   script.
     let slideIndex = 0;
