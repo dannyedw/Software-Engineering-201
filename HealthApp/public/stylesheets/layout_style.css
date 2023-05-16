@@ -139,6 +139,7 @@ color: #f1f1f1;
 #company-logo
 {
   display: block;
+  width: 18vmin;
 }
 
 #user-logo
@@ -147,11 +148,16 @@ color: #f1f1f1;
   margin: 0 10px -10px;
 }
 
+#log-out
+{
+  font-size: 2.25vmax;
+}
+
 #hrefLogo
 {
   position: relative;
   display: block;
-  transform: translate(100%, 0%);
+  transform: translate(90%, 0%);
 }
 
 /* .inner_main_menu
@@ -297,7 +303,9 @@ footer p
     margin-left: 50px;
   }
 
+  #log-out
+  {
+    font-size: 2.5vmax;
+  }
 
-
-  
 }
