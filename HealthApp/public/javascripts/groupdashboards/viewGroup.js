@@ -41,7 +41,7 @@ function displayGroup(data)
         groups.innerHTML = ``;
         if(Object.keys(data.content).length === 0)
         {
-            groups.innerHTML = `<h2>You are in no groups</h2>`;
+            groups.innerHTML = `<h2 id='noGroupsHeader'>You are in no groups</h2>`;
         }
         else
         {
