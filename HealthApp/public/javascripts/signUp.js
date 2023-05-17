@@ -4,6 +4,7 @@ form.addEventListener("submit", signUp);
 
 const inpUsername = document.getElementById("username");
 const inpEmail = document.getElementById("email");
+const inpPasswordConfirm = document.getElementById("passwordConfirm");
 
 inpUsername.onchange = () => {
     inpUsername.setCustomValidity("");
@@ -15,6 +16,11 @@ inpEmail.onchange = () => {
     inpEmail.reportValidity();
 }
 
+inpPasswordConfirm.onchange = () => {
+    inpPasswordConfirm.setCustomValidity("");
+    inpPasswordConfirm.reportValidity();
+}
+
 function signUp()
 {
     const firstName = document.getElementById("firstName").value;
@@ -22,7 +28,7 @@ function signUp()
     const username = inpUsername.value;
     const email = inpEmail.value;
     const password = document.getElementById("password").value;
-    const passwordConfirm = document.getElementById("passwordConfirm").value;
+    const passwordConfirm = inpPasswordConfirm.value;
     const height = document.getElementById("height").value;
     const weight = document.getElementById("weight").value;
     const age = document.getElementById("age").value;
@@ -31,7 +37,8 @@ function signUp()
     if (password != passwordConfirm)
     {
         //tell user theyre a dummy
-        alert("Passwords do not match");
+        inpPasswordConfirm.setCustomValidity("Passwords do not match");
+        inpPasswordConfirm.reportValidity();
         return;
     }
 
