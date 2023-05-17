@@ -8,7 +8,7 @@ const files = Object.freeze({
     EXERCISE: "model/database/exercise.json",
     DIET: "model/database/diet.json",
     PERSONALGOAL: "model/database/personalGoals.json",
-    GROUPGOAL: "model/database/groupGoals.json"
+    GROUPGOALS: "model/database/groupGoals.json"
 });
 
 function getTable(table)
