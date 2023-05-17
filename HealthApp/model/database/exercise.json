@@ -28,6 +28,33 @@
                 "amount": "6"
             }
         ],
-        "2023-05-16": []
+        "2023-05-16": [
+            {
+                "set": "Upper Body",
+                "name": "push-ups",
+                "time": "10",
+                "amount": "5"
+            },
+            {
+                "set": "Upper Body",
+                "name": "pull-ups",
+                "time": "10",
+                "amount": "5"
+            },
+            {
+                "set": "Cardio",
+                "name": "running",
+                "time": "5",
+                "amount": "1000"
+            }
+        ],
+        "2023-05-17": [
+            {
+                "set": "Upper Body",
+                "name": "pull-ups",
+                "time": "10",
+                "amount": "5"
+            }
+        ]
     }
 }
