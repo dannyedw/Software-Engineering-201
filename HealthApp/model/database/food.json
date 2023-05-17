@@ -34,23 +34,13 @@
         },
         "3": {
             "mealType": "Lunch",
-            "name": "pasta",
-            "calories": "100000000"
+            "name": "steak",
+            "calories": "400"
         },
         "4": {
-            "mealType": "BreakFast",
-            "name": "pasta",
-            "calories": "10000"
-        },
-        "5": {
             "mealType": "Dinner",
-            "name": "pasta",
-            "calories": "150"
-        },
-        "6": {
-            "mealType": "BreakFast",
-            "name": "Spaghetti",
-            "calories": "800"
+            "name": "steak",
+            "calories": "500"
         }
     }
 }
