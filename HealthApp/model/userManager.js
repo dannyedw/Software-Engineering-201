@@ -74,10 +74,8 @@ function signup(content)
     //optional information
     if (content.height) userInfo.height = content.height;
 
-    let date = getAndFormatCurrentDate
-    if (content.weight) userInfo.weight = {
-        date: content.weight}
-    //add date here
+    let date = getAndFormatCurrentDate();
+    if (content.weight) userInfo.weight[date] = content.weight;
 
     if (content.bmi) userInfo.bmi = content.bmi;
     if (content.age) userInfo.age = content.age;
@@ -149,16 +147,31 @@ function addPendingUser(username, userInfo)
     const userTable = database.getTable("USER");
     let pendingUserTable = database.getTable("PENDINGUSER");
 
-    if (userTable[username] || pendingUserTable[username]) return { status: 400, content: "Username already taken" };
+    if (userTable[username] || pendingUserTable[username]) return { status: 400,
+        content: {
+            message: "Username already taken",
+            type: "username"
+        }
+    };
 
     for (let k in userTable)
     {
-        if (userTable[k].email === userInfo.email) return { status: 400, content: "Email already taken" };
+        if (userTable[k].email === userInfo.email) return { status: 400,
+            content: {
+                message: "Email already taken",
+                type: "email"
+            }
+        };
     }
 
     for (let k in pendingUserTable)
     {
-        if (pendingUserTable[k].email === userInfo.email) return { status: 400, content: "Email already taken" };
+        if (pendingUserTable[k].email === userInfo.email) return { status: 400,
+            content: {
+                message: "Email already taken",
+                type: "email"
+            }
+        };
     }
     
     userInfo.password = crypto.createHash('sha512').update(userInfo.password).digest('hex');

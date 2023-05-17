@@ -13,7 +13,8 @@
         "age": 0,
         "groups": [
             "Danny_Gs_group",
-            "Yons_s_group"
+            "Yons_s_group",
+            "tester"
         ]
     },
     "test3": {
@@ -55,7 +56,8 @@
         "bmi": 0,
         "age": 0,
         "groups": [
-            "Danny_Gs_group"
+            "Danny_Gs_group",
+            "test2"
         ]
     },
     "DannyGee": {

@@ -2,17 +2,25 @@
 const form = document.getElementById("fSignUp");
 form.addEventListener("submit", signUp);
 
-const usernameInUseDiv = document.getElementById("usernameInUseWarning");
-const pUsernameInUseWarning = document.createElement("p");
-pUsernameInUseWarning.innerHTML = "Username in use";
+const inpUsername = document.getElementById("username");
+const inpEmail = document.getElementById("email");
 
+inpUsername.onchange = () => {
+    inpUsername.setCustomValidity("");
+    inpUsername.reportValidity();
+}
+
+inpEmail.onchange = () => {
+    inpEmail.setCustomValidity("");
+    inpEmail.reportValidity();
+}
 
 function signUp()
 {
     const firstName = document.getElementById("firstName").value;
     const lastName = document.getElementById("lastName").value;
-    const username = document.getElementById("username").value;
-    const email = document.getElementById("email").value;
+    const username = inpUsername.value;
+    const email = inpEmail.value;
     const password = document.getElementById("password").value;
     const passwordConfirm = document.getElementById("passwordConfirm").value;
     const height = document.getElementById("height").value;
@@ -63,7 +71,26 @@ function responseHandler(response)
     }
     else
     {
-        console.log(response.json());
-        usernameInUseDiv.append(pUsernameInUseWarning);
+        //awkward but have to do it like this to work with the auto redirect, cant just use makeRequest in dataInteraction
+        response.json().then(displaySignupFailMessage);
+    }
+}
+
+function displaySignupFailMessage(content)
+{
+    if (content.type === "username")
+    {
+        inpUsername.setCustomValidity(content.message);
+        inpUsername.reportValidity();
+    }
+    else if (content.type === "email")
+    {
+        inpEmail.setCustomValidity(content.message);
+        inpEmail.reportValidity();
+    }
+    else
+    {
+        //something bork
+        console.log(content);
     }
 }

@@ -16,8 +16,14 @@ function create(username, content)
         pendingMembers: []
     };
 
-    let groupname = content.groupname;
-    groupname = groupname.replaceAll(" ", "_"); //replace spaces to prevent issues with urls and the groupname
+    let groupname = content.groupname.replaceAll(" ", "_"); //replace spaces to prevent issues with urls and the groupname
+
+    let grouptable = database.getTable("GROUP");
+    if (grouptable[groupname] != null)
+    {
+        //group already exists, cannot be created
+        return { status: 400, content: "Group name already taken" };
+    }
 
     //check if users actually exist before adding them to the group
     let usertable = database.getTable("USER");
@@ -43,14 +49,6 @@ function create(username, content)
         {
             warningInfo.push("No user found with username: " + uname);
         }
-    }
-
-    let grouptable = database.getTable("GROUP");
-
-    if (grouptable[groupname] != null)
-    {
-        //group already exists, cannot be created
-        return { status: 400, content: "Group name already taken" };
     }
 
     grouptable[groupname] = groupData;
