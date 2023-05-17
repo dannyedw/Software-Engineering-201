@@ -301,6 +301,8 @@ let removeDietButtonContainer = document.getElementById("removeDietButtonsContai
 
 //retrives the date selected
 const mainDate = document.getElementById("dataForm");
+//https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Traversing_an_HTML_table_with_JavaScript_and_DOM_Interfaces
+//Reference for table creation
 mainDate.addEventListener("change", (event) => {
 	
 	exerciseTable.innerHTML = "<tr>" +
