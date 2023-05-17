@@ -84,7 +84,4 @@ document.getElementById("submitGroupForm").addEventListener("click",function(){
             document.getElementById("groupDescription").value = "";
         }
 	}
-
 })
-
-

@@ -2,10 +2,6 @@
 const form = document.getElementById("fSignUp");
 form.addEventListener("submit", signUp);
 
-const dvSignupFailMessage = document.getElementById("dvSignupFailMessage");
-const pSignupFailMessage = document.createElement("p");
-dvSignupFailMessage.style.display = "none";
-dvSignupFailMessage.appendChild(pSignupFailMessage);
 const inpUsername = document.getElementById("username");
 const inpEmail = document.getElementById("email");
 
