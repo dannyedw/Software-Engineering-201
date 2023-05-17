@@ -35,6 +35,12 @@
   width: 500px;
   border-top: 500px;
 
+  border: 5px solid #0793f8;
+  border-style: groove;
+  border-radius: 16px;
+
+  background-color: #B9DDE0;
+
   position: fixed;
   top: 40%;
   left: 50%;
@@ -373,6 +379,7 @@
 {
   text-align: center;
   padding: 10px;
+  background-color: #B9DDE0;
 }
 
 #addGroupGoalButton
