@@ -20,8 +20,12 @@
         "owner": "test",
         "description": "testing same name functionality",
         "members": [],
-        "pendingMembers": [
-            "test"
-        ]
+        "pendingMembers": []
+    },
+    "test2": {
+        "owner": "alexf13",
+        "description": "aaa",
+        "members": [],
+        "pendingMembers": []
     }
 }

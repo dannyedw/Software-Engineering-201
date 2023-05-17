@@ -6,14 +6,25 @@ const dvSignupFailMessage = document.getElementById("dvSignupFailMessage");
 const pSignupFailMessage = document.createElement("p");
 dvSignupFailMessage.style.display = "none";
 dvSignupFailMessage.appendChild(pSignupFailMessage);
+const inpUsername = document.getElementById("username");
+const inpEmail = document.getElementById("email");
 
+inpUsername.onchange = () => {
+    inpUsername.setCustomValidity("");
+    inpUsername.reportValidity();
+}
+
+inpEmail.onchange = () => {
+    inpEmail.setCustomValidity("");
+    inpEmail.reportValidity();
+}
 
 function signUp()
 {
     const firstName = document.getElementById("firstName").value;
     const lastName = document.getElementById("lastName").value;
-    const username = document.getElementById("username").value;
-    const email = document.getElementById("email").value;
+    const username = inpUsername.value;
+    const email = inpEmail.value;
     const password = document.getElementById("password").value;
     const passwordConfirm = document.getElementById("passwordConfirm").value;
     const height = document.getElementById("height").value;
@@ -69,9 +80,21 @@ function responseHandler(response)
     }
 }
 
-function displaySignupFailMessage(text)
+function displaySignupFailMessage(content)
 {
-    console.log(text);
-    dvSignupFailMessage.style.display = "block";
-    pSignupFailMessage.innerHTML = text;
+    if (content.type === "username")
+    {
+        inpUsername.setCustomValidity(content.message);
+        inpUsername.reportValidity();
+    }
+    else if (content.type === "email")
+    {
+        inpEmail.setCustomValidity(content.message);
+        inpEmail.reportValidity();
+    }
+    else
+    {
+        //something bork
+        console.log(content);
+    }
 }

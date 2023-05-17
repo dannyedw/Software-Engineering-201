@@ -13,6 +13,11 @@ document.getElementById('createGroupButton').addEventListener("click",groupCreat
 
 const overlay = document.querySelector('.overlay');
 const addGroupContainer = document.querySelector('#addGroupContainer');
+const inpGroupName = document.getElementById("groupName");
+inpGroupName.onchange = () => {
+    inpGroupName.setCustomValidity(""); //hide "group already taken" message when input is changed
+    inpGroupName.reportValidity();
+}
 
 
 //member emails section
@@ -51,13 +56,6 @@ function removeMail(m){
 document.getElementById("submitGroupForm").addEventListener("click",function(){
     var groupName = document.getElementById("groupName").value;
     var description = document.getElementById("groupDescription").value;
-  
-
-    overlay.style.display = "none";
-	addGroupContainer.style.display = "none";
-    memberEmails.innerHTML = "";
-    document.getElementById("groupName").value        = "";
-    document.getElementById("groupDescription").value = "";
 
     //form submission to backend
     let data = {
@@ -74,7 +72,17 @@ document.getElementById("submitGroupForm").addEventListener("click",function(){
 	function responseHandler(response) {
 		if (response.status != 200) {
 			console.log(response.content)
+            inpGroupName.setCustomValidity("Group name already taken");
+            inpGroupName.reportValidity();
 		}
+        else
+        {
+            overlay.style.display = "none";
+            addGroupContainer.style.display = "none";
+            memberEmails.innerHTML = "";
+            document.getElementById("groupName").value        = "";
+            document.getElementById("groupDescription").value = "";
+        }
 	}
 
 })
