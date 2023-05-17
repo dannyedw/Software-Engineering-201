@@ -2,9 +2,10 @@
 const form = document.getElementById("fSignUp");
 form.addEventListener("submit", signUp);
 
-const usernameInUseDiv = document.getElementById("usernameInUseWarning");
-const pUsernameInUseWarning = document.createElement("p");
-pUsernameInUseWarning.innerHTML = "Username in use";
+const dvSignupFailMessage = document.getElementById("dvSignupFailMessage");
+const pSignupFailMessage = document.createElement("p");
+dvSignupFailMessage.style.display = "none";
+dvSignupFailMessage.appendChild(pSignupFailMessage);
 
 
 function signUp()
@@ -63,13 +64,14 @@ function responseHandler(response)
     }
     else
     {
-        console.log(response.json());
-        usernameInUseDiv.append(pUsernameInUseWarning);
+        //awkward but have to do it like this to work with the auto redirect, cant just use makeRequest in dataInteraction
+        response.json().then(displaySignupFailMessage);
     }
+}
 
-    /*
-    if(response.status === 403)
-    {
-        
-    } */
+function displaySignupFailMessage(text)
+{
+    console.log(text);
+    dvSignupFailMessage.style.display = "block";
+    pSignupFailMessage.innerHTML = text;
 }

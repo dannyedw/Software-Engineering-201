@@ -74,10 +74,8 @@ function signup(content)
     //optional information
     if (content.height) userInfo.height = content.height;
 
-    let date = getAndFormatCurrentDate
-    if (content.weight) userInfo.weight = {
-        date: content.weight}
-    //add date here
+    let date = getAndFormatCurrentDate();
+    if (content.weight) userInfo.weight[date] = content.weight;
 
     if (content.bmi) userInfo.bmi = content.bmi;
     if (content.age) userInfo.age = content.age;
