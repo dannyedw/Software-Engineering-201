@@ -126,6 +126,7 @@ function notifyGroupGoalCompletion(username, groupname, goalDetails)
     const userTable = database.getTable("USER");
     const groupTable = database.getTable("GROUP");
 
+    console.log("we here")
     if(groupTable[groupName])
     {
         var usersInGroup = groupTable[groupName].members;
@@ -146,7 +147,7 @@ function notifyGroupGoalCompletion(username, groupname, goalDetails)
             let subject = "ASCEND - User in group " + groupname + " has completed a goal";
             let text = "Hello " + userFirstName + ",\n" + username + " has completed a goal in group " + groupname + "\nGoal Description: " + goalDetails;
             sendEmail(email, subject, text);
-            // console.log("E-mailed to :" + email); //if you need to see where the email went
+            console.log("E-mailed to :" + email); //if you need to see where the email went
         }
     }
     return {status: 200, content: "Send emails to all provided emails in database"}
