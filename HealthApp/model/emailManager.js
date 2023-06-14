@@ -5,8 +5,8 @@ const database = require("./database");
 const nodemailer = require("nodemailer");
 
 let account = {
-    user: 'webprogramming2f@gmail.com', //reusing account from year 1 web dev cw2, no point making another one
-    pass: 'bwrmnaffoqzcfadh' //app password so i dont think you can do anything stupid to the account (and if you can, dont. pls)
+    user: 'seemail@gmail.com', //reusing account from year 1 web dev cw2, no point making another one
+    pass: 'fgnlkdjlkgskl' //app password so i dont think you can do anything stupid to the account (and if you can, dont. pls)
 };
 
 let transporter = nodemailer.createTransport({

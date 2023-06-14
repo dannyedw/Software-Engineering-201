@@ -33,7 +33,7 @@
     "test2": {
         "firstName": "Yellow",
         "lastName": "Mellow",
-        "email": "alex.w.faulkner13@gmail.com",
+        "email": "cooldude3@gmail.com",
         "password": "929872838cb9cfe6578e11f0a323438aee5ae7f61d41412d62db72b25dac52019de2d6a355eb2d033336fb70e73f0ec0afeca3ef36dd8a90d83f998fee23b78d",
         "height": "170",
         "weight": {
@@ -47,7 +47,7 @@
     "alexf13": {
         "firstName": "alex",
         "lastName": "f",
-        "email": "alex.w.faulkner13@gmail.com",
+        "email": "cooldude4@gmail.com",
         "password": "929872838cb9cfe6578e11f0a323438aee5ae7f61d41412d62db72b25dac52019de2d6a355eb2d033336fb70e73f0ec0afeca3ef36dd8a90d83f998fee23b78d",
         "height": 0,
         "weight": {
@@ -63,7 +63,7 @@
     "DannyGee": {
         "firstName": "Danny",
         "lastName": "GmyG",
-        "email": "danielgaraway@gmail.com",
+        "email": "mygg@gmail.com",
         "password": "929872838cb9cfe6578e11f0a323438aee5ae7f61d41412d62db72b25dac52019de2d6a355eb2d033336fb70e73f0ec0afeca3ef36dd8a90d83f998fee23b78d",
         "height": "185",
         "weight": {
